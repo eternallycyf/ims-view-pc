@@ -1,4 +1,4 @@
-# ims-monorepo-template
+# ims-view-pc
 
 [![Gitmoji][gitmoji]][gitmoji-url] [![semantic-release][semantic-release]][semantic-release-repo]
 
@@ -23,11 +23,7 @@
 
 ## 使用案例
 
-[ims-view]: https://github.com/eternallycyf/ims-view
-
-## 快速上手
-
-使用指南: ➡️ [传送门](https://ims-monorepo-template.vercel.app/guide)
+[ims-view-pc]: https://github.com/eternallycyf/ims-view-pc
 
 ## License
 

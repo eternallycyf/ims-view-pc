@@ -1,4 +1,4 @@
-import Foo from '@ims-view/foo';
+import Foo from '@ims-view/hooks';
 import React, { FC } from 'react';
 
 const Bar: FC = () => {

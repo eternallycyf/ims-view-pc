@@ -16,8 +16,8 @@
     /* Alias 路径 */
     "baseUrl": ".",
     "paths": {
-      "@ims-view/foo": ["./packages/foo/src"],
-      "@ims-view/bar": ["./packages/bar/src"]
+      "@ims-view/hooks": ["./packages/hooks/src"],
+      "@ims-view/utils": ["./packages/utils/src"]
     }
   }
 }

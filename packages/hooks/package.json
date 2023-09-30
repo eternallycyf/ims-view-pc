@@ -1,5 +1,5 @@
 {
-  "name": "@ims-view/foo",
+  "name": "@ims-view/hooks",
   "version": "1.0.0",
   "main": "lib/index.js",
   "module": "es/index.js",

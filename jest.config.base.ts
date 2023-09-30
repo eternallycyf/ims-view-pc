@@ -13,8 +13,8 @@ const config: Config.InitialOptions = {
   testEnvironment: 'jsdom',
   moduleNameMapper: {
     ...base.moduleNameMapper,
-    '@ims-view/foo': '<rootDir>/packages/foo/src',
-    '@ims-view/bar': '<rootDir>/packages/bar/src',
+    '@ims-view/hooks': '<rootDir>/packages/hooks/src',
+    '@ims-view/utils': '<rootDir>/packages/utils/src',
   },
   rootDir: path.resolve(__dirname, '.'),
   coveragePathIgnorePatterns: ['/node_modules/', '/lib/', '/es/'],

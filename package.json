@@ -1,17 +1,18 @@
 {
-  "name": "ims-monorepo-template",
+  "name": "ims-view-pc",
   "version": "1.0.0",
   "private": true,
   "keywords": [
-    "monorepo",
-    "template"
+    "antd",
+    "component",
+    "plus"
   ],
-  "description": "monorepo develop template",
-  "homepage": "https://github.com/eternallycyf/ims-monorepo-template#readme",
+  "description": "antd plus component",
+  "homepage": "https://github.com/eternallycyf/ims-view-pc#readme",
   "bugs": {
-    "url": "https://github.com/eternallycyf/ims-monorepo-template"
+    "url": "https://github.com/eternallycyf/ims-view-pc/issues"
   },
-  "repository": "git+https://github.com/eternallycyf/ims-monorepo-template.git",
+  "repository": "git+https://github.com/eternallycyf/ims-view-pc.git",
   "license": "MIT",
   "author": "eternallycyf(969475322@qq.com)",
   "workspaces": [
@@ -40,6 +41,9 @@
     "test": "jest",
     "test:coverage": "jest --coverage",
     "tsc": "tsc -p tsconfig-check.json"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.23.1"
   },
   "lint-staged": {
     "*.{js,jsx,less,md,json}": [

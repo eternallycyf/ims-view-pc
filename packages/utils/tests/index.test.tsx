@@ -1,10 +1,10 @@
 import { render } from '@testing-library/react';
 
-import Bar from '@ims-view/bar';
+import Hooks from '@ims-view/hooks';
 import React from 'react';
 
-test('Bar', () => {
-  const { container } = render(<Bar />);
+test('Hooks', () => {
+  const { container } = render(<Hooks />);
 
   expect(container).toMatchSnapshot();
 });

@@ -57,8 +57,8 @@ export default defineConfig({
   publicPath: isProd ? '/' : basePath,
   favicons: [isProd ? '/images/favicon.ico' : `/${repo}/images/favicon.ico`],
   alias: {
-    '@ims-view/foo': path.join(__dirname, './packages/foo/src'),
-    '@ims-view/bar': path.join(__dirname, './packages/bar/src'),
+    '@ims-view/hooks': path.join(__dirname, './packages/hooks/src'),
+    '@ims-view/utils': path.join(__dirname, './packages/utils/src'),
   },
   styles: [
     `html, body { background: transparent;  }
