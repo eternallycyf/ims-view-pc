@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    /* 生成能力 */
+    "declaration": true,
+    /* 模块导入配置项 */
+    "moduleResolution": "Node",
+    "esModuleInterop": true,
+    /* 模块依赖 */
+    // 这些选项对 babel 编译 TypeScript 没有作用
+    // 但是可以让编辑器正确提示错误
+    "target": "es5",
+    "module": "CommonJS",
+    "sourceMap": true,
+    "lib": ["ESNext"],
+    "jsx": "react",
+    /* Alias 路径 */
+    "baseUrl": ".",
+    "paths": {
+      "@ims-view/foo": ["./packages/foo/src"],
+      "@ims-view/bar": ["./packages/bar/src"]
+    }
+  }
+}

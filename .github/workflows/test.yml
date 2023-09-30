@@ -1,0 +1,27 @@
+name: Test CI
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: ⚙ 设置 pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: latest
+
+      - name: 🏗 准备 Node.js 环境
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: 🗳 安装依赖
+        run: pnpm install
+
+      - name: ✅ 测试检查
+        run: pnpm run test:coverage
+
+      - name: ⬆️上传至 Codecov
+        uses: codecov/codecov-action@v3
