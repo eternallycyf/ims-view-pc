@@ -22,7 +22,7 @@
     "**/*.less"
   ],
   "scripts": {
-    "start": "npm run dumi dev",
+    "start": "dumi dev",
     "docs:build": "dumi build",
     "build": "lerna run build  --parallel",
     "clean": "lerna run clean && rm -rf es lib dist build coverage .umi .eslintcache apis",
