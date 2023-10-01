@@ -37,10 +37,11 @@
     "prepare": "husky install",
     "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,md,json}'",
     "release": "multi-semantic-release",
-    "release:local": "multi-semantic-release --no-ci",
+    "release:local": "npm run check-error && multi-semantic-release --no-ci",
     "test": "jest",
     "test:coverage": "jest --coverage",
-    "tsc": "tsc -p tsconfig-check.json"
+    "tsc": "tsc -p tsconfig-check.json",
+    "check-error": "npm run lint && npm run test && npm run doctor && npm run test && npm run test:coverage"
   },
   "dependencies": {
     "@babel/runtime": "^7.23.1"

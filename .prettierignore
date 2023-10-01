@@ -17,3 +17,4 @@ LICENSE
 *.lock
 yarn-error.log
 package.json
+/.dumi

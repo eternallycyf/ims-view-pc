@@ -11,7 +11,6 @@
     "target": "es5",
     "module": "CommonJS",
     "sourceMap": true,
-    "lib": ["ESNext"],
     "jsx": "react",
     /* Alias 路径 */
     "baseUrl": ".",
