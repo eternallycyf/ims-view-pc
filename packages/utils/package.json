@@ -1,6 +1,6 @@
 {
   "name": "@ims-view/utils",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
   "types": "lib/index.d.ts",
@@ -19,7 +19,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@ims-view/utils": "1.1.0"
+    "@ims-view/utils": "1.2.0"
   },
   "peerDependencies": {
     "react": "^18",
