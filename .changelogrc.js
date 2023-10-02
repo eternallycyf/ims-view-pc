@@ -9,9 +9,9 @@ module.exports = {
     guide: '指南',
   },
   titleLanguage: 'zh-CN',
-  displayTypes: ['feat', 'fix', 'styles', 'pref'],
+  displayTypes: ['feat', 'fix', 'styles', 'pref', 'chore', 'docs'],
   showSummary: true,
   reduceHeadingLevel: true,
   newlineTimestamp: true,
-  addBackToTop: true,
+  addBackToTop: false,
 };

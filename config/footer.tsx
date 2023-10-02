@@ -14,17 +14,17 @@ export const footer = [
     items: [
       {
         title: 'ims-view-pc',
-        url: 'https://ims-view.site/ims-view-pc/component',
+        url: 'https://ims-view.site/component',
         openExternal: true,
       },
       {
         title: '@ims-view/hooks',
-        url: 'https://ims-view.site/ims-view-pc/hooks',
+        url: 'https://ims-view.site/hooks',
         openExternal: true,
       },
       {
         title: '@ims-view/utils',
-        url: 'https://ims-view.site/ims-view-pc/utils',
+        url: 'https://ims-view.site/utils',
         openExternal: true,
       },
     ],

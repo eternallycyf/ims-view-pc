@@ -9,7 +9,7 @@ export const features: IFeature[] = [
   {
     title: '基于 Ant Design',
     description:
-      '本主题包使用 antd 作为基础组件库, 兼容antd所有API, 提供了封装的CROD组件, 以及一些常用的组件',
+      '使用 antd 作为基础组件库, 兼容antd所有API, 提供了封装的CROD组件, 以及一些常用的组件',
     link: '/guide',
     imageType: 'light',
     image:
