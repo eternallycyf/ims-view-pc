@@ -1,9 +1,19 @@
 ---
-title: hooks
+title: 使用方式
 order: 0
+nav:
+  title: hooks
 ---
 
-## hooks
+## 使用方式
+
+### install
+
+```shell
+pnpm i @ims-view/hooks
+```
+
+### start
 
 ```tsx
 import * as hooks from '@ims-view/hooks';

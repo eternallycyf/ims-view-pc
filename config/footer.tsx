@@ -10,86 +10,21 @@ import React from 'react';
 
 export const footer = [
   {
-    title: '相关资源',
+    title: '相关依赖',
     items: [
       {
-        title: 'Ant Design Pro',
-        url: 'https://pro.ant.design',
+        title: 'ims-view-pc',
+        url: 'https://ims-view.site/ims-view-pc/component',
         openExternal: true,
       },
       {
-        title: 'Ant Design Pro Components',
-        url: 'https://procomponents.ant.design',
+        title: '@ims-view/hooks',
+        url: 'https://ims-view.site/ims-view-pc/hooks',
         openExternal: true,
       },
       {
-        title: 'Umi',
-        description: 'React 应用开发框架',
-        url: 'https://umijs.org',
-        openExternal: true,
-      },
-      {
-        title: 'Dumi',
-        description: '组件/文档研发工具',
-        url: 'https://d.umijs.org',
-        openExternal: true,
-      },
-      {
-        title: 'qiankun',
-        description: '微前端框架',
-        url: 'https://qiankun.umijs.org',
-        openExternal: true,
-      },
-    ],
-  },
-  {
-    title: '社区',
-    items: [
-      {
-        icon: <MediumOutlined />,
-        title: 'Medium',
-        url: 'http://medium.com/ant-design/',
-        openExternal: true,
-      },
-      {
-        icon: <TwitterOutlined style={{ color: '#1DA1F2' }} />,
-        title: 'Twitter',
-        url: 'http://twitter.com/antdesignui',
-        openExternal: true,
-      },
-      {
-        icon: (
-          <img
-            src="https://gw.alipayobjects.com/zos/rmsportal/XuVpGqBFxXplzvLjJBZB.svg"
-            alt="yuque"
-          />
-        ),
-        title: 'Ant Design 语雀专栏',
-        url: 'https://yuque.com/ant-design/ant-design',
-        openExternal: true,
-      },
-      {
-        icon: <ZhihuOutlined style={{ color: '#056de8' }} />,
-        title: 'Ant Design 知乎专栏',
-        url: 'https://www.zhihu.com/column/c_1564262000561106944',
-        openExternal: true,
-      },
-      {
-        icon: <ZhihuOutlined style={{ color: '#056de8' }} />,
-        title: '体验科技专栏',
-        url: 'http://zhuanlan.zhihu.com/xtech',
-        openExternal: true,
-      },
-      {
-        icon: (
-          <img
-            src="https://gw.alipayobjects.com/zos/rmsportal/mZBWtboYbnMkTBaRIuWQ.png"
-            alt="seeconf"
-          />
-        ),
-        title: 'SEE Conf',
-        description: 'SEE Conf-蚂蚁体验科技大会',
-        url: 'https://seeconf.antfin.com/',
+        title: '@ims-view/utils',
+        url: 'https://ims-view.site/ims-view-pc/utils',
         openExternal: true,
       },
     ],
@@ -98,87 +33,43 @@ export const footer = [
     title: '帮助',
     items: [
       {
-        icon: <GithubOutlined />,
         title: 'GitHub',
-        url: 'https://github.com/ant-design/antd-style',
+        url: 'https://github.com/eternallycyf/ims-view-pc',
         openExternal: true,
       },
       {
-        icon: <HistoryOutlined />,
         title: '更新日志',
-        url: '/changelog',
-        // LinkComponent: Link,
+        url: '/ims-view-pc/changelog/ims-view-pc',
       },
-
       {
-        icon: <IssuesCloseOutlined />,
         title: '讨论',
-        url: 'https://github.com/ant-design/antd-style/issues',
+        url: 'https://github.com/eternallycyf/ims-view-pc/issues',
         openExternal: true,
       },
     ],
   },
   {
-    icon: (
-      <img
-        src="https://gw.alipayobjects.com/zos/rmsportal/nBVXkrFdWHxbZlmMbsaH.svg"
-        alt="more products"
-      />
-    ),
-    title: '更多产品',
+    title: '模板',
     items: [
       {
-        icon: (
-          <img
-            src="https://gw.alipayobjects.com/zos/rmsportal/XuVpGqBFxXplzvLjJBZB.svg"
-            alt="yuque"
-          />
-        ),
-        title: '语雀',
-        url: 'https://yuque.com',
-        description: '知识创作与分享工具',
+        title: 'ims-monorepo-template',
+        description: 'monorepo模板',
+        url: 'https://github.com/eternallycyf/ims-monorepo-template',
         openExternal: true,
       },
       {
-        icon: (
-          <img
-            src="https://gw.alipayobjects.com/zos/antfincdn/nc7Fc0XBg5/8a6844f5-a6ed-4630-9177-4fa5d0b7dd47.png"
-            alt="AntV"
-          />
-        ),
-        title: 'AntV',
-        url: 'https://antv.vision',
-        description: '数据可视化解决方案',
+        title: 'ims-template',
+        url: 'https://github.com/eternallycyf/ims-template',
         openExternal: true,
       },
+    ],
+  },
+  {
+    title: '更多',
+    items: [
       {
-        icon: <img src="https://www.eggjs.org/logo.svg" alt="Egg" />,
-        title: 'Egg',
-        url: 'https://eggjs.org',
-        description: '企业级 Node.js 框架',
-        openExternal: true,
-      },
-      {
-        icon: (
-          <img
-            src="https://gw.alipayobjects.com/zos/rmsportal/DMDOlAUhmktLyEODCMBR.ico"
-            alt="kitchen"
-          />
-        ),
-        title: 'Kitchen',
-        description: 'Sketch 工具集',
-        url: 'https://kitchen.alipay.com',
-        openExternal: true,
-      },
-      {
-        icon: (
-          <img
-            src="https://gw.alipayobjects.com/zos/rmsportal/nBVXkrFdWHxbZlmMbsaH.svg"
-            alt="xtech"
-          />
-        ),
-        title: '蚂蚁体验科技',
-        url: 'https://xtech.antfin.com/',
+        title: 'lrxc-cli',
+        url: 'https://github.com/eternallycyf/lrxc-cli',
         openExternal: true,
       },
     ],

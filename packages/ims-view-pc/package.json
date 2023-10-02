@@ -1,6 +1,6 @@
 {
-  "name": "@ims-view/hooks",
-  "version": "1.2.0",
+  "name": "ims-view-pc",
+  "version": "1.0.0",
   "main": "lib/index.js",
   "module": "es/index.js",
   "types": "lib/index.d.ts",
@@ -18,9 +18,21 @@
     "start": "father dev",
     "test": "jest"
   },
+  "dependencies": {
+    "@ims-view/utils": "latest",
+    "@ims-view/hooks": "latest"
+  },
   "peerDependencies": {
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "@ant-design/icons": "^5.2.6",
+    "antd": "^5.9.4",
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "@ant-design/icons": "^5.2.6",
+    "antd": "^5.9.4",
+    "lodash": "^4.17.21"
   },
   "publishConfig": {
     "access": "public",

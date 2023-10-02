@@ -1,7 +1,8 @@
 import { defineConfig } from 'dumi';
 import type { SiteThemeConfig } from 'dumi-theme-antd-style';
 import path from 'path';
-import { featuresZh } from './config/features';
+import { features } from './config/features';
+import { footer } from './config/footer';
 import style from './docs/siteIndexStyle';
 import { homepage, name as repo } from './package.json';
 
@@ -27,25 +28,21 @@ const themeConfig: SiteThemeConfig = {
           openExternal: true,
         },
       ],
-      features: featuresZh,
-    },
-    'en-US': {
-      description: 'dumi2 theme similar to antd v5 website',
-      actions: [
-        {
-          type: 'primary',
-          text: 'Start',
-          link: '/guide-en',
-        },
-        {
-          text: 'Config',
-          link: '/config-en',
-        },
-      ],
+      features: features,
     },
   },
   socialLinks: { github: homepage },
-  footer: 'Made with ❤️ by eternallycyf - AFX & 数字科技',
+  apiHeader: {
+    sourceUrl: `{github}/tree/master/src/components/{atomId}/index.tsx`,
+    docUrl: `{github}/tree/master/example/docs/components/{atomId}.{locale}.md`,
+    pkg: 'ims-view-pc',
+    match: ['/ims-view-pc/component'],
+  },
+  footerConfig: {
+    bottom: '2023',
+    copyright: 'Made with ❤️ by eternallycyf - AFX & 数字科技',
+    columns: footer,
+  },
 };
 
 export default defineConfig({
@@ -59,6 +56,7 @@ export default defineConfig({
   alias: {
     '@ims-view/hooks': path.join(__dirname, './packages/hooks/src'),
     '@ims-view/utils': path.join(__dirname, './packages/utils/src'),
+    'ims-view-pc': path.join(__dirname, './packages/ims-view-pc/src'),
   },
   styles: [
     `html, body { background: transparent;  }
