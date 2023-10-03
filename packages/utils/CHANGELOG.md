@@ -1,5 +1,24 @@
 # Changelog
 
+### [Version&nbsp;1.3.1](https://github.com/eternallycyf/ims-view-pc/compare/@ims-view/utils@1.3.0...@ims-view/utils@1.3.1)
+
+<sup>Released on **2023-10-03**</sup>
+
+#### 🐛 修复
+
+- Update docs.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- Update docs ([2f6eda8](https://github.com/eternallycyf/ims-view-pc/commit/2f6eda8))
+
+</details>
+
 ## [Version&nbsp;1.3.0](https://github.com/eternallycyf/ims-view-pc/compare/@ims-view/utils@1.2.0...@ims-view/utils@1.3.0)
 
 <sup>Released on **2023-10-02**</sup>
