@@ -1,5 +1,20 @@
 # Changelog
 
+### [Version&nbsp;1.0.1](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.0.0...ims-view-pc@1.0.1)
+
+<sup>Released on **2023-10-03**</sup>
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+</details>
+
+### Dependencies
+
+- **@ims-view/utils:** upgraded to 1.3.1
+
 ## Version&nbsp;1.0.0
 
 <sup>Released on **2023-10-02**</sup>
