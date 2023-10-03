@@ -3,7 +3,6 @@ title: useIsomorphicLayoutEffect
 order: 4
 apiHeader:
   pkg: '@ims-view/hooks'
-  defaultImport: true
   docUrl: https://github.com/eternallycyf/ims-view-pc/blob/master/docs/hooks/useIsomorphicLayoutEffect.md
   sourceUrl: https://github.com/eternallycyf/ims-view-pc/blob/master/packages/hooks/src/useIsomorphicLayoutEffect.ts
 ---

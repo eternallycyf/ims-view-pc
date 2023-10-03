@@ -3,7 +3,6 @@ title: useForceUpdate
 order: 3
 apiHeader:
   pkg: '@ims-view/hooks'
-  defaultImport: true
   docUrl: https://github.com/eternallycyf/ims-view-pc/blob/master/docs/hooks/useForceUpdate.md
   sourceUrl: https://github.com/eternallycyf/ims-view-pc/blob/master/packages/hooks/src/useForceUpdate.ts
 ---

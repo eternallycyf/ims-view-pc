@@ -1,5 +1,7 @@
 export { default as useClickOutside } from './useClickOutside';
 export { default as useDebounce } from './useDebounce';
+export { default as useFetch } from './useFetch';
+export * from './useFetch/interface';
 export { default as useForceUpdate } from './useForceUpdate';
 export { default as useIsomorphicLayoutEffect } from './useIsomorphicLayoutEffect';
 export { default as useMemoizedFn } from './useMemoizedFn';

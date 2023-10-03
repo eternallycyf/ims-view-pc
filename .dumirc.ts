@@ -73,7 +73,9 @@ export default defineConfig({
   themeConfig,
   ssr: isProd ? {} : false,
   hash: true,
-  mock: {},
+  mock: {
+    include: ['mock/**/*.{ts}'],
+  },
   html2sketch: {},
   mfsu: {
     runtimePublicPath: true,

@@ -2,6 +2,8 @@
   "compilerOptions": {
     /* 生成能力 */
     "declaration": true,
+    "declarationMap": true,
+    "declarationDir": "typing",
     /* 模块导入配置项 */
     "moduleResolution": "Node",
     "esModuleInterop": true,
@@ -19,5 +21,6 @@
       "@ims-view/utils": ["./packages/utils/src"],
       "ims-view-pc": ["./packages/ims-view-pc/src"]
     }
-  }
+  },
+  "exclude": ["node_modules", "dist", "server"]
 }

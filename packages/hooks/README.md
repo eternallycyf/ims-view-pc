@@ -16,3 +16,14 @@
 <!-- docs url -->
 
 - https://ims-view.site/ims-view-pc/hooks
+
+## required dev
+
+```JSON
+{
+    "react": "^18",
+    "react-dom": "^18",
+    "lodash": "^4.17.21",
+    "axios": "^1.5.1"
+}
+```

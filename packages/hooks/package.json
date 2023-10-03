@@ -18,9 +18,18 @@
     "start": "father dev",
     "test": "jest"
   },
+  "dependencies": {
+    "react-use": "^17.4.0"
+  },
+  "devDependencies": {
+    "lodash": "^4.17.21",
+    "axios": "^1.5.1"
+  },
   "peerDependencies": {
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "lodash": "^4.17.21",
+    "axios": "^1.5.1"
   },
   "publishConfig": {
     "access": "public",

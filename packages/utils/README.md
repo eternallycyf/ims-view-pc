@@ -16,3 +16,13 @@
 <!-- docs url -->
 
 - https://ims-view.site/ims-view-pc/utils
+
+## required dev
+
+```JSON
+{
+    "react": "^18",
+    "react-dom": "^18",
+    "lodash": "^4.17.21"
+}
+```

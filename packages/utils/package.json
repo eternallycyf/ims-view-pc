@@ -19,9 +19,13 @@
     "test": "jest"
   },
   "dependencies": {},
+  "devDependencies": {
+    "lodash": "^4.17.21"
+  },
   "peerDependencies": {
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "lodash": "^4.17.21"
   },
   "publishConfig": {
     "access": "public",

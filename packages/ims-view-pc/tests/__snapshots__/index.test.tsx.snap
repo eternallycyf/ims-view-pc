@@ -1,9 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Utils 1`] = `
-<div>
-  <div>
-    hello ims-view-pc!
-  </div>
-</div>
-`;
+exports[`CommonDemo 1`] = `<div />`;

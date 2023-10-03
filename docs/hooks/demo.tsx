@@ -1,15 +1,15 @@
 import * as hooks from '@ims-view/hooks';
 import React from 'react';
 
-const Demos = () => {
-  let [number, setNumber] = hooks.useSyncState<number>(0);
+const Demo = () => {
+  let [number, setNumber] = hooks.useSyncState<number>(5);
 
   return (
     <div>
-      <button onClick={() => setNumber(number++)}>+</button>
-      {number}
-      <button onClick={() => setNumber(number--)}>-</button>
+      <div>{number}</div>
+      <button onClick={() => setNumber(number + 1)}>+</button>
+      <button onClick={() => setNumber(number - 1)}>-</button>
     </div>
   );
 };
-export default Demos;
+export default Demo;

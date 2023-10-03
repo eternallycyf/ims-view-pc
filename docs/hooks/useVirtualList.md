@@ -3,7 +3,6 @@ title: useVirtualList
 order: 12
 apiHeader:
   pkg: '@ims-view/hooks'
-  defaultImport: true
   docUrl: https://github.com/eternallycyf/ims-view-pc/blob/master/docs/hooks/useVirtualList.md
   sourceUrl: https://github.com/eternallycyf/ims-view-pc/blob/master/packages/hooks/src/useVirtualList.ts
 ---
