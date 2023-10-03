@@ -41,7 +41,7 @@
     "test": "jest",
     "test:coverage": "jest --coverage",
     "tsc": "tsc -p tsconfig-check.json",
-    "check-error": "npm run lint && npm run test && npm run doctor && npm run test && npm run test:coverage"
+    "check-error": "npm run lint && npm run test && npm run test:coverage && npm run doctor"
   },
   "dependencies": {
     "@babel/runtime": "^7.23.1"
