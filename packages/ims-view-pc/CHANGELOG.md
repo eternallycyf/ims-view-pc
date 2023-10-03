@@ -1,5 +1,29 @@
 # Changelog
 
+## [Version&nbsp;1.1.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.0.1...ims-view-pc@1.1.0)
+
+<sup>Released on **2023-10-03**</sup>
+
+#### ✨ 新特性
+
+- Ims-view:CommonDemo + @ims-view/hooks:useFetch.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- Ims-view:CommonDemo + @ims-view/hooks:useFetch ([2107502](https://github.com/eternallycyf/ims-view-pc/commit/2107502))
+
+</details>
+
+### Dependencies
+
+- **@ims-view/utils:** upgraded to 1.4.0
+- **@ims-view/hooks:** upgraded to 1.4.0
+
 ### [Version&nbsp;1.0.1](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.0.0...ims-view-pc@1.0.1)
 
 <sup>Released on **2023-10-03**</sup>
