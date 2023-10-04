@@ -1,6 +1,5 @@
 import { useFetch, useFetchProps, useFetchState } from '@ims-view/hooks';
 import { Button, Spin } from 'antd';
-import axios from 'axios';
 import React, { useState } from 'react';
 
 interface IApi {
@@ -23,9 +22,17 @@ const App = () => {
       // when initRequest use true
       // depts: [number],
     },
-    request: axios,
+    request: async (config) => {
+      const data = new Promise((resolve, reject) => {
+        fetch(config?.url, config as any)
+          .then((data) => data.json())
+          .then((data) => resolve(data))
+          .catch((error) => reject(error));
+      });
+      return (await data) as IApi;
+    },
     initRequest: false,
-    dataHandler: (data) => data?.data,
+    // dataHandler: (data) => data?.data,
   });
 
   const hanldeFetch = () => {

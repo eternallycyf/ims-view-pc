@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import { useAsyncFn } from 'react-use';
 import { useFetchProps, useFetchState } from './interface';
 
@@ -17,7 +17,8 @@ export default function useFetch<T>(props: useFetchProps<T>): useFetchState<T> {
       if (dataHandler) return dataHandler(data);
       return data || {};
     } catch (error) {
-      console.log(error);
+      console.dir(error);
+      return data || {};
     }
   }, fetchConfig?.depts || []);
 

@@ -1,6 +1,5 @@
 import { useFetchProps, useFetchState } from '@ims-view/hooks';
 import { Button, Spin } from 'antd';
-import axios from 'axios';
 import { CommonDemo, ICommonDemoHandle } from 'ims-view-pc';
 import React, { useState } from 'react';
 
@@ -24,8 +23,16 @@ const Demo = () => {
       dataPath: 'data',
       depts: [number],
     },
-    request: axios,
-    dataHandler: (data) => data?.data,
+    request: async (config) => {
+      const data = new Promise((resolve, reject) => {
+        fetch(config?.url, config as any)
+          .then((data) => data.json())
+          .then((data) => resolve(data))
+          .catch((error) => reject(error));
+      });
+      return (await data) as IApi;
+    },
+    // dataHandler: (data) => data?.data,
   };
 
   const handleFetch = () => {

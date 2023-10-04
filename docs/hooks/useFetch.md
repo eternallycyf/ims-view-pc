@@ -4,7 +4,7 @@ order: 1
 apiHeader:
   pkg: '@ims-view/hooks'
   docUrl: https://github.com/eternallycyf/ims-view-pc/blob/master/docs/hooks/useFetch.md
-  sourceUrl: https://github.com/eternallycyf/ims-view-pc/blob/master/packages/hooks/src/useFetch.tsx
+  sourceUrl: https://github.com/eternallycyf/ims-view-pc/blob/master/packages/hooks/src/useFetch.ts
 ---
 
 ## useFetch
@@ -13,12 +13,12 @@ apiHeader:
 
 ## Params
 
-| 属性        | 说明           | 类型                           | 默认值  |
-| ----------- | -------------- | ------------------------------ | ------- |
-| fetchConfig | 请求配置       | `useFetchProps['fetchConfig']` | -       |
-| dataHandler | 数据处理函数   | `(data: T) => T`               | -       |
-| initRequest | 是否初始化请求 | `boolean`                      | `false` |
-| request     | 请求实例       | `AxiosInstance`                | -       |
+| 属性        | 说明           | 类型                                         | 默认值  |
+| ----------- | -------------- | -------------------------------------------- | ------- |
+| fetchConfig | 请求配置       | `useFetchProps['fetchConfig']`               | -       |
+| dataHandler | 数据处理函数   | `(data: T) => T`                             | -       |
+| initRequest | 是否初始化请求 | `boolean`                                    | `false` |
+| request     | 请求函数       | `(config: AxiosRequestConfig) => Promise<T>` | -       |
 
 ## Result
 

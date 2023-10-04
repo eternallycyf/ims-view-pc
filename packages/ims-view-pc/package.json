@@ -19,6 +19,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@babel/runtime": "^7.23.1",
     "@ims-view/utils": "1.4.0",
     "@ims-view/hooks": "1.4.0"
   },

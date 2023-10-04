@@ -1,5 +1,4 @@
-import { AxiosInstance } from 'axios';
-import _ from 'lodash';
+import { AxiosRequestConfig } from 'axios';
 
 /**
  * @typedef useFetchProps - 描述列表组件
@@ -26,7 +25,7 @@ export interface useFetchProps<T = any> {
   };
   dataHandler?: (data: T) => any;
   initRequest?: boolean;
-  request: AxiosInstance;
+  request: (config: AxiosRequestConfig) => Promise<T>;
 }
 
 export type useFetchState<T = any> = readonly [

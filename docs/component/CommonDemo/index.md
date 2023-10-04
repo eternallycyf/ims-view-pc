@@ -30,4 +30,4 @@ import { ICommonDemoHandle, ICommonDemoProps, CommonDemo } from 'ims-view-pc';
 | fetchConfig | 请求配置       | <a href='/hooks/use-fetch#fetchconfig'>fetchConfig</a> | -      |
 | dataHandler | 数据处理       | `(data: T) => any`                                     | -      |
 | initRequest | 是否初始化请求 | `boolean`                                              | -      |
-| request     | 请求实例       | `AxiosInstance`                                        | -      |
+| request     | 请求函数       | `(config: AxiosRequestConfig) => Promise<T>`           | -      |
