@@ -1,5 +1,24 @@
 # Changelog
 
+### [Version&nbsp;1.4.1](https://github.com/eternallycyf/ims-view-pc/compare/@ims-view/hooks@1.4.0...@ims-view/hooks@1.4.1)
+
+<sup>Released on **2023-10-04**</sup>
+
+#### 🐛 修复
+
+- Demo use fetch replace axios.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- Demo use fetch replace axios ([296780b](https://github.com/eternallycyf/ims-view-pc/commit/296780b))
+
+</details>
+
 ## [Version&nbsp;1.4.0](https://github.com/eternallycyf/ims-view-pc/compare/@ims-view/hooks@1.3.0...@ims-view/hooks@1.4.0)
 
 <sup>Released on **2023-10-03**</sup>
