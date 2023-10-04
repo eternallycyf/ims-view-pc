@@ -1,5 +1,29 @@
 # Changelog
 
+## [Version&nbsp;1.2.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.1.1...ims-view-pc@1.2.0)
+
+<sup>Released on **2023-10-04**</sup>
+
+#### ✨ 新特性
+
+- Ims-view:AudioPlayer + @ims-view/hooks: refactor.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- Ims-view:AudioPlayer + @ims-view/hooks: refactor ([7825a35](https://github.com/eternallycyf/ims-view-pc/commit/7825a35))
+
+</details>
+
+### Dependencies
+
+- **@ims-view/utils:** upgraded to 1.5.0
+- **@ims-view/hooks:** upgraded to 1.5.0
+
 ### [Version&nbsp;1.1.1](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.1.0...ims-view-pc@1.1.1)
 
 <sup>Released on **2023-10-04**</sup>
