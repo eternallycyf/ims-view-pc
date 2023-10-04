@@ -1,0 +1,247 @@
+.audio-player {
+  position: relative;
+  width: 100%;
+  height: 36px;
+
+  .audio-player-wrap {
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    height: 100%;
+    border: 1px solid #e1e3e6;
+    border-radius: 2px;
+
+    .box {
+      text-align: center;
+    }
+
+    // 播放区
+    .pause-play-box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 100%;
+      line-height: 34px;
+    }
+
+    .pause-play-box-enable {
+      cursor: pointer;
+    }
+
+    .pause-play-box-disabled > i {
+      cursor: not-allowed;
+    }
+
+    //进度区
+    .step-box {
+      flex: 1;
+      padding: 0 10px;
+    }
+
+    .time-box {
+      display: flex;
+      align-items: center;
+      padding: 0 10px;
+    }
+
+    //音量调节区
+    .volume-box {
+      display: flex;
+      align-items: center;
+      width: 30px;
+      height: 100%;
+      line-height: 34px;
+
+      :global {
+        .ant-popover-inner {
+          min-width: 150px;
+        }
+      }
+    }
+
+    // 播放速度调节区
+    .rate-box {
+      display: flex;
+      align-items: center;
+      margin-bottom: 0;
+      padding: 0 6px;
+      height: 100%;
+      line-height: 34px;
+      cursor: pointer;
+    }
+
+    //下载区
+    .download-box {
+      display: flex;
+      align-items: center;
+      width: 30px;
+      height: 100%;
+      line-height: 34px;
+
+      a {
+        color: #666;
+      }
+    }
+
+    .handle-audio-icon {
+      color: #666;
+      cursor: pointer;
+
+      &:hover {
+        color: #666;
+      }
+    }
+  }
+
+  &-sm {
+    height: 28px;
+
+    &-wrap {
+      // 播放区
+      padding: 0 5px;
+
+      .pause-play-box {
+        width: 28px;
+        height: 100%;
+        line-height: 26px;
+      }
+
+      //进度区
+      .step-box {
+        padding: 0 5px;
+      }
+
+      .time-box {
+        padding: 0 5px;
+        font-size: 12px;
+      }
+
+      //音量调节区
+      .volume-box {
+        width: 30px;
+        height: 100%;
+        line-height: 26px;
+      }
+
+      // 播放速度调节区
+      .rate-box {
+        margin-bottom: 0;
+        padding: 0 6px;
+        height: 100%;
+        line-height: 26px;
+        cursor: pointer;
+      }
+
+      //下载区
+      .download-box {
+        width: 28px;
+        height: 100%;
+        line-height: 26px;
+      }
+    }
+  }
+
+  .change-audio-volume {
+    &-box {
+      width: 30px;
+      height: 150px;
+    }
+
+    &-slider {
+      height: 120px;
+      text-align: center;
+    }
+
+    &-value {
+      text-align: center;
+      letter-spacing: 0;
+      font-size: 12px;
+    }
+
+    &-customer-handle {
+      width: 20px;
+      height: 13px;
+      border: 1px solid #fff;
+      border-radius: 4px;
+      background-color: #666;
+      text-align: center;
+      line-height: 10px;
+
+      i {
+        color: #fff;
+        font-size: 12px;
+      }
+    }
+
+    // Popover样式覆盖
+    .fishd-popover-inner-content {
+      padding: 11px 4px;
+    }
+
+    //Slider样式覆盖
+    .slider {
+      margin: 6px 9px;
+
+      &-handle {
+        margin-left: -8px;
+        border: none;
+      }
+
+      &-handle-custom {
+        border-radius: 4px;
+      }
+    }
+  }
+
+  .change-audio-rate-item {
+    margin-bottom: 6px;
+    white-space: nowrap;
+    word-break: normal;
+    cursor: pointer;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    &:hover {
+      color: var(--colorPrimaryHover);
+    }
+  }
+
+  //Slider样式覆盖
+  .slider {
+    margin: 10px 6px;
+
+    &-track {
+      background-color: fade(#666, 80%);
+    }
+
+    &-handle {
+      border: solid 2px fade(#666, 80%);
+
+      &:focus {
+        border-color: #666;
+        box-shadow: none;
+      }
+    }
+
+    &:hover {
+      .slider-rail {
+        background-color: #e1e3e6;
+      }
+
+      .slider-track {
+        background-color: #666;
+      }
+    }
+
+    &-dot {
+      border: 2px solid #666;
+
+      &-active {
+        border-color: fade(#666, 80%);
+      }
+    }
+  }
+}

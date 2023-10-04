@@ -1,5 +1,11 @@
 {
   "compilerOptions": {
+    "outDir": "dist",
+    "resolveJsonModule": true,
+    "importHelpers": true,
+    "allowSyntheticDefaultImports": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "experimentalDecorators": true,
     /* 生成能力 */
     "declaration": true,
     "declarationMap": true,
@@ -10,10 +16,10 @@
     /* 模块依赖 */
     // 这些选项对 babel 编译 TypeScript 没有作用
     // 但是可以让编辑器正确提示错误
-    "target": "es5",
-    "module": "CommonJS",
+    "target": "ESNext",
+    "module": "ESNext",
     "sourceMap": true,
-    "jsx": "react",
+    "jsx": "react-jsx",
     /* Alias 路径 */
     "baseUrl": ".",
     "paths": {

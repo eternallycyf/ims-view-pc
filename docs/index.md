@@ -4,7 +4,7 @@ hero:
   description: a antd component plus
   actions:
     - text: 快速上手
-      link: /guide
+      link: /components
     - text: Github
       link: https://github.com/eternallycyf/ims-view-pc/
 ---

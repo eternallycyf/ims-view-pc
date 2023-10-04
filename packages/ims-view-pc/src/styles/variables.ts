@@ -5,6 +5,6 @@ export interface IThemeConfig {
   variables: ThemeConfig['token'];
 }
 
-export const themeConfig = {
+export const themeConfig: IThemeConfig = {
   variables: getDesignToken(),
 };

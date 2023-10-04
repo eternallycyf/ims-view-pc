@@ -20,7 +20,7 @@ const themeConfig: SiteThemeConfig = {
         {
           type: 'primary',
           text: '开始使用',
-          link: '/guide',
+          link: '/components',
         },
         {
           text: 'Github',
@@ -33,8 +33,8 @@ const themeConfig: SiteThemeConfig = {
   },
   socialLinks: { github: homepage },
   apiHeader: {
-    sourceUrl: `{github}/tree/master/src/components/{atomId}/index.tsx`,
-    docUrl: `{github}/tree/master/example/docs/components/{atomId}.{locale}.md`,
+    sourceUrl: `https://github.com/eternallycyf/ims-view-pc/tree/master/packages/ims-view-pc/src/components/{atomId}/index.tsx`,
+    docUrl: `https://github.com/eternallycyf/ims-view-pc/tree/master/packages/ims-view-pc/src/component/{atomId}/index.md`,
     pkg: 'ims-view-pc',
     match: ['/ims-view-pc/component'],
   },
@@ -57,6 +57,14 @@ export default defineConfig({
     '@ims-view/hooks': path.join(__dirname, './packages/hooks/src'),
     '@ims-view/utils': path.join(__dirname, './packages/utils/src'),
     'ims-view-pc': path.join(__dirname, './packages/ims-view-pc/src'),
+  },
+  resolve: {
+    docDirs: ['docs'],
+    atomDirs: [
+      { type: 'component', dir: './packages/ims-view-pc/src/components' },
+      { type: 'hooks', dir: './packages/hooks/src' },
+      { type: 'utils', dir: './packages/utils/src' },
+    ],
   },
   styles: [
     `html, body { background: transparent;  }

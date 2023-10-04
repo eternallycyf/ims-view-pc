@@ -10,7 +10,7 @@ export const features: IFeature[] = [
     title: '基于 Ant Design',
     description:
       '使用 antd 作为基础组件库, 兼容antd所有API, 提供了封装的CROD组件, 以及一些常用的组件',
-    link: '/guide',
+    link: '/components',
     imageType: 'light',
     image:
       'https://gw.alipayobjects.com/zos/hitu-asset/c88e3678-6900-4289-8538-31367c2d30f2/hitu-1609235995955-image.png',
@@ -18,7 +18,6 @@ export const features: IFeature[] = [
   },
   {
     title: '亮暗色主题模式一键切换',
-    link: '/guide/theme',
     description:
       '本文档基于 antd v5 自定义了亮色与暗色主题算法，默认提供美观易用的亮暗色主题。用户可以根据自己的喜好选择主题模式，在不同的光线环境下都能获得良好的阅读体验。',
     image:
