@@ -4,7 +4,6 @@
     "resolveJsonModule": true,
     "importHelpers": true,
     "allowSyntheticDefaultImports": true,
-    "suppressImplicitAnyIndexErrors": true,
     "experimentalDecorators": true,
     /* 生成能力 */
     "declaration": true,
