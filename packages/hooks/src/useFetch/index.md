@@ -3,7 +3,7 @@ title: useFetch
 order: 2
 apiHeader:
   pkg: '@ims-view/hooks'
-  docUrl: https://github.com/eternallycyf/ims-view-pc/blob/master/docs/hooks/useFetch/index.md
+  docUrl: https://github.com/eternallycyf/ims-view-pc/blob/master/packages/hooks/src/useFetch/index.md
   sourceUrl: https://github.com/eternallycyf/ims-view-pc/blob/master/packages/hooks/src/useFetch/index.ts
 ---
 

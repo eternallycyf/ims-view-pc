@@ -3,7 +3,7 @@ title: useClickOutside
 order: 2
 apiHeader:
   pkg: '@ims-view/hooks'
-  docUrl: https://github.com/eternallycyf/ims-view-pc/blob/master/docs/hooks/useClickOutside/index.md
+  docUrl: https://github.com/eternallycyf/ims-view-pc/blob/master/packages/hooks/src/useClickOutside/index.md
   sourceUrl: https://github.com/eternallycyf/ims-view-pc/blob/master/packages/hooks/src/useClickOutside/index.tsx
 ---
 

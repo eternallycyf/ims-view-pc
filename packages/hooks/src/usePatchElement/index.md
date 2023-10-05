@@ -3,7 +3,7 @@ title: usePatchElement
 order: 2
 apiHeader:
   pkg: '@ims-view/hooks'
-  docUrl: https://github.com/eternallycyf/ims-view-pc/blob/master/docs/hooks/usePatchElement/index.md
+  docUrl: https://github.com/eternallycyf/ims-view-pc/blob/master/packages/hooks/src/usePatchElement/index.md
   sourceUrl: https://github.com/eternallycyf/ims-view-pc/blob/master/packages/hooks/src/usePatchElement/index.ts
 ---
 

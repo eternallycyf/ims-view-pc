@@ -3,7 +3,7 @@ title: useOverFlowScroll
 order: 2
 apiHeader:
   pkg: '@ims-view/hooks'
-  docUrl: https://github.com/eternallycyf/ims-view-pc/blob/master/docs/hooks/useOverFlowScroll/index.md
+  docUrl: https://github.com/eternallycyf/ims-view-pc/blob/master/packages/hooks/src/useOverFlowScroll/index.md
   sourceUrl: https://github.com/eternallycyf/ims-view-pc/blob/master/packages/hooks/src/useOverFlowScroll/index.ts
 ---
 

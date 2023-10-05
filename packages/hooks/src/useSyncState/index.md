@@ -3,7 +3,7 @@ title: useSyncState
 order: 2
 apiHeader:
   pkg: '@ims-view/hooks'
-  docUrl: https://github.com/eternallycyf/ims-view-pc/blob/master/docs/hooks/useSyncState/index.md
+  docUrl: https://github.com/eternallycyf/ims-view-pc/blob/master/packages/hooks/src/useSyncState/index.md
   sourceUrl: https://github.com/eternallycyf/ims-view-pc/blob/master/packages/hooks/src/useSyncState/index.ts
 ---
 
