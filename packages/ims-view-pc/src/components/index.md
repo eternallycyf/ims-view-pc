@@ -1,5 +1,5 @@
 ---
-title: 快速上手
+title: 使用方式
 order: 0
 nav:
   title: 组件
@@ -7,20 +7,21 @@ nav:
 apiHeader: false
 ---
 
-## 快速上手
+## 使用方式
 
 ```shell
-pnpm i ims-view-pc
+pnpm i 'ims-view-pc'
 ```
 
-## 前提依赖
+## peerDependencies
 
-```json
-{
-  "react": "^18",
-  "react-dom": "^18",
+```JSON
+"peerDependencies": {
   "@ant-design/icons": "^5.2.6",
   "antd": "^5.9.4",
-  "lodash": "^4.17.21"
+  "axios": "^1.5.1",
+  "lodash": "^4.17.21",
+  "react": "^18",
+  "react-dom": "^18"
 }
 ```

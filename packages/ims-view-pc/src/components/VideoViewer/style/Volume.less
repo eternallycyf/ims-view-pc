@@ -1,0 +1,94 @@
+@fishd-prefix: fishd;
+@videoVolumePrefix: ~'@{fishd-prefix}-video-viewer-volume';
+@sliderPrefixClass: ~'@{fishd-prefix}-slider';
+@video-viewer-primary-color: #ffaf0f;
+
+.@{videoVolumePrefix} {
+  &-volume-box {
+    width: 30px;
+    height: 150px;
+  }
+
+  // 音量值
+  &-volume-value {
+    color: #fff;
+    text-align: center;
+    letter-spacing: 0;
+    font-size: 12px;
+  }
+
+  &-volume-slider {
+    height: 120px;
+  }
+
+  // 音量图标
+  &-customer-handle {
+    width: 20px;
+    height: 13px;
+    border: 1px solid #fff;
+    border-radius: 4px;
+    background-color: #fff;
+    text-align: center;
+    line-height: 10px;
+
+    i {
+      color: #000;
+      font-size: 12px;
+    }
+  }
+
+  // Popover样式覆盖
+  .fishd-popover-arrow {
+    position: absolute;
+    display: block;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    background: none;
+    transform: none;
+  }
+
+  .fishd-popover-placement-top > .fishd-popover-content > .fishd-popover-arrow {
+    border-width: 5px 5px 0;
+    border-top-color: rgba(51, 51, 51, 0.9);
+    box-shadow: none;
+    transform: none;
+  }
+
+  .fishd-popover-placement-top .fishd-popover-arrow {
+    left: 50%;
+    margin-left: -5px;
+  }
+
+  .fishd-popover-inner {
+    background: rgba(51, 51, 51, 0.9);
+  }
+
+  .fishd-popover-inner-content {
+    padding: 11px 4px;
+  }
+
+  // Slider样式覆盖
+  .@{sliderPrefixClass} {
+    margin: 6px 9px;
+
+    &-handle {
+      margin-left: -8px;
+      border: none;
+    }
+
+    &-handle-custom {
+      border-radius: 4px;
+    }
+
+    &-track {
+      background-color: @video-viewer-primary-color;
+    }
+
+    &:hover {
+      .@{sliderPrefixClass}-track {
+        background-color: @video-viewer-primary-color;
+      }
+    }
+  }
+}

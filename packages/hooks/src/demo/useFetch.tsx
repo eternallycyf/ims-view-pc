@@ -1,4 +1,4 @@
-import { useFetch, useFetchProps, useFetchState } from '@ims-view/hooks';
+import { useFetch } from '@ims-view/hooks';
 import { Button, Spin } from 'antd';
 import React, { useState } from 'react';
 
