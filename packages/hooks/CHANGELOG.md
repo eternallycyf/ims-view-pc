@@ -1,5 +1,32 @@
 # Changelog
 
+## [Version&nbsp;1.6.0](https://github.com/eternallycyf/ims-view-pc/compare/@ims-view/hooks@1.5.0...@ims-view/hooks@1.6.0)
+
+<sup>Released on **2023-10-07**</sup>
+
+#### ✨ 新特性
+
+- Ims-view:VidemoViewer.
+
+#### 📝 文档
+
+- Update docUrl.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- Ims-view:VidemoViewer ([3c434e5](https://github.com/eternallycyf/ims-view-pc/commit/3c434e5))
+
+#### Documentation
+
+- Update docUrl ([5f6a743](https://github.com/eternallycyf/ims-view-pc/commit/5f6a743))
+
+</details>
+
 ## [Version&nbsp;1.5.0](https://github.com/eternallycyf/ims-view-pc/compare/@ims-view/hooks@1.4.1...@ims-view/hooks@1.5.0)
 
 <sup>Released on **2023-10-04**</sup>
