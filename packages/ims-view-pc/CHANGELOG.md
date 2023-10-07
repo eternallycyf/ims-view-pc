@@ -1,5 +1,28 @@
 # Changelog
 
+## [Version&nbsp;1.3.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.2.0...ims-view-pc@1.3.0)
+
+<sup>Released on **2023-10-07**</sup>
+
+#### ✨ 新特性
+
+- Ims-view:VidemoViewer.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- Ims-view:VidemoViewer ([3c434e5](https://github.com/eternallycyf/ims-view-pc/commit/3c434e5))
+
+</details>
+
+### Dependencies
+
+- **@ims-view/hooks:** upgraded to 1.6.0
+
 ## [Version&nbsp;1.2.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.1.1...ims-view-pc@1.2.0)
 
 <sup>Released on **2023-10-04**</sup>
