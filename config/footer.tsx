@@ -14,7 +14,7 @@ export const footer = [
     items: [
       {
         title: 'ims-view-pc',
-        url: 'https://ims-view.site/component',
+        url: 'https://ims-view.site/components',
         openExternal: true,
       },
       {
@@ -39,7 +39,7 @@ export const footer = [
       },
       {
         title: '更新日志',
-        url: '/ims-view-pc/changelog/ims-view-pc',
+        url: '/changelog/ims-view-pc',
       },
       {
         title: '讨论',
