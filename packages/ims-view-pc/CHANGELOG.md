@@ -1,5 +1,28 @@
 # Changelog
 
+## [Version&nbsp;1.4.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.3.1...ims-view-pc@1.4.0)
+
+<sup>Released on **2023-10-09**</sup>
+
+#### ✨ 新特性
+
+- Ims-view:AccessBtn.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- Ims-view:AccessBtn ([fbcc38b](https://github.com/eternallycyf/ims-view-pc/commit/fbcc38b))
+
+</details>
+
+### Dependencies
+
+- **@ims-view/utils:** upgraded to 1.6.0
+
 ### [Version&nbsp;1.3.1](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.3.0...ims-view-pc@1.3.1)
 
 <sup>Released on **2023-10-08**</sup>
