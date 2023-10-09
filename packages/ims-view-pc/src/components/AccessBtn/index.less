@@ -1,0 +1,31 @@
+.btnGroup {
+  border-radius: 2px;
+
+  :global {
+    .ant-btn {
+      margin: 0 !important;
+      border-color: var(--colorBorder) !important;
+      border-top: none;
+      border-right: none;
+      border-bottom: none;
+      border-radius: 0;
+
+      &:hover {
+        color: var(--colorPrimary) !important;
+      }
+
+      &:first-child {
+        border-left: none;
+      }
+    }
+
+    .ant-btn:not(:first-child) {
+      border-left: 1px solid var(--colorBorder);
+    }
+
+    .ant-btn-primary {
+      background: #e0ecff !important;
+      color: var(--colorPrimary) !important;
+    }
+  }
+}
