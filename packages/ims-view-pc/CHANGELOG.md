@@ -1,5 +1,24 @@
 # Changelog
 
+## [Version&nbsp;1.5.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.4.0...ims-view-pc@1.5.0)
+
+<sup>Released on **2023-10-10**</sup>
+
+#### ✨ 新特性
+
+- Ims-view:CommonCard.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- Ims-view:CommonCard ([0132a1b](https://github.com/eternallycyf/ims-view-pc/commit/0132a1b))
+
+</details>
+
 ## [Version&nbsp;1.4.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.3.1...ims-view-pc@1.4.0)
 
 <sup>Released on **2023-10-09**</sup>
