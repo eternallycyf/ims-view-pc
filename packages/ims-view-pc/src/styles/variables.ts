@@ -5,9 +5,11 @@ export interface IThemeConfig {
   variables: ThemeConfig['token'];
 }
 
-// import { themeConfig } from '../../../styles/variables';
-// style={{ '--colorPrimaryHover': themeConfig?.variables?.colorPrimary }}
+// import { variables } from '../../../styles/variables';
+// style={{ '--colorPrimaryHover': variables?.colorPrimary }}
 
 export const themeConfig: IThemeConfig = {
   variables: getDesignToken(),
 };
+
+export const variables = themeConfig.variables;

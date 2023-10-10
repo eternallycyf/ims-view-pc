@@ -1,6 +1,6 @@
 import { Button } from 'antd';
 import React, { useImperativeHandle, useState } from 'react';
-import { themeConfig } from '../../styles/variables';
+import { variables } from '../../styles/variables';
 import './index.less';
 import { IButtonGroupDefaultProps, IButtonGroupHandle } from './interface';
 
@@ -21,8 +21,8 @@ const ButtonGroup: React.ForwardRefRenderFunction<IButtonGroupHandle, IButtonGro
   return (
     <Button.Group
       style={{
-        '--colorPrimary': themeConfig?.variables?.colorPrimary,
-        '--colorBorder': themeConfig?.variables?.colorBorder,
+        '--colorPrimary': variables?.colorPrimary,
+        '--colorBorder': variables?.colorBorder,
         ...style,
       }}
       size="small"

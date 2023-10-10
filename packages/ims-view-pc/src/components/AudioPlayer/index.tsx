@@ -8,7 +8,7 @@ import {
 import { Popover, Slider } from 'antd';
 import classNames from 'classnames';
 import React, { useImperativeHandle } from 'react';
-import { themeConfig } from '../../styles/variables';
+import { variables } from '../../styles/variables';
 import './index.less';
 import { AudioPlayerProps } from './interface';
 
@@ -285,7 +285,7 @@ const InternalAudioPlayer: React.ForwardRefRenderFunction<unknown, AudioPlayerPr
             content={rateRange.map((rateItem) => (
               <p
                 className="change-audio-rate-item"
-                style={{ '--colorPrimaryHover': themeConfig?.variables?.colorPrimaryHover }}
+                style={{ '--colorPrimaryHover': variables?.colorPrimaryHover }}
                 key={`rate-${rateItem}`}
                 onClick={() => {
                   controlAudio('changeRate', rateItem);

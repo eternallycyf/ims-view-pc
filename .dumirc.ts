@@ -80,7 +80,6 @@ export default defineConfig({
   codeSplitting: { jsStrategy: 'granularChunks' },
   themeConfig,
   ssr: isProd ? {} : false,
-  hash: true,
   mock: {
     include: ['mock/**/*.{ts}'],
   },

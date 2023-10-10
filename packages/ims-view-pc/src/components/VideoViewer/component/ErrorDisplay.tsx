@@ -1,7 +1,7 @@
 import { PictureOutlined } from '@ant-design/icons';
 import React, { Component } from 'react';
 import { type VideoJsPlayer } from 'video.js';
-import { themeConfig } from '../../../styles/variables';
+import { variables } from '../../../styles/variables';
 import { MEDIA_ERROR } from '../constant';
 
 interface ErrorDisplayProps {
@@ -63,10 +63,7 @@ export default class ErrorDisplay extends Component<ErrorDisplayProps, ErrorDisp
     const errorMessage = mediaError !== null ? MEDIA_ERROR[mediaError.code] : '';
 
     return (
-      <div
-        className="VideoViewer"
-        style={{ '--colorPrimaryHover': themeConfig?.variables?.colorPrimaryHover }}
-      >
+      <div className="VideoViewer" style={{ '--colorPrimaryHover': variables?.colorPrimaryHover }}>
         <div className={prefixCls}>
           {mediaError ? (
             <div className={`${prefixCls}-msg`}>

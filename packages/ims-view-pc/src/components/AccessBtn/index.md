@@ -9,7 +9,7 @@ demo:
   cols: 2
 ---
 
-## IAccessBtnProps
+## AccessBtn
 
 <code src='./demo/type.tsx' description="default | custom | delete | group">按钮的基本类型</code>
 
@@ -17,7 +17,7 @@ demo:
 
 ## API
 
-### AccessBtn
+### IAccessBtnProps
 
 | 参数             | 说明       | 类型             | 默认值 |
 | ---------------- | ---------- | ---------------- | ------ |

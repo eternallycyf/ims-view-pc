@@ -1,0 +1,212 @@
+.CommonCard {
+}
+
+.IndexPage {
+  height: 100%;
+
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    padding-right: 8px;
+    height: 100%;
+    background: var(--primary-bg-color);
+
+    .header {
+      position: relative;
+      flex: none;
+      padding-bottom: 24px;
+      background-color: #fff;
+
+      .headerCard {
+        padding-top: 16px;
+        padding-right: 16px;
+        padding-left: 16px;
+      }
+    }
+
+    .content {
+      overflow-y: auto;
+      flex: 1;
+      height: 100%;
+      background-color: #fff;
+    }
+
+    .tabContentCard {
+      padding-top: 16px;
+      height: 100%;
+      background-color: #fff;
+    }
+
+    .spaceLine {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 8px;
+      background: var(--primary-bg-color);
+    }
+  }
+
+  .spin {
+    width: 100%;
+    height: 100%;
+
+    .ant-spin-container {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+
+.tabs {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color: #fff;
+
+  .ant-tabs-nav {
+    padding: 0 !important;
+    height: 46px;
+
+    &::before {
+      left: 0 !important;
+    }
+  }
+
+  .ant-tabs-tab {
+    display: flex !important;
+    align-items: center;
+    margin-right: 48px !important;
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+    font-size: 14px !important;
+  }
+
+  .ant-tabs-ink-bar {
+    height: 3px !important;
+    background-color: var(--primary-color);
+  }
+
+  .ant-tabs-content-holder {
+    overflow-y: auto;
+    flex: 1;
+    height: 100%;
+  }
+
+  .ant-tabs-content,
+  .ant-tabs-tabpane {
+    height: 100%;
+  }
+
+  .antd-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-tbn {
+    color: var(--primary-color);
+
+    &:hover {
+      color: var(--primary-color-hover);
+    }
+
+    &:active {
+      color: var(--primary-color-active);
+    }
+  }
+
+  .ant-tabs-ink-bar {
+    &.ant-tabs-ink-bar-animated {
+      background-color: var(--primary-color);
+    }
+  }
+
+  .ant-tabs-nav {
+    margin: 0;
+    padding: 0 24px;
+
+    &::before {
+      left: 24px;
+      border-color: #eff1f4;
+    }
+  }
+
+  .tabTitle {
+    display: flex;
+    align-items: center;
+    margin-right: 64px;
+    font-weight: bold;
+    font-size: 16px;
+  }
+}
+
+.line {
+  width: 100%;
+  height: 8px;
+  background: var(--primary-bg-color);
+}
+
+.AnchorCard {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  > div {
+    &:first-child {
+      flex: none;
+    }
+
+    &:last-child {
+      overflow-y: auto;
+      flex: auto;
+      height: 100%;
+    }
+  }
+
+  .anchorName {
+    .ant-anchor {
+      display: flex;
+      border-bottom: 0;
+      background-color: #fff;
+
+      &::before {
+        display: none;
+      }
+    }
+
+    .ant-anchor .ant-anchor-link {
+      margin: 0 8px 0 0;
+      padding: 6px 10px;
+      background: #f5f6f8;
+    }
+
+    .ant-anchor .ant-anchor-ink:hover {
+      border-bottom: 0;
+      background: #ebf2ff;
+      color: var(--primary-color);
+      font-weight: 600;
+    }
+
+    .ant-anchor .ant-anchor-link-active {
+      border-bottom: 0;
+      background: #ebf2ff;
+      color: var(--primary-color);
+      font-weight: 600;
+    }
+  }
+
+  .anchorContent {
+    overflow-x: hidden;
+    margin-top: 10px;
+  }
+
+  .ant-affix {
+    position: absolute !important;
+    top: 10px !important;
+  }
+
+  .ant-anchor {
+    width: 100%;
+  }
+
+  .ant-anchor-link {
+    display: flex;
+    align-items: center;
+    height: 26px;
+  }
+}
