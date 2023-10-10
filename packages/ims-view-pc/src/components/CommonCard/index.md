@@ -18,6 +18,31 @@ const { IndexPage, Link, AnchorCard, AnchorLink } = CommonCard;
 
 全景页面会出现很多滚动条的情况 这里封装了一个全景组件 将锚点和滚动条进行了处理
 头部区域是固定的 同时保证页面只出现一个滚动条 使用 `flex` 实现
+
+```less
+// 只显示一个滚动条 固定头部
+// 如果层级更多 需要滚动条的容器都需要加 height: 100%;
+.page {
+  height: 100%;
+
+  .card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    .header {
+      flex: none;
+    }
+
+    .content {
+      flex: 1;
+      overflow-y: auto;
+      height: 100%;
+    }
+  }
+}
+```
+
 也可以自行使用 `position: sticky` 进行实现
 
 - demo 在新窗口打开, 根节点设置 `height=固定长度或者 100vh` 就可以看到效果了
