@@ -1,6 +1,6 @@
 {
   "name": "ims-view-pc",
-  "version": "1.5.3",
+  "version": "1.6.0",
   "main": "lib/index.js",
   "module": "es/index.js",
   "types": "lib/index.d.ts",

@@ -1,5 +1,32 @@
 # Changelog
 
+## [Version&nbsp;1.6.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.5.3...ims-view-pc@1.6.0)
+
+<sup>Released on **2023-10-11**</sup>
+
+#### ✨ 新特性
+
+- **@ims-view/chart**: 🎉 init chart packages.
+
+#### 🎫 杂项
+
+- Antd use last version.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **@ims-view/chart**: 🎉 init chart packages ([5f60104](https://github.com/eternallycyf/ims-view-pc/commit/5f60104))
+
+#### Chores
+
+- Antd use last version ([c2f7e13](https://github.com/eternallycyf/ims-view-pc/commit/c2f7e13))
+
+</details>
+
 ### [Version&nbsp;1.5.3](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.5.2...ims-view-pc@1.5.3)
 
 <sup>Released on **2023-10-11**</sup>
