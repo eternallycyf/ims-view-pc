@@ -1,5 +1,24 @@
 # Changelog
 
+### [Version&nbsp;1.5.3](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.5.2...ims-view-pc@1.5.3)
+
+<sup>Released on **2023-10-11**</sup>
+
+#### 🐛 修复
+
+- **ims-view-pc**: VideoViewer css import by tsx.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- **ims-view-pc**: VideoViewer css import by tsx ([11ba7b7](https://github.com/eternallycyf/ims-view-pc/commit/11ba7b7))
+
+</details>
+
 ### [Version&nbsp;1.5.2](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.5.1...ims-view-pc@1.5.2)
 
 <sup>Released on **2023-10-11**</sup>
