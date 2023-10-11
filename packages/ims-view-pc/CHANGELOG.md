@@ -1,5 +1,24 @@
 # Changelog
 
+### [Version&nbsp;1.5.2](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.5.1...ims-view-pc@1.5.2)
+
+<sup>Released on **2023-10-11**</sup>
+
+#### 🐛 修复
+
+- **ims-view-pc**: VideoViewer css use unpkg.com.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- **ims-view-pc**: VideoViewer css use unpkg.com ([58f0441](https://github.com/eternallycyf/ims-view-pc/commit/58f0441))
+
+</details>
+
 ### [Version&nbsp;1.5.1](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.5.0...ims-view-pc@1.5.1)
 
 <sup>Released on **2023-10-10**</sup>
