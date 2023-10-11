@@ -27,7 +27,7 @@
   },
   "peerDependencies": {
     "@ant-design/icons": "^5.2.6",
-    "antd": "^5.9.4",
+    "antd": "^5",
     "axios": "^1.5.1",
     "lodash": "^4.17.21",
     "react": "^18",
@@ -36,7 +36,7 @@
   "devDependencies": {
     "@ant-design/icons": "^5.2.6",
     "@types/video.js": "^7.3.53",
-    "antd": "^5.9.4",
+    "antd": "^5",
     "axios": "^1.5.1",
     "lodash": "^4.17.21"
   },
