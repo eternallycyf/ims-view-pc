@@ -56,6 +56,7 @@ export default defineConfig({
   alias: {
     '@ims-view/hooks': path.join(__dirname, './packages/hooks/src'),
     '@ims-view/utils': path.join(__dirname, './packages/utils/src'),
+    '@ims-view/chart': path.join(__dirname, './packages/chart/src'),
     'ims-view-pc': path.join(__dirname, './packages/ims-view-pc/src'),
   },
   resolve: {
@@ -64,6 +65,7 @@ export default defineConfig({
       { type: 'component', dir: './packages/ims-view-pc/src/components' },
       { type: 'hooks', dir: './packages/hooks/src' },
       { type: 'utils', dir: './packages/utils/src' },
+      { type: 'chart', dir: './packages/chart/src' },
     ],
   },
   styles: [

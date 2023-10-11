@@ -1,6 +1,6 @@
 {
-  "name": "ims-view-pc",
-  "version": "1.5.3",
+  "name": "@ims-view/chart",
+  "version": "0.0.1",
   "main": "lib/index.js",
   "module": "es/index.js",
   "types": "lib/index.d.ts",
@@ -18,26 +18,18 @@
     "start": "father dev",
     "test": "jest"
   },
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
     "@babel/runtime": "^7.23.1",
-    "@ims-view/hooks": "1.6.0",
-    "@ims-view/utils": "1.6.0",
-    "classnames": "^2.3.2",
-    "video.js": "^7.21.5"
+    "lodash": "^4.17.21",
+    "echarts": "^5.4.3",
+    "echarts-for-react": "^3.0.2",
+    "echarts-stat": "^1.2.0",
+    "dayjs": "^1.11.10"
   },
   "peerDependencies": {
-    "@ant-design/icons": "^5.2.6",
-    "antd": "^5",
-    "axios": "^1.5.1",
-    "lodash": "^4.17.21",
     "react": "^18",
-    "react-dom": "^18"
-  },
-  "devDependencies": {
-    "@ant-design/icons": "^5.2.6",
-    "@types/video.js": "^7.3.53",
-    "antd": "^5",
-    "axios": "^1.5.1",
+    "react-dom": "^18",
     "lodash": "^4.17.21"
   },
   "publishConfig": {

@@ -3,7 +3,7 @@ title: 使用方式
 order: 0
 nav:
   title: 组件
-  order: 2
+  order: 1
 apiHeader: false
 ---
 

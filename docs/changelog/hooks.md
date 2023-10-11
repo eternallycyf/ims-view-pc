@@ -1,6 +1,6 @@
 ---
 title: hooks
-order: 1
+order: 2
 nav:
   title: 更新日志
   order: 999

@@ -15,6 +15,7 @@ const config: Config.InitialOptions = {
     ...base.moduleNameMapper,
     '@ims-view/hooks': '<rootDir>/packages/hooks/src',
     '@ims-view/utils': '<rootDir>/packages/utils/src',
+    '@ims-view/chart': '<rootDir>/packages/chart/src',
     'ims-view-pc': '<rootDir>/packages/ims-view-pc/src',
   },
   rootDir: path.resolve(__dirname, '.'),
