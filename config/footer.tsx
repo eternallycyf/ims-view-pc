@@ -27,6 +27,11 @@ export const footer = [
         url: 'https://ims-view.site/utils',
         openExternal: true,
       },
+      {
+        title: '@ims-view/chart',
+        url: 'https://ims-view.site/chart',
+        openExternal: true,
+      },
     ],
   },
   {

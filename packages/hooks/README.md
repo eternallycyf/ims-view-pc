@@ -15,7 +15,7 @@
 
 <!-- docs url -->
 
-- https://ims-view.site/ims-view-pc/hooks
+- https://ims-view.site/hooks
 
 ## required dev
 

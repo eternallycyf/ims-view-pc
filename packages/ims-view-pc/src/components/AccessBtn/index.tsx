@@ -1,9 +1,10 @@
-import { getUUID } from '@ims-view/utils';
+import { random } from '@ims-view/utils';
 import { Button, Popconfirm, Space } from 'antd';
 import React, { Fragment, useEffect, useState } from 'react';
 import ButtonGroup from './ButtonGroup';
 import './index.less';
 import { IAccessBtnProps, IButtonItemProps } from './interface';
+const { getUUID } = random;
 
 const AccessBtn: React.FC<IAccessBtnProps> = (props) => {
   const { accessCollection = [], btnList, children, className } = props;

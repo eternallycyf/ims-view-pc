@@ -2,7 +2,7 @@
 title: 使用方式
 order: 0
 nav:
-  title: charts
+  title: chart
   order: 2
 ---
 
@@ -11,5 +11,5 @@ nav:
 ### install
 
 ```shell
-pnpm i @ims-view/utils
+pnpm i @ims-view/chart
 ```

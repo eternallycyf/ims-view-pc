@@ -15,7 +15,7 @@
 
 <!-- docs url -->
 
-- https://ims-view.site/ims-view-pc/chart
+- https://ims-view.site/chart
 
 ## required dev
 

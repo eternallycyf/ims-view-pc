@@ -15,7 +15,7 @@
 
 <!-- docs url -->
 
-- https://ims-view.site/ims-view-pc/utils
+- https://ims-view.site/utils
 
 ## required dev
 

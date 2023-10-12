@@ -1,32 +1,38 @@
 import { StackChart, StackChartConfig } from '@ims-view/chart';
+import { useEffect, useState } from 'react';
 import { getAssetTrends } from './chart';
 
 const Demo = () => {
-  const chartData2 = [
-    {
-      time: '2020-05-01',
-      total: 100,
-      otherAssets: 30,
-      totalAssets: 70,
-    },
-    {
-      time: '2021-05-01',
-      total: 150,
-      otherAssets: 50,
-      totalAssets: 100,
-    },
-    {
-      time: '2023-05-01',
-      total: 150,
-      otherAssets: -50,
-      totalAssets: 200,
-    },
-  ];
+  const [chartData, setChartData] = useState<any[]>([]);
+
+  useEffect(() => {
+    const chartData2 = [
+      {
+        time: '2020-05-01',
+        total: 100,
+        otherAssets: 30,
+        totalAssets: 70,
+      },
+      {
+        time: '2021-05-01',
+        total: 150,
+        otherAssets: 50,
+        totalAssets: 100,
+      },
+      {
+        time: '2023-05-01',
+        total: 150,
+        otherAssets: -50,
+        totalAssets: 200,
+      },
+    ];
+    setChartData(chartData2);
+  }, []);
 
   return (
     <StackChart
-      data={chartData2}
-      chartConfig={getAssetTrends(chartData2)}
+      data={chartData}
+      chartConfig={getAssetTrends(chartData)}
       baseConfig={
         {
           GRID_CONFIG: {
