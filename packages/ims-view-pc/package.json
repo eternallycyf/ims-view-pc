@@ -1,6 +1,6 @@
 {
   "name": "ims-view-pc",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "main": "lib/index.js",
   "module": "es/index.js",
   "types": "lib/index.d.ts",
@@ -20,8 +20,8 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.23.1",
-    "@ims-view/hooks": "1.6.0",
-    "@ims-view/utils": "1.6.0",
+    "@ims-view/hooks": "1.7.0",
+    "@ims-view/utils": "1.7.0",
     "classnames": "^2.3.2",
     "video.js": "^7.21.5"
   },
