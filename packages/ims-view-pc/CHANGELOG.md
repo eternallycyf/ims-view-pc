@@ -1,5 +1,28 @@
 # Changelog
 
+## [Version&nbsp;1.8.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.7.0...ims-view-pc@1.8.0)
+
+<sup>Released on **2023-10-13**</sup>
+
+#### ✨ 新特性
+
+- **ims-view-pc**: Add CommonCard.CardList.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **ims-view-pc**: Add CommonCard.CardList ([25bb2b7](https://github.com/eternallycyf/ims-view-pc/commit/25bb2b7))
+
+</details>
+
+### Dependencies
+
+- **@ims-view/hooks:** upgraded to 1.8.0
+
 ## [Version&nbsp;1.7.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.6.0...ims-view-pc@1.7.0)
 
 <sup>Released on **2023-10-12**</sup>
