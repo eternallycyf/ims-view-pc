@@ -1,6 +1,7 @@
 import React from 'react';
 import AnchorCard from './AnchorCard';
 import AnchorLink from './AnchorLink';
+import CardList from './CardList';
 import CommonCardComponent from './CommonCard';
 import IndexPage from './IndexPage';
 import { ICommonCardHandle, ICommonCardProps } from './interface';
@@ -19,6 +20,7 @@ type CompoundedComponent = typeof CompoundedCommonCard & {
   Line: typeof Line;
   AnchorCard: typeof AnchorCard;
   AnchorLink: typeof AnchorLink;
+  CardList: typeof CardList;
 };
 
 const CommonCard = CompoundedCommonCard as CompoundedComponent;
@@ -27,5 +29,6 @@ CommonCard.IndexPage = IndexPage;
 CommonCard.Line = Line;
 CommonCard.AnchorCard = AnchorCard;
 CommonCard.AnchorLink = AnchorLink;
+CommonCard.CardList = CardList;
 
 export default CommonCard;

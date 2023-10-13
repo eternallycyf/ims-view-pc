@@ -1,5 +1,6 @@
 import { useFetchProps, useFetchState } from '@ims-view/hooks';
 import { TabsProps } from 'antd';
+export * from './CardList/interface';
 
 /**
  * @typedef ICommonCardHandle - 卡片组件

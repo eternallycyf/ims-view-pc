@@ -3,20 +3,22 @@ import { Button, Spin } from 'antd';
 import { CommonDemo, ICommonDemoHandle } from 'ims-view-pc';
 import React, { useState } from 'react';
 
+interface IRecord {
+  username: string;
+  useId: number;
+}
+
 interface IApi {
   code: number;
   msg: string;
   success: boolean;
-  data: {
-    username: string;
-    useId: number;
-  };
+  data: IRecord;
 }
 
 const Demo = () => {
   const [number, setNumber] = useState<number>(0);
-  const CommonDemoRef = React.useRef<ICommonDemoHandle<IApi>>(null!);
-  const params: useFetchProps = {
+  const CommonDemoRef = React.useRef<ICommonDemoHandle<IRecord>>(null!);
+  const params: useFetchProps<IRecord> = {
     fetchConfig: {
       apiUrl: '/fetchUserInfo',
       method: 'post',
@@ -41,7 +43,7 @@ const Demo = () => {
 
   return (
     <>
-      <CommonDemo<IApi> ref={CommonDemoRef} {...params}>
+      <CommonDemo<IRecord> ref={CommonDemoRef} {...params}>
         <Spin spinning={CommonDemoRef?.current?.loading || false}>
           <Button onClick={handleFetch}>发起请求</Button>
           <pre>{JSON.stringify(CommonDemoRef?.current?.data)}</pre>

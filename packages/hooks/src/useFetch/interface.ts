@@ -1,4 +1,5 @@
 import { AxiosRequestConfig } from 'axios';
+import { AnyObject } from '../type';
 
 /**
  * @typedef useFetchProps - 描述列表组件
@@ -6,7 +7,7 @@ import { AxiosRequestConfig } from 'axios';
  * @property {useFetchProps['fetchConfig']} fetchConfig - 请求配置
  * @property {(data: T) => T} [dataHandler] - 数据处理函数
  */
-export interface useFetchProps<T = any> {
+export interface useFetchProps<T = Record<string, unknown>> {
   /**
    * @name 请求配置
    * @property {string} apiUrl - 请求地址
@@ -25,10 +26,10 @@ export interface useFetchProps<T = any> {
   };
   dataHandler?: (data: T) => any;
   initRequest?: boolean;
-  request: (config: AxiosRequestConfig) => Promise<T>;
+  request: (config: AxiosRequestConfig) => Promise<any>;
 }
 
-export type useFetchState<T = any> = readonly [
+export type useFetchState<T = AnyObject> = readonly [
   {
     loading: boolean;
     value: T;

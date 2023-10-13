@@ -11,8 +11,12 @@ demo:
 
 ```ts
 import { CommonCard } from 'ims-view-pc';
-const { IndexPage, Link, AnchorCard, AnchorLink } = CommonCard;
+const { IndexPage, Link, AnchorCard, AnchorLink, CardList } = CommonCard;
 ```
+
+## CommonCard.CardList
+
+<code src='./demo/cardList.tsx' description="这是一个卡片列表">卡片列表</code>
 
 ## CommonCard.IndexPage
 
@@ -91,6 +95,68 @@ export interface ICommonCardProps<T = Record<string, any>> extends useFetchProps
 | 属性     | 说明   | 类型              | 默认值 |
 | -------- | ------ | ----------------- | ------ |
 | children | 子组件 | `React.ReactNode` | -      |
+
+## CommonCard.CardList
+
+### ICardListHandle
+
+| 属性      | 说明     | 类型                                                       | 默认值 |
+| --------- | -------- | ---------------------------------------------------------- | ------ |
+| fetchData | 请求数据 | `(defaultParams?: any, defaultData?: any) => Promise<T[]>` | -      |
+
+### ICardListProps
+
+```ts
+/**
+ * @typedef ICardListProps - 卡片列表组件
+ * @template T - 列表项record
+ *
+ * @property {string} [title] - 标题
+ * @property {React.ReactNode} [extra] - 额外的内容
+ * @property {string} [rowKey='index'] - 列表项的key
+ * @property {number} [column=3] - 每行的个数
+ * @property {CardProps['actions']} [actions] - 卡片的操作
+ * @property {ListProps<T>['renderItem']} [renderItem] - 列表项的渲染函数
+ *
+ * @property {ICardListProps['fetchConfig']} [fetchConfig] - 请求配置
+ *
+ * @property {CardProps} [cardProps] - 卡片的属性
+ * @property {ListProps<T>} [listProps] - 列表的属性
+ * @property {PaginationProps} [paginationProps] - 分页的属性
+ */
+export interface ICardListProps<T = AnyObject> extends useFetchProps<T[]> {
+  title?: string;
+  extra?: React.ReactNode;
+  /**
+   * @name 列表项的key
+   * @default index
+   */
+  rowKey?: string;
+  column?: number;
+  actions?: CardProps['actions'];
+  renderItem?: ListProps<T>['renderItem'];
+
+  cardProps?: CardProps;
+  listProps?: ListProps<T>;
+  /**
+   * @name 分页的属性
+   * @property {PaginationProps} [paginationProps = { pageSize: 9 }]
+   */
+  paginationProps?: PaginationProps;
+}
+```
+
+| 属性            | 说明      | 类型              | 默认值            |
+| --------------- | --------- | ----------------- | ----------------- |
+| title           | 标题      | `string`          | -                 |
+| extra           | 额外内容  | `React.ReactNode` | -                 |
+| rowKey          | 列表项 id | `string`          | `index`           |
+| column          | 每行个数  | `number`          | `3`               |
+| actions         | 操作      | `CardProps`       | -                 |
+| renderItem      | 渲染函数  | `ListProps<T>`    | -                 |
+| cardProps       | 卡片属性  | `CardProps`       | -                 |
+| listProps       | 列表属性  | `ListProps<T>`    | -                 |
+| paginationProps | 分页属性  | `PaginationProps` | `{ pageSize: 9 }` |
 
 ## CommonCard.IndexPage
 
