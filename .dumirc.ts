@@ -67,7 +67,7 @@ export default defineConfig({
       { type: 'utils', dir: './packages/utils/src' },
       { type: 'chart', dir: './packages/chart/src' },
     ],
-    entryFile: './packages/ims-view-pc/src/index.ts',
+    // entryFile: './packages/ims-view-pc/src/index.ts',
   },
   styles: [
     `html, body { background: transparent;  }
@@ -76,7 +76,6 @@ export default defineConfig({
   }`,
     style,
   ],
-  apiParser: {},
   devtool: isProd ? false : 'source-map',
   clickToComponent: {},
   ignoreMomentLocale: true,
