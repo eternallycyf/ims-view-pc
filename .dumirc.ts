@@ -58,6 +58,10 @@ export default defineConfig({
     '@ims-view/utils': path.join(__dirname, './packages/utils/src'),
     '@ims-view/chart': path.join(__dirname, './packages/chart/src'),
     'ims-view-pc': path.join(__dirname, './packages/ims-view-pc/src'),
+    '@ims-view/hooks/src': path.join(__dirname, './packages/hooks/src/*'),
+    '@ims-view/utils/src': path.join(__dirname, './packages/utils/src/*'),
+    '@ims-view/chart/src': path.join(__dirname, './packages/chart/src/*'),
+    'ims-view-pc/src': path.join(__dirname, './packages/ims-view-pc/src/*'),
   },
   resolve: {
     docDirs: ['docs'],

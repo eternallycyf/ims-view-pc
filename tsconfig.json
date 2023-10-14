@@ -23,9 +23,13 @@
     "baseUrl": ".",
     "paths": {
       "@ims-view/hooks": ["./packages/hooks/src"],
+      "@ims-view/hooks/*": ["./packages/hooks/src/*"],
       "@ims-view/utils": ["./packages/utils/src"],
+      "@ims-view/utils/*": ["./packages/utils/src/*"],
       "@ims-view/chart": ["./packages/chart/src"],
-      "ims-view-pc": ["./packages/ims-view-pc/src"]
+      "@ims-view/chart/*": ["./packages/chart/src/*"],
+      "ims-view-pc": ["./packages/ims-view-pc/src"],
+      "ims-view-pc/*": ["./packages/ims-view-pc/src/*"]
     }
   },
   "exclude": ["node_modules", "dist", "server"]

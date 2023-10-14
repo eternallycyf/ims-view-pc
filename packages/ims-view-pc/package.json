@@ -20,10 +20,13 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.23.1",
-    "@ims-view/hooks": "1.8.0",
-    "@ims-view/utils": "1.7.0",
+    "@ims-view/chart": "latest",
+    "@ims-view/hooks": "latest",
+    "@ims-view/utils": "latest",
     "classnames": "^2.3.2",
-    "video.js": "^7.21.5"
+    "video.js": "^7.21.5",
+    "dayjs": "^1.11.10",
+    "react-use": "^17.4.0"
   },
   "peerDependencies": {
     "@ant-design/icons": "^5.2.6",
