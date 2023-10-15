@@ -1,5 +1,24 @@
 # Changelog
 
+## [Version&nbsp;1.10.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.9.0...ims-view-pc@1.10.0)
+
+<sup>Released on **2023-10-15**</sup>
+
+#### ✨ 新特性
+
+- **ims-view-pc**: Add editor.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **ims-view-pc**: Add editor ([ae2579d](https://github.com/eternallycyf/ims-view-pc/commit/ae2579d))
+
+</details>
+
 ## [Version&nbsp;1.9.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.8.0...ims-view-pc@1.9.0)
 
 <sup>Released on **2023-10-14**</sup>
