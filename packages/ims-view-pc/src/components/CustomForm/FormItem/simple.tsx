@@ -1,21 +1,36 @@
 import { SearchOutlined } from '@ant-design/icons';
 import {
   AutoComplete,
+  AutoCompleteProps,
   Checkbox,
+  CheckboxProps,
   DatePicker,
+  DatePickerProps,
   Input,
   InputNumber,
+  InputNumberProps,
+  InputProps,
   Radio,
+  RadioGroupProps,
+  RadioProps,
   Rate,
+  RateProps,
   Slider,
   Switch,
+  SwitchProps,
   TimePicker,
+  TimePickerProps,
 } from 'antd';
+import { CheckboxGroupProps } from 'antd/es/checkbox';
+import { RangePickerProps } from 'antd/es/date-picker';
 import locale from 'antd/es/date-picker/locale/zh_CN';
+import { PasswordProps, TextAreaProps } from 'antd/es/input';
+import { SliderBaseProps } from 'antd/es/slider';
 import dayjs from 'dayjs';
 import 'dayjs/locale/zh-cn';
-import { IControlProps } from 'ims-view-pc/type/form/base';
-import React, { useImperativeHandle } from 'react';
+import { IBaseControlProps } from 'ims-view-pc/type/form/base';
+import { IBaseCustomFormItemProps } from 'ims-view-pc/type/form/formItem';
+import React from 'react';
 const RadioGroup = Radio.Group;
 const CheckboxGroup = Checkbox.Group;
 const { TextArea, Password, Search } = Input;
@@ -23,11 +38,106 @@ const { MonthPicker, RangePicker, QuarterPicker } = DatePicker;
 
 dayjs.locale('zh-cn');
 
-interface ISimpleControlProps extends IControlProps {
-  defaultVal?: any;
+export interface ISimpleControlProps<T = string> extends IBaseCustomFormItemProps {
+  controlProps: Partial<
+    Pick<IBaseControlProps, 'Component' | 'dict' | 'renderItem'> &
+      DatePickerProps &
+      RangePickerProps &
+      TimePickerProps &
+      InputProps &
+      PasswordProps &
+      TextAreaProps &
+      InputNumberProps &
+      RateProps &
+      SwitchProps &
+      SliderBaseProps &
+      AutoCompleteProps &
+      CheckboxProps &
+      CheckboxGroupProps &
+      RadioProps &
+      RadioGroupProps
+  >;
+  defaultVal?: {
+    year?: {
+      locale: any;
+      picker: string;
+      allowClear: boolean;
+    };
+    quarter?: {
+      locale: any;
+      picker: string;
+      allowClear: boolean;
+    };
+    datetime?: {
+      locale: any;
+      showTime: boolean;
+      format: string;
+      allowClear: boolean;
+    };
+    month?: {
+      locale: any;
+      format: string;
+      allowClear: boolean;
+    };
+    time?: {
+      locale: any;
+      format: string;
+      allowClear: boolean;
+    };
+    dateRange?: {
+      locale: any;
+      format: string;
+      allowClear: boolean;
+    };
+    input?: {
+      placeholder: string;
+      allowClear: boolean;
+    };
+    password?: {
+      placeholder: string;
+      allowClear: boolean;
+    };
+    textarea?: {
+      placeholder: string;
+      autoSize: { minRows: number; maxRows: number };
+      allowClear: boolean;
+    };
+    search?: {
+      placeholder: string;
+      allowClear: boolean;
+    };
+    inputNumber: {
+      min: number;
+      max: number;
+      placeholder: string;
+    };
+  };
+  checked?: boolean;
+  onChange: (value: T) => any;
+  type:
+    | 'date'
+    | 'year'
+    | 'quarter'
+    | 'datetime'
+    | 'month'
+    | 'time'
+    | 'dateRange'
+    | 'input'
+    | 'password'
+    | 'textarea'
+    | 'search'
+    | 'rate'
+    | 'switch'
+    | 'inputNumber'
+    | 'slider'
+    | 'autoComplete'
+    | 'checkbox'
+    | 'radio'
+    | 'custom';
+  value: T;
 }
 
-const SimpleControl: React.FC<ISimpleControlProps> = React.forwardRef((props, ref) => {
+const SimpleControl: React.FC<ISimpleControlProps> = (props) => {
   const {
     name,
     form,
@@ -35,13 +145,19 @@ const SimpleControl: React.FC<ISimpleControlProps> = React.forwardRef((props, re
     dict,
     defaultVal,
     Component: CustomComponent,
-    ...newControlProps
+    value,
+    checked = false,
+    onChange,
+    controlProps: defaultControlProps = {},
   } = props;
 
   let Component: any;
-  let controlProps = { ...newControlProps } || {};
-
-  useImperativeHandle(ref, () => ({}));
+  let controlProps: Partial<ISimpleControlProps['controlProps']> = {
+    value,
+    onChange,
+    ...defaultVal[type],
+    ...defaultControlProps,
+  };
 
   switch (type) {
     case 'date':
@@ -89,27 +205,23 @@ const SimpleControl: React.FC<ISimpleControlProps> = React.forwardRef((props, re
   }
 
   const formProps = { form, name, type };
-  controlProps = {
-    ...defaultVal[type],
-    ...controlProps,
-  };
 
   if (type === 'autoComplete') {
     return (
       <AutoComplete {...controlProps}>
-        {dict?.map((dic: any) => (
-          <AutoComplete.Option {...dic} key={dic.value} value={dic.value}>
-            {(controlProps.renderItem && controlProps.renderItem(dic)) || dic.text}{' '}
+        {dict?.map((item) => (
+          <AutoComplete.Option {...item} key={item.value} value={item.value}>
+            {((controlProps.renderItem && controlProps.renderItem(item)) || item?.label) ?? '--'}
           </AutoComplete.Option>
         ))}
       </AutoComplete>
     );
   } else if (type === 'checkbox') {
     return (
-      <CheckboxGroup {...controlProps}>
-        {dict?.map((dic: any) => (
-          <Checkbox {...dic} key={dic.value} value={dic.value}>
-            {dic.text}
+      <CheckboxGroup {...(controlProps as any as CheckboxGroupProps)}>
+        {dict?.map((item) => (
+          <Checkbox {...item} key={item.value} value={item.value}>
+            {item?.label}
           </Checkbox>
         ))}
       </CheckboxGroup>
@@ -121,30 +233,41 @@ const SimpleControl: React.FC<ISimpleControlProps> = React.forwardRef((props, re
     }
     return (
       <RadioGroup {...controlProps}>
-        {dict?.map((dic: any) => (
-          <RadioComp {...dic} key={dic.value} value={dic.value} title={dic.text}>
-            {dic.text}
+        {dict?.map((item) => (
+          <RadioComp {...item} key={item.value} value={item.value} title={item.label}>
+            {item.label}
           </RadioComp>
         ))}
       </RadioGroup>
     );
   } else {
-    const { transform, inputNumber, ...restControlProps } = controlProps;
-    const restSwitchProps = type === 'switch' ? { transform: transform + '' } : {};
-    const inputnumberProps = { inputnumber: inputNumber };
-
+    const fillStyle = [
+      'date',
+      'year',
+      'quarter',
+      'datetime',
+      'month',
+      'time',
+      'dateRange',
+      'inputNumber',
+    ].includes(type)
+      ? {
+          width: '100%',
+        }
+      : {};
+    if (type === 'switch') {
+      controlProps = { ...controlProps, checked: !!checked };
+    }
     return (
       <Component
         prefix={type === 'search' ? <SearchOutlined /> : ''}
-        {...restSwitchProps}
-        {...inputnumberProps}
-        {...restControlProps}
+        {...controlProps}
         {...formProps}
-        style={{ width: '100%', ...controlProps?.style }}
+        style={{ ...fillStyle, ...controlProps?.style }}
       />
     );
   }
-});
+};
 
 SimpleControl.defaultProps = {
   defaultVal: {
@@ -194,12 +317,12 @@ SimpleControl.defaultProps = {
     },
     search: {
       placeholder: '请输入',
-      inputNumber: {
-        min: 0,
-        max: 100,
-        placeholder: '请输入',
-      },
       allowClear: true,
+    },
+    inputNumber: {
+      min: 0,
+      max: 100,
+      placeholder: '请输入',
     },
   },
 };

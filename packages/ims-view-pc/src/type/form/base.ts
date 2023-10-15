@@ -1,5 +1,9 @@
 import { FormItemProps } from 'antd';
 import { Method } from 'axios';
+import { IEditorProps } from 'ims-view-pc/components/CustomForm/FormItem/editor';
+import { ISimpleControlProps } from 'ims-view-pc/components/CustomForm/FormItem/simple';
+import { AnyObject } from '../type';
+import { IFieldComponentTypeParams } from './fieldCompType';
 
 const FORM_TYPE_DICT = [
   'input',
@@ -41,20 +45,24 @@ export interface IFetchConfig {
   initDictFn?: (record: any) => any[];
 }
 
-export interface IControlProps {
-  fetchConfig?: IFetchConfig;
-  itemProps?: FormItemProps;
-  dictConfig?: { textKey: string; valueKey: string };
-  Component?: any;
-  dict?: ReadonlyArray<{
-    text: string;
-    value: string | number;
-    disabled?: boolean;
-    children?: Array<{ text: string; value: string; disabled?: boolean }>;
-    rules?: any[]; //校验规则
-    placeholder?: string;
-    onChange?: (...args: any[]) => any;
-    [propName: string]: any;
-  }>;
-  [propName: string]: any;
-}
+export type Dict = ReadonlyArray<{
+  label?: string;
+  value?: string | number;
+  disabled?: boolean;
+  children?: Array<{ text: string; value: string; disabled?: boolean }>;
+  rules?: any[]; //校验规则
+  placeholder?: string;
+  onChange?: (...args: any[]) => any;
+}>;
+
+/*---------------------IControlProps--------------------------------- */
+
+export interface IBaseControlProps<Values = AnyObject, Rest = AnyObject, Extra = unknown>
+  extends Pick<
+    IFieldComponentTypeParams<Values, Rest, Extra>,
+    'fetchConfig' | 'itemProps' | 'dict' | 'Component' | 'renderItem'
+  > {}
+
+export type IControlProps = IBaseControlProps &
+  IEditorProps['controlProps'] &
+  ISimpleControlProps['controlProps'];

@@ -16,9 +16,11 @@ export const getFieldComp: FieldCompType = ({
   hidden,
 
   fetchConfig,
+  dict,
   record = {},
   controlProps = {},
   itemProps = {},
+  Component,
 }) => {
   let formProps: Partial<IFieldComponentTypeParams> = {
     name,
@@ -26,8 +28,10 @@ export const getFieldComp: FieldCompType = ({
     record,
     form,
     fetchConfig,
+    dict,
     itemProps,
     controlProps,
+    Component,
   };
   if (!fetchConfig) formProps = _.omit(formProps, ['fetchConfig']);
 
@@ -73,10 +77,9 @@ export const getFieldComp: FieldCompType = ({
     //   if (dictConfig) formProps.dictConfig = dictConfig;
     //   FieldComp = require(`@/components/CustomForm/FormItem/select`).default;
     //   break;
-    // case 'editor':
-    //   itemProps.initialValue = BraftEditor.createEditorState(itemProps.initialValue);
-    //   FieldComp = require(`ims-view-pc/components/CustomForm/FormItem/editor`).default;
-    //   break;
+    case 'editor':
+      FieldComp = require(`ims-view-pc/components/CustomForm/FormItem/editor`).default;
+      break;
     default:
       FieldComp = require(`ims-view-pc/components/CustomForm/FormItem/${type}`).default;
   }
