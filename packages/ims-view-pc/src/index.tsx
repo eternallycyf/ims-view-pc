@@ -6,5 +6,6 @@ export { default as CommonCard } from './components/CommonCard';
 export * from './components/CommonCard/interface';
 export { default as CommonDemo } from './components/CommonDemo';
 export * from './components/CommonDemo/interface';
+export { default as Ellipsis } from './components/Ellipsis';
 export { default as VideoViewer } from './components/VideoViewer';
 export * from './components/VideoViewer/interface';

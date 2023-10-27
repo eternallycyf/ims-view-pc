@@ -1,0 +1,49 @@
+@plus-prefix: plus;
+
+@ellipsis-prefix-cls: ~'@{plus-prefix}-ellipsis';
+
+.@{ellipsis-prefix-cls}-ellipsis {
+  display: inline-block;
+  overflow: hidden;
+  width: 100%;
+  word-break: break-all;
+}
+
+.@{ellipsis-prefix-cls}-tooltip {
+  word-wrap: break-word;
+
+  overflow-wrap: break-word;
+  .@{ellipsis-prefix-cls}-tooltip-inner {
+    overflow-y: auto;
+    max-height: 300px;
+  }
+}
+
+.@{ellipsis-prefix-cls}-width-mode {
+  width: auto;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.@{ellipsis-prefix-cls}-lines {
+  position: relative;
+
+  .shadow {
+    position: absolute;
+    z-index: -999;
+    display: block;
+    color: transparent;
+    opacity: 0;
+  }
+}
+
+.@{ellipsis-prefix-cls}-lineClamp {
+  position: relative;
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.@{ellipsis-prefix-cls}-shadow {
+  opacity: 0;
+}
