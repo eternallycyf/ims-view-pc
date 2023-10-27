@@ -1,11 +1,9 @@
 import { FormItemProps } from 'antd';
 import { Method } from 'axios';
-import { IEditorProps } from 'ims-view-pc/components/CustomForm/FormItem/editor';
-import { ISimpleControlProps } from 'ims-view-pc/components/CustomForm/FormItem/simple';
-import { AnyObject } from '../type';
-import { IFieldComponentTypeParams } from './fieldCompType';
+import { AnyObject, IEditorProps, ISimpleControlProps } from 'ims-view-pc';
+import { Search } from '.';
 
-const FORM_TYPE_DICT = [
+export const FORM_TYPE_DICT = [
   'input',
   'search',
   'password',
@@ -36,13 +34,13 @@ export type FormControlType = (typeof FORM_TYPE_DICT)[number];
 
 export type ItemProps = FormItemProps;
 
-export interface IFetchConfig {
+export interface IFetchConfig<Record = AnyObject> {
   apiUrl: string;
   method?: Method;
   params?: any;
   searchKey?: string;
   dataPath?: string;
-  initDictFn?: (record: any) => any[];
+  initDictFn?: (record: Record) => Record[];
 }
 
 export type Dict = ReadonlyArray<{
@@ -59,7 +57,7 @@ export type Dict = ReadonlyArray<{
 
 export interface IBaseControlProps<Values = AnyObject, Rest = AnyObject, Extra = unknown>
   extends Pick<
-    IFieldComponentTypeParams<Values, Rest, Extra>,
+    Search<Values, Rest, Extra>,
     'fetchConfig' | 'itemProps' | 'dict' | 'Component' | 'renderItem'
   > {}
 

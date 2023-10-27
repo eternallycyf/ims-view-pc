@@ -1,5 +1,5 @@
 import { FormInstance } from 'antd';
-import { AddIndexSignature, AnyObject, ValueOf } from '../type';
+import { AddIndexSignature, AnyObject, ValueOf } from 'ims-view-pc';
 import {
   Dict,
   type FormControlType,
@@ -11,7 +11,7 @@ import { IBaseCustomFormItemProps } from './formItem';
 
 export type NameKey<Values = AnyObject> = (keyof Values & string) | [number, keyof Values & string];
 
-export interface IFieldComponentTypeParams<Values = AnyObject, Rest = AnyObject, Extra = unknown> {
+export interface IBaseFormControl<Values = AnyObject, Rest = AnyObject, Extra = unknown> {
   form?: FormInstance<Values>;
   name?: NameKey<Values>;
   label?: React.ReactNode;
@@ -26,7 +26,7 @@ export interface IFieldComponentTypeParams<Values = AnyObject, Rest = AnyObject,
   dict?: Dict;
   hidden?: boolean;
 
-  fetchConfig?: IFetchConfig;
+  fetchConfig?: IFetchConfig<AnyObject>;
   controlProps?: IControlProps;
   itemProps?: ItemProps;
 
@@ -41,8 +41,21 @@ export interface IFieldComponentTypeParams<Values = AnyObject, Rest = AnyObject,
   renderItem?: (item: Dict[number]) => React.ReactNode;
 }
 
+export type Search<Values = AnyObject, Rest = AnyObject, Extra = unknown> = IBaseFormControl<
+  Values,
+  Rest,
+  Extra
+> &
+  Rest;
+
 export type FieldCompType = {
   <Values = AnyObject, Rest = AnyObject, Extra = unknown>(
-    ...args: IFieldComponentTypeParams<Values, Rest, Extra>[]
+    ...args: Search<Values, Rest, Extra>[]
   ): React.ReactNode;
 };
+
+export type ISearchesType<Values = AnyObject, Rest = AnyObject, Extra = unknown> = Search<
+  Values,
+  Rest,
+  Extra
+>[];

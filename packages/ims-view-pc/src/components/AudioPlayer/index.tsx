@@ -7,8 +7,8 @@ import {
 } from '@ant-design/icons';
 import { Popover, Slider } from 'antd';
 import classNames from 'classnames';
+import { variables } from 'ims-view-pc';
 import React, { useImperativeHandle } from 'react';
-import { variables } from '../../styles/variables';
 import './index.less';
 import { AudioPlayerProps } from './interface';
 

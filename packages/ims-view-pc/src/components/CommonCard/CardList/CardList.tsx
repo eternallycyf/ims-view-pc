@@ -1,8 +1,8 @@
 import { useFetch } from '@ims-view/hooks';
 import { Card, Empty, List } from 'antd';
+import { AnyObject } from 'ims-view-pc';
 import _ from 'lodash';
 import React, { Fragment, useImperativeHandle } from 'react';
-import { AnyObject } from '../../../type/type';
 import './index.less';
 import { ICardListHandle, ICardListProps } from './interface';
 

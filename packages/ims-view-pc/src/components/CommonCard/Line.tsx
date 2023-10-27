@@ -1,4 +1,4 @@
-import { variables } from '../../styles/variables';
+import { variables } from 'ims-view-pc';
 import './index.less';
 
 const Line = () => (

@@ -1,7 +1,7 @@
 import { useFetchProps, useFetchState } from '@ims-view/hooks';
 import { CardProps, ListProps, PaginationProps } from 'antd';
+import { AnyObject } from 'ims-view-pc';
 import React from 'react';
-import { AnyObject } from '../../../type/type';
 
 /**
  * @typedef ICardListHandle - 卡片列表组件的ref

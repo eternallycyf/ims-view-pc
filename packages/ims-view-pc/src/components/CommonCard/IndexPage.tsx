@@ -1,6 +1,6 @@
 import { Spin, Tabs } from 'antd';
+import { variables as defaultVariables } from 'ims-view-pc';
 import React, { Component } from 'react';
-import { variables as defaultVariables } from '../../styles/variables';
 import './index.less';
 import { ICommonCardIndexPageProps } from './interface';
 

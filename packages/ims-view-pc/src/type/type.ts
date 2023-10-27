@@ -22,7 +22,7 @@ export type IsTuple<T> = T extends [...params: infer Eles]
 
 /*----------------------------deep-----------------------------------------------------*/
 
-type DeepReadonly<Obj extends Record<string, any>> = {
+export type DeepReadonly<Obj extends Record<string, any>> = {
   readonly [Key in keyof Obj]: Obj[Key] extends object
     ? Obj[Key] extends Function
       ? Obj[Key]
@@ -81,7 +81,7 @@ export type AddIndexSignature<Obj extends Record<string, any>> = {
 } & { [Key: string]: any };
 
 // 对 A、B 两个索引类型做合并，如果是只有 A 中有的不变，如果是 A、B 都有的就变为可选，只有 B 中有的也变为可选
-type Defaultize<A, B> = Pick<A, Exclude<keyof A, keyof B>> &
+export type Defaultize<A, B> = Pick<A, Exclude<keyof A, keyof B>> &
   Partial<Pick<A, Extract<keyof A, keyof B>>> &
   Partial<Pick<B, Exclude<keyof B, keyof A>>>;
 

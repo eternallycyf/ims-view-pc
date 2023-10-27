@@ -1,7 +1,7 @@
 import { PictureOutlined } from '@ant-design/icons';
+import { variables } from 'ims-view-pc';
 import React, { Component } from 'react';
 import { type VideoJsPlayer } from 'video.js';
-import { variables } from '../../../styles/variables';
 import { MEDIA_ERROR } from '../constant';
 
 interface ErrorDisplayProps {

@@ -1,10 +1,9 @@
-import { AnyObject } from '../type';
-import { IFieldComponentTypeParams } from './fieldCompType';
+import { AnyObject, Search } from 'ims-view-pc';
 
 export interface IBaseCustomFormItemProps<Values = AnyObject, Rest = AnyObject, Extra = unknown>
   extends Pick<
-    IFieldComponentTypeParams<Values, Rest, Extra>,
+    Search<Values, Rest, Extra>,
     'form' | 'itemProps' | 'name' | 'record' | 'dict' | 'Component'
   > {
-  id?: IFieldComponentTypeParams<Values, Rest, Extra>['name'];
+  id?: Search<Values, Rest, Extra>['name'];
 }

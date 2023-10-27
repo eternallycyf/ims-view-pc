@@ -1,6 +1,6 @@
 import { Button } from 'antd';
+import { variables } from 'ims-view-pc';
 import React, { useImperativeHandle, useState } from 'react';
-import { variables } from '../../styles/variables';
 import './index.less';
 import { IButtonGroupDefaultProps, IButtonGroupHandle } from './interface';
 

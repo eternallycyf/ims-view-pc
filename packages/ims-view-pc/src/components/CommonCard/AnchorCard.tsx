@@ -1,6 +1,6 @@
 import { Anchor, Col, Row } from 'antd';
+import { variables as defaultVariables } from 'ims-view-pc';
 import React from 'react';
-import { variables as defaultVariables } from '../../styles/variables';
 import './index.less';
 import { ICommonCardAnchorCardProps } from './interface';
 const { Link } = Anchor;

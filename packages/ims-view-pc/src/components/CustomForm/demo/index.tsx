@@ -1,7 +1,6 @@
 import { Button, Form, Switch } from 'antd';
 import dayjs from 'dayjs';
-import { getFieldComp } from 'ims-view-pc/core/helpers';
-import { IFieldComponentTypeParams } from 'ims-view-pc/type/form/fieldCompType';
+import { ISearchesType, renderFormItem } from 'ims-view-pc';
 
 const dict = [
   { label: '1', value: 1 },
@@ -17,7 +16,7 @@ interface IRecord {
 
 export default () => {
   const [form] = Form.useForm();
-  const formList: IFieldComponentTypeParams<IRecord>[] = [
+  const formList: ISearchesType<IRecord, { sss?: '2' }> = [
     {
       name: 'input',
       label: 'input',
@@ -34,12 +33,12 @@ export default () => {
       },
       initialValue: 1,
     },
-    // {
-    //   name: 'editor',
-    //   label: 'editor',
-    //   type: 'editor',
-    //   initialValue: '<h1>editor</h1>',
-    // },
+    {
+      name: 'editor',
+      label: 'editor',
+      type: 'editor',
+      initialValue: '<h1>editor</h1>',
+    },
     {
       name: 'custom',
       label: 'custom',
@@ -58,7 +57,7 @@ export default () => {
 
   return (
     <Form style={{ overflow: 'auto' }} form={form} onFinish={(value) => console.log(value)}>
-      {formList.map((item) => getFieldComp({ ...item, form }))}
+      {formList.map((item) => renderFormItem({ ...item, form }))}
       <div>
         <Button type="primary" htmlType="submit">
           submit

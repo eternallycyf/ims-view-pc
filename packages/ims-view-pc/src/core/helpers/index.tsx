@@ -1,8 +1,9 @@
 import { Form } from 'antd';
 import dayjs from 'dayjs';
+import { AddIndexSignature, Search } from 'ims-view-pc';
 import _ from 'lodash';
-import { FieldCompType, IFieldComponentTypeParams } from '../../type/form/fieldCompType';
-import { AddIndexSignature } from '../../type/type';
+import { FieldCompType } from '../../type/form';
+
 /**
  * 获取控件
  * @param props
@@ -22,7 +23,7 @@ export const getFieldComp: FieldCompType = ({
   itemProps = {},
   Component,
 }) => {
-  let formProps: Partial<IFieldComponentTypeParams> = {
+  let formProps: Partial<Search> = {
     name,
     type: type ?? 'input',
     record,
@@ -35,10 +36,7 @@ export const getFieldComp: FieldCompType = ({
   };
   if (!fetchConfig) formProps = _.omit(formProps, ['fetchConfig']);
 
-  let FieldComp: React.ForwardRefRenderFunction<
-    any,
-    AddIndexSignature<Partial<IFieldComponentTypeParams>>
-  > = null;
+  let FieldComp: React.ForwardRefRenderFunction<any, AddIndexSignature<Partial<Search>>> = null;
 
   // 特殊处理
   if (initValue) {
@@ -93,4 +91,24 @@ export const getFieldComp: FieldCompType = ({
   } else {
     return <FieldComp {...formProps} />;
   }
+};
+
+export const renderFormItem = (item: any, index?: number) => {
+  const { name, type, initialValue, formFieldProps, controlProps, ...otherProps } = item;
+  const myControlProps = {
+    ...controlProps,
+    size: (controlProps && controlProps.size) || 'small',
+  };
+  const fieldProps = {
+    name,
+    type,
+    initialValue,
+    formFieldProps,
+    controlProps: myControlProps,
+    ...otherProps,
+  };
+  if (item.children) {
+    return item.children.map((child: any, childIndex: number) => renderFormItem(child, childIndex));
+  }
+  return getFieldComp(fieldProps);
 };
