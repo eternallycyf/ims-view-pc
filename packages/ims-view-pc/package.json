@@ -9,7 +9,6 @@
     "es",
     "dist"
   ],
-  "type": "module",
   "scripts": {
     "build": "father build",
     "clean": "rm -rf es lib dist build coverage .eslintcache",
