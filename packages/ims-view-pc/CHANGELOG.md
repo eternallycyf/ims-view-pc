@@ -1,5 +1,32 @@
 # Changelog
 
+## [Version&nbsp;1.11.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.10.1...ims-view-pc@1.11.0)
+
+<sup>Released on **2023-10-27**</sup>
+
+#### ✨ 新特性
+
+- **ims-view-pc**: Add Ellipsis.
+
+#### 🎫 杂项
+
+- : add runes2 and resize-observer-polyfill.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **ims-view-pc**: Add Ellipsis ([5cf8a08](https://github.com/eternallycyf/ims-view-pc/commit/5cf8a08))
+
+#### Chores
+
+- : add runes2 and resize-observer-polyfill ([ade537e](https://github.com/eternallycyf/ims-view-pc/commit/ade537e))
+
+</details>
+
 ### [Version&nbsp;1.10.1](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.10.0...ims-view-pc@1.10.1)
 
 <sup>Released on **2023-10-27**</sup>
