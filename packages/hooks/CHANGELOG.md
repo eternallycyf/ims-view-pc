@@ -1,5 +1,24 @@
 # Changelog
 
+## [Version&nbsp;1.9.0](https://github.com/eternallycyf/ims-view-pc/compare/@ims-view/hooks@1.8.0...@ims-view/hooks@1.9.0)
+
+<sup>Released on **2023-10-27**</sup>
+
+#### ✨ 新特性
+
+- @ims-view/hooks add useResizeEffect.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- @ims-view/hooks add useResizeEffect ([929331b](https://github.com/eternallycyf/ims-view-pc/commit/929331b))
+
+</details>
+
 ## [Version&nbsp;1.8.0](https://github.com/eternallycyf/ims-view-pc/compare/@ims-view/hooks@1.7.0...@ims-view/hooks@1.8.0)
 
 <sup>Released on **2023-10-13**</sup>
