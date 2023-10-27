@@ -90,6 +90,7 @@ export default defineConfig({
   mock: {
     include: ['mock/**/*.{ts}'],
   },
+  exportStatic: false,
   html2sketch: {},
   mfsu: {
     runtimePublicPath: true,

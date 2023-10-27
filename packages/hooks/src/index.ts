@@ -7,6 +7,7 @@ export { default as useIsomorphicLayoutEffect } from './useIsomorphicLayoutEffec
 export { default as useMemoizedFn } from './useMemoizedFn';
 export { default as useOverFlowScroll } from './useOverFlowScroll';
 export { default as usePatchElement } from './usePatchElement';
+export { default as useResizeEffect } from './useResizeEffect';
 export { default as useStateCallback } from './useStateCallback';
 export { default as useSyncState } from './useSyncState';
 export { default as useVirtualList } from './useVirtualList';
