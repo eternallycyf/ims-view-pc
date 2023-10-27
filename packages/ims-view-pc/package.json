@@ -28,6 +28,8 @@
     "video.js": "^7.21.5",
     "dayjs": "^1.11.10",
     "react-use": "^17.4.0",
+    "runes2": "^1.1.2",
+    "resize-observer-polyfill": "1.5.1",
     "@wangeditor/editor": "^5.1.23",
     "@wangeditor/editor-for-react": "^1.0.6"
   },
