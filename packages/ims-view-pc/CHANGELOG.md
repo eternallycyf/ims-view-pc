@@ -1,5 +1,24 @@
 # Changelog
 
+## [Version&nbsp;1.13.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.12.0...ims-view-pc@1.13.0)
+
+<sup>Released on **2023-10-27**</sup>
+
+#### ✨ 新特性
+
+- Add Editor formItem and adjust import path.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- Add Editor formItem and adjust import path ([f9608a2](https://github.com/eternallycyf/ims-view-pc/commit/f9608a2))
+
+</details>
+
 ## [Version&nbsp;1.12.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.11.0...ims-view-pc@1.12.0)
 
 <sup>Released on **2023-10-27**</sup>
