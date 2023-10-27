@@ -78,6 +78,7 @@
     "prettier": "^2.2.1",
     "prettier-plugin-organize-imports": "^3",
     "prettier-plugin-packagejson": "^2",
+    "tslib": "^2.6.2",
     "@umijs/max": "^4",
     "mockjs": "^1.1.0",
     "@umijs/test": "^4",
