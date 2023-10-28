@@ -1,5 +1,32 @@
 # Changelog
 
+### [Version&nbsp;1.13.1](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.13.0...ims-view-pc@1.13.1)
+
+<sup>Released on **2023-10-28**</sup>
+
+#### 🎫 杂项
+
+- : remove "type": "module",.
+
+#### 🐛 修复
+
+- RenderFormItem use lazy replace required.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### Chores
+
+- : remove "type": "module", ([aafce5b](https://github.com/eternallycyf/ims-view-pc/commit/aafce5b))
+
+#### What's fixed
+
+- RenderFormItem use lazy replace required ([cc054ae](https://github.com/eternallycyf/ims-view-pc/commit/cc054ae))
+
+</details>
+
 ## [Version&nbsp;1.13.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.12.0...ims-view-pc@1.13.0)
 
 <sup>Released on **2023-10-27**</sup>
