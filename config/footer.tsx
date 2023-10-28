@@ -32,6 +32,11 @@ export const footer = [
         url: 'https://ims-view.site/chart',
         openExternal: true,
       },
+      {
+        title: 'ims-graph',
+        url: 'https://ims-graph.vercel.app/components/graph-chart',
+        openExternal: true,
+      },
     ],
   },
   {
