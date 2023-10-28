@@ -2,7 +2,11 @@ import { Form } from 'antd';
 import dayjs from 'dayjs';
 import { AddIndexSignature, Search } from 'ims-view-pc';
 import _ from 'lodash';
+import React from 'react';
 import { FieldCompType } from '../../type/form';
+
+const Simple = React.lazy(() => import('../../components/CustomForm/FormItem/simple'));
+const Editor = React.lazy(() => import('../../components/CustomForm/FormItem/editor'));
 
 /**
  * 获取控件
@@ -36,7 +40,7 @@ export const getFieldComp: FieldCompType = ({
   };
   if (!fetchConfig) formProps = _.omit(formProps, ['fetchConfig']);
 
-  let FieldComp: React.ForwardRefRenderFunction<any, AddIndexSignature<Partial<Search>>> = null;
+  let FieldComp: React.LazyExoticComponent<React.FC<any>> = null;
 
   // 特殊处理
   if (initValue) {
@@ -69,18 +73,20 @@ export const getFieldComp: FieldCompType = ({
     case 'time':
     case 'monthRange':
     case 'custom':
-      FieldComp = require(`ims-view-pc/components/CustomForm/FormItem/simple`).default;
+      FieldComp = Simple;
       break;
     // case 'select':
     //   if (dictConfig) formProps.dictConfig = dictConfig;
     //   FieldComp = require(`@/components/CustomForm/FormItem/select`).default;
     //   break;
     case 'editor':
-      FieldComp = require(`ims-view-pc/components/CustomForm/FormItem/editor`).default;
+      FieldComp = Editor;
       break;
     default:
-      FieldComp = require(`ims-view-pc/components/CustomForm/FormItem/${type}`).default;
+      FieldComp = null;
   }
+
+  if (!FieldComp) return null;
 
   if (form) {
     return (

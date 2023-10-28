@@ -29,7 +29,7 @@ import { SliderBaseProps } from 'antd/es/slider';
 import dayjs from 'dayjs';
 import 'dayjs/locale/zh-cn';
 import { IBaseControlProps, IBaseCustomFormItemProps } from 'ims-view-pc';
-import React from 'react';
+import React, { useImperativeHandle } from 'react';
 const RadioGroup = Radio.Group;
 const CheckboxGroup = Checkbox.Group;
 const { TextArea, Password, Search } = Input;
@@ -67,7 +67,7 @@ export interface ISimpleControlProps<T = string> extends IBaseCustomFormItemProp
       picker: string;
       allowClear: boolean;
     };
-    datetime?: {
+    date?: {
       locale: any;
       showTime: boolean;
       format: string;
@@ -136,7 +136,7 @@ export interface ISimpleControlProps<T = string> extends IBaseCustomFormItemProp
   value: T;
 }
 
-const SimpleControl: React.FC<ISimpleControlProps> = (props) => {
+const SimpleControl = React.forwardRef<any, ISimpleControlProps>((props, ref) => {
   const {
     name,
     form,
@@ -157,6 +157,8 @@ const SimpleControl: React.FC<ISimpleControlProps> = (props) => {
     ...defaultVal[type],
     ...defaultControlProps,
   };
+
+  useImperativeHandle(ref, () => ({}));
 
   switch (type) {
     case 'date':
@@ -207,7 +209,7 @@ const SimpleControl: React.FC<ISimpleControlProps> = (props) => {
 
   if (type === 'autoComplete') {
     return (
-      <AutoComplete {...controlProps}>
+      <AutoComplete ref={ref} {...controlProps}>
         {dict?.map((item) => (
           <AutoComplete.Option {...item} key={item.value} value={item.value}>
             {((controlProps.renderItem && controlProps.renderItem(item)) || item?.label) ?? '--'}
@@ -217,7 +219,7 @@ const SimpleControl: React.FC<ISimpleControlProps> = (props) => {
     );
   } else if (type === 'checkbox') {
     return (
-      <CheckboxGroup {...(controlProps as any as CheckboxGroupProps)}>
+      <CheckboxGroup ref={ref} {...(controlProps as any as CheckboxGroupProps)}>
         {dict?.map((item) => (
           <Checkbox {...item} key={item.value} value={item.value}>
             {item?.label}
@@ -231,7 +233,7 @@ const SimpleControl: React.FC<ISimpleControlProps> = (props) => {
       RadioComp = Radio.Button;
     }
     return (
-      <RadioGroup {...controlProps}>
+      <RadioGroup ref={ref} {...controlProps}>
         {dict?.map((item) => (
           <RadioComp {...item} key={item.value} value={item.value} title={item.label}>
             {item.label}
@@ -259,6 +261,7 @@ const SimpleControl: React.FC<ISimpleControlProps> = (props) => {
     }
     return (
       <Component
+        ref={ref}
         prefix={type === 'search' ? <SearchOutlined /> : ''}
         {...controlProps}
         {...formProps}
@@ -266,7 +269,7 @@ const SimpleControl: React.FC<ISimpleControlProps> = (props) => {
       />
     );
   }
-};
+});
 
 SimpleControl.defaultProps = {
   defaultVal: {
@@ -280,7 +283,7 @@ SimpleControl.defaultProps = {
       picker: 'quarter',
       allowClear: true,
     },
-    datetime: {
+    date: {
       locale,
       showTime: true,
       format: 'YYYY-MM-DD HH:mm:ss',

@@ -16,12 +16,13 @@ interface IRecord {
 
 export default () => {
   const [form] = Form.useForm();
-  const formList: ISearchesType<IRecord, { sss?: '2' }> = [
+  const formList: ISearchesType<IRecord, { customParams?: '2' }> = [
     {
       name: 'input',
       label: 'input',
       type: 'input',
       initialValue: 'input',
+      customParams: '2',
     },
     {
       name: 'radio',

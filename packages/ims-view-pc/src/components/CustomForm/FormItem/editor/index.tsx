@@ -3,7 +3,7 @@ import { Editor, Toolbar } from '@wangeditor/editor-for-react';
 import '@wangeditor/editor/dist/css/style.css';
 import { Flex } from 'antd';
 import { IBaseCustomFormItemProps, variables } from 'ims-view-pc';
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useEffect, useImperativeHandle, useState } from 'react';
 import './index.less';
 import { insertImg, uploadImg } from './utils';
 
@@ -18,13 +18,15 @@ export interface IEditorProps<T = string> extends IBaseCustomFormItemProps {
   value: T;
 }
 
-const MyEditor: FC<IEditorProps> = (props) => {
+const MyEditor = React.forwardRef<any, IEditorProps>((props, ref) => {
   const { value, onChange, itemProps } = props;
   const [editor, setEditor] = useState<IDomEditor | null>();
   const [toolbarConfig, setToolbarConfig] = useState<Partial<IToolbarConfig>>({});
   const [editorConfig, setEditorConfig] = useState<Partial<IEditorConfig>>({});
 
   const [html, setHtml] = useState<string>(itemProps?.initialValue);
+
+  useImperativeHandle(ref, () => ({}));
 
   useEffect(() => {
     handleInitConfig();
@@ -123,6 +125,6 @@ const MyEditor: FC<IEditorProps> = (props) => {
       </div>
     </>
   );
-};
+});
 
 export default MyEditor;
