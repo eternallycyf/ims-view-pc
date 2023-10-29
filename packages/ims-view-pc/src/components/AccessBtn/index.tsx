@@ -19,7 +19,7 @@ const AccessBtn: React.FC<IAccessBtnProps> = (props) => {
     const accessCodeList = accessCollection.map((item) => item);
 
     const btnEleList = (btnList || []).map((btn, index) => {
-      const { type, code, buttonType, element, visible, itemProps } = btn;
+      const { type = 'default', code, buttonType, element, visible, itemProps } = btn;
       const buttonProps = (btn?.itemProps?.buttonProps as IButtonItemProps['buttonProps']) || {};
       const buttonGroupProps = btn?.itemProps?.buttonGroupProps || {};
       const popConfirmProps = btn?.itemProps?.popConfirmProps || {};
@@ -79,7 +79,7 @@ const AccessBtn: React.FC<IAccessBtnProps> = (props) => {
       return (
         <Button
           key={`access-${code || index}${getUUID()}`}
-          size={size || 'middle'}
+          size={size || 'small'}
           type={buttonType || 'primary'}
           {...buttonProps}
         >

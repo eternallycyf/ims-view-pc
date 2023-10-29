@@ -1,4 +1,6 @@
-import Icon from '@ant-design/icons';
+import Icon, { QuestionCircleOutlined } from '@ant-design/icons';
+import { Tooltip } from 'antd';
+import dayjs from 'dayjs';
 import _ from 'lodash';
 import { ForwardRefExoticComponent } from 'react';
 
@@ -92,6 +94,70 @@ export const getIcon = (icon: string, className?: string) => {
   }
   return icon;
 };
+
+export const renderTooltip = (
+  title: string = '',
+  tooltip: React.ReactNode = '',
+  extraText: React.ReactNode = '',
+) => {
+  return (
+    <div>
+      <span style={{ marginRight: 4 }}>{title}</span>
+      <Tooltip title={tooltip}>
+        <QuestionCircleOutlined
+          style={{
+            marginLeft: 2,
+            fontSize: 12,
+            color: 'rgb(153,153,153)',
+          }}
+        />
+      </Tooltip>
+      {extraText}
+    </div>
+  );
+};
+
+export const formatNumber = (options: any, value: number) => {
+  let fractionDigits = typeof options.formatNumber === 'number' ? options.formatNumber : 2;
+  let number = value;
+  if (typeof options.formatNumber === 'function') {
+    const customOptions = options.formatNumber(Number(value));
+    if (Array.isArray(customOptions)) {
+      number = customOptions?.[0];
+      fractionDigits = customOptions?.[1];
+    } else {
+      number = customOptions;
+    }
+  }
+
+  if (_.isNil(value)) return '--';
+  if (isNaN(Number(value))) return value;
+  return Number(number).toLocaleString(undefined, {
+    minimumFractionDigits: fractionDigits,
+    maximumFractionDigits: fractionDigits,
+  });
+};
+
+export const formatPercent = (value: number) => {
+  if (_.isNil(value)) return '--';
+  if (isNaN(Number(value))) return value;
+  return (value * 100)?.toFixed(2) + '%';
+};
+
+export const formatTime = (options: any, text: any) => {
+  if (_.isNil(text)) return '--';
+  if (typeof options.formatTime === 'object') {
+    const { format, type } = options.formatTime;
+    return dayjs(text, type).format(format);
+  }
+  return dayjs(text).format(options.format);
+};
+
+export function getDictMap(dict: any) {
+  const dictMap: any = {};
+  dict.forEach((item: any) => (dictMap[item.value] = item.text));
+  return dictMap;
+}
 
 export function mergeProps<A, B>(a: A, b: B): B & A;
 export function mergeProps<A, B, C>(a: A, b: B, c: C): C & B & A;

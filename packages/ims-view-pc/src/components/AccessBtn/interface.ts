@@ -42,7 +42,7 @@ export interface IButtonItemProps extends IButtonDeleteProps, IButtonGroupProps 
   popConfirmProps?: PopconfirmProps;
 }
 
-export interface IButtonProps {
+export interface IBaseButtonProps {
   element?: ReactNode;
   type?: IAccessBtnType;
   buttonType?: ButtonProps['type'];
@@ -51,9 +51,11 @@ export interface IButtonProps {
   itemProps?: IButtonItemProps;
 }
 
-export interface IAccessBtnProps {
+export type IButtonProps<Rest = Record<string, unknown>> = Rest & IBaseButtonProps;
+
+export interface IAccessBtnProps<Rest = Record<string, unknown>> {
   className?: string;
   accessCollection?: string[];
   children?: React.ReactNode;
-  btnList?: IButtonProps[];
+  btnList?: IButtonProps<Rest>[];
 }

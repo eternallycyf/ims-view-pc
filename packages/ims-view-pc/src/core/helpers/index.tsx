@@ -1,9 +1,10 @@
 import { Form } from 'antd';
 import dayjs from 'dayjs';
-import { AddIndexSignature, Search } from 'ims-view-pc';
+import { AddIndexSignature, Ellipsis, Search } from 'ims-view-pc';
 import _ from 'lodash';
 import React from 'react';
 import { FieldCompType } from '../../type/form';
+import { formatNumber, formatPercent, formatTime, getDictMap, renderTooltip } from './utils';
 
 const Simple = React.lazy(() => import('../../components/CustomForm/FormItem/simple'));
 const Editor = React.lazy(() => import('../../components/CustomForm/FormItem/editor'));
@@ -118,3 +119,110 @@ export const renderFormItem = (item: any, index?: number) => {
   }
   return getFieldComp(fieldProps);
 };
+
+/**
+ * 格式化表格 columns
+ * @param data
+ */
+export function formatColumn(columns: any[]) {
+  const defaultOptions = {
+    format: 'YYYY-MM-DD',
+    ellipsis: false,
+    ellipsisType: 'line',
+    rows: 1,
+    maxLength: 100,
+  };
+
+  const deepData = _.cloneDeep(columns);
+  const accessCollection = JSON.parse(sessionStorage.getItem('accessCollection') || '[]');
+
+  return deepData
+    .filter(({ acpCode }) => (acpCode ? accessCollection.includes(acpCode) : true))
+    .map((item, index, arr) => {
+      const options = {
+        ...defaultOptions,
+        ...item,
+      };
+
+      if (!item.render) {
+        item.render = (newText: any) => {
+          let text = newText;
+          return _.isNil(text) ? '--' : text;
+        };
+
+        if (item.dict) {
+          item.render = (newText: any) => {
+            let text = newText;
+            text = getDictMap(item.dict)[text];
+            return _.isNil(text) ? '--' : text;
+          };
+        }
+
+        if (item.formatTime) {
+          item.render = (text: any) => formatTime(options, text);
+        }
+
+        if (item.formatPercent) {
+          item.render = formatPercent;
+        }
+
+        if (Number.isInteger(item.formatNumber) || item.formatNumber) {
+          item.render = (text: number) => formatNumber(item, text);
+        }
+
+        if (item.ellipsis) {
+          item.ellipsis = {
+            ellipsis: options?.ellipsis,
+            isShowTitle: false,
+          };
+          item.render = (text: any) => {
+            if (_.isNil(text)) return '--';
+            let newText = text;
+            if (item.dict) {
+              const dictText = getDictMap(item.dict)[text];
+              newText = _.isNil(dictText) ? '--' : dictText;
+            }
+            if (item.formatTime) newText = formatTime(options, text);
+            if (item.formatPercent) newText = formatPercent(text);
+            if (item.formatNumber) newText = formatNumber(item, text);
+
+            return options.ellipsisType === 'line' ? (
+              <Ellipsis lines={options.rows}>{newText}</Ellipsis>
+            ) : (
+              <Ellipsis length={options.maxLength}>{newText}</Ellipsis>
+            );
+          };
+        }
+      }
+
+      if (item.tooltip) {
+        const { title } = item;
+        if (typeof item.tooltip === 'string') {
+          item.title = () => renderTooltip(title, item.tooltip);
+        } else if (typeof item.tooltip === 'function') {
+          item.title = () => renderTooltip(title, item.tooltip());
+        } else {
+          const text =
+            typeof item.tooltip.text === 'function'
+              ? item.tooltip.text() || ''
+              : item.tooltip.text || '';
+          const extraText =
+            item.tooltip.extraText === 'function'
+              ? item.tooltip.extraText() || ''
+              : item.tooltip.extraText || '';
+          item.title = () => renderTooltip(title, text, extraText);
+        }
+      }
+      item.className = `
+      ${item.className ?? ''}
+      ${(item.children && index !== arr?.length - 1) || arr[index + 1]?.children ? 'tableLine' : ''}
+      ${item.align || 'left'}
+      `;
+      item.width += 20;
+
+      if (item.children) {
+        item.children = formatColumn(item.children || []);
+      }
+      return item;
+    });
+}

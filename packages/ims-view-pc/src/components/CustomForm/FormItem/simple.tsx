@@ -37,25 +37,29 @@ const { MonthPicker, RangePicker, QuarterPicker } = DatePicker;
 
 dayjs.locale('zh-cn');
 
+type ISimpleBaseControlProps = Partial<
+  Pick<IBaseControlProps, 'Component' | 'dict' | 'renderItem'> &
+    DatePickerProps &
+    RangePickerProps &
+    TimePickerProps &
+    InputProps &
+    PasswordProps &
+    TextAreaProps &
+    InputNumberProps &
+    RateProps &
+    SwitchProps &
+    SliderBaseProps &
+    AutoCompleteProps &
+    CheckboxProps &
+    CheckboxGroupProps &
+    RadioProps &
+    RadioGroupProps
+>;
+
 export interface ISimpleControlProps<T = string> extends IBaseCustomFormItemProps {
-  controlProps: Partial<
-    Pick<IBaseControlProps, 'Component' | 'dict' | 'renderItem'> &
-      DatePickerProps &
-      RangePickerProps &
-      TimePickerProps &
-      InputProps &
-      PasswordProps &
-      TextAreaProps &
-      InputNumberProps &
-      RateProps &
-      SwitchProps &
-      SliderBaseProps &
-      AutoCompleteProps &
-      CheckboxProps &
-      CheckboxGroupProps &
-      RadioProps &
-      RadioGroupProps
-  >;
+  controlProps: ISimpleBaseControlProps & {
+    onChange?: any;
+  };
   defaultVal?: {
     year?: {
       locale: any;
@@ -144,18 +148,16 @@ const SimpleControl = React.forwardRef<any, ISimpleControlProps>((props, ref) =>
     dict,
     defaultVal,
     Component: CustomComponent,
-    value,
     checked = false,
-    onChange,
     controlProps: defaultControlProps = {},
+    ...restProps
   } = props;
 
   let Component: any;
   let controlProps: Partial<ISimpleControlProps['controlProps']> = {
-    value,
-    onChange,
     ...defaultVal[type],
     ...defaultControlProps,
+    ...restProps,
   };
 
   useImperativeHandle(ref, () => ({}));
@@ -259,6 +261,7 @@ const SimpleControl = React.forwardRef<any, ISimpleControlProps>((props, ref) =>
     if (type === 'switch') {
       controlProps = { ...controlProps, checked: !!checked };
     }
+
     return (
       <Component
         ref={ref}
