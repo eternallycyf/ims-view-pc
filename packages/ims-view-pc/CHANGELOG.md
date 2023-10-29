@@ -1,5 +1,24 @@
 # Changelog
 
+## [Version&nbsp;1.14.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.13.1...ims-view-pc@1.14.0)
+
+<sup>Released on **2023-10-29**</sup>
+
+#### ✨ 新特性
+
+- **ims-view-pc**: Add CommonEditTable.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **ims-view-pc**: Add CommonEditTable ([81e9f63](https://github.com/eternallycyf/ims-view-pc/commit/81e9f63))
+
+</details>
+
 ### [Version&nbsp;1.13.1](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.13.0...ims-view-pc@1.13.1)
 
 <sup>Released on **2023-10-28**</sup>
