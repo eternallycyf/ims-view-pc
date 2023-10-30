@@ -36,7 +36,7 @@ const themeConfig: SiteThemeConfig = {
     sourceUrl: `https://github.com/eternallycyf/ims-view-pc/tree/master/packages/ims-view-pc/src/components/{atomId}/index.tsx`,
     docUrl: `https://github.com/eternallycyf/ims-view-pc/tree/master/packages/ims-view-pc/src/components/{atomId}/index.md`,
     pkg: 'ims-view-pc',
-    match: ['/ims-view-pc/component'],
+    match: ['components'],
   },
   footerConfig: {
     bottom: '2023',
