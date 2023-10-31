@@ -1,5 +1,24 @@
 # Changelog
 
+## [Version&nbsp;1.16.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.15.0...ims-view-pc@1.16.0)
+
+<sup>Released on **2023-10-31**</sup>
+
+#### ✨ 新特性
+
+- **ims-view-pc**: CommonEditTable add custom edit row.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **ims-view-pc**: CommonEditTable add custom edit row ([079d124](https://github.com/eternallycyf/ims-view-pc/commit/079d124))
+
+</details>
+
 ## [Version&nbsp;1.15.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.14.0...ims-view-pc@1.15.0)
 
 <sup>Released on **2023-10-30**</sup>
