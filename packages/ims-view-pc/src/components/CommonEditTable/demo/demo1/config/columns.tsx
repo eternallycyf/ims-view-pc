@@ -1,7 +1,7 @@
 import { ICommonEditTableColumnsType } from 'ims-view-pc';
 import _ from 'lodash';
 // import './index.less';
-import { IColumnsExtraRecord, IRecord } from '../demo1';
+import { IColumnsExtraRecord, IRecord } from '..';
 
 interface IGetColumnsParams {
   handleGetCurrentRatio: () => void;

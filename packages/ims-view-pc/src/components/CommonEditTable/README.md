@@ -9,4 +9,8 @@ demo:
   cols: 2
 ---
 
-<code src='./demo/demo1.tsx'>CommonEditTable<code>
+## CommonEditTable
+
+<code src='./demo/demo1/index.tsx'>多行编辑</code>
+
+<code src='./demo/demo2/index.tsx'>单行编辑</code>

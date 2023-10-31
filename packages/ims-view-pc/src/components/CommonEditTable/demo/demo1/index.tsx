@@ -79,8 +79,9 @@ const Demo = () => {
               visible: (renderProps, operation, status) => status == 'edit',
               itemProps: {
                 buttonProps: {
-                  onClick: (renderProps, operation, status) =>
-                    operation.add({ userName: '张三' }, 0),
+                  onClick: (renderProps, operation, status, val) => {
+                    operation.add({ userName: '张三' }, 0);
+                  },
                 },
               },
             },
@@ -99,7 +100,7 @@ const Demo = () => {
             }),
           ]}
           itemButton={[
-            (values, operation) => {
+            (values, operation, status) => {
               return {
                 type: 'delete',
                 buttonType: 'default',
@@ -108,9 +109,19 @@ const Demo = () => {
                   deleteText: '确认删除嘛',
                   handleDeleteConfirm: () => operation.remove(values.index),
                 },
-                onClick: () => operation.remove(values.index),
               };
             },
+            // {
+            //   type: 'delete',
+            //   buttonType: 'default',
+            //   element: '删除',
+            //   itemProps: {
+            //     deleteText: '确认删除嘛',
+            //     handleDeleteConfirm: (renderProps, operation, status, val) => {
+            //       operation.remove(renderProps.index);
+            //     },
+            //   },
+            // },
           ]}
           beforeChildren={(values) => {
             return (

@@ -37,6 +37,7 @@ export interface IEditTableContext<Values = any, FormItemsValues = any>
  * @property {boolean} [isMultiple=true] - 是否是实时保存类型 为false时 editable = true 才会可编辑
  * @property {string[]} [editableKeys] - 可编辑的key
  * @property {number} [itemButtonWidth=undefined] - 每一行的操作按钮的宽度 默认自适应
+ * @property {any} [curryParams] - 柯里化函数入参
  *
  * @property {React.ReactNode | ((value: IEditTableContext) => React.ReactNode)} [beforeChildren] - 表格前面的内容
  * @property {React.ReactNode | ((value: IEditTableContext) => React.ReactNode)} [afterChildren] - 表格后面的内容
@@ -69,6 +70,7 @@ export interface ICommonEditTableProps<
   isMultiple?: boolean;
   editableKeys?: string[];
   itemButtonWidth?: number;
+  curryParams?: any;
 
   /**@name 其他内容配置 */
   beforeChildren?:
@@ -152,11 +154,26 @@ export interface IRenderFnProps<Values> {
   arr: Values[];
   index: number;
 }
-export type IEditButtonFunction<Values = Record<string, unknown>> = (
-  renderProps: IRenderFnProps<Values>,
+export type IEditButtonFunction<
+  Values = Record<string, unknown>,
+  IsItemBtn extends boolean = false,
+> = (
+  renderProps: IsItemBtn extends true ? IRenderFnProps<Values> : undefined,
   operation: FormListOperation<Values>,
   status: ICommonEditTableProps['status'],
+  value: any,
 ) => any;
+
+export type IHandleGroupValueOnChange<
+  Values = Record<string, unknown>,
+  IsItemBtn extends boolean = false,
+> = (
+  renderProps: IsItemBtn extends true ? IRenderFnProps<Values> : undefined,
+  operation: FormListOperation<Values>,
+  status: ICommonEditTableProps['status'],
+  value: Parameters<IButtonItemProps['handleGroupValueOnChange']>,
+) => any;
+
 export interface IEditButtonItemProps<
   Values = Record<string, unknown>,
   IsItemBtn extends boolean = false,
@@ -170,18 +187,12 @@ export interface IEditButtonItemProps<
      * @param {IRenderFnProps<Values>} renderProps - 当前行的值
      * @param {FormListOperation<Values>} operation - formList的操作
      * @param {ICommonEditTableProps['status']} status - 当前编辑状态
+     * @param {any} value - 点击事件 Event
      */
-    onClick?: IsItemBtn extends true ? (e: any) => any : IEditButtonFunction<Values>;
+    onClick?: IEditButtonFunction<Values, IsItemBtn>;
   };
-  handleDeleteConfirm?: IsItemBtn extends true ? (e: any) => any : IEditButtonFunction<Values>;
-  handleGroupValueOnChange?: IsItemBtn extends true
-    ? (value: Parameters<IButtonItemProps['handleGroupValueOnChange']>) => any
-    : (
-        value: Parameters<IButtonItemProps['handleGroupValueOnChange']>,
-        renderProps: IRenderFnProps<Values>,
-        operation: FormListOperation<Values>,
-        status: ICommonEditTableProps['status'],
-      ) => any;
+  handleDeleteConfirm?: IEditButtonFunction<Values, IsItemBtn>;
+  handleGroupValueOnChange?: IHandleGroupValueOnChange<Values, IsItemBtn>;
 }
 export interface IBaseEditButtonProps<
   Values = Record<string, unknown>,
@@ -190,20 +201,27 @@ export interface IBaseEditButtonProps<
   visible?:
     | boolean
     | ((
-        renderProps: IsItemBtn extends true ? undefined : IRenderFnProps<Values>,
-        operation: IsItemBtn extends true ? undefined : FormListOperation<Values>,
+        renderProps: IsItemBtn extends true ? IRenderFnProps<Values> : undefined,
+        operation: FormListOperation<Values>,
         status: ICommonEditTableProps['status'],
       ) => boolean);
   itemProps?: IEditButtonItemProps<Values, IsItemBtn>;
 }
 
+/**
+ * 支持柯里化形式 (renderProps,...) => (curryParams) => ({ type:'default',...})
+ */
 export type IEditButtonProps<Values = Record<string, unknown>, IsItemBtn extends boolean = false> =
   | IBaseEditButtonProps<Values, IsItemBtn>
   | ((
       renderProps: IRenderFnProps<Values>,
       operation: FormListOperation<Values>,
       status: ICommonEditTableProps['status'],
-    ) => IBaseEditButtonProps<Values, IsItemBtn>);
+    ) =>
+      | IBaseEditButtonProps<Values, IsItemBtn>
+      | ((
+          ...arg: { editableKeys: string[]; [props: string]: any }[]
+        ) => IBaseEditButtonProps<Values, IsItemBtn>));
 
 export type IGetColumns<Values = any, Rest = Record<string, unknown>> = (
   operation: FormListOperation<Values>,

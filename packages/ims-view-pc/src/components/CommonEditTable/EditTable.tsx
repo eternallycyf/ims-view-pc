@@ -75,6 +75,7 @@ const CommonEditTable: React.ForwardRefRenderFunction<
     handleExport,
     status,
   };
+
   //#endregion
 
   // #region
@@ -242,7 +243,9 @@ const CommonEditTable: React.ForwardRefRenderFunction<
     const getBtnProps = (button: IEditButtonProps[]) => {
       return button.map((item) => {
         if (typeof item === 'function') {
-          const params = item(renderProps, operation, status);
+          const result: any = item(renderProps, operation, status);
+          const params =
+            typeof result === 'function' ? result({ editableKeys, ...props.curryParams }) : result;
           return {
             ...params,
             visible: params?.visible || true,
@@ -259,13 +262,7 @@ const CommonEditTable: React.ForwardRefRenderFunction<
             : undefined;
         const handleGroupValueOnChange =
           typeof item?.itemProps?.handleGroupValueOnChange === 'function'
-            ? item.itemProps.handleGroupValueOnChange.bind(
-                null,
-                item.itemProps.handleGroupValueOnChange,
-                renderProps,
-                operation,
-                status,
-              )
+            ? item.itemProps.handleGroupValueOnChange.bind(null, renderProps, operation, status)
             : undefined;
 
         const btnProps: IButtonProps = {
@@ -283,7 +280,7 @@ const CommonEditTable: React.ForwardRefRenderFunction<
           visible: () => {
             if (item.visible == undefined) return true;
             if (typeof item.visible === 'function')
-              return item.visible(renderProps, operation, status);
+              return item.visible(renderProps as any, operation, status);
             return item.visible;
           },
         };
