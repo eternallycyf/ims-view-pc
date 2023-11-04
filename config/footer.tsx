@@ -29,7 +29,7 @@ export const footer = [
       },
       {
         title: '@ims-view/chart',
-        url: 'https://ims-view.site/chart',
+        url: 'https://ims-view.site/charts',
         openExternal: true,
       },
       {
