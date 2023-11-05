@@ -1,6 +1,7 @@
 import { Button, Form, Switch } from 'antd';
 import dayjs from 'dayjs';
 import { ISearchesType, renderFormItem } from 'ims-view-pc';
+import React, { Fragment } from 'react';
 
 const dict = [
   { label: '1', value: 1 },
@@ -12,6 +13,8 @@ interface IRecord {
   radio: (typeof dict)[number]['value'];
   editor: string;
   custom: any;
+  update: AudioNode;
+  updateInput: string;
 }
 
 export default () => {
@@ -29,10 +32,32 @@ export default () => {
       label: 'radio',
       type: 'radio',
       dict,
+      itemProps: {
+        extra: '当值为3时 显示update表单',
+      },
       controlProps: {
         buttonStyle: 'solid',
       },
       initialValue: 1,
+    },
+    {
+      name: 'updateInput',
+      label: 'update',
+      type: 'update',
+      itemProps: {
+        noStyle: true,
+        shouldUpdate: (pre, cru) => pre.radio != cru.radio,
+        next: (values, form) => {
+          if (values?.radio != 3) return false;
+          return [
+            {
+              label: 'update',
+              name: 'updateInput',
+              type: 'input',
+            },
+          ];
+        },
+      },
     },
     {
       name: 'editor',
@@ -45,20 +70,23 @@ export default () => {
       label: 'custom',
       type: 'custom',
       initialValue: true,
-      Component: (props) => {
+      Component: React.forwardRef((props, ref) => {
+        console.log(props);
         return (
           <div>
             <Switch checked={!!props?.value} onChange={(e) => props.onChange(!props?.value)} />
             <div>{!!props?.value ? 'light' : 'dark'}</div>
           </div>
         );
-      },
+      }),
     },
   ];
 
   return (
     <Form style={{ overflow: 'auto' }} form={form} onFinish={(value) => console.log(value)}>
-      {formList.map((item) => renderFormItem({ ...item, form }))}
+      {formList.map((item, index) => (
+        <Fragment key={index}>{renderFormItem({ ...item, form })}</Fragment>
+      ))}
       <div>
         <Button type="primary" htmlType="submit">
           submit

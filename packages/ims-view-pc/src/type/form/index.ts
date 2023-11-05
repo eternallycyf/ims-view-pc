@@ -28,14 +28,17 @@ export interface IBaseFormControl<Values = AnyObject, Rest = AnyObject, Extra = 
 
   fetchConfig?: IFetchConfig<AnyObject>;
   controlProps?: IControlProps;
-  itemProps?: ItemProps;
+  itemProps?: ItemProps<Values, Rest, Extra>;
 
   Component?: (
-    props: IBaseCustomFormItemProps<Values, Rest, Extra> & {
-      controlProps: IControlProps;
-      onChange: (value: any) => any;
-      type: FormControlType;
+    props: IControlProps & {
+      form: FormInstance<Values>;
+      name: NameKey<Values>;
       value: any;
+      onChange: (...args: any[]) => any;
+      record: AddIndexSignature<Values>;
+      dict: Dict;
+      type: FormControlType;
     },
   ) => React.ReactNode;
   renderItem?: (item: Dict[number]) => React.ReactNode;

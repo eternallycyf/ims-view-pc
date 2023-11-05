@@ -5,5 +5,5 @@ export interface IBaseCustomFormItemProps<Values = AnyObject, Rest = AnyObject, 
     Search<Values, Rest, Extra>,
     'form' | 'itemProps' | 'name' | 'record' | 'dict' | 'Component'
   > {
-  id?: Search<Values, Rest, Extra>['name'];
+  id?: string;
 }

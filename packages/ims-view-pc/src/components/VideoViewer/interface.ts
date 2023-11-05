@@ -26,10 +26,9 @@ export interface VideoModalProps extends ModalProps {
   draggable?: boolean;
   mask?: boolean;
   onCancel?: () => void;
-  visible?: boolean;
+  open?: boolean;
   children?: React.ReactNode;
   wrapClassName?: string;
-  maskStyle?: React.CSSProperties;
   closable?: boolean;
   sources?: any[];
   download?: boolean;

@@ -70,7 +70,7 @@ class VideoViewer extends React.Component<VideoViewerProps, VideoViewerState> {
     const { videoModalVisible } = this.state;
     const { prefixCls, width, height, poster, modalProps, videoProps, failedMessage } = this.props;
 
-    const otherModalProps = _.omit(modalProps, ['visible', 'afterClose', 'onCancel']);
+    const otherModalProps = _.omit(modalProps, ['open', 'afterClose', 'onCancel']);
 
     const otherVideoProps = _.omit(videoProps, ['autoPlay']);
 
@@ -113,7 +113,7 @@ class VideoViewer extends React.Component<VideoViewerProps, VideoViewerState> {
         </div>
         <VideoModal
           {...otherModalProps}
-          visible={videoModalVisible}
+          open={videoModalVisible}
           afterClose={this.onClose}
           onCancel={this.handleCancel}
         >

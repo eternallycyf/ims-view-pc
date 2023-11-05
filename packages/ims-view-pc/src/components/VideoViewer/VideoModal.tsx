@@ -7,7 +7,7 @@ import { VideoModalProps } from './interface';
 class VideoModal extends React.Component<VideoModalProps> {
   static defaultProps = {
     prefixCls: 'fishd-video-modal',
-    visible: false,
+    open: false,
     draggable: false,
     closable: true,
     mask: false,
@@ -24,7 +24,7 @@ class VideoModal extends React.Component<VideoModalProps> {
   };
 
   render() {
-    const { prefixCls, children, closable, wrapClassName = '', maskStyle } = this.props;
+    const { prefixCls, children, closable, wrapClassName = '' } = this.props;
 
     const MODAL_WRAP = `${prefixCls}-modal-wrap`;
 
@@ -33,7 +33,6 @@ class VideoModal extends React.Component<VideoModalProps> {
       'wrapClassName',
       'title',
       'footer',
-      'maskStyle',
       'closable',
     ]);
 
@@ -41,7 +40,10 @@ class VideoModal extends React.Component<VideoModalProps> {
       ...otherProps,
       wrapClassName: `${wrapClassName} ${MODAL_WRAP}`,
       className: 'fishd-modal',
-      maskStyle: maskStyle ? maskStyle : { backgroundColor: 'rgba(0,0,0,0.2)' },
+      styles: {
+        backgroundColor: 'rgba(0,0,0,0.2)',
+        ...otherProps?.styles,
+      },
       // 不显示Modal自带的关闭按钮
       closable: false,
       title: null,

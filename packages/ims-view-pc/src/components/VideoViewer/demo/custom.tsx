@@ -4,21 +4,21 @@ import React from 'react';
 import './custom.less';
 
 interface IState {
-  visible: boolean;
+  open: boolean;
 }
 
 export default class Custom extends React.Component<any, IState> {
   video: React.RefObject<InstanceType<typeof VideoViewer.Video>>;
   constructor(props) {
     super(props);
-    this.state = { visible: false };
+    this.state = { open: false };
     this.video = React.createRef();
   }
 
   open = () => {
     this.setState(
       {
-        visible: true,
+        open: true,
       },
       () => {
         const video = this.video && this.video.current;
@@ -40,7 +40,7 @@ export default class Custom extends React.Component<any, IState> {
 
   handleCancel = () => {
     this.setState({
-      visible: false,
+      open: false,
     });
   };
 
@@ -55,7 +55,7 @@ export default class Custom extends React.Component<any, IState> {
             mask={true}
             draggable={true}
             maskClosable={false}
-            visible={this.state.visible}
+            open={this.state.open}
             afterClose={this.onClose}
             onCancel={this.handleCancel}
             width={600}

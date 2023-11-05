@@ -52,7 +52,7 @@ demo:
 | draggable  | 模态框是否支持拖动                   | Boolean          | false  |
 | mask       | 模态框关闭的遮罩是否可见             | Boolean          | false  |
 | onCancel   | 点击遮罩层或右上角叉或取消按钮的回调 | (e) => Void      | -      |
-| visible    | 模态框是否可见                       | Boolean          | false  |
+| open       | 模态框是否可见                       | Boolean          | false  |
 
 ### VideoViewer.Video
 

@@ -1,3 +1,4 @@
+import { random } from '@ims-view/utils';
 import { Form } from 'antd';
 import dayjs from 'dayjs';
 import { AddIndexSignature, Ellipsis, Search } from 'ims-view-pc';
@@ -8,6 +9,7 @@ import { formatNumber, formatPercent, formatTime, getDictMap, renderTooltip } fr
 
 const Simple = React.lazy(() => import('../../components/CustomForm/FormItem/simple'));
 const Editor = React.lazy(() => import('../../components/CustomForm/FormItem/editor'));
+const Update = React.lazy(() => import('../../components/CustomForm/FormItem/update'));
 
 /**
  * 获取控件
@@ -25,7 +27,7 @@ export const getFieldComp: FieldCompType = ({
   dict,
   record = {},
   controlProps = {},
-  itemProps = {},
+  itemProps = {} as any,
   Component,
 }) => {
   let formProps: Partial<Search> = {
@@ -76,6 +78,9 @@ export const getFieldComp: FieldCompType = ({
     case 'custom':
       FieldComp = Simple;
       break;
+    case 'update':
+      FieldComp = Update;
+      break;
     // case 'select':
     //   if (dictConfig) formProps.dictConfig = dictConfig;
     //   FieldComp = require(`@/components/CustomForm/FormItem/select`).default;
@@ -91,12 +96,17 @@ export const getFieldComp: FieldCompType = ({
 
   if (form) {
     return (
-      <Form.Item name={name} label={label ?? ''} {...formProps?.itemProps}>
+      <Form.Item
+        key={name || random.getUUID()}
+        name={name}
+        label={label ?? ''}
+        {...(formProps?.itemProps as any)}
+      >
         <FieldComp {...formProps} />
       </Form.Item>
     );
   } else {
-    return <FieldComp {...formProps} />;
+    return <FieldComp key={name || random.getUUID()} {...formProps} />;
   }
 };
 

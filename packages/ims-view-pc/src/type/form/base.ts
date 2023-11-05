@@ -1,6 +1,12 @@
 import { FormItemProps } from 'antd';
 import { Method } from 'axios';
-import { AnyObject, IEditorProps, ISimpleControlProps } from 'ims-view-pc';
+import {
+  AnyObject,
+  IBaseCustomFormItemProps,
+  IEditorProps,
+  ISimpleControlProps,
+  IUpdateControlProps,
+} from 'ims-view-pc';
 import { Search } from '.';
 
 export const FORM_TYPE_DICT = [
@@ -32,7 +38,9 @@ export const FORM_TYPE_DICT = [
 
 export type FormControlType = (typeof FORM_TYPE_DICT)[number];
 
-export type ItemProps = FormItemProps;
+export type ItemProps<Values, Rest, Extra> = FormItemProps<Values> & {
+  next?: IUpdateControlProps<Values, Rest, Extra>['itemProps']['next'];
+};
 
 export interface IFetchConfig<Record = AnyObject> {
   apiUrl: string;
@@ -61,6 +69,10 @@ export interface IBaseControlProps<Values = AnyObject, Rest = AnyObject, Extra =
     'fetchConfig' | 'itemProps' | 'dict' | 'Component' | 'renderItem'
   > {}
 
-export type IControlProps = IBaseControlProps &
+export type IControlProps<
+  Values = AnyObject,
+  Rest = AnyObject,
+  Extra = unknown,
+> = IBaseControlProps<Values, Rest, Extra> &
   IEditorProps['controlProps'] &
-  ISimpleControlProps['controlProps'];
+  ISimpleControlProps<Values>['controlProps'];

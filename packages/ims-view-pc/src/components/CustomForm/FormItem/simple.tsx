@@ -28,7 +28,7 @@ import { PasswordProps, TextAreaProps } from 'antd/es/input';
 import { SliderBaseProps } from 'antd/es/slider';
 import dayjs from 'dayjs';
 import 'dayjs/locale/zh-cn';
-import { IBaseControlProps, IBaseCustomFormItemProps } from 'ims-view-pc';
+import { AnyObject, IBaseControlProps, IBaseCustomFormItemProps } from 'ims-view-pc';
 import React, { useImperativeHandle } from 'react';
 const RadioGroup = Radio.Group;
 const CheckboxGroup = Checkbox.Group;
@@ -56,7 +56,7 @@ type ISimpleBaseControlProps = Partial<
     RadioGroupProps
 >;
 
-export interface ISimpleControlProps<T = string> extends IBaseCustomFormItemProps {
+export interface ISimpleControlProps<T = AnyObject> extends IBaseCustomFormItemProps<T> {
   controlProps: ISimpleBaseControlProps & {
     onChange?: any;
   };
@@ -150,6 +150,7 @@ const SimpleControl = React.forwardRef<any, ISimpleControlProps>((props, ref) =>
     Component: CustomComponent,
     checked = false,
     controlProps: defaultControlProps = {},
+    itemProps,
     ...restProps
   } = props;
 
