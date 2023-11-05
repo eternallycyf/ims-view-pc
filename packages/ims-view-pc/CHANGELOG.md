@@ -1,5 +1,33 @@
 # Changelog
 
+## [Version&nbsp;1.17.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.16.0...ims-view-pc@1.17.0)
+
+<sup>Released on **2023-11-05**</sup>
+
+#### ✨ 新特性
+
+- **ims-view-pc**: Add CustomForm.update.
+
+#### 📝 文档
+
+- Add CommonEditTable apis, update footer link and commonEditTable apiHeader.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **ims-view-pc**: Add CustomForm.update ([db4ef4b](https://github.com/eternallycyf/ims-view-pc/commit/db4ef4b))
+
+#### Documentation
+
+- Add CommonEditTable apis ([45999a1](https://github.com/eternallycyf/ims-view-pc/commit/45999a1))
+- Update footer link and commonEditTable apiHeader ([d496d7c](https://github.com/eternallycyf/ims-view-pc/commit/d496d7c))
+
+</details>
+
 ## [Version&nbsp;1.16.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.15.0...ims-view-pc@1.16.0)
 
 <sup>Released on **2023-10-31**</sup>
