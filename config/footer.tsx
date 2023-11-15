@@ -37,6 +37,11 @@ export const footer = [
         url: 'https://ims-graph.vercel.app/components/graph-chart',
         openExternal: true,
       },
+      {
+        title: 'ims-IndexedDB',
+        url: 'https://ims-indexed-db.vercel.app/components/create-indexed-db-helper',
+        openExternal: true,
+      },
     ],
   },
   {
