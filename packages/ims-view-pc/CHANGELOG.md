@@ -1,5 +1,24 @@
 # Changelog
 
+### [Version&nbsp;1.17.1](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.17.0...ims-view-pc@1.17.1)
+
+<sup>Released on **2023-11-15**</sup>
+
+#### 🐛 修复
+
+- RenderFormItem col span use ?? replace ||.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- RenderFormItem col span use ?? replace || ([01639f1](https://github.com/eternallycyf/ims-view-pc/commit/01639f1))
+
+</details>
+
 ## [Version&nbsp;1.17.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.16.0...ims-view-pc@1.17.0)
 
 <sup>Released on **2023-11-05**</sup>
