@@ -1,5 +1,24 @@
 # Changelog
 
+### [Version&nbsp;1.19.1](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.19.0...ims-view-pc@1.19.1)
+
+<sup>Released on **2023-11-18**</sup>
+
+#### 🐛 修复
+
+- **commonEditTable**: Update formItem types in editTable.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- **commonEditTable**: Update formItem types in editTable ([b304766](https://github.com/eternallycyf/ims-view-pc/commit/b304766))
+
+</details>
+
 ## [Version&nbsp;1.19.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.18.0...ims-view-pc@1.19.0)
 
 <sup>Released on **2023-11-18**</sup>
