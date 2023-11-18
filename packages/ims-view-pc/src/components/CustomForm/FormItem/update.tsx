@@ -9,13 +9,18 @@ import {
 } from 'ims-view-pc';
 import React, { Fragment, useImperativeHandle, useState } from 'react';
 
-export interface IUpdateControlProps<Values = AnyObject, Rest = AnyObject, Extra = unknown> {
+export interface IUpdateControlProps<
+  Values = AnyObject,
+  Rest = AnyObject,
+  Extra = unknown,
+  FormValues = Values,
+> {
   itemProps?: {
     shouldUpdate?: (prevValues: Values, nextValues: Values) => boolean;
     /**@name index使用commonEditable 自动注入 */
     next?: (
-      values: Values,
-      form: Omit<FormInstance<Values>, 'scrollToField' | 'getFieldInstance'>,
+      values: FormValues,
+      form: Omit<FormInstance<FormValues>, 'scrollToField' | 'getFieldInstance'>,
       index?: number,
     ) => false | React.ReactNode | DeepPartial<ISearchesType<Values, Rest, Extra>>;
   };
@@ -36,7 +41,10 @@ const UpdateControl = React.forwardRef<any, IUpdateControlProps>((props, ref) =>
         if (!next) return null;
         const nextValues = next(values, form);
         if (nextValues === false) return null;
-        if (React.isValidElement(nextValues) && !Array.isArray(nextValues)) {
+        if (
+          typeof nextValues === 'string' ||
+          (React.isValidElement(nextValues) && !Array.isArray(nextValues))
+        ) {
           return nextValues;
         }
 

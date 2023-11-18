@@ -171,7 +171,6 @@ const CommonEditTable: React.ForwardRefRenderFunction<
                 key={key}
                 rules={rules || itemProps?.rules || []}
                 initialValue={initialValue}
-                {...layout}
                 {...itemProps}
               >
                 {renderFormItem(formProps, index)}

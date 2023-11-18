@@ -6,6 +6,7 @@ import {
   IBaseButtonProps,
   IButtonItemProps,
   ISearchesType,
+  IUpdateControlProps,
   Search,
 } from 'ims-view-pc';
 import React from 'react';
@@ -118,19 +119,28 @@ export interface IColumnEditRestProps<Values> {
  * @name columns
  * 只有 type === 'custom' || item.transform && status == 'view' 时 render 才会生效
  * item.transform ? item.transform : item.render
+ * @Values 每一行的 record
+ * @description FormValues 所有表单的values
  */
 export type ICommonEditTableColumnsType<
   Values = Record<string, unknown>,
   Rest = Record<string, unknown>,
+  FormValues = Record<string, unknown>,
 > = Omit<Column<Values>, 'formItemProps' | 'render'> & {
   /**@name 是否有必填标记 */
   hasRequiredMark?: boolean;
-  formItemProps?: Omit<Search<Values>, 'name' | 'label' | 'type' | 'controlProps'> & {
+  formItemProps?: Omit<
+    Search<Values, Rest>,
+    'name' | 'label' | 'type' | 'controlProps' | 'itemProps'
+  > & {
     rules?: FormItemProps<Values>['rules'];
     controlProps?: Partial<Search['controlProps']>;
+    itemProps?: Omit<Search<FormValues, Rest>['itemProps'], 'shouldUpdate' | 'next'> & {
+      shouldUpdate?: FormItemProps<FormValues>['shouldUpdate'];
+      next?: IUpdateControlProps<Values, Rest, unknown, FormValues>['itemProps']['next'];
+    };
   };
   render?: (value: any, record: Values, index: number, allValues: Values[]) => React.ReactNode;
-  shouldUpdate?: FormItemProps<Values>['shouldUpdate'];
   /**
    * @name 自定义转换的方法
    * @name status === 'view' | !editable 状态时 展示数据转换 和render一样 只不过为了使用formatCoumn的方法 用这个代替render

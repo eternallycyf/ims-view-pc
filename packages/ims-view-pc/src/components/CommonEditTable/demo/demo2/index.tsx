@@ -28,11 +28,11 @@ export interface IFormValues {
 
 export interface IColumnsExtraRecord {}
 
-export const columns: ICommonEditTableColumnsType<IRecord, IColumnsExtraRecord>[] = [
+export const columns: ICommonEditTableColumnsType<IRecord, IColumnsExtraRecord, IFormValues>[] = [
   {
     dataIndex: 'userName',
     title: '姓名',
-    type: 'input',
+    type: 'update',
     align: 'center',
     ellipsis: true,
     width: 100,
@@ -40,7 +40,20 @@ export const columns: ICommonEditTableColumnsType<IRecord, IColumnsExtraRecord>[
     editable: true,
     formItemProps: {
       itemProps: {
+        noStyle: true,
         rules: [{ required: true, message: '请输入姓名' }],
+        style: { display: 'flex' },
+        shouldUpdate: (pre, cru) => true,
+        next: (values, form, index) => {
+          const record = values?.EditTable?.[index];
+          if (record?.age === 10) return '---';
+          return [
+            {
+              name: [index, 'userName'],
+              type: 'input',
+            },
+          ];
+        },
       },
     },
   },

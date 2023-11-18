@@ -1,7 +1,7 @@
 import { ICommonEditTableColumnsType } from 'ims-view-pc';
 import _ from 'lodash';
 // import './index.less';
-import { IColumnsExtraRecord, IRecord } from '..';
+import { IColumnsExtraRecord, IFormValues, IRecord } from '..';
 
 interface IGetColumnsParams {
   handleGetCurrentRatio: () => void;
@@ -9,19 +9,33 @@ interface IGetColumnsParams {
 }
 export const getColumns = (
   params: IGetColumnsParams,
-): ICommonEditTableColumnsType<IRecord, IColumnsExtraRecord>[] => {
+): ICommonEditTableColumnsType<IRecord, IColumnsExtraRecord, IFormValues>[] => {
   const { handleGetCurrentRatio, handleCheckIsRatioExceedExcessie } = params;
   return [
     {
       dataIndex: 'userName',
       title: '姓名',
-      type: 'input',
+      type: 'update',
       align: 'center',
       ellipsis: true,
       width: 100,
       tooltip: 'sss',
       formItemProps: {
-        controlProps: {},
+        itemProps: {
+          noStyle: true,
+          style: { display: 'flex' },
+          shouldUpdate: (pre, cru) => true,
+          next: (values, form, index) => {
+            const record = values?.EditTable?.[index];
+            if (record?.ratio === 10) return '---';
+            return [
+              {
+                name: [index, 'userName'],
+                type: 'input',
+              },
+            ];
+          },
+        },
       },
     },
     {
