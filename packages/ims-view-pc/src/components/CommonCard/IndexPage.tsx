@@ -5,13 +5,14 @@ import './index.less';
 import { ICommonCardIndexPageProps } from './interface';
 
 function IndexPage<Values = any>(props: ICommonCardIndexPageProps<Values>): React.ReactElement {
-  const { loading = false, header, tabProps, tabList = [], children } = props;
+  const { loading = false, header, tabProps, tabList = [], children, style } = props;
 
   const variables = {
     '--primary-bg-color': defaultVariables.colorPrimaryBg,
     '--primary-color': defaultVariables.colorPrimary,
     '--primary-color-hover': defaultVariables.colorPrimaryHover,
     '--primary-color-active': defaultVariables.colorPrimaryActive,
+    ...style,
   };
 
   return (

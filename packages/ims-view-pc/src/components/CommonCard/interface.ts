@@ -36,6 +36,7 @@ export interface ICommonCardIndexPageProps<T = any> {
   tabProps?: TabsProps;
   tabList?: Items[];
   children?: React.ReactNode;
+  style?: React.CSSProperties;
 }
 
 /**

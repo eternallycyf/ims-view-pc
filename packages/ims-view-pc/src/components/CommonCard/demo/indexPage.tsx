@@ -20,6 +20,7 @@ const IndexPage = () => {
       header={'这是头部'}
       tabList={tabList}
       loading={false}
+      style={{ height: '100vh' }}
       tabProps={{
         activeKey,
         onChange: setActiveKey,

@@ -49,15 +49,13 @@ const { IndexPage, Link, AnchorCard, AnchorLink, CardList } = CommonCard;
 
 也可以自行使用 `position: sticky` 进行实现
 
-- demo 在新窗口打开, 根节点设置 `height=固定长度或者 100vh` 就可以看到效果了
-
-<code transform="true"  src='./demo/indexPage.tsx' description="在新窗口打开, 根节点设置 height=固定长度或者100vh 就可以看到效果了">布局</code>
+<code transform="true"  src='./demo/indexPage.tsx'>全景页面</code>
 
 ## API
 
-## CommonCard
+### CommonCard
 
-### `ICommonDemoHandle<T = any>`
+#### `ICommonDemoHandle<T = any>`
 
 ```ts
 /**
@@ -80,7 +78,7 @@ export type ICommonCardHandle<T = Record<string, any>> = {
 | data      | 数据     | `T`                                                        | -      |
 | loading   | 加载状态 | `boolean`                                                  | -      |
 
-### ICommonCardProps
+#### ICommonCardProps
 
 ```ts
 /**
@@ -96,15 +94,15 @@ export interface ICommonCardProps<T = Record<string, any>> extends useFetchProps
 | -------- | ------ | ----------------- | ------ |
 | children | 子组件 | `React.ReactNode` | -      |
 
-## CommonCard.CardList
+### CommonCard.CardList
 
-### ICardListHandle
+#### ICardListHandle
 
 | 属性      | 说明     | 类型                                                       | 默认值 |
 | --------- | -------- | ---------------------------------------------------------- | ------ |
 | fetchData | 请求数据 | `(defaultParams?: any, defaultData?: any) => Promise<T[]>` | -      |
 
-### ICardListProps
+#### ICardListProps
 
 ```ts
 /**
@@ -158,7 +156,7 @@ export interface ICardListProps<T = AnyObject> extends useFetchProps<T[]> {
 | listProps       | 列表属性  | `ListProps<T>`    | -                 |
 | paginationProps | 分页属性  | `PaginationProps` | `{ pageSize: 9 }` |
 
-## CommonCard.IndexPage
+### CommonCard.IndexPage
 
 ```ts
 /**
@@ -173,7 +171,7 @@ export interface ICommonCardIndexPageProps<T = any> {
 }
 ```
 
-### ICommonCardIndexPageProps
+#### ICommonCardIndexPageProps
 
 | 属性     | 说明     | 类型              | 默认值 |
 | -------- | -------- | ----------------- | ------ |
@@ -192,7 +190,7 @@ interface Items extends Item {
 }
 ```
 
-## CommonCard.AnchorCard
+### CommonCard.AnchorCard
 
 ```ts
 /**
@@ -213,7 +211,7 @@ export interface ICommonCardAnchorCardProps<T extends string> {
 | children      | 子组件        | `React.ReactNode`                        | -      |
 | id            | 锚点父节点 id | `string`                                 | -      |
 
-## CommonCard.AnchorLink
+### CommonCard.AnchorLink
 
 ```ts
 /**
@@ -229,6 +227,22 @@ export interface ICommonCardAnchorLinkProps<T extends string>
 | ---- | --------- | ---- | ------ |
 | id   | 子锚点 id | `T`  | -      |
 
-## CommonCard.Line
+### CommonCard.Line
 
 - 一条分割线
+
+## FQA
+
+### 1.[粘性定位显示不出来](https://stackoverflow.com/questions/47723554/why-is-my-positionsticky-not-working)
+
+```less
+.parent {
+  display: initial;
+  .header {
+    position: sticky;
+    top: 1px;
+  }
+}
+```
+
+### 1. [粘性点位如何监听何时触发](https://stackoverflow.com/questions/16302483/event-to-detect-when-positionsticky-is-triggered)
