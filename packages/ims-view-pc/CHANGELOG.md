@@ -1,5 +1,24 @@
 # Changelog
 
+## [Version&nbsp;1.18.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.17.1...ims-view-pc@1.18.0)
+
+<sup>Released on **2023-11-18**</sup>
+
+#### ✨ 新特性
+
+- Add custom theme docs.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- Add custom theme docs ([3463a1e](https://github.com/eternallycyf/ims-view-pc/commit/3463a1e))
+
+</details>
+
 ### [Version&nbsp;1.17.1](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.17.0...ims-view-pc@1.17.1)
 
 <sup>Released on **2023-11-15**</sup>
