@@ -1,5 +1,24 @@
 # Changelog
 
+## [Version&nbsp;1.19.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.18.0...ims-view-pc@1.19.0)
+
+<sup>Released on **2023-11-18**</sup>
+
+#### ✨ 新特性
+
+- Add feature component with CustomMenu CustomTab.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- Add feature component with CustomMenu CustomTab ([8fe34f5](https://github.com/eternallycyf/ims-view-pc/commit/8fe34f5))
+
+</details>
+
 ## [Version&nbsp;1.18.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.17.1...ims-view-pc@1.18.0)
 
 <sup>Released on **2023-11-18**</sup>
