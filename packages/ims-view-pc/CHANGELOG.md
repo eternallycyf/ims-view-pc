@@ -1,5 +1,24 @@
 # Changelog
 
+## [Version&nbsp;1.20.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.19.1...ims-view-pc@1.20.0)
+
+<sup>Released on **2023-11-18**</sup>
+
+#### ✨ 新特性
+
+- Add muitiple formList and commonEditTable demo.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- Add muitiple formList and commonEditTable demo ([78eb980](https://github.com/eternallycyf/ims-view-pc/commit/78eb980))
+
+</details>
+
 ### [Version&nbsp;1.19.1](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.19.0...ims-view-pc@1.19.1)
 
 <sup>Released on **2023-11-18**</sup>
