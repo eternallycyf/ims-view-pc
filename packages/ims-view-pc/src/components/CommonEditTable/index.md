@@ -15,6 +15,8 @@ demo:
 
 <code src='./demo/demo2/index.tsx'>单行编辑</code>
 
+<code src='./demo/demo3/index.tsx'>多层 formList + EditTable</code>
+
 ## API
 
 ### IEditTableContext

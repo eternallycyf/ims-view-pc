@@ -1,5 +1,5 @@
-import { FormInstance } from 'antd';
-import { AddIndexSignature, AnyObject, ValueOf } from 'ims-view-pc';
+import { FormInstance, FormItemProps } from 'antd';
+import { AddIndexSignature, AnyObject, IUpdateControlProps, ValueOf } from 'ims-view-pc';
 import {
   Dict,
   type FormControlType,
@@ -62,3 +62,23 @@ export type ISearchesType<Values = AnyObject, Rest = AnyObject, Extra = unknown>
   Rest,
   Extra
 >[];
+
+export type IUpdateSearchType<
+  Values = AnyObject,
+  Rest = AnyObject,
+  Extra = unknown,
+  FormValues = Values,
+> = Omit<IBaseFormControl<FormValues, Rest, Extra>, 'itemProps' | 'name'> & {
+  name?: NameKey<Values>;
+  itemProps?: Omit<Search<FormValues, Rest>['itemProps'], 'shouldUpdate' | 'next'> & {
+    shouldUpdate?: FormItemProps<FormValues>['shouldUpdate'];
+    next?: IUpdateControlProps<Values, Rest, Extra, FormValues>['itemProps']['next'];
+  };
+} & Rest;
+
+export type IUpdateSearchesType<
+  Values = AnyObject,
+  Rest = AnyObject,
+  Extra = unknown,
+  FormValues = Values,
+> = IUpdateSearchType<Values, Rest, Extra, FormValues>[];

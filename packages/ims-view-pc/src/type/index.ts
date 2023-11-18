@@ -1,5 +1,5 @@
 export type { Column, IColumnsType } from './column/base';
-export type { ISearchesType, Search } from './form';
+export type { ISearchesType, IUpdateSearchesType, IUpdateSearchType, Search } from './form';
 export type {
   Dict,
   FormControlType,
