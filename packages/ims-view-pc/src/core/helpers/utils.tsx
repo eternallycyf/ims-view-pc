@@ -96,13 +96,13 @@ export const getIcon = (icon: string, className?: string) => {
 };
 
 export const renderTooltip = (
-  title: string = '',
+  title: string | Function = '',
   tooltip: React.ReactNode = '',
   extraText: React.ReactNode = '',
 ) => {
   return (
     <div>
-      <span style={{ marginRight: 4 }}>{title}</span>
+      <span style={{ marginRight: 4 }}>{typeof title === 'function' ? title() : title}</span>
       <Tooltip title={tooltip}>
         <QuestionCircleOutlined
           style={{
