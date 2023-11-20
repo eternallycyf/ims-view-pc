@@ -1,5 +1,24 @@
 # Changelog
 
+### [Version&nbsp;1.20.1](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.20.0...ims-view-pc@1.20.1)
+
+<sup>Released on **2023-11-20**</sup>
+
+#### 🐛 修复
+
+- FormatColumns title can use function and string.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- FormatColumns title can use function and string ([cff7281](https://github.com/eternallycyf/ims-view-pc/commit/cff7281))
+
+</details>
+
 ## [Version&nbsp;1.20.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.19.1...ims-view-pc@1.20.0)
 
 <sup>Released on **2023-11-18**</sup>
