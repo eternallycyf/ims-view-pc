@@ -1,17 +1,20 @@
 ---
-title: CustomForm
-description: CustomForm
+title: 简介
+description: 自定义表单
 toc: content
 group:
   title: 表单
   order: 1
+order: 0
 demo:
   cols: 2
 ---
 
-## CustomForm
+## 简介
 
-## FormControlType
+### `FormControlType`
+
+- 支持的表单类型
 
 ```ts
 export const FORM_TYPE_DICT = [
@@ -41,5 +44,3 @@ export const FORM_TYPE_DICT = [
   'fileUpload',
 ] as const;
 ```
-
-<code src='./demo/index.tsx'>demo<code>

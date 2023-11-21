@@ -4,7 +4,7 @@ description: 卡片布局
 toc: content
 group:
   title: 布局
-  order: 3
+  order: 4
 demo:
   cols: 2
 ---

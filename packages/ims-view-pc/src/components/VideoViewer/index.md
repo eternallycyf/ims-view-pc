@@ -4,7 +4,7 @@ description: 视频播放器 播放视频
 toc: content
 group:
   title: 文件
-  order: 4
+  order: 5
 demo:
   cols: 2
 ---

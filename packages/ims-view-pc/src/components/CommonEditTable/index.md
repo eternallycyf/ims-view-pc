@@ -3,7 +3,7 @@ title: CommonEditTable
 description: 单行多行动态编辑表格
 toc: content
 group:
-  title: 表格
+  title: 编辑表格
   order: 2
 demo:
   cols: 2
