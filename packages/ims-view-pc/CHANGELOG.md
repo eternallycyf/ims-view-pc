@@ -1,5 +1,24 @@
 # Changelog
 
+## [Version&nbsp;1.22.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.21.0...ims-view-pc@1.22.0)
+
+<sup>Released on **2023-11-21**</sup>
+
+#### ✨ 新特性
+
+- Add WaterMark and update docs.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- Add WaterMark and update docs ([5d4be30](https://github.com/eternallycyf/ims-view-pc/commit/5d4be30))
+
+</details>
+
 ## [Version&nbsp;1.21.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.20.1...ims-view-pc@1.21.0)
 
 <sup>Released on **2023-11-21**</sup>
