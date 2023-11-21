@@ -1,5 +1,24 @@
 # Changelog
 
+## [Version&nbsp;1.21.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.20.1...ims-view-pc@1.21.0)
+
+<sup>Released on **2023-11-21**</sup>
+
+#### ✨ 新特性
+
+- Update docs feature.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- Update docs feature ([eeca388](https://github.com/eternallycyf/ims-view-pc/commit/eeca388))
+
+</details>
+
 ### [Version&nbsp;1.20.1](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.20.0...ims-view-pc@1.20.1)
 
 <sup>Released on **2023-11-20**</sup>
