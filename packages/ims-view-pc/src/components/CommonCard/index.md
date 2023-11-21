@@ -9,16 +9,32 @@ demo:
   cols: 2
 ---
 
+## CommonCard 通用卡片
+
+CommonCard 是一个通用的卡片组件，用于展示各种内容，提供灵活的配置选项。
+
+### 何时使用
+
+- 展示信息卡片，如文章卡片、产品卡片等。
+- 提供一致的卡片样式，以保持整体设计风格。
+- 允许灵活配置卡片内容和样式。
+
+### 如何使用
+
+在需要显示通用卡片的地方引入 `CommonCard` 组件，并传入相应的内容和配置项。例如：
+
 ```ts
 import { CommonCard } from 'ims-view-pc';
 const { IndexPage, Link, AnchorCard, AnchorLink, CardList } = CommonCard;
 ```
 
-## CommonCard.CardList
+## demo
+
+### CommonCard.CardList
 
 <code src='./demo/cardList.tsx' description="这是一个卡片列表">卡片列表</code>
 
-## CommonCard.IndexPage
+### CommonCard.IndexPage
 
 全景页面会出现很多滚动条的情况 这里封装了一个全景组件 将锚点和滚动条进行了处理
 头部区域是固定的 同时保证页面只出现一个滚动条 使用 `flex` 实现

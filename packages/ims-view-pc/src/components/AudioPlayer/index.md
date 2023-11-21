@@ -9,7 +9,21 @@ demo:
   cols: 2
 ---
 
-## 何时使用
+## AudioPlayer 音频播放器
+
+AudioPlayer 是一个用于播放音频文件的组件，提供用户友好的音频控制界面。
+
+### 何时使用
+
+- 播放单个音频文件或音频列表。
+- 提供基本的音频控制功能，如播放、暂停、音量调节等。
+- 支持自定义样式和主题以满足项目需求。
+
+### 如何使用
+
+在需要显示音频播放器的地方引入 `AudioPlayer` 组件，并传入相应的音频源和配置项。例如：
+
+## demo
 
 <code description="网页中播放音频" src="./demo/base.tsx">基本使用</code>
 
@@ -59,3 +73,9 @@ demo:
 | rateOptions      | rateOptions.value，设置音频的默认播放速度，值为假值时播放速度为 1 ，但不展示播放速度；rateOptions.suffix，设置展示的播放速度的单位；rateOptions.decimal，设置展示的播放速度的数字精度；rateOptions.range，设置音频播放速度的选择范围，值为[]时不展示选择范围 | {value: Number, suffix: String, decimal: Number, range: Array\<Number\>} | {value: 0, suffix: 'x', decimal: 1, range: []} |
 
 其他 H5 audio 属性和事件配置参见 [H5 audio 属性说明](http://www.w3school.com.cn/jsref/dom_obj_audio.asp)。
+
+## FAQ
+
+- 确保音频文件路径或链接正确，支持的音频格式包括 MP3、WAV 等。
+- 针对移动端，考虑兼容性和性能问题。
+- 根据需要，可选择添加自定义控制按钮或样式。

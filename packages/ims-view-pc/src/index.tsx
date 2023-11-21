@@ -17,6 +17,8 @@ export { default as Ellipsis } from './components/Ellipsis';
 export { default as ErrorBoundary } from './components/ErrorBoundary';
 export { default as VideoViewer } from './components/VideoViewer';
 export * from './components/VideoViewer/interface';
+export { default as WaterMark } from './components/WaterMark';
+export * from './components/WaterMark/interface';
 export { getFieldComp, renderFormItem } from './core/helpers';
 export { variables } from './styles/variables';
 export * from './type/index';

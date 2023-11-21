@@ -9,7 +9,20 @@ demo:
   cols: 2
 ---
 
-## AccessBtn
+## AccessBtn 访问按钮
+
+`AccessBtn` 是一个用于控制访问权限的按钮组件。
+
+### 何时使用
+
+- 用于根据用户角色或权限配置显示或隐藏特定功能按钮。
+- 提供灵活的配置选项，以便根据不同的权限状态定制按钮的展示和行为。
+
+### 如何使用
+
+在需要使用访问按钮的地方引入 `AccessBtn` 组件，并传入相应的权限配置。例如：
+
+## demo
 
 <code src='./demo/type.tsx' description="default | custom | delete | group">按钮的基本类型</code>
 
@@ -68,3 +81,5 @@ type groupDict =
 | ------------------- | -------------- | ------------------------------ | ------ |
 | deleteText          | 删除按钮的文案 | `string`                       | -      |
 | handleDeleteConfirm | 删除按钮的回调 | `PopconfirmProps['onConfirm']` | -      |
+
+## FAQ

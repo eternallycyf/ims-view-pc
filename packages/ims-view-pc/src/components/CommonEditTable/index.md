@@ -9,7 +9,21 @@ demo:
   cols: 2
 ---
 
-## CommonEditTable
+## CommonEditTable 通用编辑表格
+
+CommonEditTable 是一个通用的可编辑表格组件，用于展示和编辑表格数据。
+
+### 何时使用
+
+- 允许用户编辑表格中的数据，包括添加、删除、更新等操作。
+- 提供友好的表格界面，适用于需要用户交互的数据管理场景。
+- 具有灵活的配置选项，以适应不同的表格需求。
+
+### 如何使用
+
+在需要显示可编辑表格的地方引入 `CommonEditTable` 组件，并传入相应的表格数据和配置项。例如：
+
+## demo
 
 <code src='./demo/demo1/index.tsx'>多行编辑</code>
 
@@ -146,3 +160,5 @@ demo:
 | --------- | --------------------------------- | ------ | ---- |
 | operation | `FormListOperation<Values>`       | -      | -    |
 | status    | `ICommonEditTableProps['status']` |
+
+## FAQ
