@@ -1,5 +1,24 @@
 # Changelog
 
+## [Version&nbsp;1.10.0](https://github.com/eternallycyf/ims-view-pc/compare/@ims-view/hooks@1.9.0...@ims-view/hooks@1.10.0)
+
+<sup>Released on **2023-11-23**</sup>
+
+#### ✨ 新特性
+
+- **@ims-view/hooks**: Add applyAwait.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **@ims-view/hooks**: Add applyAwait ([68fcb21](https://github.com/eternallycyf/ims-view-pc/commit/68fcb21))
+
+</details>
+
 ## [Version&nbsp;1.9.0](https://github.com/eternallycyf/ims-view-pc/compare/@ims-view/hooks@1.8.0...@ims-view/hooks@1.9.0)
 
 <sup>Released on **2023-10-27**</sup>
