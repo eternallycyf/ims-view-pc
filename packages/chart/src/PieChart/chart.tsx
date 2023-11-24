@@ -2,7 +2,7 @@ import { IGetPieChartOptions, IPieChartConfig } from './interface';
 import { BASE_CONFIG as BASECONFIG, defaultFormatColor, renderTooltip } from './utils';
 
 export const getOptions = (config: IGetPieChartOptions): any => {
-  const { data: DATA, baseConfig = {}, chartConfig = {} } = config;
+  const { data: DATA, baseConfig = {}, chartConfig = [] } = config;
   const BASE_CONFIG = { ...BASECONFIG, ...baseConfig };
   const CHART_CONFIG: IPieChartConfig[] = [...chartConfig];
 

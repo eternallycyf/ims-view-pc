@@ -1,6 +1,6 @@
 import ReactECharts from 'echarts-for-react';
 import type { EChartsReactProps } from 'echarts-for-react/lib/types';
-import { forwardRef, useImperativeHandle, useRef } from 'react';
+import React, { forwardRef, useEffect, useImperativeHandle, useRef } from 'react';
 
 interface IHandle {
   ref: echarts.ECharts;
@@ -8,15 +8,22 @@ interface IHandle {
 
 const ReactEChart: React.ForwardRefRenderFunction<IHandle, EChartsReactProps> = (
   props,
-  echartsRef: any,
+  echartsRef,
 ) => {
-  const { option, ...restProps } = props;
-  const ref = useRef<any>(null!);
+  const { option: defaultOptions, ...restProps } = props;
+  const [option, setOption] = React.useState<EChartsReactProps['option']>(defaultOptions);
+  const ref = useRef<InstanceType<typeof ReactECharts>>(null!);
+
   useImperativeHandle(echartsRef, () => ({
     ref: ref.current.getEchartsInstance(),
   }));
+
+  useEffect(() => {
+    setOption(defaultOptions);
+  }, []);
+
   return (
-    <div ref={echartsRef}>
+    <div>
       <ReactECharts ref={ref} option={option} {...restProps} />
     </div>
   );

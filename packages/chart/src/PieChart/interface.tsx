@@ -1,22 +1,53 @@
 import { CSSProperties } from 'react';
-import { BASE_CONFIG } from './utils';
+
+/**
+ * @typedef {Object} IBaseConfig
+ * @property {number} TOOLTIP_WIDTH - The width of the tooltip.
+ * @property {number} TOOLTIP_HEIGHT - The height of the tooltip.
+ * @property {boolean} HAS_TOOLTIP - Indicates whether tooltip is enabled.
+ * @property {string} BLACK - Color code for black.
+ * @property {string} RED - Color code for red.
+ * @property {string} GREEN - Color code for green.
+ * @property {string} TOOLTIP_SHADOW_COLOR - Color code for tooltip shadow.
+ * @property {Object} PIE_SERIES - Configuration for pie series.
+ * @property {string} PIE_SERIES.type - The type of the pie series.
+ * @property {Object} GRID_CONFIG - Configuration for grid.
+ * @property {(item: IPieChartConfig, data: any[]) => { name: string; icon: string }} GET_LEGEND_FN - Function to get legend information.
+ * @property {boolean} IS_SOLID - Indicates whether the pie chart is solid.
+ * @description Define the structure of the base configuration object.
+ */
+export type IBaseConfig = {
+  TOOLTIP_WIDTH: number;
+  TOOLTIP_HEIGHT: number;
+  HAS_TOOLTIP: boolean;
+  BLACK: string;
+  RED: string;
+  GREEN: string;
+  TOOLTIP_SHADOW_COLOR: string;
+  PIE_SERIES: {
+    type: string;
+  };
+  GRID_CONFIG: any;
+  GET_LEGEND_FN: (item: IPieChartConfig, data: any[]) => { name: string; icon: string };
+  IS_SOLID: boolean;
+};
 
 export type IGetPieChartOptions = {
   data: any;
   /**
    * @name 基础配置
    */
-  baseConfig?: Partial<typeof BASE_CONFIG>;
+  baseConfig?: Partial<IBaseConfig>;
   /**
    * @name echarts配置
    */
-  chartConfig?: any;
+  chartConfig?: Partial<IPieChartConfig>[];
   style?: CSSProperties;
   emptyStyle?: CSSProperties;
 };
 
 export interface IPieChartConfig {
-  name: string;
+  name?: string;
   /**
    * @name tooltipName
    * @required
@@ -26,13 +57,13 @@ export interface IPieChartConfig {
    * @name 数据key
    * @required
    */
-  dataKey: string;
+  dataKey?: string;
   percentKey?: string;
   /**
    * @name 是否显示在图例中
    * @required
    */
-  isLegend: boolean;
+  isLegend?: boolean;
   /**
    * @name 图例name额外后缀
    * @default ''
@@ -43,7 +74,7 @@ export interface IPieChartConfig {
    * @deprecated
    * @todo 暂时根据 isLegend 判断 只有 isLegend 为 true 时才显示在 series 中
    */
-  isSeries: boolean;
+  isSeries?: boolean;
   /**
    * @name tooltip 显示的单位
    * @default ''

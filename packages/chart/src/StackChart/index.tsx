@@ -9,7 +9,7 @@ import { BASE_CONFIG } from './utils';
 const StackChart = (props: IGetStackOptions) => {
   const [options, setOptions] = useState({});
   const [currentSelectedLegend, setCurrentSelectedLegend] = useState<string[]>([]);
-  const EchartsRef = useRef<any>(null);
+  const EchartsRef = useRef<React.ElementRef<typeof ReactECharts>>(null);
 
   const { data, baseConfig: newBaseConfig, chartConfig = {}, style } = props;
   const baseConfig = { ...BASE_CONFIG, ...newBaseConfig };
