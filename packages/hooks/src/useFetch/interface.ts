@@ -29,6 +29,10 @@ export interface useFetchProps<T = Record<string, unknown>> {
   request: (config: AxiosRequestConfig) => Promise<any>;
 }
 
+/**
+ * 表示异步状态的元组。
+ * @template T - 异步状态中值的类型。
+ */
 export type useFetchState<T = AnyObject> = readonly [
   {
     loading: boolean;
