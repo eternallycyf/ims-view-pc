@@ -1,5 +1,24 @@
 # Changelog
 
+## [Version&nbsp;1.2.0](https://github.com/eternallycyf/ims-view-pc/compare/@ims-view/chart@1.1.0...@ims-view/chart@1.2.0)
+
+<sup>Released on **2023-11-24**</sup>
+
+#### ✨ 新特性
+
+- **@ims-view/chart**: Add demos.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **@ims-view/chart**: Add demos ([c4839a5](https://github.com/eternallycyf/ims-view-pc/commit/c4839a5))
+
+</details>
+
 ## [Version&nbsp;1.1.0](https://github.com/eternallycyf/ims-view-pc/compare/@ims-view/chart@1.0.0...@ims-view/chart@1.1.0)
 
 <sup>Released on **2023-10-12**</sup>
