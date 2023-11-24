@@ -18,15 +18,17 @@
     "start": "father dev",
     "test": "jest"
   },
-  "dependencies": {},
+  "dependencies": {
+    "decimal.js": "^10.4.3"
+  },
   "devDependencies": {
     "@babel/runtime": "^7.23.1",
     "lodash": "^4.17.21"
   },
   "peerDependencies": {
+    "lodash": "^4.17.21",
     "react": "^18",
-    "react-dom": "^18",
-    "lodash": "^4.17.21"
+    "react-dom": "^18"
   },
   "publishConfig": {
     "access": "public",
