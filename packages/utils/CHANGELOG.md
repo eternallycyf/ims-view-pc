@@ -1,5 +1,24 @@
 # Changelog
 
+## [Version&nbsp;1.8.0](https://github.com/eternallycyf/ims-view-pc/compare/@ims-view/utils@1.7.0...@ims-view/utils@1.8.0)
+
+<sup>Released on **2023-11-24**</sup>
+
+#### ✨ 新特性
+
+- **@ims-view/utils**: Add decimal.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **@ims-view/utils**: Add decimal ([ce1a240](https://github.com/eternallycyf/ims-view-pc/commit/ce1a240))
+
+</details>
+
 ## [Version&nbsp;1.7.0](https://github.com/eternallycyf/ims-view-pc/compare/@ims-view/utils@1.6.0...@ims-view/utils@1.7.0)
 
 <sup>Released on **2023-10-12**</sup>
