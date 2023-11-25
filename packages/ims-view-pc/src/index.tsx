@@ -15,6 +15,8 @@ export type {
 } from './components/CustomForm/interface';
 export { default as Ellipsis } from './components/Ellipsis';
 export { default as ErrorBoundary } from './components/ErrorBoundary';
+export { default as SectionTitle } from './components/SectionTitle';
+export * from './components/SectionTitle/interface';
 export { default as VideoViewer } from './components/VideoViewer';
 export * from './components/VideoViewer/interface';
 export { default as WaterMark } from './components/WaterMark';

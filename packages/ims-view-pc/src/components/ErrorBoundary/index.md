@@ -5,6 +5,7 @@ toc: content
 group:
   title: 其他
   order: 10
+order: 10
 demo:
   cols: 2
 ---
