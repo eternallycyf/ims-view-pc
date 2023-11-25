@@ -1,5 +1,33 @@
 # Changelog
 
+## [Version&nbsp;1.11.0](https://github.com/eternallycyf/ims-view-pc/compare/@ims-view/utils@1.10.0...@ims-view/utils@1.11.0)
+
+<sup>Released on **2023-11-25**</sup>
+
+#### ✨ 新特性
+
+- **@ims-view/utils**: Add mergeProps, add storage.
+
+#### 🎫 杂项
+
+- Add js-cookie.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **@ims-view/utils**: Add mergeProps ([12912b9](https://github.com/eternallycyf/ims-view-pc/commit/12912b9))
+- **@ims-view/utils**: Add storage ([3497c13](https://github.com/eternallycyf/ims-view-pc/commit/3497c13))
+
+#### Chores
+
+- Add js-cookie ([47f5b49](https://github.com/eternallycyf/ims-view-pc/commit/47f5b49))
+
+</details>
+
 ## [Version&nbsp;1.10.0](https://github.com/eternallycyf/ims-view-pc/compare/@ims-view/utils@1.9.0...@ims-view/utils@1.10.0)
 
 <sup>Released on **2023-11-25**</sup>
