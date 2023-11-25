@@ -1,5 +1,6 @@
 import * as JsCookie from 'js-cookie';
-const { get, set, remove } = JsCookie;
+//@ts-ignore
+const { get, set, remove } = JsCookie.default;
 
 const defaultCookieKey = 'token';
 
