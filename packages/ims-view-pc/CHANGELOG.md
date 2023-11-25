@@ -1,5 +1,24 @@
 # Changelog
 
+## [Version&nbsp;1.23.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.22.7...ims-view-pc@1.23.0)
+
+<sup>Released on **2023-11-25**</sup>
+
+#### ✨ 新特性
+
+- **ims-view-pc**: Add SectionTitle.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **ims-view-pc**: Add SectionTitle ([c2eeff5](https://github.com/eternallycyf/ims-view-pc/commit/c2eeff5))
+
+</details>
+
 ### [Version&nbsp;1.22.7](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.22.6...ims-view-pc@1.22.7)
 
 <sup>Released on **2023-11-25**</sup>
