@@ -2,6 +2,7 @@ import { BaseChart } from '@ims-view/chart';
 import React from 'react';
 
 const lineChartOption = {
+  width: 500,
   title: {
     text: '折线图示例',
   },
@@ -23,9 +24,9 @@ const lineChartOption = {
 
 const Demo1 = () => {
   return (
-    <div>
+    <div style={{ width: '100%' }}>
       <h2>lineChart 使用示例 - 折线图</h2>
-      <BaseChart option={lineChartOption} />
+      <BaseChart style={{ height: 300, width: '100%' }} option={lineChartOption} />
     </div>
   );
 };

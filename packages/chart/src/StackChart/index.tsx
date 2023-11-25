@@ -3,15 +3,15 @@ import ReactECharts from 'echarts-for-react';
 import _ from 'lodash';
 import { Fragment, useCallback, useLayoutEffect, useRef, useState } from 'react';
 import { getOptions } from './chart';
-import { IGetStackOptions } from './interface';
+import { IStackChartProps } from './interface';
 import { BASE_CONFIG } from './utils';
 
-const StackChart = (props: IGetStackOptions) => {
+const StackChart = (props: IStackChartProps) => {
   const [options, setOptions] = useState({});
   const [currentSelectedLegend, setCurrentSelectedLegend] = useState<string[]>([]);
   const EchartsRef = useRef<React.ElementRef<typeof ReactECharts>>(null);
 
-  const { data, baseConfig: newBaseConfig, chartConfig = {}, style } = props;
+  const { data, baseConfig: newBaseConfig, chartConfig = [], style } = props;
   const baseConfig = { ...BASE_CONFIG, ...newBaseConfig };
   const HAS_TOP_LABEL = baseConfig.HAS_TOP_LABEL;
   const TOTAL_NAME = baseConfig.TOTAL_NAME;

@@ -1,6 +1,6 @@
 /* eslint-disable no-useless-escape */
 import './chart.less';
-import { IBaseConfig, IPieChartConfig } from './interface';
+import { IBasePieConfig, IPieChartConfig } from './interface';
 
 /**
  * Format a number according to the provided configuration.
@@ -57,7 +57,7 @@ export const defaultFormatColor = ({
 }: {
   formatColor?: (value: number) => string;
   value: any;
-  BASE_CONFIG: IBaseConfig;
+  BASE_CONFIG: IBasePieConfig;
 }) => {
   const hasFormatColor = formatColor && typeof formatColor === 'function';
   let valueColor = '';
@@ -74,7 +74,7 @@ export const defaultFormatColor = ({
   return valueColor;
 };
 
-export const BASE_CONFIG: Partial<IBaseConfig> = {
+export const BASE_CONFIG: Partial<IBasePieConfig> = {
   /**
    * @name TOOLTIP_WIDTH
    * @type number

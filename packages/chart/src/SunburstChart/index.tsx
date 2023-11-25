@@ -2,11 +2,11 @@ import { Empty } from 'antd';
 import { Fragment } from 'react';
 import Charts from '../BaseChart';
 import { getOptions } from './chart';
-import { SunburstChartConfig } from './interface';
+import { ISunburstChartProps } from './interface';
 import { BASE_CONFIG } from './utils';
 
-const SunburstChart = (props: SunburstChartConfig) => {
-  const { data, baseConfig = BASE_CONFIG, chartConfig = {}, style } = props;
+const SunburstChart = (props: ISunburstChartProps) => {
+  const { data, baseConfig = BASE_CONFIG, chartConfig = [], style } = props;
   const isEmpty = !data || data.length === 0;
   return (
     <Fragment>

@@ -1,7 +1,8 @@
-import { IGetPieChartOptions, IPieChartConfig } from './interface';
+import { EChartsReactProps } from 'echarts-for-react';
+import { IPieChartConfig, IPieChartProps } from './interface';
 import { BASE_CONFIG as BASECONFIG, defaultFormatColor, renderTooltip } from './utils';
 
-export const getOptions = (config: IGetPieChartOptions): any => {
+export const getOptions = (config: IPieChartProps): EChartsReactProps['option'] => {
   const { data: DATA, baseConfig = {}, chartConfig = [] } = config;
   const BASE_CONFIG = { ...BASECONFIG, ...baseConfig };
   const CHART_CONFIG: IPieChartConfig[] = [...chartConfig];

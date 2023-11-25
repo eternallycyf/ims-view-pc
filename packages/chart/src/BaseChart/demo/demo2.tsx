@@ -2,6 +2,7 @@ import { BaseChart } from '@ims-view/chart';
 import React from 'react';
 
 const barChartOption = {
+  width: 500,
   title: {
     text: '柱形图示例',
   },
@@ -23,7 +24,7 @@ const barChartOption = {
 
 const Demo2 = () => {
   return (
-    <div>
+    <div style={{ width: '100%' }}>
       <h2>barChart 使用示例 - 柱形图</h2>
       <BaseChart option={barChartOption} />
     </div>

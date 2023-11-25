@@ -2,10 +2,10 @@ import { Empty } from 'antd';
 import { Fragment } from 'react';
 import Chart from '../BaseChart';
 import { getOptions } from './chart';
-import { IGetPieChartOptions } from './interface';
+import { IPieChartProps } from './interface';
 import { BASE_CONFIG } from './utils';
 
-const PieChart = (props: IGetPieChartOptions) => {
+const PieChart = (props: IPieChartProps) => {
   const { data, baseConfig = BASE_CONFIG, chartConfig = [], style, emptyStyle } = props;
   const isEmpty = !data || data.length === 0;
   return (

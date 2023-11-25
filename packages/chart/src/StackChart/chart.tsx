@@ -1,6 +1,7 @@
 import dayjs from 'dayjs';
+import { EChartsReactProps } from 'echarts-for-react';
 import { cloneDeep } from 'lodash';
-import { IGetStackOptions, IStackChartConfig } from './interface';
+import { IStackChartConfig, IStackChartProps } from './interface';
 import {
   BASE_CONFIG as BASECONFIG,
   defaultFormatColor,
@@ -8,8 +9,8 @@ import {
   renderTooltip,
 } from './utils';
 
-export const getOptions = (config: IGetStackOptions): any => {
-  const { data: DATA = [], baseConfig = {}, chartConfig = {}, currentSelectedLegend = [] } = config;
+export const getOptions = (config: IStackChartProps): EChartsReactProps['option'] => {
+  const { data: DATA = [], baseConfig = {}, chartConfig = [], currentSelectedLegend = [] } = config;
   const BASE_CONFIG = { ...BASECONFIG, ...baseConfig };
   const CHART_CONFIG: IStackChartConfig[] = [...chartConfig];
 

@@ -1,9 +1,10 @@
+import { EChartsReactProps } from 'echarts-for-react';
 import _ from 'lodash';
-import { ISunburstChartConfig, SunburstChartConfig } from './interface';
+import { ISunburstChartConfig, ISunburstChartProps } from './interface';
 import { BASE_CONFIG as BASECONFIG, formatNumber, renderTooltip } from './utils';
 
-export const getOptions = (config: SunburstChartConfig) => {
-  const { data: DATA, baseConfig = {}, chartConfig = {} } = config;
+export const getOptions = (config: ISunburstChartProps): EChartsReactProps['option'] => {
+  const { data: DATA, baseConfig = {}, chartConfig = [] } = config;
   const BASE_CONFIG = { ...BASECONFIG, ...baseConfig };
   const CHART_CONFIG: ISunburstChartConfig[] = [...chartConfig];
 

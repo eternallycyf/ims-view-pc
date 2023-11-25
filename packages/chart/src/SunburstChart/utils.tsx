@@ -1,4 +1,5 @@
 /* eslint-disable no-useless-escape */
+import { IBaseSunburstChartConfig } from '..';
 import './chart.less';
 
 export const formatNumber = (config: { number: number; isPercent?: boolean }) => {
@@ -14,7 +15,7 @@ export const formatNumber = (config: { number: number; isPercent?: boolean }) =>
   return haveDecimal ? Number(number).toFixed(2) : number;
 };
 
-export const BASE_CONFIG = {
+export const BASE_CONFIG: IBaseSunburstChartConfig = {
   TOOLTIP_WIDTH: 320,
   TOOLTIP_HEIGHT: 350,
   TOOLTIP_SHADOW_COLOR: '#F0F6FF',

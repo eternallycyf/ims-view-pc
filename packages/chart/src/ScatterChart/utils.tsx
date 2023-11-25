@@ -1,6 +1,6 @@
 /* eslint-disable no-useless-escape */
 import './chart.less';
-import { IScatterChartConfig } from './interface';
+import { IBaseScatterConfig, IScatterChartConfig } from './interface';
 
 export const formatNumber = ({
   number,
@@ -36,7 +36,7 @@ export const defaultFormatColor = ({ formatColor, value, BASE_CONFIG }: any) => 
   return valueColor;
 };
 
-export const BASE_CONFIG = {
+export const BASE_CONFIG: IBaseScatterConfig = {
   // 时间的字段
   TIME: 'time',
   // 合计的字段
@@ -96,7 +96,7 @@ export const BASE_CONFIG = {
     };
   },
   RENDER_TOOLTIP_FN: (data: any[]) => data,
-} as const;
+};
 
 export const renderTooltip = (
   data: (IScatterChartConfig & {

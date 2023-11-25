@@ -20,7 +20,7 @@ apiHeader:
 
 在需要使用基础图表的地方引入 `BaseChart` 组件，并传入相应`echarts`的数据和配置。例如：
 
-## demo
+## 示例
 
 <code src="./demo/demo1.tsx">折线图</code>
 <code src="./demo/demo2.tsx">柱形图</code>

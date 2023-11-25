@@ -1,6 +1,7 @@
 import dayjs from 'dayjs';
+import { EChartsReactProps } from 'echarts-for-react';
 import ecStat from 'echarts-stat';
-import { IGetScatterChartOptions, IScatterChartConfig } from './interface';
+import { IScatterChartConfig, IScatterChartProps } from './interface';
 import {
   BASE_CONFIG as BASECONFIG,
   defaultFormatColor,
@@ -8,7 +9,7 @@ import {
   renderTooltip,
 } from './utils';
 
-export const getOptions = (config: IGetScatterChartOptions): any => {
+export const getOptions = (config: IScatterChartProps): EChartsReactProps['option'] => {
   const { data: _data = [], baseConfig = {}, chartConfig = [] } = config;
   const BASE_CONFIG = { ...BASECONFIG, ...baseConfig };
   const CHART_CONFIG: IScatterChartConfig[] = [...chartConfig];
@@ -245,7 +246,7 @@ export const getOptions = (config: IGetScatterChartOptions): any => {
             };
           },
         );
-        return renderTooltip(BASE_CONFIG.RENDER_TOOLTIP_FN(newArr));
+        return renderTooltip(BASE_CONFIG.RENDER_TOOLTIP_FN(newArr).filter(Boolean));
       },
     },
   };

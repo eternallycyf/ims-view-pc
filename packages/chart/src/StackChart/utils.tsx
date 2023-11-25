@@ -1,6 +1,6 @@
 /* eslint-disable no-useless-escape */
 import './chart.less';
-import { IStackChartConfig } from './interface';
+import { IBaseStackConfig, IStackChartConfig } from './interface';
 
 export const formatNumber = (number: number, isPercent = true) => {
   if (number == 0) return 0;
@@ -30,7 +30,7 @@ export const defaultFormatColor = ({ formatColor, value, BASE_CONFIG }: any) => 
   return valueColor;
 };
 
-export const BASE_CONFIG = {
+export const BASE_CONFIG: IBaseStackConfig = {
   // 时间的字段
   TIME: 'time',
   // 合计的字段

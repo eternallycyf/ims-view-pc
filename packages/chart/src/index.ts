@@ -10,5 +10,5 @@ export * from './StackChart/interface';
 export { BASE_CONFIG as StackChartConfig } from './StackChart/utils';
 export { default as SunburstChart } from './SunburstChart';
 export * from './SunburstChart/interface';
-export { BASE_CONFIG as SunburstChartConfig } from './SunburstChart/utils';
+export { BASE_CONFIG as ISunburstChartProps } from './SunburstChart/utils';
 export * from './utils';

@@ -16,7 +16,7 @@ import { CSSProperties } from 'react';
  * @property {boolean} IS_SOLID - Indicates whether the pie chart is solid.
  * @description Define the structure of the base configuration object.
  */
-export type IBaseConfig = {
+export type IBasePieConfig = {
   TOOLTIP_WIDTH: number;
   TOOLTIP_HEIGHT: number;
   HAS_TOOLTIP: boolean;
@@ -32,12 +32,12 @@ export type IBaseConfig = {
   IS_SOLID: boolean;
 };
 
-export type IGetPieChartOptions = {
+export type IPieChartProps = {
   data: any;
   /**
    * @name 基础配置
    */
-  baseConfig?: Partial<IBaseConfig>;
+  baseConfig?: Partial<IBasePieConfig>;
   /**
    * @name echarts配置
    */

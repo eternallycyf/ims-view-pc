@@ -1,6 +1,7 @@
 import ReactECharts from 'echarts-for-react';
 import type { EChartsReactProps } from 'echarts-for-react/lib/types';
 import React, { forwardRef, useEffect, useImperativeHandle, useRef } from 'react';
+import './index.less';
 
 interface IHandle {
   ref: echarts.ECharts;
@@ -19,14 +20,23 @@ const ReactEChart: React.ForwardRefRenderFunction<IHandle, EChartsReactProps> = 
   }));
 
   useEffect(() => {
-    setOption(defaultOptions);
-  }, []);
+    const echartsInstance = ref?.current?.getEchartsInstance();
 
-  return (
-    <div>
-      <ReactECharts ref={ref} option={option} {...restProps} />
-    </div>
-  );
+    if (echartsInstance) {
+      const handleResize = () => echartsInstance.resize();
+      setOption(defaultOptions);
+
+      echartsInstance.setOption(defaultOptions, true);
+      setTimeout(handleResize, 0);
+
+      window.addEventListener('resize', handleResize);
+      return () => {
+        window.removeEventListener('resize', handleResize);
+      };
+    }
+  }, [defaultOptions, ref]);
+
+  return <ReactECharts className="base-chart" ref={ref} option={option} {...restProps} />;
 };
 
 export default forwardRef(ReactEChart);
