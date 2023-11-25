@@ -2,9 +2,9 @@
 title: applyAwait
 order: 2
 apiHeader:
-  pkg: '@ims-view/hooks'
-  docUrl: https://github.com/eternallycyf/ims-view-pc/blob/master/packages/hooks/src/applyAwait/index.md
-  sourceUrl: https://github.com/eternallycyf/ims-view-pc/blob/master/packages/hooks/src/applyAwait/index.ts
+  pkg: '@ims-view/utils'
+  docUrl: https://github.com/eternallycyf/ims-view-pc/blob/master/packages/utils/src/applyAwait/index.md
+  sourceUrl: https://github.com/eternallycyf/ims-view-pc/blob/master/packages/utils/src/applyAwait/index.ts
 ---
 
 ## applyAwait
