@@ -9,6 +9,8 @@ apiHeader:
 
 ## applyAwait
 
+- 用于处理`async/await`的错误处理
+
 ```ts
 /**
  * @param { Promise } promise
