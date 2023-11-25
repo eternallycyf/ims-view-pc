@@ -21,6 +21,7 @@
     "jsx": "react-jsx",
     /* Alias 路径 */
     "baseUrl": ".",
+    "noImplicitAny": false,
     "paths": {
       "@ims-view/hooks": ["./packages/hooks/src"],
       "@ims-view/hooks/*": ["./packages/hooks/src/*"],

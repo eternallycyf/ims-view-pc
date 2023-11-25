@@ -19,12 +19,13 @@
     "test": "jest"
   },
   "dependencies": {
-    "decimal.js": "^10.4.3"
+    "decimal.js": "^10.4.3",
+    "crypto-js": "^4.2.0",
+    "js-cookie": "^3.0.5"
   },
   "devDependencies": {
     "@babel/runtime": "^7.23.1",
-    "lodash": "^4.17.21",
-    "crypto-js": "^4.2.0"
+    "@types/js-cookie": "^3.0.6"
   },
   "peerDependencies": {
     "lodash": "^4.17.21",
