@@ -1,5 +1,24 @@
 # Changelog
 
+## [Version&nbsp;1.24.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.23.0...ims-view-pc@1.24.0)
+
+<sup>Released on **2023-11-25**</sup>
+
+#### ✨ 新特性
+
+- **ims-view-pc**: Add CommonCard.Page.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **ims-view-pc**: Add CommonCard.Page ([7085e7a](https://github.com/eternallycyf/ims-view-pc/commit/7085e7a))
+
+</details>
+
 ## [Version&nbsp;1.23.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.22.7...ims-view-pc@1.23.0)
 
 <sup>Released on **2023-11-25**</sup>
