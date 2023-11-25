@@ -1,5 +1,32 @@
 # Changelog
 
+## [Version&nbsp;1.9.0](https://github.com/eternallycyf/ims-view-pc/compare/@ims-view/utils@1.8.0...@ims-view/utils@1.9.0)
+
+<sup>Released on **2023-11-25**</sup>
+
+#### ✨ 新特性
+
+- **@ims-view/utils**: Add ase.
+
+#### 📝 文档
+
+- Update doc and annotation.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **@ims-view/utils**: Add ase ([99f491c](https://github.com/eternallycyf/ims-view-pc/commit/99f491c))
+
+#### Documentation
+
+- Update doc and annotation ([f356e17](https://github.com/eternallycyf/ims-view-pc/commit/f356e17))
+
+</details>
+
 ## [Version&nbsp;1.8.0](https://github.com/eternallycyf/ims-view-pc/compare/@ims-view/utils@1.7.0...@ims-view/utils@1.8.0)
 
 <sup>Released on **2023-11-24**</sup>
