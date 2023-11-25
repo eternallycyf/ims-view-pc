@@ -1,11 +1,6 @@
-import { Tooltip, TooltipProps } from 'antd';
+import { Tooltip } from 'antd';
 import * as React from 'react';
-import { EllipsisProps } from './Ellipsis';
-
-interface EllipsisLineClampProps
-  extends Omit<EllipsisProps, 'length' | 'width' | 'fullWidthRecognition'> {
-  tooltipProps?: TooltipProps;
-}
+import { EllipsisLineClampProps } from './interface';
 
 const EllipsisLineClamp = (props: EllipsisLineClampProps) => {
   const { className, prefix, lines, tooltip, tooltipProps, children, ...restProps } = props;

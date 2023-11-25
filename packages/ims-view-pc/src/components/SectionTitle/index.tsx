@@ -39,7 +39,7 @@ const SectionTitle: FC<ISectionTitle> = (props) => {
       <Row
         justify="space-between"
         align="middle"
-        className="SectionTitle"
+        className={title != undefined ? 'SectionTitle' : 'default-SectionTitle'}
         style={{ ...rowStyle, '--primary-color': variables.colorPrimary }}
       >
         <Col className="SectionTitle-title" style={titleStyle}>

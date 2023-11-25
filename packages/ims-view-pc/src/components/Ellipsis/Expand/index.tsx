@@ -1,30 +1,12 @@
 import { useResizeEffect } from '@ims-view/hooks';
-import { Tooltip, TooltipProps } from 'antd';
 import { mergeProps } from 'ims-view-pc/core/helpers/utils';
-import React, { FC, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import React, { useLayoutEffect, useMemo, useRef, useState } from 'react';
 import runes from 'runes2';
+import { EllipsisExpandProps } from '../interface';
 import './index.less';
-import {
-  NativeProps,
-  PropagationEvent,
-  pxToNumber,
-  withNativeProps,
-  withStopPropagation,
-} from './utils';
+import { pxToNumber, withNativeProps, withStopPropagation } from './utils';
 
 const classPrefix = `plus-ellipsis`;
-
-export type EllipsisExpandProps = {
-  content: string;
-  direction?: 'start' | 'end' | 'middle';
-  rows?: number;
-  expandText?: React.ReactNode;
-  collapseText?: React.ReactNode;
-  stopPropagationForActionButtons?: PropagationEvent[];
-  onContentClick?: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
-  defaultExpanded?: boolean;
-  tooltip?: boolean | TooltipProps;
-} & NativeProps;
 
 const defaultProps = {
   direction: 'end',

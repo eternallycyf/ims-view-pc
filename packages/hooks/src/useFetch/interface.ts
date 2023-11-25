@@ -26,7 +26,7 @@ export interface useFetchProps<T = Record<string, unknown>> {
   };
   dataHandler?: (data: T) => any;
   initRequest?: boolean;
-  request: (config: AxiosRequestConfig) => Promise<any>;
+  request?: (config: AxiosRequestConfig) => Promise<any>;
 }
 
 /**

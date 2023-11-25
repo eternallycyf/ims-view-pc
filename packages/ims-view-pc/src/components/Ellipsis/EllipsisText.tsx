@@ -1,5 +1,6 @@
-import { Tooltip, TooltipProps } from 'antd';
+import { Tooltip } from 'antd';
 import * as React from 'react';
+import { EllipsisTextProps } from './interface';
 
 export const getStrFullLength = (str = '') =>
   str.split('').reduce((pre, cur) => {
@@ -25,16 +26,6 @@ export const cutStrByFullLength = (str = '', maxLength: number) => {
     return pre;
   }, '');
 };
-
-export interface EllipsisTextProps {
-  prefix: string;
-  text: React.ReactNode | string;
-  length: number;
-  tooltip: boolean;
-  className: string;
-  fullWidthRecognition: boolean;
-  tooltipProps?: TooltipProps;
-}
 
 const EllipsisText: React.FC<EllipsisTextProps> = (props) => {
   const { prefix, text, length, tooltip, className, fullWidthRecognition, tooltipProps, ...other } =

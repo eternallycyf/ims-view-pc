@@ -5,21 +5,10 @@ import EllipsisLineClamp from './EllipsisLineClamp';
 import EllipsisText from './EllipsisText';
 import EllipsisWidth from './EllipsisWidth';
 import './index.less';
+import { EllipsisProps } from './interface';
 
 // @ts-ignore
 const isSupportLineClamp = document.body.style.webkitLineClamp !== undefined;
-
-export interface EllipsisProps {
-  tooltip?: boolean | TooltipProps;
-  length?: number;
-  lines?: number;
-  fullWidthRecognition?: boolean;
-  className?: string;
-  width?: number | string;
-  style?: React.CSSProperties;
-  prefix?: string;
-  children: React.ReactNode;
-}
 
 const Ellipsis = (props: EllipsisProps) => {
   const {

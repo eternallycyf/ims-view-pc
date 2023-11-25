@@ -1,4 +1,3 @@
-import React from 'react';
 import Ellipsis from './Ellipsis';
 import Expand from './Expand';
 

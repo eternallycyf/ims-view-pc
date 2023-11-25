@@ -1,7 +1,7 @@
-import { Tooltip, TooltipProps } from 'antd';
+import { Tooltip } from 'antd';
 import * as React from 'react';
 import ResizeObserver from 'resize-observer-polyfill';
-import { EllipsisProps } from './Ellipsis';
+import { EllipsisLineProps } from './interface';
 
 const bisection = (
   th: number,
@@ -44,11 +44,6 @@ const bisection = (
   mid = Math.floor((end - begin) / 2) + begin;
   return bisection(th, mid, begin, end, text, shadowNode);
 };
-
-interface EllipsisLineProps
-  extends Omit<EllipsisProps, 'length' | 'width' | 'fullWidthRecognition'> {
-  tooltipProps?: TooltipProps;
-}
 
 const EllipsisLine = (props: EllipsisLineProps) => {
   const { className, prefix, lines = 2, tooltip, tooltipProps, children, ...restProps } = props;
