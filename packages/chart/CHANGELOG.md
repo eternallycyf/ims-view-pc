@@ -1,5 +1,24 @@
 # Changelog
 
+## [Version&nbsp;1.3.0](https://github.com/eternallycyf/ims-view-pc/compare/@ims-view/chart@1.2.0...@ims-view/chart@1.3.0)
+
+<sup>Released on **2023-11-25**</sup>
+
+#### ✨ 新特性
+
+- **@ims-view/chart**: Upgrade charts.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **@ims-view/chart**: Upgrade charts ([fa2f79b](https://github.com/eternallycyf/ims-view-pc/commit/fa2f79b))
+
+</details>
+
 ## [Version&nbsp;1.2.0](https://github.com/eternallycyf/ims-view-pc/compare/@ims-view/chart@1.1.0...@ims-view/chart@1.2.0)
 
 <sup>Released on **2023-11-24**</sup>
