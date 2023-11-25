@@ -1,5 +1,6 @@
 import { useFetchProps, useFetchState } from '@ims-view/hooks';
 import { TabsProps } from 'antd';
+import { ISectionTitle } from 'ims-view-pc';
 export * from './CardList/interface';
 
 /**
@@ -21,6 +22,18 @@ export type ICommonCardHandle<T = Record<string, any>> = {
  */
 export interface ICommonCardProps<T = Record<string, any>> extends useFetchProps<T> {
   children?: React.ReactNode;
+}
+
+/**
+ * @name 容器组件
+ */
+export interface IPageProps {
+  loading?: boolean;
+  className?: string;
+  style?: React.CSSProperties;
+  children?: React.ReactNode;
+  title?: React.ReactNode;
+  sectionTitleProps?: ISectionTitle;
 }
 
 /**

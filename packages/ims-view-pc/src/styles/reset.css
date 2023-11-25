@@ -255,3 +255,9 @@ mark {
   padding: 0.2em;
   background-color: #feffe6;
 }
+
+.ant-spin-nested-loading,
+.ant-spin-container {
+  width: 100%;
+  height: 100%;
+}

@@ -1,7 +1,7 @@
 import { TooltipProps } from 'antd';
 
 export interface ISectionTitle {
-  title: React.ReactNode;
+  title?: React.ReactNode;
   extraContent?: React.ReactNode;
   rowStyle?: React.CSSProperties;
   titleStyle?: React.CSSProperties;

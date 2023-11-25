@@ -25,16 +25,20 @@ CommonCard 是一个通用的卡片组件，用于展示各种内容，提供灵
 
 ```ts
 import { CommonCard } from 'ims-view-pc';
-const { IndexPage, Link, AnchorCard, AnchorLink, CardList } = CommonCard;
+const { Page, IndexPage, Link, AnchorCard, AnchorLink, CardList } = CommonCard;
 ```
 
 ## 示例
 
-### CommonCard.CardList
+### Page
 
-<code src='./demo/cardList.tsx' description="这是一个卡片列表">卡片列表</code>
+<code src='./demo/page.tsx' ></code>
 
-### CommonCard.IndexPage
+### CardList
+
+<code src='./demo/cardList.tsx' ></code>
+
+### IndexPage
 
 全景页面会出现很多滚动条的情况 这里封装了一个全景组件 将锚点和滚动条进行了处理
 头部区域是固定的 同时保证页面只出现一个滚动条 使用 `flex` 实现
@@ -65,7 +69,7 @@ const { IndexPage, Link, AnchorCard, AnchorLink, CardList } = CommonCard;
 
 也可以自行使用 `position: sticky` 进行实现
 
-<code transform="true"  src='./demo/indexPage.tsx'>全景页面</code>
+<code transform="true"  src='./demo/indexPage.tsx'></code>
 
 ## API
 
@@ -110,7 +114,17 @@ export interface ICommonCardProps<T = Record<string, any>> extends useFetchProps
 | -------- | ------ | ----------------- | ------ |
 | children | 子组件 | `React.ReactNode` | -      |
 
-### CommonCard.CardList
+### Page
+
+| 属性      | 说明     | 类型                  | 默认值 |
+| --------- | -------- | --------------------- | ------ |
+| loading   | 加载状态 | `boolean`             | -      |
+| className | 类名     | `string`              | -      |
+| style     | 样式     | `React.CSSProperties` | -      |
+| children  | 子组件   | `React.ReactNode`     | -      |
+| title     | 标题     | `React.ReactNode`     | -      |
+
+### CardList
 
 #### ICardListHandle
 
@@ -172,7 +186,7 @@ export interface ICardListProps<T = AnyObject> extends useFetchProps<T[]> {
 | listProps       | 列表属性  | `ListProps<T>`    | -                 |
 | paginationProps | 分页属性  | `PaginationProps` | `{ pageSize: 9 }` |
 
-### CommonCard.IndexPage
+### IndexPage
 
 ```ts
 /**
@@ -206,7 +220,7 @@ interface Items extends Item {
 }
 ```
 
-### CommonCard.AnchorCard
+### AnchorCard
 
 ```ts
 /**
@@ -227,7 +241,7 @@ export interface ICommonCardAnchorCardProps<T extends string> {
 | children      | 子组件        | `React.ReactNode`                        | -      |
 | id            | 锚点父节点 id | `string`                                 | -      |
 
-### CommonCard.AnchorLink
+### AnchorLink
 
 ```ts
 /**
@@ -243,7 +257,7 @@ export interface ICommonCardAnchorLinkProps<T extends string>
 | ---- | --------- | ---- | ------ |
 | id   | 子锚点 id | `T`  | -      |
 
-### CommonCard.Line
+### Line
 
 - 一条分割线
 
