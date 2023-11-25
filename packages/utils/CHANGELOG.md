@@ -1,5 +1,24 @@
 # Changelog
 
+## [Version&nbsp;1.10.0](https://github.com/eternallycyf/ims-view-pc/compare/@ims-view/utils@1.9.0...@ims-view/utils@1.10.0)
+
+<sup>Released on **2023-11-25**</sup>
+
+#### ✨ 新特性
+
+- **@ims-view/utils**: Add PubSub.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **@ims-view/utils**: Add PubSub ([0c5e93e](https://github.com/eternallycyf/ims-view-pc/commit/0c5e93e))
+
+</details>
+
 ## [Version&nbsp;1.9.0](https://github.com/eternallycyf/ims-view-pc/compare/@ims-view/utils@1.8.0...@ims-view/utils@1.9.0)
 
 <sup>Released on **2023-11-25**</sup>
