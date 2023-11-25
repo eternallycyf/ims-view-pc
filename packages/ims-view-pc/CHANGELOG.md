@@ -1,5 +1,28 @@
 # Changelog
 
+## [Version&nbsp;1.25.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.24.0...ims-view-pc@1.25.0)
+
+<sup>Released on **2023-11-25**</sup>
+
+#### ✨ 新特性
+
+- **ims-view-pc**: Add CommonDescriptions.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **ims-view-pc**: Add CommonDescriptions ([7048a1e](https://github.com/eternallycyf/ims-view-pc/commit/7048a1e))
+
+</details>
+
+### Dependencies
+
+- **@ims-view/hooks:** upgraded to 1.11.0
+
 ## [Version&nbsp;1.24.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.23.0...ims-view-pc@1.24.0)
 
 <sup>Released on **2023-11-25**</sup>
