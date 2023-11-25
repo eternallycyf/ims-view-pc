@@ -23,7 +23,7 @@ AudioPlayer 是一个用于播放音频文件的组件，提供用户友好的�
 
 在需要显示音频播放器的地方引入 `AudioPlayer` 组件，并传入相应的音频源和配置项。例如：
 
-## demo
+## 示例
 
 <code description="网页中播放音频" src="./demo/base.tsx">基本使用</code>
 

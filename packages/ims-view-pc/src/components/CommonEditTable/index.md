@@ -23,7 +23,7 @@ CommonEditTable 是一个通用的可编辑表格组件，用于展示和编辑�
 
 在需要显示可编辑表格的地方引入 `CommonEditTable` 组件，并传入相应的表格数据和配置项。例如：
 
-## demo
+## 示例
 
 <code src='./demo/demo1/index.tsx'>多行编辑</code>
 

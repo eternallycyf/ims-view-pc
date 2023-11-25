@@ -22,7 +22,7 @@ demo:
 
 在需要使用访问按钮的地方引入 `AccessBtn` 组件，并传入相应的权限配置。例如：
 
-## demo
+## 示例
 
 <code src='./demo/type.tsx' description="default | custom | delete | group">按钮的基本类型</code>
 

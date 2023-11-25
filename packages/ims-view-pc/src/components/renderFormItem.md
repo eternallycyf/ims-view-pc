@@ -24,7 +24,7 @@ demo:
 
 使用 `renderFormItem` 函数，传入表单项的类型和相关配置，获取渲染后的表单元素。例如：
 
-## demo
+## 示例
 
 <code src='./CustomForm/demo/index.tsx'></code>
 

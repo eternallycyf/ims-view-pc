@@ -28,7 +28,7 @@ import { CommonCard } from 'ims-view-pc';
 const { IndexPage, Link, AnchorCard, AnchorLink, CardList } = CommonCard;
 ```
 
-## demo
+## 示例
 
 ### CommonCard.CardList
 

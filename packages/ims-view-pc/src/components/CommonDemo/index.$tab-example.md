@@ -108,6 +108,6 @@ export default Item;
 
 - [参考本页面](https://github.com/eternallycyf/ims-view-pc/tree/master/packages/ims-view-pc/src/components/CommonDemo/index.md)
 
-### demo/index.tsx
+### 示例/index.tsx
 
 - 略
