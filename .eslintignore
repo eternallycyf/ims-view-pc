@@ -10,3 +10,4 @@ jest*
 es
 lib
 /docs
+/packages/ims-view-pc/src/styles/iconfont/**

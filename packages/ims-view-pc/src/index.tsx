@@ -19,6 +19,7 @@ export { default as CustomModal } from './components/CustomModal';
 export { default as Ellipsis } from './components/Ellipsis';
 export * from './components/Ellipsis/interface';
 export { default as ErrorBoundary } from './components/ErrorBoundary';
+export { default as Icon } from './components/Icon';
 export { default as SectionTitle } from './components/SectionTitle';
 export * from './components/SectionTitle/interface';
 export { default as VideoViewer } from './components/VideoViewer';

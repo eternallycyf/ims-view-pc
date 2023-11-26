@@ -17,6 +17,9 @@ const config: Config.InitialOptions = {
     '@ims-view/utils': '<rootDir>/packages/utils/src',
     '@ims-view/chart': '<rootDir>/packages/chart/src',
     'ims-view-pc': '<rootDir>/packages/ims-view-pc/src',
+    // fix: iconfont报错
+    '../../styles/iconfont/iconfont.js':
+      '<rootDir>/packages/ims-view-pc/src/components/AccessBtn/index.tsx',
   },
   rootDir: path.resolve(__dirname, '.'),
   coveragePathIgnorePatterns: ['/node_modules/', '/lib/', '/es/'],

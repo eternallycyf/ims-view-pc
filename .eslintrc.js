@@ -14,4 +14,5 @@ module.exports = {
     'no-unused-expressions': 'off',
     '@typescript-eslint/no-unused-expressions': 'warn',
   },
+  ignorePatterns: ['**/*.html'],
 };
