@@ -15,6 +15,7 @@ export type {
   ISimpleControlProps,
   IUpdateControlProps,
 } from './components/CustomForm/interface';
+export { default as CustomModal } from './components/CustomModal';
 export { default as Ellipsis } from './components/Ellipsis';
 export * from './components/Ellipsis/interface';
 export { default as ErrorBoundary } from './components/ErrorBoundary';
