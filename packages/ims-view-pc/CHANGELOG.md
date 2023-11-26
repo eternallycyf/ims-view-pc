@@ -1,5 +1,24 @@
 # Changelog
 
+## [Version&nbsp;1.27.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.26.0...ims-view-pc@1.27.0)
+
+<sup>Released on **2023-11-26**</sup>
+
+#### ✨ 新特性
+
+- **ims-view-pc**: Add icon.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **ims-view-pc**: Add icon ([13e6f6f](https://github.com/eternallycyf/ims-view-pc/commit/13e6f6f))
+
+</details>
+
 ## [Version&nbsp;1.26.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.25.2...ims-view-pc@1.26.0)
 
 <sup>Released on **2023-11-26**</sup>
