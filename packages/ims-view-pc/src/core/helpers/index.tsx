@@ -26,7 +26,7 @@ export const getFieldComp: FieldCompType = ({
   fetchConfig,
   dict,
   record = {},
-  controlProps = {},
+  controlProps = {} as any,
   itemProps = {} as any,
   Component,
 }) => {
