@@ -1,5 +1,24 @@
 # Changelog
 
+## [Version&nbsp;1.12.0](https://github.com/eternallycyf/ims-view-pc/compare/@ims-view/hooks@1.11.0...@ims-view/hooks@1.12.0)
+
+<sup>Released on **2023-11-27**</sup>
+
+#### ✨ 新特性
+
+- **ims-view-pc|@ims-view/hoos**: Export useAsync and add cascade formControl.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **ims-view-pc|@ims-view/hoos**: Export useAsync and add cascade formControl ([0d78c89](https://github.com/eternallycyf/ims-view-pc/commit/0d78c89))
+
+</details>
+
 ## [Version&nbsp;1.11.0](https://github.com/eternallycyf/ims-view-pc/compare/@ims-view/hooks@1.10.0...@ims-view/hooks@1.11.0)
 
 <sup>Released on **2023-11-25**</sup>
