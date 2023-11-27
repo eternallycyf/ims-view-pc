@@ -10,6 +10,7 @@ import { formatNumber, formatPercent, formatTime, getDictMap, renderTooltip } fr
 const Simple = React.lazy(() => import('../../components/CustomForm/FormItem/simple'));
 const Editor = React.lazy(() => import('../../components/CustomForm/FormItem/editor'));
 const Update = React.lazy(() => import('../../components/CustomForm/FormItem/update'));
+const Cascader = React.lazy(() => import('../../components/CustomForm/FormItem/cascader'));
 
 /**
  * 获取控件
@@ -21,7 +22,6 @@ export const getFieldComp: FieldCompType = ({
   label,
   type,
   initialValue: initValue,
-  hidden,
 
   fetchConfig,
   dict,
@@ -31,6 +31,7 @@ export const getFieldComp: FieldCompType = ({
   Component,
 }) => {
   let formProps: Partial<Search> = {
+    label,
     name,
     type: type ?? 'input',
     record,
@@ -78,13 +79,17 @@ export const getFieldComp: FieldCompType = ({
     case 'custom':
       FieldComp = Simple;
       break;
-    case 'update':
-      FieldComp = Update;
+
+    case 'cascader':
+      FieldComp = Cascader;
       break;
     // case 'select':
     //   if (dictConfig) formProps.dictConfig = dictConfig;
     //   FieldComp = require(`@/components/CustomForm/FormItem/select`).default;
     //   break;
+    case 'update':
+      FieldComp = Update;
+      break;
     case 'editor':
       FieldComp = Editor;
       break;

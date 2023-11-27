@@ -5,7 +5,6 @@ import {
   Checkbox,
   CheckboxProps,
   DatePicker,
-  DatePickerProps,
   Input,
   InputNumber,
   InputNumberProps,
@@ -19,16 +18,14 @@ import {
   Switch,
   SwitchProps,
   TimePicker,
-  TimePickerProps,
 } from 'antd';
 import { CheckboxGroupProps } from 'antd/es/checkbox';
-import { RangePickerProps } from 'antd/es/date-picker';
 import locale from 'antd/es/date-picker/locale/zh_CN';
 import { PasswordProps, TextAreaProps } from 'antd/es/input';
 import { SliderBaseProps } from 'antd/es/slider';
 import dayjs from 'dayjs';
 import 'dayjs/locale/zh-cn';
-import { AnyObject, IBaseControlProps, IBaseCustomFormItemProps } from 'ims-view-pc';
+import { AnyObject, DeepPartial, IBaseControlProps, IBaseCustomFormItemProps } from 'ims-view-pc';
 import React, { useImperativeHandle } from 'react';
 const RadioGroup = Radio.Group;
 const CheckboxGroup = Checkbox.Group;
@@ -37,84 +34,29 @@ const { MonthPicker, RangePicker, QuarterPicker } = DatePicker;
 
 dayjs.locale('zh-cn');
 
-type ISimpleBaseControlProps = Partial<
-  Pick<IBaseControlProps, 'Component' | 'dict' | 'renderItem'> &
-    DatePickerProps &
-    RangePickerProps &
-    TimePickerProps &
-    InputProps &
-    PasswordProps &
-    TextAreaProps &
-    InputNumberProps &
-    RateProps &
-    SwitchProps &
-    SliderBaseProps &
-    AutoCompleteProps &
-    CheckboxProps &
-    CheckboxGroupProps &
-    RadioProps &
-    RadioGroupProps
->;
+interface IBaseSimpleBaseControlProps extends Pick<IBaseControlProps, 'Component' | 'dict'> {}
 
-export interface ISimpleControlProps<T = AnyObject> extends IBaseCustomFormItemProps<T> {
-  controlProps: ISimpleBaseControlProps & {
+type ISimpleBaseControlProps = IBaseSimpleBaseControlProps &
+  InputProps &
+  PasswordProps &
+  TextAreaProps &
+  InputNumberProps &
+  RateProps &
+  SwitchProps &
+  SliderBaseProps &
+  AutoCompleteProps &
+  CheckboxProps &
+  CheckboxGroupProps &
+  RadioProps &
+  RadioGroupProps;
+
+export interface ISimpleControlProps<T = AnyObject>
+  extends Omit<IBaseCustomFormItemProps<T>, 'type'> {
+  controlProps: DeepPartial<Omit<ISimpleBaseControlProps, 'placeholder'>> & {
     onChange?: any;
+    placeholder?: string | string[] | undefined;
   };
-  defaultVal?: {
-    year?: {
-      locale: any;
-      picker: string;
-      allowClear: boolean;
-    };
-    quarter?: {
-      locale: any;
-      picker: string;
-      allowClear: boolean;
-    };
-    date?: {
-      locale: any;
-      showTime: boolean;
-      format: string;
-      allowClear: boolean;
-    };
-    month?: {
-      locale: any;
-      format: string;
-      allowClear: boolean;
-    };
-    time?: {
-      locale: any;
-      format: string;
-      allowClear: boolean;
-    };
-    dateRange?: {
-      locale: any;
-      format: string;
-      allowClear: boolean;
-    };
-    input?: {
-      placeholder: string;
-      allowClear: boolean;
-    };
-    password?: {
-      placeholder: string;
-      allowClear: boolean;
-    };
-    textarea?: {
-      placeholder: string;
-      autoSize: { minRows: number; maxRows: number };
-      allowClear: boolean;
-    };
-    search?: {
-      placeholder: string;
-      allowClear: boolean;
-    };
-    inputNumber: {
-      min: number;
-      max: number;
-      placeholder: string;
-    };
-  };
+  defaultVal?: any;
   checked?: boolean;
   onChange: (value: T) => any;
   type:
@@ -143,6 +85,7 @@ export interface ISimpleControlProps<T = AnyObject> extends IBaseCustomFormItemP
 const SimpleControl = React.forwardRef<any, ISimpleControlProps>((props, ref) => {
   const {
     name,
+    label,
     form,
     type,
     dict,
@@ -154,9 +97,24 @@ const SimpleControl = React.forwardRef<any, ISimpleControlProps>((props, ref) =>
     ...restProps
   } = props;
 
+  const _getPlaceholder = () => {
+    let defaultType = ['input', 'password', 'textarea', 'search', 'inputNumber'].includes(type)
+      ? 'input'
+      : 'select';
+    if (type === 'autoComplete') {
+      defaultType = 'select';
+    }
+    return defaultControlProps?.placeholder
+      ? defaultControlProps?.placeholder
+      : typeof label === 'string' && label?.length <= 5
+      ? `${defaultType === 'input' ? `请输入${label}` : `请选择${label}`}`
+      : `${defaultType === 'input' ? '请输入' : '请选择'}`;
+  };
+
   let Component: any;
-  let controlProps: Partial<ISimpleControlProps['controlProps']> = {
+  let controlProps: any = {
     ...defaultVal[type],
+    placeholder: _getPlaceholder(),
     ...defaultControlProps,
     ...restProps,
   };
@@ -190,7 +148,7 @@ const SimpleControl = React.forwardRef<any, ISimpleControlProps>((props, ref) =>
       Component = TextArea;
       break;
     case 'search':
-      Component = Input;
+      Component = Search;
       break;
     case 'rate':
       Component = Rate;
@@ -211,15 +169,7 @@ const SimpleControl = React.forwardRef<any, ISimpleControlProps>((props, ref) =>
   const formProps = { form, name, type };
 
   if (type === 'autoComplete') {
-    return (
-      <AutoComplete ref={ref} {...controlProps}>
-        {dict?.map((item) => (
-          <AutoComplete.Option {...item} key={item.value} value={item.value}>
-            {((controlProps.renderItem && controlProps.renderItem(item)) || item?.label) ?? '--'}
-          </AutoComplete.Option>
-        ))}
-      </AutoComplete>
-    );
+    return <AutoComplete ref={ref} options={dict as any as any} {...controlProps}></AutoComplete>;
   } else if (type === 'checkbox') {
     return (
       <CheckboxGroup ref={ref} {...(controlProps as any as CheckboxGroupProps)}>
@@ -281,54 +231,55 @@ SimpleControl.defaultProps = {
       locale,
       picker: 'year',
       allowClear: true,
+      placeholder: '请选择年份',
     },
     quarter: {
       locale,
       picker: 'quarter',
       allowClear: true,
+      placeholder: '请选择季度',
     },
     date: {
       locale,
       showTime: true,
       format: 'YYYY-MM-DD HH:mm:ss',
       allowClear: true,
+      placeholder: '请选择日期',
     },
     month: {
       locale,
       format: 'YYYY-MM',
       allowClear: true,
+      placeholder: '请选择月份',
     },
     time: {
       locale,
       format: 'HH:mm:ss',
       allowClear: true,
+      placeholder: '请选择时间',
     },
     dateRange: {
       locale,
       format: 'YYYY-MM-DD',
       allowClear: true,
+      placeholder: ['开始日期', '结束日期'],
     },
     input: {
-      placeholder: '请输入',
       allowClear: true,
     },
     password: {
-      placeholder: '请输入',
       allowClear: true,
     },
     textarea: {
-      placeholder: '请输入',
       autoSize: { minRows: 2, maxRows: 5 },
       allowClear: true,
     },
     search: {
-      placeholder: '请输入',
       allowClear: true,
     },
     inputNumber: {
       min: 0,
       max: 100,
-      placeholder: '请输入',
     },
   },
 };

@@ -11,6 +11,7 @@ export * from './components/CommonDescriptions/interface';
 export { default as CommonEditTable } from './components/CommonEditTable';
 export * from './components/CommonEditTable/interface';
 export type {
+  ICascadeControlProps,
   IEditorProps,
   ISimpleControlProps,
   IUpdateControlProps,

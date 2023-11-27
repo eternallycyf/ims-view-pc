@@ -3,12 +3,59 @@ import dayjs from 'dayjs';
 import { ISearchesType, renderFormItem } from 'ims-view-pc';
 import React, { Fragment } from 'react';
 
+interface Option {
+  value: string;
+  label: string;
+  children?: Option[];
+  disabled?: boolean;
+}
+
 const dict = [
   { label: '1', value: 1 },
   { label: '2', value: 2 },
   { label: '3', value: 3 },
 ] as const;
+const options: Option[] = [
+  {
+    value: 'zhejiang',
+    label: 'Zhejiang',
+    children: [
+      {
+        value: 'hangzhou',
+        label: 'Hangzhou',
+        children: [
+          {
+            value: 'xihu',
+            label: 'West Lake',
+          },
+          {
+            value: 'xiasha',
+            label: 'Xia Sha',
+            disabled: true,
+          },
+        ],
+      },
+    ],
+  },
+  {
+    value: 'jiangsu',
+    label: 'Jiangsu',
+    children: [
+      {
+        value: 'nanjing',
+        label: 'Nanjing',
+        children: [
+          {
+            value: 'zhonghuamen',
+            label: 'Zhong Hua men',
+          },
+        ],
+      },
+    ],
+  },
+];
 interface IRecord {
+  cascader: string[];
   input: string;
   radio: (typeof dict)[number]['value'];
   editor: string;
@@ -20,6 +67,12 @@ interface IRecord {
 export default () => {
   const [form] = Form.useForm();
   const formList: ISearchesType<IRecord, { customParams?: '2' }> = [
+    {
+      name: 'cascader',
+      label: 'cascader',
+      type: 'cascader',
+      dict: options as any[],
+    },
     {
       name: 'input',
       label: 'input',

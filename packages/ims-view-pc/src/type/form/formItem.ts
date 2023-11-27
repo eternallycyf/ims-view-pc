@@ -3,7 +3,15 @@ import { AnyObject, Search } from 'ims-view-pc';
 export interface IBaseCustomFormItemProps<Values = AnyObject, Rest = AnyObject, Extra = unknown>
   extends Pick<
     Search<Values, Rest, Extra>,
-    'form' | 'itemProps' | 'name' | 'record' | 'dict' | 'Component'
+    | 'form'
+    | 'itemProps'
+    | 'name'
+    | 'record'
+    | 'dict'
+    | 'Component'
+    | 'fetchConfig'
+    | 'type'
+    | 'label'
   > {
   id?: string;
 }

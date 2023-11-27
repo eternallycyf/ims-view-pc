@@ -3,6 +3,7 @@ import { Method } from 'axios';
 import {
   AnyObject,
   IBaseCustomFormItemProps,
+  ICascadeControlProps,
   IEditorProps,
   ISimpleControlProps,
   IUpdateControlProps,
@@ -11,29 +12,32 @@ import { Search } from '.';
 
 export const FORM_TYPE_DICT = [
   'input',
-  'search',
   'password',
+  'search',
   'textarea',
   'inputNumber',
-  'autoComplete',
-  'select',
+
   'checkbox',
   'radio',
-  'switch',
-  'slider',
   'rate',
-  'date',
+  'slider',
+  'switch',
+
   'year',
   'quarter',
-  'dateRange',
   'month',
   'time',
+  'date',
+  'dateRange',
   'monthRange',
+
+  'autoComplete',
+  'cascader',
+  'select',
+
   'editor',
+  'update',
   'custom',
-  'view',
-  'update', // 动态表单 => shouldUpdate
-  'fileUpload',
 ] as const;
 
 export type FormControlType = (typeof FORM_TYPE_DICT)[number];
@@ -43,20 +47,15 @@ export type ItemProps<Values, Rest, Extra> = FormItemProps<Values> & {
 };
 
 export interface IFetchConfig<Record = AnyObject> {
-  apiUrl: string;
-  method?: Method;
-  params?: any;
-  searchKey?: string;
-  dataPath?: string;
-  initDictFn?: (record: Record) => Record[];
+  request?: () => Promise<Record>;
 }
 
 export type Dict = ReadonlyArray<{
   label?: string;
   value?: string | number;
   disabled?: boolean;
-  children?: Array<{ text: string; value: string; disabled?: boolean }>;
-  rules?: any[]; //校验规则
+  children?: Array<Dict>;
+  rules?: any[];
   placeholder?: string;
   onChange?: (...args: any[]) => any;
 }>;
@@ -66,7 +65,7 @@ export type Dict = ReadonlyArray<{
 export interface IBaseControlProps<Values = AnyObject, Rest = AnyObject, Extra = unknown>
   extends Pick<
     Search<Values, Rest, Extra>,
-    'fetchConfig' | 'itemProps' | 'dict' | 'Component' | 'renderItem'
+    'fetchConfig' | 'itemProps' | 'dict' | 'Component' | 'label'
   > {}
 
 export type IControlProps<
@@ -75,4 +74,5 @@ export type IControlProps<
   Extra = unknown,
 > = IBaseControlProps<Values, Rest, Extra> &
   IEditorProps['controlProps'] &
-  ISimpleControlProps<Values>['controlProps'];
+  ISimpleControlProps<Values>['controlProps'] &
+  ICascadeControlProps<Values>['controlProps'];

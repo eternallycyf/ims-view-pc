@@ -1,4 +1,5 @@
 import { FormInstance, FormItemProps } from 'antd';
+import dayjs from 'dayjs';
 import { AddIndexSignature, AnyObject, IUpdateControlProps, ValueOf } from 'ims-view-pc';
 import {
   Dict,
@@ -21,13 +22,15 @@ export interface IBaseFormControl<Values = AnyObject, Rest = AnyObject, Extra = 
     | AddIndexSignature<ValueOf<Values>>
     | string
     | number
-    | { key: any };
+    | { key: any }
+    | { label: any; value: any }
+    | dayjs.Dayjs
+    | [dayjs.Dayjs, dayjs.Dayjs];
   record?: AddIndexSignature<Values>;
   dict?: Dict;
-  hidden?: boolean;
 
-  fetchConfig?: IFetchConfig<AnyObject>;
-  controlProps?: IControlProps;
+  fetchConfig?: IFetchConfig<any>;
+  controlProps?: IControlProps<Values, Rest, Extra>;
   itemProps?: ItemProps<Values, Rest, Extra>;
 
   Component?: (
@@ -41,7 +44,6 @@ export interface IBaseFormControl<Values = AnyObject, Rest = AnyObject, Extra = 
       type: FormControlType;
     },
   ) => React.ReactNode;
-  renderItem?: (item: Dict[number]) => React.ReactNode;
 }
 
 export type Search<Values = AnyObject, Rest = AnyObject, Extra = unknown> = IBaseFormControl<
