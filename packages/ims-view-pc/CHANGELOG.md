@@ -1,5 +1,24 @@
 # Changelog
 
+## [Version&nbsp;1.29.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.28.0...ims-view-pc@1.29.0)
+
+<sup>Released on **2023-11-28**</sup>
+
+#### ✨ 新特性
+
+- **ims-view-pc**: Add mentions formControl.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **ims-view-pc**: Add mentions formControl ([d96eb75](https://github.com/eternallycyf/ims-view-pc/commit/d96eb75))
+
+</details>
+
 ## [Version&nbsp;1.28.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.27.0...ims-view-pc@1.28.0)
 
 <sup>Released on **2023-11-27**</sup>
