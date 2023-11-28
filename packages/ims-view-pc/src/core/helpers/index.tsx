@@ -70,13 +70,18 @@ export const getFieldComp: FieldCompType = ({
     case 'slider':
     case 'inputNumber':
     case 'autoComplete':
-    case 'date':
-    case 'year':
-    case 'quarter':
-    case 'dateRange':
-    case 'month':
     case 'time':
+    case 'date':
+    case 'month':
+    case 'quarter':
+    case 'year':
+    case 'dateRange':
+    case 'timeRange':
+    case 'weekRange':
     case 'monthRange':
+    case 'quarterRange':
+    case 'yearRange':
+
     case 'custom':
       FieldComp = Simple;
       break;

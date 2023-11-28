@@ -20,10 +20,13 @@ import {
   TimePicker,
 } from 'antd';
 import { CheckboxGroupProps } from 'antd/es/checkbox';
+import { RangePickerProps } from 'antd/es/date-picker';
+import { PickerProps } from 'antd/es/date-picker/generatePicker';
 import locale from 'antd/es/date-picker/locale/zh_CN';
 import { PasswordProps, TextAreaProps } from 'antd/es/input';
 import { SliderBaseProps } from 'antd/es/slider';
-import dayjs from 'dayjs';
+import { DatePickerProps } from 'antd/lib';
+import dayjs, { Dayjs } from 'dayjs';
 import 'dayjs/locale/zh-cn';
 import { AnyObject, DeepPartial, IBaseControlProps, IBaseCustomFormItemProps } from 'ims-view-pc';
 import React, { useImperativeHandle } from 'react';
@@ -52,21 +55,29 @@ type ISimpleBaseControlProps = IBaseSimpleBaseControlProps &
 
 export interface ISimpleControlProps<T = AnyObject>
   extends Omit<IBaseCustomFormItemProps<T>, 'type'> {
-  controlProps: DeepPartial<Omit<ISimpleBaseControlProps, 'placeholder'>> & {
-    onChange?: any;
-    placeholder?: string | string[] | undefined;
-  };
+  controlProps: DeepPartial<Omit<ISimpleBaseControlProps, 'placeholder'>> &
+    DatePickerProps &
+    RangePickerProps & {
+      onChange?: any;
+      placeholder?: string | string[] | undefined;
+      picker?: PickerProps<Dayjs>['picker'];
+    };
   defaultVal?: any;
   checked?: boolean;
   onChange: (value: T) => any;
   type:
-    | 'date'
-    | 'year'
-    | 'quarter'
-    | 'datetime'
-    | 'month'
     | 'time'
+    | 'date'
+    | 'week'
+    | 'month'
+    | 'quarter'
+    | 'year'
+    | 'timeRange'
     | 'dateRange'
+    | 'weekRange'
+    | 'monthRange'
+    | 'quarterRange'
+    | 'yearRange'
     | 'input'
     | 'password'
     | 'textarea'
@@ -104,6 +115,25 @@ const SimpleControl = React.forwardRef<any, ISimpleControlProps>((props, ref) =>
     if (type === 'autoComplete') {
       defaultType = 'select';
     }
+
+    if (
+      [
+        'time',
+        'date',
+        'week',
+        'month',
+        'quarter',
+        'year',
+        'timeRange',
+        'dateRange',
+        'weekRange',
+        'monthRange',
+        'quarterRange',
+        'yearRange',
+      ].includes(type)
+    ) {
+      return defaultControlProps?.placeholder || defaultVal[type]?.placeholder;
+    }
     return defaultControlProps?.placeholder
       ? defaultControlProps?.placeholder
       : typeof label === 'string' && label?.length <= 5
@@ -122,22 +152,25 @@ const SimpleControl = React.forwardRef<any, ISimpleControlProps>((props, ref) =>
   useImperativeHandle(ref, () => ({}));
 
   switch (type) {
-    case 'date':
-    case 'year':
-      Component = DatePicker;
-      break;
-    case 'quarter':
-      Component = QuarterPicker;
-      break;
-    case 'dateRange':
-      Component = RangePicker;
-      break;
-    case 'month':
-      Component = MonthPicker;
-      break;
     case 'time':
       Component = TimePicker;
       break;
+    case 'date':
+    case 'week':
+    case 'month':
+    case 'quarter':
+    case 'year':
+      Component = DatePicker;
+      break;
+    case 'timeRange':
+    case 'dateRange':
+    case 'weekRange':
+    case 'monthRange':
+    case 'quarterRange':
+    case 'yearRange':
+      Component = RangePicker;
+      break;
+
     case 'input':
       Component = Input;
       break;
@@ -201,6 +234,7 @@ const SimpleControl = React.forwardRef<any, ISimpleControlProps>((props, ref) =>
       'quarter',
       'datetime',
       'month',
+      'monthRange',
       'time',
       'dateRange',
       'inputNumber',
@@ -227,17 +261,11 @@ const SimpleControl = React.forwardRef<any, ISimpleControlProps>((props, ref) =>
 
 SimpleControl.defaultProps = {
   defaultVal: {
-    year: {
+    time: {
       locale,
-      picker: 'year',
+      format: 'HH:mm:ss',
       allowClear: true,
-      placeholder: '请选择年份',
-    },
-    quarter: {
-      locale,
-      picker: 'quarter',
-      allowClear: true,
-      placeholder: '请选择季度',
+      placeholder: '请选择时间',
     },
     date: {
       locale,
@@ -246,23 +274,73 @@ SimpleControl.defaultProps = {
       allowClear: true,
       placeholder: '请选择日期',
     },
+    week: {
+      locale,
+      picker: 'week',
+      format: 'YYYY-wo',
+      allowClear: true,
+      placeholder: '请选择周',
+    },
     month: {
       locale,
+      picker: 'month',
       format: 'YYYY-MM',
       allowClear: true,
       placeholder: '请选择月份',
     },
-    time: {
+    quarter: {
+      locale,
+      picker: 'quarter',
+      format: 'YYYY-[Q]Q',
+      allowClear: true,
+      placeholder: '请选择季度',
+    },
+    year: {
+      locale,
+      picker: 'year',
+      format: 'YYYY',
+      allowClear: true,
+      placeholder: '请选择年份',
+    },
+    timeRange: {
       locale,
       format: 'HH:mm:ss',
       allowClear: true,
-      placeholder: '请选择时间',
+      placeholder: ['开始时间', '结束时间'],
     },
     dateRange: {
       locale,
       format: 'YYYY-MM-DD',
       allowClear: true,
       placeholder: ['开始日期', '结束日期'],
+    },
+    weekRange: {
+      locale,
+      format: 'YYYY-wo',
+      allowClear: true,
+      placeholder: ['开始周', '结束周'],
+      picker: 'week',
+    },
+    monthRange: {
+      locale,
+      format: 'YYYY-MM',
+      allowClear: true,
+      placeholder: ['开始月份', '结束月份'],
+      picker: 'month',
+    },
+    quarterRange: {
+      locale,
+      format: 'YYYY-[Q]Q',
+      allowClear: true,
+      placeholder: ['开始季度', '结束季度'],
+      picker: 'quarter',
+    },
+    yearRange: {
+      locale,
+      format: 'YYYY',
+      allowClear: true,
+      placeholder: ['开始年份', '结束年份'],
+      picker: 'year',
     },
     input: {
       allowClear: true,

@@ -77,6 +77,18 @@ interface IRecord {
   custom: any;
   update: AudioNode;
   updateInput: string;
+  time: dayjs.Dayjs;
+  date: dayjs.Dayjs;
+  week: dayjs.Dayjs;
+  month: dayjs.Dayjs;
+  quarter: dayjs.Dayjs;
+  year: dayjs.Dayjs;
+  timeRange: dayjs.Dayjs[];
+  dateRange: dayjs.Dayjs[];
+  weekRange: dayjs.Dayjs[];
+  monthRange: dayjs.Dayjs[];
+  quarterRange: dayjs.Dayjs[];
+  yearRange: dayjs.Dayjs[];
 }
 
 export default () => {
@@ -104,6 +116,67 @@ export default () => {
         },
       },
     },
+    {
+      name: 'time',
+      label: 'time',
+      type: 'time',
+    },
+    {
+      name: 'date',
+      label: 'date',
+      type: 'date',
+    },
+    {
+      name: 'week',
+      label: 'week',
+      type: 'week',
+    },
+    {
+      name: 'month',
+      label: 'month',
+      type: 'month',
+    },
+    {
+      name: 'quarter',
+      label: 'quarter',
+      type: 'quarter',
+    },
+    {
+      name: 'year',
+      label: 'year',
+      type: 'year',
+    },
+    {
+      name: 'timeRange',
+      label: 'timeRange',
+      type: 'timeRange',
+    },
+    {
+      name: 'dateRange',
+      label: 'dateRange',
+      type: 'dateRange',
+    },
+    {
+      name: 'weekRange',
+      label: 'weekRange',
+      type: 'weekRange',
+    },
+    {
+      name: 'monthRange',
+      label: 'monthRange',
+      type: 'monthRange',
+    },
+    {
+      name: 'quarterRange',
+      label: 'quarterRange',
+      type: 'quarterRange',
+    },
+    {
+      name: 'yearRange',
+      label: 'yearRange',
+      type: 'yearRange',
+    },
+
     {
       name: 'input',
       label: 'input',
