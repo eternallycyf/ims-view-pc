@@ -124,7 +124,6 @@ export default () => {
       type: 'custom',
       initialValue: true,
       Component: React.forwardRef((props, ref) => {
-        console.log(props);
         return (
           <div>
             <Switch checked={!!props?.value} onChange={(e) => props.onChange(!props?.value)} />

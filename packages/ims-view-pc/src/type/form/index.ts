@@ -1,6 +1,12 @@
 import { FormInstance, FormItemProps } from 'antd';
 import dayjs from 'dayjs';
-import { AddIndexSignature, AnyObject, IUpdateControlProps, ValueOf } from 'ims-view-pc';
+import {
+  AddIndexSignature,
+  AnyObject,
+  DeepPartial,
+  IUpdateControlProps,
+  ValueOf,
+} from 'ims-view-pc';
 import {
   Dict,
   type FormControlType,
@@ -34,14 +40,15 @@ export interface IBaseFormControl<Values = AnyObject, Rest = AnyObject, Extra = 
   itemProps?: ItemProps<Values, Rest, Extra>;
 
   Component?: (
-    props: IControlProps & {
-      form: FormInstance<Values>;
-      name: NameKey<Values>;
-      value: any;
-      onChange: (...args: any[]) => any;
-      record: AddIndexSignature<Values>;
-      dict: Dict;
-      type: FormControlType;
+    props: IBaseCustomFormItemProps & {
+      controlProps: IControlProps & {
+        onChange?: any;
+      };
+      onChange: (value: any) => any;
+      value?: any;
+      placeholder?: IControlProps['placeholder'];
+      prefix?: IControlProps['prefix'];
+      size?: IControlProps['size'];
     },
   ) => React.ReactNode;
 }
