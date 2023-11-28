@@ -54,8 +54,23 @@ const options: Option[] = [
     ],
   },
 ];
+const mentionsOptions = [
+  {
+    value: 'afc163',
+    label: 'afc163',
+  },
+  {
+    value: 'zombieJ',
+    label: 'zombieJ',
+  },
+  {
+    value: 'yesmeck',
+    label: 'yesmeck',
+  },
+];
 interface IRecord {
   cascader: string[];
+  mentions: string;
   input: string;
   radio: (typeof dict)[number]['value'];
   editor: string;
@@ -72,6 +87,22 @@ export default () => {
       label: 'cascader',
       type: 'cascader',
       dict: options as any[],
+    },
+    {
+      name: 'mentions',
+      label: 'mentions',
+      type: 'mentions',
+      initialValue: '@afc163',
+      controlProps: {},
+      fetchConfig: {
+        request(params) {
+          return new Promise((resolve) => {
+            setTimeout(() => {
+              resolve(mentionsOptions);
+            }, 2000);
+          });
+        },
+      },
     },
     {
       name: 'input',

@@ -5,6 +5,7 @@ import {
   IBaseCustomFormItemProps,
   ICascadeControlProps,
   IEditorProps,
+  IMentionsControlProps,
   ISimpleControlProps,
   IUpdateControlProps,
 } from 'ims-view-pc';
@@ -34,6 +35,7 @@ export const FORM_TYPE_DICT = [
   'autoComplete',
   'cascader',
   'select',
+  'mentions',
 
   'editor',
   'update',
@@ -47,7 +49,7 @@ export type ItemProps<Values, Rest, Extra> = FormItemProps<Values> & {
 };
 
 export interface IFetchConfig<Record = AnyObject> {
-  request?: () => Promise<Record>;
+  request?: (params?: any) => Promise<Record>;
 }
 
 export type Dict = ReadonlyArray<{
@@ -75,4 +77,5 @@ export type IControlProps<
 > = IBaseControlProps<Values, Rest, Extra> &
   IEditorProps['controlProps'] &
   ISimpleControlProps<Values>['controlProps'] &
-  ICascadeControlProps<Values>['controlProps'];
+  ICascadeControlProps<Values>['controlProps'] &
+  IMentionsControlProps<Values>['controlProps'];

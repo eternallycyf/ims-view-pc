@@ -11,6 +11,7 @@ const Simple = React.lazy(() => import('../../components/CustomForm/FormItem/sim
 const Editor = React.lazy(() => import('../../components/CustomForm/FormItem/editor'));
 const Update = React.lazy(() => import('../../components/CustomForm/FormItem/update'));
 const Cascader = React.lazy(() => import('../../components/CustomForm/FormItem/cascader'));
+const Mentions = React.lazy(() => import('../../components/CustomForm/FormItem/mentions'));
 
 /**
  * 获取控件
@@ -83,10 +84,14 @@ export const getFieldComp: FieldCompType = ({
     case 'cascader':
       FieldComp = Cascader;
       break;
+    case 'mentions':
+      FieldComp = Mentions;
+      break;
     // case 'select':
     //   if (dictConfig) formProps.dictConfig = dictConfig;
     //   FieldComp = require(`@/components/CustomForm/FormItem/select`).default;
     //   break;
+
     case 'update':
       FieldComp = Update;
       break;

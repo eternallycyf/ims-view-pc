@@ -13,6 +13,7 @@ export * from './components/CommonEditTable/interface';
 export type {
   ICascadeControlProps,
   IEditorProps,
+  IMentionsControlProps,
   ISimpleControlProps,
   IUpdateControlProps,
 } from './components/CustomForm/interface';
