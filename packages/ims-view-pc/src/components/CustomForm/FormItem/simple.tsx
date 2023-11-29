@@ -229,15 +229,18 @@ const SimpleControl = React.forwardRef<any, ISimpleControlProps>((props, ref) =>
     );
   } else {
     const fillStyle = [
-      'date',
-      'year',
-      'quarter',
-      'datetime',
-      'month',
-      'monthRange',
       'time',
+      'date',
+      'week',
+      'month',
+      'quarter',
+      'year',
+      'timeRange',
       'dateRange',
-      'inputNumber',
+      'weekRange',
+      'monthRange',
+      'quarterRange',
+      'yearRange',
     ].includes(type)
       ? {
           width: '100%',
