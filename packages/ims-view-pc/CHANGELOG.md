@@ -1,5 +1,24 @@
 # Changelog
 
+## [Version&nbsp;1.31.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.30.1...ims-view-pc@1.31.0)
+
+<sup>Released on **2023-12-02**</sup>
+
+#### ✨ 新特性
+
+- **ims-view-pc**: Add Theme.Badge Theme.ThemeColor.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **ims-view-pc**: Add Theme.Badge Theme.ThemeColor ([8e0e3b1](https://github.com/eternallycyf/ims-view-pc/commit/8e0e3b1))
+
+</details>
+
 ### [Version&nbsp;1.30.1](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.30.0...ims-view-pc@1.30.1)
 
 <sup>Released on **2023-11-29**</sup>
