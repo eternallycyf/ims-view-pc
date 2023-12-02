@@ -1,104 +1,112 @@
 ---
-title: 定制主题
+title: Theme
 order: 0
 nav:
   title: 组件
   order: 1
-apiHeader: false
 ---
 
-## 简述
+## 待完成
+
+- 切换按钮颜色 select 选中项颜色
+- 文件上传组件 文件类型 icon
+- 空状态
+- tags
+
+## 继承 antd 主题
 
 - 与`antd v5`主题配置方法保持统一, 只需要使用 `ConfigProvider` 组件包裹即可
 - 具体可参考 antd [主题配置方法](https://ant-design.antgroup.com/docs/react/customize-theme-cn)
 
-<code src="./demo/index.tsx">主题</code>
+<code src="./demo/index.tsx"></code>
 
-## 主题色
+## Theme
 
-```less
-@blue: #2b5fdc;
-@red: #e62c3b;
-@orange: #fa6a0a;
-@green: #11bb43;
-@grey: #b3b8c2;
-@purple: #b974ff;
-@white: #fff;
+### Theme.Badge
 
-@primary-border-color: #bed7f8;
-@primary-bg: #e8f3ff;
+增强了 Antd Badge 色值, 如果未匹配 则直接传入 Antd.Badge.color
 
-@blue-bg: #f5f8ff;
-@blue-hover: #4d7fe3;
-@blue-active: #1b45b8;
+- `color: Theme.CustomTheme.xxx ?? Antd.Badge.color`
 
-@red-bg: #fff6f5;
-@red-hover: #eb4f57;
-@red-active: #c01b2f;
+<code src='./demo/badge.tsx'></code>
 
-@orange-bg: #fff5e8;
-@orange-hover: #fb8b36;
-@orange-active: #cf5006;
+### Theme.ThemeColor
 
-@green-bg: #f5fff5;
-@green-hover: #33c95b;
-@green-active: #0b9f3c;
+| key                          | -                                      | value   |
+| ---------------------------- | -------------------------------------- | ------- |
+| `blue`                       | <input type="color" value="#2b5fdc" /> | #2b5fdc |
+| `red`                        | <input type="color" value="#e62c3b" /> | #e62c3b |
+| `orange`                     | <input type="color" value="#fa6a0a" /> | #fa6a0a |
+| `green`                      | <input type="color" value="#11bb43" /> | #11bb43 |
+| `grey`                       | <input type="color" value="#b3b8c2" /> | #b3b8c2 |
+| `purple`                     | <input type="color" value="#b974ff" /> | #b974ff |
+| `white`                      | <input type="color" value="#fff" />`   | #fff    |
+| `primary-border-color`       | <input type="color" value="#bed7f8" /> | #bed7f8 |
+| `primary-bg`                 | <input type="color" value="#e8f3ff" /> | #e8f3ff |
+| `blue-bg`                    | <input type="color" value="#f5f8ff" /> | #f5f8ff |
+| `blue-hover`                 | <input type="color" value="#4d7fe3" /> | #4d7fe3 |
+| `blue-active`                | <input type="color" value="#1b45b8" /> | #1b45b8 |
+| `red-bg`                     | <input type="color" value="#fff6f5" /> | #fff6f5 |
+| `red-hover`                  | <input type="color" value="#eb4f57" /> | #eb4f57 |
+| `red-active`                 | <input type="color" value="#c01b2f" /> | #c01b2f |
+| `orange-bg`                  | <input type="color" value="#fff5e8" /> | #fff5e8 |
+| `orange-hover`               | <input type="color" value="#fb8b36" /> | #fb8b36 |
+| `orange-active`              | <input type="color" value="#cf5006" /> | #cf5006 |
+| `green-bg`                   | <input type="color" value="#f5fff5" /> | #f5fff5 |
+| `green-hover`                | <input type="color" value="#33c95b" /> | #33c95b |
+| `green-active`               | <input type="color" value="#0b9f3c" /> | #0b9f3c |
+| `grey-bg`                    | <input type="color" value="#eff1f4" /> | #eff1f4 |
+| `grey-hover`                 | <input type="color" value="#caced7" /> | #caced7 |
+| `grey-active`                | <input type="color" value="#8e96a4" /> | #8e96a4 |
+| `purple-bg`                  | <input type="color" value="#e7c7ff" /> | #e7c7ff |
+| `purple-hover`               | <input type="color" value="#a04dff" /> | #a04dff |
+| `purple-active`              | <input type="color" value="#8426ff" /> | #8426ff |
+| `light-blue-bg`              | <input type="color" value="#e8f3ff" /> | #e8f3ff |
+| `light-blue-hover`           | <input type="color" value="#54cfda" /> | #54cfda |
+| `light-blue-active`          | <input type="color" value="#1fb4c2" /> | #1fb4c2 |
+| `brown-bg`                   | <input type="color" value="#d6b296" /> | #d6b296 |
+| `brown-hover`                | <input type="color" value="#c89979" /> | #c89979 |
+| `brown-active`               | <input type="color" value="#b37a5a" /> | #b37a5a |
+| `control-height`             | <input type="color" value="#26px" />`  | #26px   |
+| `text-color`                 | <input type="color" value="#5b6371" /> | #5b6371 |
+| `text-disabled-color`        | <input type="color" value="#b3b8c2" /> | #b3b8c2 |
+| `text-disabled-weight-color` | <input type="color" value="#5b6371" /> | #5b6371 |
+| `status-text`                | <input type="color" value="#2A303B" /> | #2A303B |
+| `start`                      | <input type="color" value="#4d7fe3" /> | #4d7fe3 |
+| `approve`                    | <input type="color" value="#fa6a0a" /> | #fa6a0a |
+| `success`                    | <input type="color" value="#11bb43" /> | #11bb43 |
+| `finish`                     | <input type="color" value="#b3b8c2" /> | #b3b8c2 |
+| `error`                      | <input type="color" value="#e62c3b" /> | #e62c3b |
+| `draft`                      | <input type="color" value="#b3b8c2" /> | #b3b8c2 |
+| `line-simple-color1`         | <input type="color" value="#4d7fe3" /> | #4d7fe3 |
+| `line-simple-color2`         | <input type="color" value="#e62c3b" /> | #e62c3b |
+| `line-simple-color3`         | <input type="color" value="#fa6a0a" /> | #fa6a0a |
+| `line-simple-color4`         | <input type="color" value="#11bb43" /> | #11bb43 |
+| `line-simple-color5`         | <input type="color" value="#b974ff" /> | #b974ff |
+| `line-simple-color6`         | <input type="color" value="#b3b8c2" /> | #b3b8c2 |
+| `line-simple-color7`         | <input type="color" value="#e8f3ff" /> | #e8f3ff |
+| `line-simple-color8`         | <input type="color" value="#d6b296" /> | #d6b296 |
+| `bar-group-color1`           | <input type="color" value="#1b45b8" /> | #1b45b8 |
+| `bar-group-color2`           | <input type="color" value="#4d7fe3" /> | #4d7fe3 |
+| `bar-group-color3`           | <input type="color" value="#e8f3ff" /> | #e8f3ff |
+| `bar-group-color4`           | <input type="color" value="#0b9f3c" /> | #0b9f3c |
+| `bar-group-color5`           | <input type="color" value="#11bb43" /> | #11bb43 |
+| `bar-group-color6`           | <input type="color" value="#f5fff5" /> | #f5fff5 |
+| `bar-group-color7`           | <input type="color" value="#cf5006" /> | #cf5006 |
+| `bar-group-color8`           | <input type="color" value="#fa6a0a" /> | #fa6a0a |
+| `bar-group-color9`           | <input type="color" value="#fff5e8" /> | #fff5e8 |
+| `bar-group-color10`          | <input type="color" value="#c01b2f" /> | #c01b2f |
+| `bar-group-color11`          | <input type="color" value="#e62c3b" /> | #e62c3b |
+| `bar-group-color12`          | <input type="color" value="#fff6f5" /> | #fff6f5 |
+| `bar-group-color13`          | <input type="color" value="#8426ff" /> | #8426ff |
+| `bar-group-color14`          | <input type="color" value="#b974ff" /> | #b974ff |
+| `bar-group-color15`          | <input type="color" value="#e7c7ff" /> | #e7c7ff |
 
-@grey-bg: #eff1f4;
-@grey-hover: #caced7;
-@grey-active: #8e96a4;
+## API
 
-@purple-bg: #e7c7ff;
-@purple-hover: #a04dff;
-@purple-active: #8426ff;
+### Badge
 
-@light-blue-bg: #e8f3ff;
-@light-blue-hover: #54cfda;
-@light-blue-active: #1fb4c2;
-
-@brown-bg: #d6b296;
-@brown-hover: #c89979;
-@brown-active: #b37a5a;
-
-// 单个折线图
-@line-simple-color1: @blue-hover;
-@line-simple-color2: @red-hover;
-@line-simple-color3: @orange-hover;
-@line-simple-color4: @green-hover;
-@line-simple-color5: @purple-hover;
-@line-simple-color6: @grey-hover;
-@line-simple-color7: @light-blue-hover;
-@line-simple-color8: @brown-hover;
-
-// 多组柱形图
-@bar-group-color1: @blue-active;
-@bar-group-color2: @blue;
-@bar-group-color3: @blue-hover;
-@bar-group-color4: @green-active;
-@bar-group-color5: @green;
-@bar-group-color6: @green-hover;
-@bar-group-color7: @orange-active;
-@bar-group-color8: @orange;
-@bar-group-color9: @orange-hover;
-@bar-group-color10: @red-active;
-@bar-group-color11: @red;
-@bar-group-color12: @red-hover;
-@bar-group-color13: @purple-active;
-@bar-group-color14: @purple;
-@bar-group-color15: @purple-hover;
-
-// 高度
-@control-height: 26px;
-@text-color: #5b6371;
-@text-disabled-color: @grey-hover;
-// font-weight: 600
-@text-disabled-weight-color: @text-color;
-
-// badge
-@start: @blue-hover;
-@approve: @blue;
-@success: @green;
-@finish: @grey;
-@error: @red;
-@draft: @primary-border-color;
-```
+| 参数    | 说明             | 类型                       | 默认值 |
+| ------- | ---------------- | -------------------------- | ------ |
+| color   | 色值             | `Theme.ThemeColor\|string` | -      |
+| isTable | 是否在表格中使用 | `boolean`                  | -      |

@@ -1,4 +1,5 @@
 import { theme, ThemeConfig } from 'antd';
+import { CustomTheme as defaultCustomTheme } from './customTheme';
 const { getDesignToken } = theme;
 
 export interface IThemeConfig {
@@ -13,3 +14,4 @@ export const themeConfig: IThemeConfig = {
 };
 
 export const variables = themeConfig.variables;
+export const CustomTheme = defaultCustomTheme;
