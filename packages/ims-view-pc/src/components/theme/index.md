@@ -42,6 +42,10 @@ nav:
 
 <code src='./demo/tag.tsx'></code>
 
+### Theme.Empty
+
+<code src='./demo/empty.tsx'></code>
+
 ### Theme.ThemeColor
 
 | key                          | -                                      | value   |
