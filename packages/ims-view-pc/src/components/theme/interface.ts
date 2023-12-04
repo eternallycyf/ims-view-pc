@@ -1,6 +1,6 @@
-import { BadgeProps } from 'antd';
+import { BadgeProps, TagProps } from 'antd';
 import { LiteralUnion } from 'ims-view-pc';
-import { ICustomThemeType } from '../../styles/customTheme';
+import { IBaseHoverActiveBg, ICustomThemeType } from '../../styles/customTheme';
 
 /**
  * @typedef ThemeHandle - 主题
@@ -21,4 +21,16 @@ export interface ThemeProps<T = Record<string, any>> {
 export interface IThemeBadgeProps<T = any> extends BadgeProps {
   color?: LiteralUnion<ICustomThemeType>;
   isTable?: boolean;
+}
+
+type ICustomBaseHoverActiveBg = IBaseHoverActiveBg extends `${infer Color}-${infer T}`
+  ? Color extends 'light' | 'brown'
+    ? never
+    : T extends 'bg'
+    ? Color
+    : never
+  : never;
+
+export interface IThemeTagProps<T = any> extends TagProps {
+  color?: LiteralUnion<ICustomBaseHoverActiveBg | TagProps['color']>;
 }

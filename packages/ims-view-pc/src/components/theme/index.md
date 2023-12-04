@@ -11,7 +11,6 @@ nav:
 - 切换按钮颜色 select 选中项颜色
 - 文件上传组件 文件类型 icon
 - 空状态
-- tags
 
 ## 继承 antd 主题
 
@@ -29,6 +28,19 @@ nav:
 - `color: Theme.CustomTheme.xxx ?? Antd.Badge.color`
 
 <code src='./demo/badge.tsx'></code>
+
+### Theme.Tag
+
+增强了几项基本色值, 如果未匹配 则直接传入 Antd.Tag.color
+
+- blue
+- orange
+- green
+- red
+- purple
+- grey
+
+<code src='./demo/tag.tsx'></code>
 
 ### Theme.ThemeColor
 
