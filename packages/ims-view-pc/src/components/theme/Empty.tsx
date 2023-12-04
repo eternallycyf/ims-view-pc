@@ -2,9 +2,11 @@ import { FC } from 'react';
 import { IThemeEmptyProps } from './interface';
 
 export const emptyImages = {
-  Search: 'https://raw.githubusercontent.com/eternallycyf/umi4-tab/main/public/empty/search.png',
-  Doc: 'https://raw.githubusercontent.com/eternallycyf/umi4-tab/main/public/empty/doc.png',
-  Upload: 'https://raw.githubusercontent.com/eternallycyf/umi4-tab/main/public/empty/upload.png',
+  Search:
+    'raw.githubusercontent.com/eternallycyf/ims-view-pc/master/public/images/empty/search.png',
+  Doc: 'raw.githubusercontent.com/eternallycyf/ims-view-pc/master/public/images/empty/doc.png',
+  Upload:
+    'raw.githubusercontent.com/eternallycyf/ims-view-pc/master/public/images/empty/upload.png',
 };
 
 const Empty: FC<IThemeEmptyProps> = (props) => {
