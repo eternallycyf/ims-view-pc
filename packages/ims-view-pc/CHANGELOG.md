@@ -1,5 +1,24 @@
 # Changelog
 
+## [Version&nbsp;1.32.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.31.0...ims-view-pc@1.32.0)
+
+<sup>Released on **2023-12-04**</sup>
+
+#### ✨ 新特性
+
+- **ims-view-pc**: Add Theme.tag.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **ims-view-pc**: Add Theme.tag ([95c9924](https://github.com/eternallycyf/ims-view-pc/commit/95c9924))
+
+</details>
+
 ## [Version&nbsp;1.31.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.30.1...ims-view-pc@1.31.0)
 
 <sup>Released on **2023-12-02**</sup>
