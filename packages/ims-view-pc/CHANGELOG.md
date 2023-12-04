@@ -1,5 +1,24 @@
 # Changelog
 
+### [Version&nbsp;1.32.2](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.32.1...ims-view-pc@1.32.2)
+
+<sup>Released on **2023-12-04**</sup>
+
+#### 🐛 修复
+
+- Theme.Empty.path.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- Theme.Empty.path ([3eb7d47](https://github.com/eternallycyf/ims-view-pc/commit/3eb7d47))
+
+</details>
+
 ### [Version&nbsp;1.32.1](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.32.0...ims-view-pc@1.32.1)
 
 <sup>Released on **2023-12-04**</sup>
