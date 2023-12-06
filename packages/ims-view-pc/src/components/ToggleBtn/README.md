@@ -17,33 +17,6 @@ demo:
 
 ## API
 
-```ts
-export interface IToggleBtnValue {
-  size?: ButtonProps['size'];
-  buttonType: ButtonProps['type'];
-  buttonStyle?: CSSProperties;
-  tooltipStyle?: CSSProperties;
-  toggleIconStyle?: CSSProperties;
-  label: ReactNode | string;
-  tooltip?: ReactNode | string;
-  toggleIcon?: ReactNode | string;
-  hasTooltip?: boolean;
-}
-
-export type IToggleDict = Record<string, IToggleBtnValue>;
-
-export type IToggleButtonProps<T> = {
-  status: keyof T;
-  setStatus?: React.Dispatch<SetStateAction<keyof T>>;
-  dict: IToggleDict;
-  cb?: (status: keyof T) => void;
-};
-
-export type IDefaultProps = {
-  [Key in string as `default${Key & string}`]: any;
-};
-```
-
 ### props
 
 | 属性      | 说明       | 类型                                      | 默认值 |
