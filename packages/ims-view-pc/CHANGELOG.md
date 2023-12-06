@@ -1,5 +1,24 @@
 # Changelog
 
+## [Version&nbsp;1.33.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.32.2...ims-view-pc@1.33.0)
+
+<sup>Released on **2023-12-06**</sup>
+
+#### ✨ 新特性
+
+- **ims-view-pc**: Add ToggleBtn.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **ims-view-pc**: Add ToggleBtn ([7f676a1](https://github.com/eternallycyf/ims-view-pc/commit/7f676a1))
+
+</details>
+
 ### [Version&nbsp;1.32.2](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.32.1...ims-view-pc@1.32.2)
 
 <sup>Released on **2023-12-04**</sup>
