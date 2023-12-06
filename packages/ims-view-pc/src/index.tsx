@@ -26,6 +26,8 @@ export { default as SectionTitle } from './components/SectionTitle';
 export * from './components/SectionTitle/interface';
 export { default as Theme } from './components/theme';
 export * from './components/theme/interface';
+export { default as ToggleBtn } from './components/ToggleBtn';
+export * from './components/ToggleBtn/interface';
 export { default as VideoViewer } from './components/VideoViewer';
 export * from './components/VideoViewer/interface';
 export { default as WaterMark } from './components/WaterMark';

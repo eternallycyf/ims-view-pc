@@ -1,5 +1,132 @@
+@import './variable.less';
+
 .ant-spin-nested-loading,
 .ant-spin-container {
   width: 100%;
   height: 100%;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  border-radius: 0px 0px 1px 0px;
+  background: #fafafb;
+}
+
+/*定义滚动条轨道 内阴影+圆角*/
+::-webkit-scrollbar-track {
+  border-radius: 0px 0px 1px 0px;
+  background-color: #fafafb;
+}
+
+/*定义滑块 内阴影+圆角*/
+::-webkit-scrollbar-thumb {
+  width: 3px;
+  border-radius: 5px;
+  background: #dee1e7;
+}
+
+.ant-select-dropdown .ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
+  background: #f5f8ff;
+  color: @blue;
+  font-weight: 600;
+}
+
+// btn
+button.ant-btn-primary {
+  background: @blue;
+  color: #ffffff;
+  font-weight: 500;
+  font-size: 12px;
+}
+
+button.ant-btn-link span {
+  color: @blue;
+}
+
+button.ant-btn-dangerous span {
+  color: @red;
+}
+
+// select
+.ant-select-selector .ant-select-selection-overflow .ant-select-selection-overflow-item {
+  .ant-select-selection-item {
+    background: #ebf2ff;
+    color: @blue;
+    font-weight: 400;
+    font-size: 12px;
+  }
+}
+
+// radio
+#radio.ant-radio-group {
+  .ant-picker.ant-picker-borderless {
+    left: 20% !important;
+    height: 32px;
+    border: 1px solid @light-blue;
+    background-color: rgba(255, 255, 255, 1);
+  }
+
+  .ant-radio-group {
+    margin-left: 0px;
+    height: 25px;
+  }
+
+  .ant-picker-large .ant-picker-input > input {
+    font-size: 12px;
+  }
+
+  .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled) {
+    &:focus-within {
+      box-shadow: none;
+    }
+  }
+
+  .ant-radio-button-wrapper {
+    border-color: @light-blue;
+    background-color: #fff;
+    color: rgba(11, 10, 25, 0.65);
+
+    &:hover {
+      color: @blue;
+    }
+  }
+
+  .ant-radio-button-wrapper-checked:not(
+      [class*=' ant-radio-button-wrapper-disabled']
+    ).ant-radio-button-wrapper:first-child {
+    border-radius: 2px 0 0px 2px;
+  }
+
+  .ant-radio-button-wrapper-checked:not(
+      [class*=' ant-radio-button-wrapper-disabled']
+    ).ant-radio-button-wrapper:last-child {
+    border-radius: 0 2px 2px 0;
+  }
+
+  .ant-radio-button-wrapper-checked:not(:first-child)::before {
+    background-color: @light-blue;
+  }
+
+  .ant-radio-button-wrapper:not(:first-child)::before {
+    background-color: @light-blue;
+  }
+
+  .ant-radio-button-wrapper-checked {
+    border-color: @light-blue;
+    background: #e0ecff;
+    color: @blue;
+
+    &:not(:first-child)::before {
+      background-color: @light-blue;
+    }
+
+    &:hover {
+      border: 1px solid @blue;
+      background-color: rgb(224, 236, 255);
+
+      &:not(:first-child)::before {
+        background-color: @blue;
+      }
+    }
+  }
 }
