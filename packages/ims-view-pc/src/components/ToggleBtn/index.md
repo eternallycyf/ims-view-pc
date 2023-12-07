@@ -11,6 +11,14 @@ demo:
 
 ## ToggleBtn 切换按钮
 
+ToggleBtn 是一个 toggle 按钮，可以切换状态，可以自定义状态的样式。
+
+### 何时使用
+
+- 切换按钮
+- 切换状态
+- 展示 tooltip
+
 ## 示例
 
 <code src='./demo/demo1.tsx'></code>
