@@ -1,5 +1,24 @@
 # Changelog
 
+## [Version&nbsp;1.13.0](https://github.com/eternallycyf/ims-view-pc/compare/@ims-view/utils@1.12.1...@ims-view/utils@1.13.0)
+
+<sup>Released on **2023-12-08**</sup>
+
+#### ✨ 新特性
+
+- **@ims-view/utils**: Remove ase.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **@ims-view/utils**: Remove ase ([73bdb86](https://github.com/eternallycyf/ims-view-pc/commit/73bdb86))
+
+</details>
+
 ### [Version&nbsp;1.12.1](https://github.com/eternallycyf/ims-view-pc/compare/@ims-view/utils@1.12.0...@ims-view/utils@1.12.1)
 
 <sup>Released on **2023-12-08**</sup>
