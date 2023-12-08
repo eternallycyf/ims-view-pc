@@ -1,5 +1,24 @@
 # Changelog
 
+### [Version&nbsp;1.12.1](https://github.com/eternallycyf/ims-view-pc/compare/@ims-view/utils@1.12.0...@ims-view/utils@1.12.1)
+
+<sup>Released on **2023-12-08**</sup>
+
+#### 🐛 修复
+
+- **@ims-utils**: Use esmodules.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- **@ims-utils**: Use esmodules ([597ea52](https://github.com/eternallycyf/ims-view-pc/commit/597ea52))
+
+</details>
+
 ## [Version&nbsp;1.12.0](https://github.com/eternallycyf/ims-view-pc/compare/@ims-view/utils@1.11.0...@ims-view/utils@1.12.0)
 
 <sup>Released on **2023-12-08**</sup>
