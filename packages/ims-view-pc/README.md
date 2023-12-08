@@ -24,7 +24,7 @@
 
 - https://ims-view.site/components/
 
-## required dev
+## peerDependencies
 
 ```JSON
 {

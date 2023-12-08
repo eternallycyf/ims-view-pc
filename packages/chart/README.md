@@ -17,7 +17,7 @@
 
 - https://ims-view.site/chart
 
-## required dev
+## peerDependencies
 
 ```JSON
 {
