@@ -1,5 +1,24 @@
 # Changelog
 
+## [Version&nbsp;1.35.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.34.0...ims-view-pc@1.35.0)
+
+<sup>Released on **2023-12-08**</sup>
+
+#### ✨ 新特性
+
+- Deploy.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- Deploy ([ea98af5](https://github.com/eternallycyf/ims-view-pc/commit/ea98af5))
+
+</details>
+
 ## [Version&nbsp;1.34.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.33.0...ims-view-pc@1.34.0)
 
 <sup>Released on **2023-12-08**</sup>
