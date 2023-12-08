@@ -41,11 +41,7 @@
     "react-dom": "^18"
   },
   "devDependencies": {
-    "@ant-design/icons": "^5.2.6",
-    "@types/video.js": "^7.3.53",
-    "antd": "^5",
-    "axios": "^1.5.1",
-    "lodash": "^4.17.21"
+    "@types/video.js": "^7.3.53"
   },
   "publishConfig": {
     "access": "public",
