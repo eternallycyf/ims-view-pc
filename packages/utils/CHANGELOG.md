@@ -1,5 +1,24 @@
 # Changelog
 
+## [Version&nbsp;1.12.0](https://github.com/eternallycyf/ims-view-pc/compare/@ims-view/utils@1.11.0...@ims-view/utils@1.12.0)
+
+<sup>Released on **2023-12-08**</sup>
+
+#### ✨ 新特性
+
+- Deploy.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- Deploy ([32fb858](https://github.com/eternallycyf/ims-view-pc/commit/32fb858))
+
+</details>
+
 ## [Version&nbsp;1.11.0](https://github.com/eternallycyf/ims-view-pc/compare/@ims-view/utils@1.10.0...@ims-view/utils@1.11.0)
 
 <sup>Released on **2023-11-25**</sup>
