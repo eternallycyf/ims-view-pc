@@ -1,6 +1,6 @@
 {
   "name": "ims-view-pc",
-  "version": "1.35.1",
+  "version": "1.35.2",
   "main": "lib/index.js",
   "module": "es/index.js",
   "types": "lib/index.d.ts",
@@ -22,7 +22,7 @@
     "@babel/runtime": "^7.23.1",
     "@ims-view/chart": "1.4.0",
     "@ims-view/hooks": "1.13.0",
-    "@ims-view/utils": "1.12.1",
+    "@ims-view/utils": "1.13.0",
     "classnames": "^2.3.2",
     "video.js": "^7.21.5",
     "dayjs": "^1.11.10",
