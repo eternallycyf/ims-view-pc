@@ -1,4 +1,4 @@
-const CryptoJS = require('crypto-js');
+import * as CryptoJS from 'crypto-js';
 
 const DEFAULT_KEY = {
   SHARE_KEY: 'ase',
