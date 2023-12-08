@@ -1,5 +1,32 @@
 # Changelog
 
+## [Version&nbsp;1.4.0](https://github.com/eternallycyf/ims-view-pc/compare/@ims-view/chart@1.3.0...@ims-view/chart@1.4.0)
+
+<sup>Released on **2023-12-08**</sup>
+
+#### ✨ 新特性
+
+- Deploy.
+
+#### 🎫 杂项
+
+- Update devDependencies.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- Deploy ([32fb858](https://github.com/eternallycyf/ims-view-pc/commit/32fb858))
+
+#### Chores
+
+- Update devDependencies ([c28e055](https://github.com/eternallycyf/ims-view-pc/commit/c28e055))
+
+</details>
+
 ## [Version&nbsp;1.3.0](https://github.com/eternallycyf/ims-view-pc/compare/@ims-view/chart@1.2.0...@ims-view/chart@1.3.0)
 
 <sup>Released on **2023-11-25**</sup>
