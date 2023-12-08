@@ -1,5 +1,43 @@
 # Changelog
 
+## [Version&nbsp;1.34.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.33.0...ims-view-pc@1.34.0)
+
+<sup>Released on **2023-12-08**</sup>
+
+#### ✨ 新特性
+
+- Deploy.
+
+#### 🎫 杂项
+
+- **自动发布**: Ims-view-pc@1.34.0 [skip ci].
+- Update devDependencies.
+
+#### 📝 文档
+
+- Update Toggle doc, update Toggle doc.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- Deploy ([32fb858](https://github.com/eternallycyf/ims-view-pc/commit/32fb858))
+
+#### Chores
+
+- **自动发布**: Ims-view-pc@1.34.0 [skip ci] ([f4169ab](https://github.com/eternallycyf/ims-view-pc/commit/f4169ab))
+- Update devDependencies ([c28e055](https://github.com/eternallycyf/ims-view-pc/commit/c28e055))
+
+#### Documentation
+
+- Update Toggle doc ([26ab1cd](https://github.com/eternallycyf/ims-view-pc/commit/26ab1cd))
+- Update Toggle doc ([629a6e9](https://github.com/eternallycyf/ims-view-pc/commit/629a6e9))
+
+</details>
+
 ## [Version&nbsp;1.33.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.32.2...ims-view-pc@1.33.0)
 
 <sup>Released on **2023-12-06**</sup>
