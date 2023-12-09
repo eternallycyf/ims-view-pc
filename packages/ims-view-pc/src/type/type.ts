@@ -1,5 +1,6 @@
 //#region
-
+import { AriaAttributes, CSSProperties } from 'react';
+export { SnakeCase } from './SnakeCase';
 /*----------------------------base-----------------------------------------------------*/
 type Copy<Obj extends Record<string, any>> = {
   [Key in keyof Obj]: Obj[Key];
@@ -49,6 +50,10 @@ export type DeepPartial<T> = T extends object
 /** https://github.com/Microsoft/TypeScript/issues/29729 */
 export type LiteralUnion<T extends string> = T | (string & {});
 
+export type WithNativeStyle<S extends string = never> = CSSProperties &
+  Partial<Record<S, string>> &
+  AriaAttributes;
+
 export type AnyObject = Record<PropertyKey, any>;
 
 export type ValueOf<T> = T[keyof T];
@@ -92,5 +97,10 @@ export type PartialObjectPropByKeys<
   Obj extends Record<string, any>,
   Key extends keyof any = keyof Obj,
 > = Copy<Partial<Pick<Obj, Extract<keyof Obj, Key>>> & Omit<Obj, Key>>;
+
+// 下划线转驼峰
+export type CamelCase<Str extends string> = Str extends `${infer Left}_${infer Right}${infer Rest}`
+  ? `${Left}${Uppercase<Right>}${CamelCase<Rest>}`
+  : Str;
 
 //#endregion

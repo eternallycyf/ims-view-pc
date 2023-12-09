@@ -12,6 +12,7 @@ export type { IBaseCustomFormItemProps } from './form/formItem';
 export type {
   AddIndexSignature,
   AnyObject,
+  CamelCase,
   DeepPartial,
   DeepPromiseValueType,
   DeepReadonly,
@@ -28,6 +29,8 @@ export type {
   NotEqual,
   PartialObjectPropByKeys,
   RemoveIndexSignature,
+  SnakeCase,
   UnionToIntersection,
   ValueOf,
+  WithNativeStyle,
 } from './type';
