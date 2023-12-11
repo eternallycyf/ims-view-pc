@@ -1,5 +1,5 @@
 import { ColumnType } from 'antd/lib/table/interface';
-import { AnyObject, Search } from 'ims-view-pc';
+import { AnyObject, ObjectPaths, Search } from 'ims-view-pc';
 import { ReactNode } from 'react';
 
 //#region
@@ -87,7 +87,7 @@ export type Column<TRecord = AnyObject, Rest = AnyObject> =
       /**
        * @property {keyof TRecord | string} [dataIndex = '']
        */
-      dataIndex?: keyof TRecord & string;
+      dataIndex?: (keyof TRecord & string) | ObjectPaths<TRecord>;
       children?: (Column<TRecord, Rest> & Rest)[];
       /**
        * @name 是否可编辑 仅在editable为true时生效

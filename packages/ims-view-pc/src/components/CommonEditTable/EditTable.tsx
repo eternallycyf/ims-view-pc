@@ -113,6 +113,7 @@ const CommonEditTable: React.ForwardRefRenderFunction<
         },
         render: (text: number, field: FormListFieldData, index: number) => {
           const renderProps = getCurrentFieldValue(form, tableFormName, index);
+          //@ts-ignore
           const val = renderProps?.[0]?.[item?.dataIndex];
           const currentValues = renderProps?.[0];
           const allValues = renderProps?.[1];

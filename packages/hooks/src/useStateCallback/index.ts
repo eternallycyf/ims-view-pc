@@ -6,7 +6,7 @@ import { SetStateAction, useCallback, useEffect, useRef, useState } from 'react'
  * @param {T} defaultVal - 初始状态值。
  * @returns {[T, (newVal: SetStateAction<T>, callback: (state: SetStateAction<T>) => any) => void]} - 一个包含当前状态和更新状态的函数的数组。
  */
-const useStateCallback = <T = any>(defaultVal: T) => {
+const useStateCallback = <T = any>(defaultVal?: T) => {
   // 使用 useState 创建状态
   const [state, setState] = useState(defaultVal);
 

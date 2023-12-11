@@ -1,5 +1,6 @@
 //#region
 import { AriaAttributes, CSSProperties } from 'react';
+export { ObjectPaths, Paths } from './path';
 export { SnakeCase } from './SnakeCase';
 /*----------------------------base-----------------------------------------------------*/
 type Copy<Obj extends Record<string, any>> = {
@@ -102,5 +103,4 @@ export type PartialObjectPropByKeys<
 export type CamelCase<Str extends string> = Str extends `${infer Left}_${infer Right}${infer Rest}`
   ? `${Left}${Uppercase<Right>}${CamelCase<Rest>}`
   : Str;
-
 //#endregion
