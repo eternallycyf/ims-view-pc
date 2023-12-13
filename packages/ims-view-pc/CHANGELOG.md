@@ -1,5 +1,24 @@
 # Changelog
 
+### [Version&nbsp;1.35.3](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.35.2...ims-view-pc@1.35.3)
+
+<sup>Released on **2023-12-13**</sup>
+
+#### 🐛 修复
+
+- **ims-view-pc**: Type == 'custom' use fn no hooks.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- **ims-view-pc**: Type == 'custom' use fn no hooks ([ad3aba4](https://github.com/eternallycyf/ims-view-pc/commit/ad3aba4))
+
+</details>
+
 ### [Version&nbsp;1.35.2](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.35.1...ims-view-pc@1.35.2)
 
 <sup>Released on **2023-12-08**</sup>
