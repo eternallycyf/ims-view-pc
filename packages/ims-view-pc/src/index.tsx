@@ -10,6 +10,8 @@ export { default as CommonDescriptions } from './components/CommonDescriptions';
 export * from './components/CommonDescriptions/interface';
 export { default as CommonEditTable } from './components/CommonEditTable';
 export * from './components/CommonEditTable/interface';
+export { default as CommonTable } from './components/CommonTable';
+export * from './components/CommonTable/interface';
 export type {
   ICascadeControlProps,
   IEditorProps,

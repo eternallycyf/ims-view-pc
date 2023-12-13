@@ -1,6 +1,6 @@
 ---
 title: CustomTable
-description: 公共table
+description:
 toc: content
 group:
   title: 表格
@@ -10,6 +10,22 @@ demo:
   cols: 2
 ---
 
-### 暂未整理完成
+## CustomTable
+
+## 暂未整理完成
 
 ![](https://raw.githubusercontent.com/eternallycyf/ims-view-pc/master/public/images/crud.png)
+
+<code src='./demo/demo1.tsx'></code>
+
+## API
+
+### props
+
+### ref
+
+### columns
+
+### context
+
+## FAQ
