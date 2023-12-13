@@ -250,6 +250,16 @@ const SimpleControl = React.forwardRef<any, ISimpleControlProps>((props, ref) =>
       controlProps = { ...controlProps, checked: !!checked };
     }
 
+    if (type === 'custom') {
+      return Component({
+        ref,
+        ...controlProps,
+        ...formProps,
+        ...fillStyle,
+        ...controlProps?.style,
+      });
+    }
+
     return (
       <Component
         ref={ref}

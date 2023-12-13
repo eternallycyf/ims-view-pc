@@ -227,14 +227,14 @@ export default () => {
       label: 'custom',
       type: 'custom',
       initialValue: true,
-      Component: React.forwardRef((props, ref) => {
+      Component: (props) => {
         return (
           <div>
             <Switch checked={!!props?.value} onChange={(e) => props.onChange(!props?.value)} />
             <div>{!!props?.value ? 'light' : 'dark'}</div>
           </div>
         );
-      }),
+      },
     },
   ];
 
