@@ -1,8 +1,8 @@
 import { defineConfig } from 'dumi';
 import type { SiteThemeConfig } from 'dumi-theme-antd-style';
+import { footer } from 'ims-template-config';
 import path from 'path';
 import { features } from './config/features';
-import { footer } from './config/footer';
 import style from './docs/siteIndexStyle';
 import { homepage, name as repo } from './package.json';
 
