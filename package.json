@@ -94,6 +94,7 @@
     "@ant-design/icons": "^5.2.6",
     "lodash": "^4.17.21",
     "@types/lodash": "^4.14.199",
-    "axios": "^1.5.1"
+    "axios": "^1.5.1",
+    "ims-template-config": "latest"
   }
 }
