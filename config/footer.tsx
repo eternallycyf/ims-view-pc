@@ -38,13 +38,13 @@ export const footer = [
         openExternal: true,
       },
       {
-        title: 'ims-IndexedDB',
-        url: 'https://components-eternallycyf.vercel.app/',
+        title: 'ims-indexed-db',
+        url: 'https://ims-indexed-db.vercel.app/',
         openExternal: true,
       },
       {
         title: '@ims-view/components',
-        url: 'https://ims-graph.vercel.app/components/graph-chart',
+        url: 'https://github.com/eternallycyf/components',
         openExternal: true,
       },
     ],
