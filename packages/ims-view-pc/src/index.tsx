@@ -23,6 +23,8 @@ export { default as CustomModal } from './components/CustomModal';
 export { default as Ellipsis } from './components/Ellipsis';
 export * from './components/Ellipsis/interface';
 export { default as ErrorBoundary } from './components/ErrorBoundary';
+export { default as ExportButton } from './components/ExportButton';
+export * from './components/ExportButton/interface';
 export { default as Icon } from './components/Icon';
 export { default as SectionTitle } from './components/SectionTitle';
 export * from './components/SectionTitle/interface';
