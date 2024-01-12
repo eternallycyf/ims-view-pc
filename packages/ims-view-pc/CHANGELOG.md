@@ -1,5 +1,24 @@
 # Changelog
 
+## [Version&nbsp;1.36.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.35.3...ims-view-pc@1.36.0)
+
+<sup>Released on **2024-01-12**</sup>
+
+#### ✨ 新特性
+
+- Add ExportButton.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- Add ExportButton ([d77c715](https://github.com/eternallycyf/ims-view-pc/commit/d77c715))
+
+</details>
+
 ### [Version&nbsp;1.35.3](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.35.2...ims-view-pc@1.35.3)
 
 <sup>Released on **2023-12-13**</sup>
