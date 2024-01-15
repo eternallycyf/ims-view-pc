@@ -31,7 +31,7 @@ import 'dayjs/locale/zh-cn';
 import { AnyObject, DeepPartial, IBaseControlProps, IBaseCustomFormItemProps } from 'ims-view-pc';
 import React, { useImperativeHandle } from 'react';
 const RadioGroup = Radio.Group;
-const CheckboxGroup = Checkbox.Group;
+const CheckboxGroup: any = Checkbox.Group;
 const { TextArea, Password, Search } = Input;
 const { MonthPicker, RangePicker, QuarterPicker } = DatePicker;
 
@@ -205,7 +205,7 @@ const SimpleControl = React.forwardRef<any, ISimpleControlProps>((props, ref) =>
     return <AutoComplete ref={ref} options={dict as any as any} {...controlProps}></AutoComplete>;
   } else if (type === 'checkbox') {
     return (
-      <CheckboxGroup ref={ref} {...(controlProps as any as CheckboxGroupProps)}>
+      <CheckboxGroup {...(controlProps as any as CheckboxGroupProps)}>
         {dict?.map((item) => (
           <Checkbox {...item} key={item.value} value={item.value}>
             {item?.label}
