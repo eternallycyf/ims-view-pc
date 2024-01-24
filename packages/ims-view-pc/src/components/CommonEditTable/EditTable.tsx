@@ -1,4 +1,4 @@
-import { Col, Form, FormListFieldData, FormListOperation, Row } from 'antd';
+import { Col, Empty, Form, FormListFieldData, FormListOperation, Row } from 'antd';
 import {
   ErrorBoundary,
   IButtonProps,
@@ -9,13 +9,14 @@ import {
   IEditTableContext,
   IGetColumns,
   IRenderFnProps,
+  Theme,
   renderFormItem,
 } from 'ims-view-pc';
 import React, { Key, useImperativeHandle } from 'react';
 import { formatColumn } from '../../core/helpers';
 import { Table } from './';
-import './index.less';
 import TableBtn from './TableBtn';
+import './index.less';
 import {
   addExtraIndexParams,
   formatEditTableColumns,
@@ -324,6 +325,7 @@ const CommonEditTable: React.ForwardRefRenderFunction<
               {renderButtonRow(buttonLeft, buttonRight, operation)}
               <Form.Item className="EditTableContent">
                 <Table
+                  className={`${fields?.length > 0 ? '' : 'noDataTable'} ${tableProps?.className}`}
                   isVirtual={fields?.length >= 100 ? isVirtual : false}
                   status={status}
                   scroll={isVirtual ? { y: 800 } : false}
@@ -334,6 +336,22 @@ const CommonEditTable: React.ForwardRefRenderFunction<
                   columns={getDefaultColumns(operation, status)}
                   rowKey={'key'}
                   pagination={false}
+                  bordered
+                  size="small"
+                  locale={{
+                    emptyText: (
+                      <Empty
+                        description={<span style={{ color: '#B3B8C2' }}>暂无数据</span>}
+                        style={{
+                          color: '#B3B8C2',
+                          fontSize: 12,
+                          marginTop: 8,
+                          marginBottom: 10,
+                        }}
+                        image={<Theme.Empty.Doc />}
+                      />
+                    ),
+                  }}
                   {...tableProps}
                 />
               </Form.Item>
