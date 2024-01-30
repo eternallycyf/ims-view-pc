@@ -20,7 +20,17 @@ const ExportButton: FC<IExportButtonProps> = (props) => {
     setCellStyle,
     setCellFormat,
     sheetName,
-    setSheetStyle,
+    setSheetStyle = ({ sheetIndex }) => {
+      return {
+        views: [
+          {
+            state: 'frozen',
+            xSplit: 0,
+            ySplit: 1,
+          },
+        ],
+      };
+    },
     setInsertFooter,
     setInsertHeader,
     setWorkSheet,
