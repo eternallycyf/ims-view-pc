@@ -6,6 +6,7 @@ group:
   title: 表单
   order: 1
 order: 0
+apiHeader: false
 demo:
   cols: 2
 ---
