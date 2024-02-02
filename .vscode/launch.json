@@ -1,0 +1,27 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "jest",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
+      "console": "integratedTerminal",
+      "args": [
+        // 不再用 worker 进程并行跑测试用例，而是在当前进程串行跑：
+        "-i",
+        "${file}",
+        "-t",
+        "${input:case}"
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "type": "promptString",
+      "id": "case",
+      "description": "CommonDemo",
+      "default": ""
+    }
+  ]
+}
