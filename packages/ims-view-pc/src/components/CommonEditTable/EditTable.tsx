@@ -21,7 +21,6 @@ import {
   addExtraIndexParams,
   formatEditTableColumns,
   getCurrentFieldValue,
-  handleExport,
   removeExtraColumnsProps,
 } from './utils';
 
@@ -66,14 +65,12 @@ const CommonEditTable: React.ForwardRefRenderFunction<
 
   useImperativeHandle(ref, () => ({
     form,
-    handleExport,
     status,
   }));
 
   const EditTableContextProviderProps = {
     form,
     values: form?.getFieldValue(tableFormName) || [],
-    handleExport,
     status,
   };
 

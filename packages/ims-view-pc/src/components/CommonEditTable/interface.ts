@@ -102,7 +102,6 @@ export interface ICommonEditTableProps<
  */
 export type ICommonEditTableHandle<Values = any, FormItemsValues = any> = {
   form: FormInstance<FormItemsValues>;
-  handleExport: IHandleExport<Values>;
   status: ICommonEditTableProps['status'];
 };
 

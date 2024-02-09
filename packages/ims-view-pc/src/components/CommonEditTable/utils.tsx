@@ -12,28 +12,6 @@ export type IHandleExport<Values = any> = (
   dataSource: Values[],
 ) => void;
 
-export const handleExport: IHandleExport = (title, columns = [], dataSource = []) => {
-  const getItem = (item: ICommonEditTableColumnsType) =>
-    (columns || [])?.find((ele) => ele?.dataIndex === item?.dataIndex);
-  // TODO: export
-  // downloadExcel({
-  //   filename: title,
-  //   sheets: [
-  //     {
-  //       sheetName: title,
-  //       columns: columns
-  //         .filter((item) => item.dataIndex !== 'operation' || item.key !== 'operate')
-  //         .map((item) => ({
-  //           ...item,
-  //           title: typeof item.title === 'string' ? item.title : getItem(item)?.title ?? item?.dataIndex,
-  //         })),
-  //       dataSource: dataSource,
-  //       header: title,
-  //     },
-  //   ],
-  // });
-};
-
 export const getCurrentFieldValue = (
   form: FormInstance,
   name: FormListProps['name'],

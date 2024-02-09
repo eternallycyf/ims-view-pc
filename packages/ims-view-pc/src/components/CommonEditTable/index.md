@@ -69,11 +69,10 @@ CommonEditTable 是一个通用的可编辑表格组件，用于展示和编辑�
 
 ### ICommonEditTableHandle
 
-| 名称         | 类型                              | 默认值 | 描述      |
-| ------------ | --------------------------------- | ------ | --------- |
-| form         | `FormInstance<FormItemsValues>`   | -      | form 实例 |
-| handleExport | `IHandleExport<Values>`           | -      | -         |
-| status       | `ICommonEditTableProps['status']` | -      | -         |
+| 名称   | 类型                              | 默认值 | 描述      |
+| ------ | --------------------------------- | ------ | --------- |
+| form   | `FormInstance<FormItemsValues>`   | -      | form 实例 |
+| status | `ICommonEditTableProps['status']` | -      | -         |
 
 ### IColumnEditRestProps
 

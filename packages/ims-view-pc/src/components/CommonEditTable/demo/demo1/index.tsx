@@ -8,6 +8,7 @@ import dayjs from 'dayjs';
 import {
   AccessBtn,
   CommonEditTable,
+  ExportButton,
   ICommonEditTableHandle,
   ICommonEditTableProps,
 } from 'ims-view-pc';
@@ -71,7 +72,25 @@ const Demo = () => {
             key: index,
           }))}
           columns={getColumns(formItemProps)}
-          buttonLeft={[]}
+          buttonLeft={[
+            {
+              type: 'custom',
+              element: (
+                <ExportButton
+                  columns={getColumns(formItemProps) as any}
+                  request={async () =>
+                    (await {
+                      data: EditTableRef.current.form.getFieldsValue().EditTable,
+                      total: 20,
+                      success: true,
+                    }) as any
+                  }
+                  fileName="文件"
+                />
+              ),
+              visible: (renderProps, operation, status) => status !== 'edit',
+            },
+          ]}
           buttonRight={[
             {
               type: 'default',
