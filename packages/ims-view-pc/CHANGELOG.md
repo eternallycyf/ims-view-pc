@@ -1,5 +1,32 @@
 # Changelog
 
+### [Version&nbsp;1.39.1](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.39.0...ims-view-pc@1.39.1)
+
+<sup>Released on **2024-02-09**</sup>
+
+#### 🐛 修复
+
+- **ims-view-pc**: CommonEditTable remove export , demo use ExportButton.
+
+#### 📝 文档
+
+- Fix extra apiHeader.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- **ims-view-pc**: CommonEditTable remove export , demo use ExportButton ([79cef01](https://github.com/eternallycyf/ims-view-pc/commit/79cef01))
+
+#### Documentation
+
+- Fix extra apiHeader ([763b729](https://github.com/eternallycyf/ims-view-pc/commit/763b729))
+
+</details>
+
 ## [Version&nbsp;1.39.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.38.0...ims-view-pc@1.39.0)
 
 <sup>Released on **2024-01-30**</sup>
