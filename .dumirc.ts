@@ -41,7 +41,7 @@ const themeConfig: SiteThemeConfig = {
   footerConfig: {
     bottom: '2023',
     copyright: 'Made with ❤️ by eternallycyf - AFX & 数字科技',
-    columns: footer,
+    columns: footer(repo),
   },
 };
 
