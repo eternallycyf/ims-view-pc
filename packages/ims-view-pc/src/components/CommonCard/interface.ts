@@ -1,6 +1,7 @@
 import { useFetchProps, useFetchState } from '@ims-view/hooks';
 import { TabsProps } from 'antd';
-import { ISectionTitle } from 'ims-view-pc';
+import { AnyData, ISectionTitle } from 'ims-view-pc';
+import { PropsWithChildren } from 'react';
 export * from './CardList/interface';
 
 /**
@@ -69,3 +70,12 @@ export interface ICommonCardAnchorLinkProps<T extends string>
   extends React.DetailedHTMLProps<React.HtmlHTMLAttributes<HTMLDivElement>, HTMLDivElement> {
   id: T;
 }
+
+export type IStickyPageProps = PropsWithChildren<{
+  loading?: boolean;
+  header?: React.ReactNode;
+  style?: React.CSSProperties;
+  tabProps?: TabsProps;
+  tabList?: Items[];
+  className?: string;
+}>;

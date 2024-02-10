@@ -4,9 +4,10 @@ import AnchorLink from './AnchorLink';
 import CardList from './CardList';
 import CommonCardComponent from './CommonCard';
 import IndexPage from './IndexPage';
-import { ICommonCardHandle, ICommonCardProps } from './interface';
 import Line from './Line';
 import Page from './Page';
+import StickyPage from './StickyPage';
+import { ICommonCardHandle, ICommonCardProps } from './interface';
 
 const CompoundedCommonCard = React.forwardRef<ICommonCardHandle, ICommonCardProps>(
   CommonCardComponent,
@@ -23,6 +24,7 @@ type CompoundedComponent = typeof CompoundedCommonCard & {
   AnchorLink: typeof AnchorLink;
   CardList: typeof CardList;
   Page: typeof Page;
+  StickyPage: typeof StickyPage;
 };
 
 const CommonCard = CompoundedCommonCard as CompoundedComponent;
@@ -33,5 +35,6 @@ CommonCard.AnchorCard = AnchorCard;
 CommonCard.AnchorLink = AnchorLink;
 CommonCard.CardList = CardList;
 CommonCard.Page = Page;
+CommonCard.StickyPage = StickyPage;
 
 export default CommonCard;

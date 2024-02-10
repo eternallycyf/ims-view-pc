@@ -71,6 +71,10 @@ const { Page, IndexPage, Link, AnchorCard, AnchorLink, CardList } = CommonCard;
 
 <code transform="true"  src='./demo/indexPage.tsx'></code>
 
+### StickyPage
+
+<code src='./demo/sticky.tsx' ></code>
+
 ## API
 
 ### CommonCard
