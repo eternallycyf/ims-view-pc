@@ -1,5 +1,24 @@
 # Changelog
 
+## [Version&nbsp;1.41.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.40.0...ims-view-pc@1.41.0)
+
+<sup>Released on **2024-02-22**</sup>
+
+#### ✨ 新特性
+
+- **ims-view-pc**: Add sticky.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **ims-view-pc**: Add sticky ([893eb18](https://github.com/eternallycyf/ims-view-pc/commit/893eb18))
+
+</details>
+
 ## [Version&nbsp;1.40.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.39.1...ims-view-pc@1.40.0)
 
 <sup>Released on **2024-02-10**</sup>
