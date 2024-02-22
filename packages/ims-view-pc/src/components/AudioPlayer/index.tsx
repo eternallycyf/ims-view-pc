@@ -282,11 +282,12 @@ const InternalAudioPlayer: React.ForwardRefRenderFunction<unknown, AudioPlayerPr
             open={rateOpen}
             onOpenChange={onRateVisibleChange}
             getPopupContainer={(triggerNode) => triggerNode.parentNode as HTMLElement}
-            content={rateRange.map((rateItem) => (
+            content={rateRange.map((rateItem, index) => (
               <p
+                key={index}
                 className="change-audio-rate-item"
                 style={{ '--colorPrimaryHover': variables?.colorPrimaryHover }}
-                key={`rate-${rateItem}`}
+                // key={`rate-${rateItem}`}
                 onClick={() => {
                   controlAudio('changeRate', rateItem);
                 }}

@@ -30,6 +30,8 @@ export { default as Marker } from './components/Marker';
 export * from './components/Marker/interface';
 export { default as SectionTitle } from './components/SectionTitle';
 export * from './components/SectionTitle/interface';
+export { default as Sticky } from './components/Sticky';
+export * from './components/Sticky/interface';
 export { default as ToggleBtn } from './components/ToggleBtn';
 export * from './components/ToggleBtn/interface';
 export { default as VideoViewer } from './components/VideoViewer';
