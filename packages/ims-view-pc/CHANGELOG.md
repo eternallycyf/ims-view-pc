@@ -1,5 +1,24 @@
 # Changelog
 
+## [Version&nbsp;1.42.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.41.0...ims-view-pc@1.42.0)
+
+<sup>Released on **2024-03-04**</sup>
+
+#### ✨ 新特性
+
+- **ims-view-pc**: CustomModal.FormModal.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **ims-view-pc**: CustomModal.FormModal ([4c489a6](https://github.com/eternallycyf/ims-view-pc/commit/4c489a6))
+
+</details>
+
 ## [Version&nbsp;1.41.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.40.0...ims-view-pc@1.41.0)
 
 <sup>Released on **2024-02-22**</sup>
