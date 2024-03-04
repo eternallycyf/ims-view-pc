@@ -31,6 +31,8 @@ demo:
 
 <code src="./demo/demo3.tsx" description="只有type='confirm'才可以">带 loading 的确定</code>
 
+<code src="./demo/demo4.tsx">formModal</code>
+
 ## API
 
 ### props
@@ -52,3 +54,36 @@ demo:
 | btnChild | 按钮内容       | `React.ReactNode`                                  | -      |
 | btnProps | 按钮属性       | `ButtonProps`                                      | -      |
 | onClick  | 点击按钮的回调 | `(status: boolean, destoryFn: () => void) => void` | -      |
+
+### CustomModal.FormModal
+
+```js
+export type ICustomModalFormList<Values = AnyObject, Rest = AnyObject, Extra = unknown> = (Search<
+  Values,
+  Rest,
+  Extra,
+> & {
+  col?: number,
+  children?:
+    | Search<Values, Rest, Extra>
+    | ((
+        values: Values,
+        form: FormInstance<Values>,
+      ) => ICustomModalFormList<Values, Rest, Extra> | false),
+})[];
+
+export interface FormModalProps<Values = AnyObject, Rest = AnyObject, Extra = unknown>
+  extends Omit<ModalProps, 'onCancel'> {
+  form?: FormInstance<Values>;
+  formRef?: RefObject<FormInstance<Values>>;
+  visible?: boolean;
+  loading?: boolean;
+  formList?: ICustomModalFormList<Values, Rest, Extra>;
+  children?: React.ReactNode;
+  initialValues?: Values;
+  onFinish?: FormProps<Values>['onFinish'];
+  formProps?: Omit<FormProps<Values>, 'initialValues' | 'onFinish'>;
+  onCancel?: (values: Values) => any;
+  onDestroy?: Function;
+}
+```

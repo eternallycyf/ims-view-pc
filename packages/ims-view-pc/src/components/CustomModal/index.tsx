@@ -1,6 +1,7 @@
 import { Button, ButtonProps, Modal, ModalFuncProps } from 'antd';
 import React from 'react';
 import { variables } from '../../styles/variables';
+import FormModal from './form';
 import './index.less';
 
 interface IAsyncConfirm {
@@ -71,7 +72,7 @@ interface ICreateModal {
   }[];
 }
 
-const CustomModal = async ({
+const DefaultModal = async ({
   onOk = (status, destoryFn) => {
     destoryFn();
   },
@@ -99,5 +100,13 @@ const CustomModal = async ({
     },
   });
 };
+
+type CompoundedComponent = typeof DefaultModal & {
+  FormModal: typeof FormModal;
+};
+
+const CustomModal = DefaultModal as CompoundedComponent;
+
+CustomModal.FormModal = FormModal;
 
 export default CustomModal;
