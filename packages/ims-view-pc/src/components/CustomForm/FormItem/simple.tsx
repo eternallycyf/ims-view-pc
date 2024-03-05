@@ -29,6 +29,7 @@ import { DatePickerProps } from 'antd/lib';
 import dayjs, { Dayjs } from 'dayjs';
 import 'dayjs/locale/zh-cn';
 import { AnyObject, DeepPartial, IBaseControlProps, IBaseCustomFormItemProps } from 'ims-view-pc';
+import _ from 'lodash';
 import React, { useImperativeHandle } from 'react';
 const RadioGroup = Radio.Group;
 const CheckboxGroup: any = Checkbox.Group;
@@ -105,7 +106,9 @@ const SimpleControl = React.forwardRef<any, ISimpleControlProps>((props, ref) =>
     checked = false,
     controlProps: defaultControlProps = {},
     itemProps,
-    ...restProps
+    onChange,
+    record,
+    value,
   } = props;
 
   const _getPlaceholder = () => {
@@ -146,7 +149,15 @@ const SimpleControl = React.forwardRef<any, ISimpleControlProps>((props, ref) =>
     ...defaultVal[type],
     placeholder: _getPlaceholder(),
     ...defaultControlProps,
-    ...restProps,
+    onChange: (...arg) => {
+      //@ts-ignore
+      onChange && onChange(...arg);
+      if (defaultControlProps?.onChange) {
+        defaultControlProps?.onChange(...arg);
+      }
+    },
+    record,
+    value,
   };
 
   useImperativeHandle(ref, () => ({}));
