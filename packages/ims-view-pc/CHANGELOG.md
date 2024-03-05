@@ -1,5 +1,24 @@
 # Changelog
 
+### [Version&nbsp;1.42.1](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.42.0...ims-view-pc@1.42.1)
+
+<sup>Released on **2024-03-05**</sup>
+
+#### 🐛 修复
+
+- **ims-view-pc**: Simple form item onChange is not trigger in EditTable.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- **ims-view-pc**: Simple form item onChange is not trigger in EditTable ([1704da4](https://github.com/eternallycyf/ims-view-pc/commit/1704da4))
+
+</details>
+
 ## [Version&nbsp;1.42.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.41.0...ims-view-pc@1.42.0)
 
 <sup>Released on **2024-03-04**</sup>
