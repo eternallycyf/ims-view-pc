@@ -14,4 +14,4 @@ apiHeader: false
 
 - 原组件代码链接 https://github.com/eternallycyf/Antd-CustomComponent/tree/main/src/core/base/CustomMenu
 
-![](https://raw.githubusercontent.com/eternallycyf/Antd-CustomComponent/main/public/ims-view-pc.png)
+![](../../../../../public/images/ims-view-pc.png)

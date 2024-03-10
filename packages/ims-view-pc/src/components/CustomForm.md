@@ -12,4 +12,4 @@ demo:
 
 ### 暂未整理完成
 
-![](https://raw.githubusercontent.com/eternallycyf/ims-view-pc/master/public/images/crud.png)
+![](../../../../public/images/crud.png)

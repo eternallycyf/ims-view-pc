@@ -14,4 +14,4 @@ apiHeader: false
 
 - 原组件代码链接 https://github.com/eternallycyf/umi4-tab
 
-![](https://raw.githubusercontent.com/eternallycyf/umi4-tab/main/public/tag.png)
+![](../../../../../public/images/tag.png)
