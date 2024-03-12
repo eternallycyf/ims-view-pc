@@ -16,7 +16,7 @@ const Page: React.FC<IPageProps> = (props) => {
               <Spin tip="加裁中..." />
             </div>
           ) : (
-            <div className="content">{children}</div>
+            <div className="page-content">{children}</div>
           )}
         </SectionTitle>
       </div>
