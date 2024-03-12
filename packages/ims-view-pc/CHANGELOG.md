@@ -1,5 +1,24 @@
 # Changelog
 
+### [Version&nbsp;1.42.2](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.42.1...ims-view-pc@1.42.2)
+
+<sup>Released on **2024-03-12**</sup>
+
+#### 📝 文档
+
+- Transfer images(github raw image path to local path).
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### Documentation
+
+- Transfer images(github raw image path to local path) ([4ea79ef](https://github.com/eternallycyf/ims-view-pc/commit/4ea79ef))
+
+</details>
+
 ### [Version&nbsp;1.42.1](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.42.0...ims-view-pc@1.42.1)
 
 <sup>Released on **2024-03-05**</sup>
