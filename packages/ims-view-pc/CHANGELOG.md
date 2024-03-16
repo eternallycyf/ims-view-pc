@@ -1,5 +1,24 @@
 # Changelog
 
+## [Version&nbsp;1.44.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.43.0...ims-view-pc@1.44.0)
+
+<sup>Released on **2024-03-16**</sup>
+
+#### ✨ 新特性
+
+- **@ims-view-pc**: CommonSearch add calc span.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **@ims-view-pc**: CommonSearch add calc span ([b94b8fc](https://github.com/eternallycyf/ims-view-pc/commit/b94b8fc))
+
+</details>
+
 ## [Version&nbsp;1.43.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.42.2...ims-view-pc@1.43.0)
 
 <sup>Released on **2024-03-16**</sup>
