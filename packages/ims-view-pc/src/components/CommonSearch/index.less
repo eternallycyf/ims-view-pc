@@ -1,0 +1,93 @@
+.searchWrap {
+  position: relative;
+  width: 100%;
+  height: fit-content;
+
+  .CommonSearch-form {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+
+  .expandForm {
+    display: flex;
+    align-items: center;
+    height: 44px;
+    color: var(--colorPrimary);
+
+    &:hover {
+      border-color: var(--colorPrimary);
+      color: var(--colorPrimaryHover);
+    }
+
+    &:active {
+      color: var(--colorPrimaryActive);
+    }
+
+    .expand {
+      transition: 0.3s;
+      transform-origin: center;
+    }
+
+    .close {
+      transition: 0.3s;
+      transform: rotateZ(180deg);
+      transform-origin: center;
+    }
+  }
+
+  .CommonSearch-content {
+    position: relative;
+    display: block;
+    flex: none;
+    width: 100%;
+  }
+
+  :global {
+    .ant-form-item {
+      margin-right: 0 !important;
+
+      .ant-row {
+        width: 100%;
+      }
+
+      .ant-picker {
+        width: 100%;
+      }
+    }
+
+    .ant-select-arrow {
+      right: 9px;
+    }
+
+    .ant-form-item,
+    .ant-legacy-form-item {
+      display: flex;
+      align-items: center;
+      margin-right: 0;
+      margin-bottom: 5px;
+
+      .ant-form-item-label {
+        overflow: hidden;
+        padding-right: 8px;
+        max-width: 120px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        word-break: break-all;
+        line-height: normal;
+      }
+
+      .ant-form-item-control {
+        line-height: normal;
+
+        &-wrapper {
+          flex: 1;
+        }
+      }
+    }
+  }
+}
+
+.CommonSearch-Ellipsis {
+  max-width: 100px;
+}
