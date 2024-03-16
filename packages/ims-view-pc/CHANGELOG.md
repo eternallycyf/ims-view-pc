@@ -1,5 +1,24 @@
 # Changelog
 
+### [Version&nbsp;1.44.1](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.44.0...ims-view-pc@1.44.1)
+
+<sup>Released on **2024-03-16**</sup>
+
+#### 🐛 修复
+
+- ScrollToFirstError not id.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- ScrollToFirstError not id ([d7bdc00](https://github.com/eternallycyf/ims-view-pc/commit/d7bdc00))
+
+</details>
+
 ## [Version&nbsp;1.44.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.43.0...ims-view-pc@1.44.0)
 
 <sup>Released on **2024-03-16**</sup>
