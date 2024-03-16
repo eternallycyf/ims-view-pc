@@ -109,6 +109,7 @@ const SimpleControl = React.forwardRef<any, ISimpleControlProps>((props, ref) =>
     onChange,
     record,
     value,
+    id,
   } = props;
 
   const _getPlaceholder = () => {
@@ -158,6 +159,7 @@ const SimpleControl = React.forwardRef<any, ISimpleControlProps>((props, ref) =>
     },
     record,
     value,
+    id,
   };
 
   useImperativeHandle(ref, () => ({}));

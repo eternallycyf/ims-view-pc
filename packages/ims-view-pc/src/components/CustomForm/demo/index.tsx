@@ -1,4 +1,5 @@
-import { Button, Form, Switch } from 'antd';
+import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
+import { Button, Col, Form, Input, Row, Switch } from 'antd';
 import dayjs from 'dayjs';
 import { ISearchesType, renderFormItem } from 'ims-view-pc';
 import React, { Fragment } from 'react';
@@ -155,6 +156,9 @@ export default () => {
       name: 'dateRange',
       label: 'dateRange',
       type: 'dateRange',
+      itemProps: {
+        rules: [{ required: true }],
+      },
     },
     {
       name: 'weekRange',
@@ -236,10 +240,66 @@ export default () => {
         );
       },
     },
+    {
+      label: 'list',
+      type: 'custom',
+      itemProps: {},
+      Component(props) {
+        return (
+          <Form.List
+            initialValue={[{ name: 1 }]}
+            name="names"
+            rules={[
+              {
+                validator: async (_, names) => {
+                  if (!names || names.length < 1) {
+                    return Promise.reject(new Error('At least 1 passengers'));
+                  }
+                },
+              },
+            ]}
+          >
+            {(fields, { add, remove }, { errors }) => (
+              <>
+                {fields.map((field, index) => (
+                  <Form.Item noStyle key={field.key}>
+                    <Row gutter={16}>
+                      <Col>
+                        <Form.Item name={[field.name, 'name']}>
+                          <Input placeholder="passenger name" />
+                        </Form.Item>
+                      </Col>
+                      <Col>
+                        <MinusCircleOutlined onClick={() => remove(field.name)} />
+                      </Col>
+                    </Row>
+                  </Form.Item>
+                ))}
+                <Form.Item noStyle>
+                  <Button type="dashed" onClick={() => add()} icon={<PlusOutlined />}>
+                    Add field
+                  </Button>
+
+                  <Form.ErrorList errors={errors} />
+                </Form.Item>
+              </>
+            )}
+          </Form.List>
+        );
+      },
+    },
   ];
 
   return (
-    <Form style={{ overflow: 'auto' }} form={form} onFinish={(value) => console.log(value)}>
+    <Form
+      scrollToFirstError
+      labelAlign="right"
+      labelCol={{ span: 3 }}
+      wrapperCol={{ span: 21 }}
+      style={{ overflow: 'auto' }}
+      form={form}
+      onFinish={(value) => console.log(value)}
+    >
       {formList.map((item, index) => (
         <Fragment key={index}>{renderFormItem({ ...item, form })}</Fragment>
       ))}

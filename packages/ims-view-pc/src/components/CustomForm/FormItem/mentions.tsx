@@ -45,6 +45,7 @@ const MentionsControl = React.forwardRef<any, IMentionsControlProps>((props, ref
 
   return (
     <Mentions
+      id={id}
       value={value}
       options={options}
       onSearch={props?.fetchConfig?.request && _.debounce(onSearch, 1000)}

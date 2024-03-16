@@ -194,7 +194,7 @@ const CommonSearch: React.ForwardRefRenderFunction<CommonSearchHandle, CommonSea
             {formList.map((field, index) => {
               return (
                 <Col key={index} span={calcSpan}>
-                  {renderFormItem(field, index)}
+                  {renderFormItem({ form, ...field }, index)}
                 </Col>
               );
             })}

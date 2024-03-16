@@ -51,7 +51,7 @@ const UpdateControl = React.forwardRef<any, IUpdateControlProps>((props, ref) =>
         return (
           <Fragment key={random.getUUID()}>
             {((nextValues as any[]) || []).map((item: any, index: number) => (
-              <Col span={item?.['col'] ?? 24} key={index}>
+              <Col span={item?.['col'] ?? 0} key={index}>
                 <Form.Item
                   labelAlign="right"
                   label={item?.label}

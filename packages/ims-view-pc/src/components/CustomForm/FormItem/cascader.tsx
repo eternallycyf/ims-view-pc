@@ -47,6 +47,7 @@ const CascadeControl = React.forwardRef<any, ICascadeControlProps>((props, ref) 
 
   return (
     <Cascader
+      id={id}
       value={value}
       options={options}
       showSearch={{ filter }}
