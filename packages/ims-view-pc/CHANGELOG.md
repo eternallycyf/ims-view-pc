@@ -1,5 +1,24 @@
 # Changelog
 
+## [Version&nbsp;1.43.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.42.2...ims-view-pc@1.43.0)
+
+<sup>Released on **2024-03-16**</sup>
+
+#### ✨ 新特性
+
+- **@ims-view-pc**: Add CommonSearch template.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **@ims-view-pc**: Add CommonSearch template ([1ec1d9d](https://github.com/eternallycyf/ims-view-pc/commit/1ec1d9d))
+
+</details>
+
 ### [Version&nbsp;1.42.2](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.42.1...ims-view-pc@1.42.2)
 
 <sup>Released on **2024-03-12**</sup>
