@@ -1,12 +1,13 @@
 import { DownOutlined, ReloadOutlined, SearchOutlined } from '@ant-design/icons';
-import { Button, Col, Form, Row, type FormInstance } from 'antd';
+import { Button, Col, Form, Row, Space, type FormInstance } from 'antd';
 import { renderFormItem, type ISearchesType } from 'ims-view-pc';
 import _ from 'lodash';
-import React, { useImperativeHandle, useRef, useState } from 'react';
+import React, { useImperativeHandle, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { variables } from '../../styles/variables';
 import ErrorBoundary from '../ErrorBoundary';
 import './index.less';
 import type { CommonSearchContext, CommonSearchHandle, CommonSearchProps } from './interface';
+import useSize from './useSize';
 import { formatByAcpCode } from './utils';
 
 const dateFormat = 'YYYYMMDD';
@@ -24,9 +25,6 @@ const CommonSearch: React.ForwardRefRenderFunction<CommonSearchHandle, CommonSea
     collapsed: defaultCollapsed = false,
     columnNumber = 4,
 
-    showSearchBtn = true,
-    showResetBtn = true,
-
     onCollapse,
     onChange,
     onReset,
@@ -36,8 +34,11 @@ const CommonSearch: React.ForwardRefRenderFunction<CommonSearchHandle, CommonSea
   } = props;
 
   const [form] = Form.useForm();
+  const wrapperRef = useRef<HTMLDivElement>(null!);
+
   const [collapsed, setCollapsed] = useState(defaultCollapsed);
   const [searchParams, setSearchParams] = useState({});
+  const { size, span, calcSpan } = useSize({ wrapperRef });
 
   const formList = formatByAcpCode(defaultFormList, accessCollection);
 
@@ -172,7 +173,8 @@ const CommonSearch: React.ForwardRefRenderFunction<CommonSearchHandle, CommonSea
   return (
     <ErrorBoundary>
       <div
-        className={`searchWrap ${className}`}
+        ref={wrapperRef}
+        className={`ims-search-form-wrapper ${className}`}
         style={{
           '--colorPrimary': variables?.colorPrimary,
           '--colorPrimaryHover': variables.colorPrimaryHover,
@@ -180,66 +182,61 @@ const CommonSearch: React.ForwardRefRenderFunction<CommonSearchHandle, CommonSea
         }}
       >
         <Form
-          size="small"
+          size={size}
           layout="horizontal"
           onFieldsChange={onChange}
           form={form}
           onFinish={handleSubmit}
           labelWrap
-          className="CommonSearch-form"
+          className="ims-search-form"
         >
-          <Row align="middle" gutter={{ md: 4, lg: 12, xl: 24 }} style={{ flex: 1, width: '100%' }}>
+          <Row align="middle" gutter={{ md: 4, lg: 12, xl: 24 }}>
             {formList.map((field, index) => {
               return (
-                <Col
-                  key={field.name as string}
-                  span={index + 1 > columnNumber * 2 && !collapsed ? 0 : 24 / columnNumber}
-                >
-                  {renderFormItem({ ...field, form }, index)}
+                <Col key={index} span={calcSpan}>
+                  {renderFormItem(field, index)}
                 </Col>
               );
             })}
-            <Form.Item noStyle shouldUpdate={(pre, cru) => true}>
-              {(form) => {
-                const values = form.getFieldsValue();
-                return (
-                  <div className="CommonSearch-content">
-                    {children && children({ form, values })}
-                  </div>
-                );
-              }}
-            </Form.Item>
-          </Row>
 
-          {showSearchBtn && showResetBtn && (
-            <div style={{ marginLeft: 10 }}>
-              <Row style={{ marginBottom: 10 }}>
-                {showResetBtn ? (
+            <Col className="ims-search-form-action-wrapper">
+              <Form.Item noStyle>
+                <Space>
                   <Button
-                    style={{ marginRight: 10 }}
                     size="small"
                     htmlType="button"
-                    className="btn-default"
+                    className="btn-default ims-search-form-action-reset"
                     onClick={handleReset}
                   >
                     重置
                   </Button>
-                ) : null}
-                {showSearchBtn && (
-                  <Button type="primary" htmlType="submit" size="small">
+                  <Button
+                    className="ims-search-form-action-submit"
+                    type="primary"
+                    htmlType="submit"
+                    size="small"
+                  >
                     查询
                   </Button>
-                )}
-              </Row>
-              <a className="expandForm" onClick={toggleForm}>
-                {collapsed ? '收起' : '展开'}
-                <DownOutlined
-                  className={`${collapsed ? 'close' : 'expand'}`}
-                  style={{ marginLeft: 6 }}
-                />
-              </a>
-            </div>
-          )}
+                  <a className="ims-search-form-action" onClick={toggleForm}>
+                    {collapsed ? '收起' : '展开'}
+                    <DownOutlined className={`${collapsed ? 'close' : 'expand'}`} />
+                  </a>
+                </Space>
+              </Form.Item>
+            </Col>
+          </Row>
+
+          {/* <Form.Item noStyle shouldUpdate={(pre, cru) => true}>
+            {(form) => {
+              const values = form.getFieldsValue();
+              return (
+                <div className="ims-search-form-children">
+                  {children && children({ form, values })}
+                </div>
+              );
+            }}
+          </Form.Item> */}
         </Form>
       </div>
     </ErrorBoundary>

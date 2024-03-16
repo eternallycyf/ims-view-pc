@@ -10,14 +10,12 @@ export interface CommonSearchProps<Values = AnyObject, Params = AnyObject, Rest 
       children?: CommonSearchProps<Values, Params, Rest>['formList'];
       acpCode?: string;
       visible?: boolean;
+      span?: number;
     }
   >[];
   collapsed?: boolean;
   columnNumber?: number;
   accessCollection?: string[];
-
-  showSearchBtn?: boolean;
-  showResetBtn?: boolean;
 
   onCollapse?: (collapsed: boolean) => void;
   onSearch?: (values: Values) => void;

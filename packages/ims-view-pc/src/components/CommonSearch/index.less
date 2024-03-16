@@ -1,51 +1,53 @@
-.searchWrap {
+.ims-search-form-wrapper {
   position: relative;
   width: 100%;
   height: fit-content;
 
-  .CommonSearch-form {
+  .ims-search-form {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
   }
 
-  .expandForm {
-    display: flex;
-    align-items: center;
-    height: 44px;
-    color: var(--colorPrimary);
-
-    &:hover {
-      border-color: var(--colorPrimary);
-      color: var(--colorPrimaryHover);
-    }
-
-    &:active {
-      color: var(--colorPrimaryActive);
-    }
-
-    .expand {
-      transition: 0.3s;
-      transform-origin: center;
-    }
-
-    .close {
-      transition: 0.3s;
-      transform: rotateZ(180deg);
-      transform-origin: center;
-    }
-  }
-
-  .CommonSearch-content {
+  .ims-search-form-children {
     position: relative;
     display: block;
     flex: none;
     width: 100%;
   }
 
+  .ims-search-form-action-wrapper {
+    .ims-search-form-action {
+      display: flex;
+      align-items: center;
+      height: 44px;
+      color: var(--colorPrimary);
+
+      &:hover {
+        border-color: var(--colorPrimary);
+        color: var(--colorPrimaryHover);
+      }
+
+      &:active {
+        color: var(--colorPrimaryActive);
+      }
+
+      .expand {
+        transition: 0.3s;
+        transform-origin: center;
+      }
+
+      .close {
+        transition: 0.3s;
+        transform: rotateZ(180deg);
+        transform-origin: center;
+      }
+    }
+  }
+
   :global {
     .ant-form-item {
-      margin-right: 0 !important;
+      margin-right: 0;
 
       .ant-row {
         width: 100%;
