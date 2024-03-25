@@ -3,6 +3,11 @@ import { useEffect } from 'react';
 import { useAsyncFn } from 'react-use';
 import { useFetchProps, useFetchState } from './interface';
 
+/**
+ *
+ * @param props
+ * @returns
+ */
 export default function useFetch<T>(props: useFetchProps<T>): useFetchState<T> {
   const { fetchConfig, dataHandler, initRequest = true, request } = props;
   const [data, fetchData] = useAsyncFn(async (defaultParams?, defaultData?) => {

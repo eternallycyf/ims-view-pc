@@ -91,6 +91,7 @@ $RECYCLE.BIN/
 
 coverage
 lib
+es
 gitmojis.json
 /lerna-debug.log
 tmp
