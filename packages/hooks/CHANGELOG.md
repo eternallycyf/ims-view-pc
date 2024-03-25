@@ -1,5 +1,24 @@
 # Changelog
 
+## [Version&nbsp;1.14.0](https://github.com/eternallycyf/ims-view-pc/compare/@ims-view/hooks@1.13.0...@ims-view/hooks@1.14.0)
+
+<sup>Released on **2024-03-25**</sup>
+
+#### ✨ 新特性
+
+- Add es build.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- Add es build ([1034310](https://github.com/eternallycyf/ims-view-pc/commit/1034310))
+
+</details>
+
 ## [Version&nbsp;1.13.0](https://github.com/eternallycyf/ims-view-pc/compare/@ims-view/hooks@1.12.0...@ims-view/hooks@1.13.0)
 
 <sup>Released on **2023-12-08**</sup>
