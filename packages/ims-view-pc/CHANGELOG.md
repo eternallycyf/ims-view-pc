@@ -1,5 +1,24 @@
 # Changelog
 
+## [Version&nbsp;1.46.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.45.1...ims-view-pc@1.46.0)
+
+<sup>Released on **2024-03-25**</sup>
+
+#### ✨ 新特性
+
+- Add es build.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- Add es build ([fbaa2de](https://github.com/eternallycyf/ims-view-pc/commit/fbaa2de))
+
+</details>
+
 ### [Version&nbsp;1.44.1](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.44.0...ims-view-pc@1.44.1)
 
 <sup>Released on **2024-03-16**</sup>
