@@ -1,5 +1,24 @@
 # Changelog
 
+## [Version&nbsp;1.6.0](https://github.com/eternallycyf/ims-view-pc/compare/@ims-view/chart@1.5.0...@ims-view/chart@1.6.0)
+
+<sup>Released on **2024-03-26**</sup>
+
+#### ✨ 新特性
+
+- ✨ feat: add es build.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- ✨ feat: add es build ([f7c4642](https://github.com/eternallycyf/ims-view-pc/commit/f7c4642))
+
+</details>
+
 ## [Version&nbsp;1.5.0](https://github.com/eternallycyf/ims-view-pc/compare/@ims-view/chart@1.4.0...@ims-view/chart@1.5.0)
 
 <sup>Released on **2024-03-25**</sup>
