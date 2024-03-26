@@ -1,6 +1,6 @@
 {
   "name": "ims-view-pc",
-  "version": "1.46.0",
+  "version": "1.47.0",
   "main": "lib/index.js",
   "module": "es/index.js",
   "types": "lib/index.d.ts",
@@ -20,9 +20,9 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.23.1",
-    "@ims-view/chart": "1.5.0",
-    "@ims-view/hooks": "1.14.0",
-    "@ims-view/utils": "1.14.0",
+    "@ims-view/chart": "1.6.0",
+    "@ims-view/hooks": "1.15.0",
+    "@ims-view/utils": "1.15.0",
     "@wangeditor/editor": "^5.1.23",
     "@wangeditor/editor-for-react": "^1.0.6",
     "classnames": "^2.3.2",
