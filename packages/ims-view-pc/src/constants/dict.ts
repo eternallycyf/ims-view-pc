@@ -1,12 +1,12 @@
 export class BaseDict {
   static COMMON_TYPE = [
-    { label: '全部', value: '' },
-    { label: '是', value: '0' },
-    { label: '否', value: '1' },
+    { text: '全部', value: '' },
+    { text: '是', value: '0' },
+    { text: '否', value: '1' },
   ];
 
   static THEME_TYPE = [
-    { label: '浅色', value: 'light' },
-    { label: '深色', value: 'dark' },
+    { text: '浅色', value: 'light' },
+    { text: '深色', value: 'dark' },
   ];
 }

@@ -1,8 +1,3 @@
-/**
- *
- * @param config
- * @returns
- */
 export const formatNumber = (config: { number: number; isPercent?: true }) => {
   if (config?.number == undefined) return '--';
   const { number, isPercent = true } = config;
