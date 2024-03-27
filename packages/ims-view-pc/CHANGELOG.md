@@ -1,5 +1,24 @@
 # Changelog
 
+### [Version&nbsp;1.47.1](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.47.0...ims-view-pc@1.47.1)
+
+<sup>Released on **2024-03-27**</sup>
+
+#### 🐛 修复
+
+- **ims-view-pc**: Export excel Null judgment use ?? replace ternary expression.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- **ims-view-pc**: Export excel Null judgment use ?? replace ternary expression ([90ef8e8](https://github.com/eternallycyf/ims-view-pc/commit/90ef8e8))
+
+</details>
+
 ## [Version&nbsp;1.47.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.46.0...ims-view-pc@1.47.0)
 
 <sup>Released on **2024-03-26**</sup>
