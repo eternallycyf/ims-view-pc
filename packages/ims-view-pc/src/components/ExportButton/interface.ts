@@ -46,7 +46,26 @@ export interface IExportButtonProps<DataType = AnyData, Params = RequestParams>
   setImageStyle?: any;
   setWorkSheet?: any;
   setColumnStyle?: (...args: RenderCellParams[]) => React.CSSProperties;
+  /**
+   *
+   * @example
+   * ```tsx
+   * setRowStyle={(data, type, row, rowIndex) => {
+   *   if(type == 'header') return { font: {bold:true},height:44 }
+   *   if(type == 'main') return { height:30 }
+   * }}
+   * ```
+   */
   setRowStyle?: (...args: RenderCellParams[]) => React.CSSProperties;
+  /**
+   *
+   * @example
+   * ```tsx
+   * setCellStyle={(data, type, row, rowIndex) => {
+   *   if(type == 'main') return {style:{alignment:{vertical:'middle',horizontal:'left',wrapText:true}}}
+   * }}
+   * ```
+   */
   setCellStyle?: (...args: RenderCellParams[]) => React.CSSProperties;
   setCellFormat?: (...args: RenderCellParams[]) => React.CSSProperties;
 

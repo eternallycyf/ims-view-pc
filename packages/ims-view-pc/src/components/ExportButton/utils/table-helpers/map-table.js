@@ -230,7 +230,7 @@ export class MapCreateMergeHeaderTable extends MapTable {
     if (isObject(excel)) {
       const text = excel.text;
       const format = excel.format;
-      cell.text = text ? text : '';
+      cell.text = text ?? '';
       if (!isEmptyObj(format)) {
         cell.format = format;
       }
@@ -364,7 +364,7 @@ export class MapCreateNoMergeTable extends MapTable {
     if (isObject(excel)) {
       const text = excel.text;
       const format = excel.format;
-      cell.text = text ? text : '';
+      cell.text = text ?? '';
       if (!isEmptyObj(format)) {
         cell.format = format;
       }
@@ -561,7 +561,7 @@ export class MapCreateCombinMainTable extends MapTable {
     if (isObject(excel)) {
       const text = excel.text;
       const format = excel.format;
-      cell.text = text ? text : '';
+      cell.text = text ?? '';
       if (!isEmptyObj(format)) {
         cell.format = format;
       }
