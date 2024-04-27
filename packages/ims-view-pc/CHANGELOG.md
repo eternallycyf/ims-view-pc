@@ -1,5 +1,24 @@
 # Changelog
 
+## [Version&nbsp;1.49.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.48.1...ims-view-pc@1.49.0)
+
+<sup>Released on **2024-04-27**</sup>
+
+#### ✨ 新特性
+
+- **ims-view-pc**: Add MutateObserver.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **ims-view-pc**: Add MutateObserver ([4ced5f0](https://github.com/eternallycyf/ims-view-pc/commit/4ced5f0))
+
+</details>
+
 ### [Version&nbsp;1.48.1](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.48.0...ims-view-pc@1.48.1)
 
 <sup>Released on **2024-04-27**</sup>
