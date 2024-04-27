@@ -31,6 +31,8 @@ export * from './components/ExportButton/interface';
 export { default as Icon } from './components/Icon';
 export { default as Marker } from './components/Marker';
 export * from './components/Marker/interface';
+export { default as MutateObserver } from './components/MutateObserver';
+export * from './components/MutateObserver/interface';
 export { default as Portal } from './components/Portal';
 export * from './components/Portal/interface';
 export { default as SectionTitle } from './components/SectionTitle';
