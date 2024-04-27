@@ -40,8 +40,8 @@
     "antd": "^5",
     "axios": "^1.5.1",
     "lodash": "^4.17.21",
-    "react": "^18",
-    "react-dom": "^18"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@types/video.js": "^7.3.53"
