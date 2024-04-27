@@ -1,5 +1,32 @@
 # Changelog
 
+## [Version&nbsp;1.16.0](https://github.com/eternallycyf/ims-view-pc/compare/@ims-view/hooks@1.15.0...@ims-view/hooks@1.16.0)
+
+<sup>Released on **2024-04-27**</sup>
+
+#### ✨ 新特性
+
+- **@ims-view/hooks**: Add useMutateObserver.
+
+#### 🔖 杂项
+
+- Lock react version.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **@ims-view/hooks**: Add useMutateObserver ([4aa5da6](https://github.com/eternallycyf/ims-view-pc/commit/4aa5da6))
+
+#### Chores
+
+- Lock react version ([920d338](https://github.com/eternallycyf/ims-view-pc/commit/920d338))
+
+</details>
+
 ## [Version&nbsp;1.15.0](https://github.com/eternallycyf/ims-view-pc/compare/@ims-view/hooks@1.14.0...@ims-view/hooks@1.15.0)
 
 <sup>Released on **2024-03-26**</sup>
