@@ -1,5 +1,24 @@
 # Changelog
 
+## [Version&nbsp;1.48.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.47.1...ims-view-pc@1.48.0)
+
+<sup>Released on **2024-04-27**</sup>
+
+#### ✨ 新特性
+
+- **ims-view-pc**: Add Portal.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **ims-view-pc**: Add Portal ([6967260](https://github.com/eternallycyf/ims-view-pc/commit/6967260))
+
+</details>
+
 ### [Version&nbsp;1.47.1](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.47.0...ims-view-pc@1.47.1)
 
 <sup>Released on **2024-03-27**</sup>
