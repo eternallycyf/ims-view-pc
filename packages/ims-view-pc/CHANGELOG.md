@@ -1,5 +1,24 @@
 # Changelog
 
+## [Version&nbsp;1.50.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.49.0...ims-view-pc@1.50.0)
+
+<sup>Released on **2024-04-27**</sup>
+
+#### ✨ 新特性
+
+- **ims-view-pc**: Add Clipboard.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **ims-view-pc**: Add Clipboard ([1f8eb33](https://github.com/eternallycyf/ims-view-pc/commit/1f8eb33))
+
+</details>
+
 ## [Version&nbsp;1.49.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.48.1...ims-view-pc@1.49.0)
 
 <sup>Released on **2024-04-27**</sup>
