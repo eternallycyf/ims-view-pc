@@ -109,16 +109,15 @@ export const getFieldComp: FieldCompType = ({
 
   if (!FieldComp) return null;
 
-  return (
-    <Form.Item
-      key={name || random.getUUID()}
-      name={name}
-      label={label ?? ''}
-      {...(formProps?.itemProps as any)}
-    >
-      <FieldComp {...formProps} />
-    </Form.Item>
-  );
+  if (form) {
+    return (
+      <Form.Item name={name} label={label ?? ''} {...(formProps?.itemProps as any)}>
+        <FieldComp {...formProps} />
+      </Form.Item>
+    );
+  } else {
+    return <FieldComp {...formProps} />;
+  }
 };
 
 export const renderFormItem = (item: any, index?: number) => {
