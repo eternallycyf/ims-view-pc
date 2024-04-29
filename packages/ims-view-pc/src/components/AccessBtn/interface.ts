@@ -3,7 +3,7 @@ import { ButtonGroupProps } from 'antd/es/button';
 import { ReactNode } from 'react';
 
 export type IAccessBtnType = 'default' | 'custom' | 'delete' | 'group';
-export type IGroupButtonValue = string | number | readonly string[];
+export type IGroupButtonValue = any;
 
 //#region ------------------------ 1.buttonGroup -----------------------
 export interface IButtonGroupDefaultProps {
