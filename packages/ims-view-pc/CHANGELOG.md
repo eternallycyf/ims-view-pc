@@ -1,5 +1,24 @@
 # Changelog
 
+### [Version&nbsp;1.50.1](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.50.0...ims-view-pc@1.50.1)
+
+<sup>Released on **2024-04-29**</sup>
+
+#### 🐛 修复
+
+- Type == "update" not show formItem.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- Type == "update" not show formItem ([3d57a22](https://github.com/eternallycyf/ims-view-pc/commit/3d57a22))
+
+</details>
+
 ## [Version&nbsp;1.50.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.49.0...ims-view-pc@1.50.0)
 
 <sup>Released on **2024-04-27**</sup>
