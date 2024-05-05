@@ -1,5 +1,32 @@
 # Changelog
 
+## [Version&nbsp;1.16.0](https://github.com/eternallycyf/ims-view-pc/compare/@ims-view/utils@1.15.0...@ims-view/utils@1.16.0)
+
+<sup>Released on **2024-05-05**</sup>
+
+#### ✨ 新特性
+
+- Add umd build.
+
+#### 🔖 杂项
+
+- Lock react version.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- Add umd build ([6c4acff](https://github.com/eternallycyf/ims-view-pc/commit/6c4acff))
+
+#### Chores
+
+- Lock react version ([920d338](https://github.com/eternallycyf/ims-view-pc/commit/920d338))
+
+</details>
+
 ## [Version&nbsp;1.15.0](https://github.com/eternallycyf/ims-view-pc/compare/@ims-view/utils@1.14.0...@ims-view/utils@1.15.0)
 
 <sup>Released on **2024-03-26**</sup>
