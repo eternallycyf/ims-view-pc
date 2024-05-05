@@ -80,6 +80,7 @@ export default defineConfig({
   }`,
     style,
   ],
+  outputPath: 'docs-dist',
   devtool: isProd ? false : 'source-map',
   clickToComponent: {},
   ignoreMomentLocale: true,
