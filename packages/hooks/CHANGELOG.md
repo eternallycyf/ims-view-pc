@@ -1,5 +1,24 @@
 # Changelog
 
+## [Version&nbsp;1.17.0](https://github.com/eternallycyf/ims-view-pc/compare/@ims-view/hooks@1.16.0...@ims-view/hooks@1.17.0)
+
+<sup>Released on **2024-05-05**</sup>
+
+#### ✨ 新特性
+
+- Add umd build.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- Add umd build ([6c4acff](https://github.com/eternallycyf/ims-view-pc/commit/6c4acff))
+
+</details>
+
 ## [Version&nbsp;1.16.0](https://github.com/eternallycyf/ims-view-pc/compare/@ims-view/hooks@1.15.0...@ims-view/hooks@1.16.0)
 
 <sup>Released on **2024-04-27**</sup>
