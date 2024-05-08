@@ -1,6 +1,6 @@
 {
   "name": "ims-view-pc",
-  "version": "1.52.1",
+  "version": "1.53.0",
   "main": "lib/index.js",
   "unpkg": "dist/index.js",
   "module": "es/index.js",
@@ -41,15 +41,11 @@
     "react-syntax-highlighter": "^15.5.0",
     "react-markdown": "^9.0.1",
     "remark-gfm": "^4.0.0",
-    "file-saver": "^2.0.5",
-    "docx-preview": "^0.3.1",
     "jszip": "^3.10.1",
     "jszip-utils": "^0.1.0",
     "open-docxtemplater-image-module": "^1.0.3",
     "pizzip": "^3.1.7",
-    "react-excel-renderer": "^1.1.0",
-    "react-file-viewer": "^1.2.1",
-    "react-markdown": "^9.0.1"
+    "react-file-viewer": "^1.2.1"
   },
   "peerDependencies": {
     "@ant-design/icons": "^5.2.6",

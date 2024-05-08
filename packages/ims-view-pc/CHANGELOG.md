@@ -1,5 +1,24 @@
 # Changelog
 
+## [Version&nbsp;1.53.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.52.1...ims-view-pc@1.53.0)
+
+<sup>Released on **2024-05-08**</sup>
+
+#### ✨ 新特性
+
+- **ims-view-pc**: Add FileUpload FileViewer ExportWord.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **ims-view-pc**: Add FileUpload FileViewer ExportWord ([d1f3073](https://github.com/eternallycyf/ims-view-pc/commit/d1f3073))
+
+</details>
+
 ### [Version&nbsp;1.52.1](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.52.0...ims-view-pc@1.52.1)
 
 <sup>Released on **2024-05-08**</sup>
