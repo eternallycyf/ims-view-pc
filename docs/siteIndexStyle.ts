@@ -1,7 +1,8 @@
-import { style } from 'ims-template-config';
-
 const defaultStyle = `
-  ${style}
+  footer{
+    position: relative;
+    z-index: 99;
+  }
 `;
 
 export default defaultStyle;
