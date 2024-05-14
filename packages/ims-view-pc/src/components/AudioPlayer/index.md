@@ -4,7 +4,7 @@ description: 音频播放器： 提供音频文件的播放、控制等
 toc: content
 group:
   title: 文件
-  order: 5
+  order: 4
 demo:
   cols: 2
 ---

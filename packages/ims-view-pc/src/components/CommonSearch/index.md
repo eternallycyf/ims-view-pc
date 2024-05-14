@@ -3,8 +3,7 @@ title: CommonSearch
 description:
 toc: content
 group:
-  title: 筛选
-  order: 1
+  title: 表单
 order: 25
 demo:
   cols: 2

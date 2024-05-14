@@ -3,8 +3,7 @@ title: WaterMark
 description: 水印
 toc: content
 group:
-  title: 其他
-  order: 9
+  title: 反馈
 demo:
   cols: 2
 ---

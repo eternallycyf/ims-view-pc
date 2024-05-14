@@ -4,7 +4,6 @@ description: 多tab页切换
 toc: content
 group:
   title: 布局
-  order: 4
 demo:
   cols: 2
 apiHeader: false

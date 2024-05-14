@@ -4,7 +4,6 @@ description: 菜单
 toc: content
 group:
   title: 布局
-  order: 4
 demo:
   cols: 2
 apiHeader: false

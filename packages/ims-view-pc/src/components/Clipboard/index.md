@@ -3,7 +3,8 @@ title: Clipboard
 description: Clipboard
 toc: content
 group:
-  title: 其他
+  title: 工具
+  order: 6
 ---
 
 # Clipboard

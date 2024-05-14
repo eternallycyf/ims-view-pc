@@ -4,7 +4,6 @@ description: 上传文件
 toc: content
 group:
   title: 文件
-  order: 5
 demo:
   cols: 2
 ---

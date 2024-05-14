@@ -3,8 +3,7 @@ title: Marker
 description: 富文本搜索高亮
 toc: content
 group:
-  title: 其他
-  order: 10
+  title: 工具
 demo:
   cols: 2
 ---

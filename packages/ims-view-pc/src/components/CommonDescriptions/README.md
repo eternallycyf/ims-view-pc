@@ -4,7 +4,6 @@ description: 描述列表
 toc: content
 group:
   title: 布局
-  order: 4
 demo:
   cols: 2
 ---

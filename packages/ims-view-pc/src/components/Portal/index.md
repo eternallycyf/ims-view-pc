@@ -3,7 +3,7 @@ title: Portal
 description: Portal
 toc: content
 group:
-  title: 其他
+  title: 工具
 ---
 
 # Portal

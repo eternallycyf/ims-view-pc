@@ -1,0 +1,46 @@
+.ExpandSelect {
+  height: 40vh;
+
+  :global {
+    .ant-select-selection-item {
+      background: #ebf2ff;
+      color: #3363d7;
+      font-weight: 400;
+      font-size: 12px;
+    }
+  }
+}
+
+.ExpandSelectOptions {
+  gap: 8px;
+  display: inline-flex !important;
+  margin: 2px;
+  min-height: 14px !important;
+  line-height: 1 !important;
+  background: #f5f5f5;
+
+  :global {
+    .ant-select-item-option-state {
+      display: none;
+    }
+
+    .ant-select-item-option-content {
+      display: inline-block !important;
+    }
+  }
+}
+
+.ExpandSelectBoxSelects {
+  :global {
+    .rc-virtual-list-holder-inner {
+      display: block !important;
+    }
+  }
+}
+
+.rc-virtual-list-holder-inner {
+  display: block !important;
+}
+
+.ExpandSelectBox {
+}

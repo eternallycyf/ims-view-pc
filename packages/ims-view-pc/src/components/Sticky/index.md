@@ -3,8 +3,7 @@ title: Sticky
 description: Sticky
 toc: content
 group:
-  title: 其他
-  order: 10
+  title: 布局
 order: 3
 demo:
   cols: 2

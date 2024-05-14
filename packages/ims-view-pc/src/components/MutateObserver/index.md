@@ -3,7 +3,7 @@ title: MutateObserver
 description: MutateObserver
 toc: content
 group:
-  title: 其他
+  title: 工具
 ---
 
 # MutateObserver

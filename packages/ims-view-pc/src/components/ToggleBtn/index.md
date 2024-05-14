@@ -3,8 +3,7 @@ title: ToggleBtn
 description: ToggleBtn
 toc: content
 group:
-  title: 其他
-  order: 10
+  title: 布局
 demo:
   cols: 2
 ---

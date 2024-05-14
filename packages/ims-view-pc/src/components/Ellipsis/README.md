@@ -3,8 +3,8 @@ title: Ellipsis
 description: Ellipsis
 toc: content
 group:
-  title: 其他
-  order: 10
+  title: 信息展示
+  order: 7
 demo:
   cols: 2
 ---

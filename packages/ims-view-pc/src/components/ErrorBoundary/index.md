@@ -3,9 +3,7 @@ title: ErrorBoundary
 description: ErrorBoundary
 toc: content
 group:
-  title: 其他
-  order: 10
-order: 10
+  title: 工具
 demo:
   cols: 2
 ---
