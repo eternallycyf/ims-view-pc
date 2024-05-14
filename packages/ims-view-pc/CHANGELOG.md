@@ -1,5 +1,24 @@
 # Changelog
 
+### [Version&nbsp;1.54.1](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.54.0...ims-view-pc@1.54.1)
+
+<sup>Released on **2024-05-14**</sup>
+
+#### 🐛 修复
+
+- **ims-view-pc**: Adjust CustomModal docs seq.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- **ims-view-pc**: Adjust CustomModal docs seq ([9059969](https://github.com/eternallycyf/ims-view-pc/commit/9059969))
+
+</details>
+
 ## [Version&nbsp;1.54.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.53.0...ims-view-pc@1.54.0)
 
 <sup>Released on **2024-05-14**</sup>
