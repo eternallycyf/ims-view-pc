@@ -1,5 +1,24 @@
 # Changelog
 
+## [Version&nbsp;1.54.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.53.0...ims-view-pc@1.54.0)
+
+<sup>Released on **2024-05-14**</sup>
+
+#### ✨ 新特性
+
+- **ims-view-pc**: Add CheckModal 、ExpandSelect and TreeModal && adjust docs sequence.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **ims-view-pc**: Add CheckModal 、ExpandSelect and TreeModal && adjust docs sequence ([9970711](https://github.com/eternallycyf/ims-view-pc/commit/9970711))
+
+</details>
+
 ## [Version&nbsp;1.53.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.52.1...ims-view-pc@1.53.0)
 
 <sup>Released on **2024-05-08**</sup>
