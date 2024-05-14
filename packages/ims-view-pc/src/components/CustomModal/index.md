@@ -3,8 +3,7 @@ title: CustomModal
 description: 弹窗
 toc: content
 group:
-  title: 反馈
-  order: 6
+  title: 表单
 demo:
   cols: 2
 ---
