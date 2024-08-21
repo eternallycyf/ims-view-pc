@@ -91,15 +91,12 @@
     "lerna": "^4.0.0",
     "typescript": "^5.4.5",
     "dumi-theme-antd-style": "latest",
-    "dumi": "~2.2.17",
+    "dumi": "latest",
     "antd": "^5",
     "@ant-design/icons": "^5.2.6",
     "lodash": "^4.17.21",
     "@types/lodash": "^4.14.199",
     "axios": "^1.5.1",
     "ims-template-config": "latest"
-  },
-  "resolutions": {
-    "dumi": "~2.2.17"
   }
 }
