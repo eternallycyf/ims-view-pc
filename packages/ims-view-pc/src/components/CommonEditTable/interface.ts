@@ -83,7 +83,7 @@ export interface ICommonEditTableProps<
 
   /**@name table配置 */
   tableProps?: TableProps<Values>;
-  columns: ReturnType<IGetColumns<Values, Rest>>;
+  columns: ReturnType<IGetColumns<Values, Rest, FormItemsValues>>;
   itemButton?: IEditButtonProps<Values, true>[];
   buttonLeft?: IEditButtonProps<Values>[];
   buttonRight?: IEditButtonProps<Values>[];
@@ -232,8 +232,12 @@ export type IEditButtonProps<Values = Record<string, unknown>, IsItemBtn extends
           ...arg: { editableKeys: string[]; [props: string]: any }[]
         ) => IBaseEditButtonProps<Values, IsItemBtn>));
 
-export type IGetColumns<Values = any, Rest = Record<string, unknown>> = (
+export type IGetColumns<
+  Values = any,
+  Rest = Record<string, unknown>,
+  FormItemsValues = Record<string, unknown>,
+> = (
   operation: FormListOperation<Values>,
   status: ICommonEditTableProps['status'],
-) => ICommonEditTableColumnsType<Values, Rest>[];
+) => ICommonEditTableColumnsType<Values, Rest, FormItemsValues>[];
 //#endregion

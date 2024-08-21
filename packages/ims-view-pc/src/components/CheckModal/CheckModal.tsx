@@ -1,5 +1,4 @@
 import { Button, Checkbox, Col, Form, Modal, Row, Tag } from 'antd';
-import { CheckboxValueType } from 'antd/lib/checkbox/Group';
 import _ from 'lodash';
 import React, { useImperativeHandle, useState } from 'react';
 import { useMap } from 'react-use';
@@ -15,7 +14,7 @@ import { mapKeysDeep, sortBy } from './utils';
 const CustomCheckBox = (props: CheckModalBoxProps) => {
   const { label, value, option, onChange } = props;
 
-  const handleCheckBoxOnChange = (currentValList: CheckboxValueType[]) => {
+  const handleCheckBoxOnChange = (currentValList: any[]) => {
     const newValList = currentValList.map((item) => option.find((ele) => ele.value === item)!);
     onChange(label, newValList, option);
   };
