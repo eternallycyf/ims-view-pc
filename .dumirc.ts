@@ -87,7 +87,7 @@ export default defineConfig({
   targets: { chrome: 79 },
   codeSplitting: { jsStrategy: 'granularChunks' },
   themeConfig,
-  ssr: isProd ? {} : false,
+  ssr: false,
   mock: {
     include: ['mock/**/*.{ts}'],
   },
