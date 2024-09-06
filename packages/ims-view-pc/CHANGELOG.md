@@ -1,5 +1,24 @@
 # Changelog
 
+## [Version&nbsp;1.55.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.54.2...ims-view-pc@1.55.0)
+
+<sup>Released on **2024-09-06**</sup>
+
+#### ✨ 新特性
+
+- **ims-view-pc**: Add Piano.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **ims-view-pc**: Add Piano ([35320c4](https://github.com/eternallycyf/ims-view-pc/commit/35320c4))
+
+</details>
+
 ### [Version&nbsp;1.54.2](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.54.1...ims-view-pc@1.54.2)
 
 <sup>Released on **2024-08-21**</sup>
