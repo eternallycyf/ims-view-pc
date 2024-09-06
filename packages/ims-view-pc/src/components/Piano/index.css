@@ -1,0 +1,29 @@
+.pressed {
+  background: #aaa;
+}
+
+.keys-container {
+  display: flex;
+  overflow: hidden;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 40px auto;
+  width: 800px;
+  height: 400px;
+}
+
+.key {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  justify-content: center;
+  border: 4px solid black;
+  background: #fff;
+  text-align: center;
+  font-size: 50px;
+  line-height: 500px;
+}
+
+.key:hover {
+  background: #aaa;
+}
