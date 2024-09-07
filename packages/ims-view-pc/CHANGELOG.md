@@ -1,5 +1,24 @@
 # Changelog
 
+## [Version&nbsp;1.57.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.56.0...ims-view-pc@1.57.0)
+
+<sup>Released on **2024-09-07**</sup>
+
+#### ✨ 新特性
+
+- **ims-view-pc**: Add Flow.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **ims-view-pc**: Add Flow ([c1a0740](https://github.com/eternallycyf/ims-view-pc/commit/c1a0740))
+
+</details>
+
 ## [Version&nbsp;1.56.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.55.0...ims-view-pc@1.56.0)
 
 <sup>Released on **2024-09-07**</sup>
