@@ -46,7 +46,8 @@
     "open-docxtemplater-image-module": "^1.0.3",
     "pizzip": "^3.1.7",
     "react-file-viewer": "^1.2.1",
-    "rc-tree": "^5.8.7"
+    "rc-tree": "^5.8.7",
+    "@xyflow/react": "^12.2.0"
   },
   "peerDependencies": {
     "@ant-design/icons": "^5.2.6",

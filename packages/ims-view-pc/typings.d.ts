@@ -8,22 +8,19 @@ declare module 'react' {
   }
 }
 
-import { SlateDescendant, SlateElement, SlateText } from '@wangeditor/editor/dist/';
+import { SlateElement } from '@wangeditor/editor/dist/';
 
 declare module '@wangeditor/editor' {
   // 扩展 Text
-  interface SlateText {
-    text: string;
-  }
-
-  // 扩展 Element
-  interface SlateElement {
-    type: string;
-    children: SlateDescendant[];
-  }
 
   type VideoElement = SlateElement & {
     src: string;
     poster?: string;
   };
+}
+
+declare global {
+  interface Window {
+    osc: OscillatorNode;
+  }
 }
