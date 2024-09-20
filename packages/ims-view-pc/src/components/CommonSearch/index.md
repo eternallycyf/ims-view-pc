@@ -11,8 +11,8 @@ demo:
 
 ## CommonSearch
 
-## 暂未整理完成
+<code src='./demo/demo1.tsx'>一个自适应的筛选</code>
+
+## 更多
 
 ![](../../../../../public/images/crud.png)
-
-<code src='./demo/demo1.tsx'></code>

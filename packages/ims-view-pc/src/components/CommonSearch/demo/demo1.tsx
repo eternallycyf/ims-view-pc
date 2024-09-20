@@ -1,6 +1,6 @@
+import { Col, Form, Input } from 'antd';
 import type dayjs from 'dayjs';
 import { CommonSearch } from 'ims-view-pc';
-import React from 'react';
 
 interface Record {
   name: string;
@@ -15,7 +15,7 @@ const Demo = () => {
           ...new Array(4).fill({
             name: 'name',
             type: 'input',
-            label: 'name',
+            label: 'namenamenamenamenamenamenamenamenamenamenamenamenamenamenamenamename',
           }),
           ...new Array(10).fill({
             name: 'startDate,endDate',
@@ -23,14 +23,14 @@ const Demo = () => {
             label: '日期',
           }),
         ]}
-        columnNumber={3}
         onSearch={(values) => console.log(values)}
       >
-        {(context) => {
-          return context.values.name == 'name' ? 'name' : 'no name';
-        }}
+        <Col span={12}>
+          <Form.Item name="aaa" label="aa" rules={[{ required: true }]}>
+            <Input />
+          </Form.Item>
+        </Col>
       </CommonSearch>
-      <div>content</div>
     </>
   );
 };

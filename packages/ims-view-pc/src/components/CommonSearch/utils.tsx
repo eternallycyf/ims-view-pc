@@ -1,5 +1,14 @@
 import { AnyObject, Ellipsis, type CommonSearchProps } from 'ims-view-pc';
 import './index.less';
+
+export const isBrowser = () => {
+  return (
+    typeof window !== 'undefined' &&
+    typeof window.document !== 'undefined' &&
+    typeof window.matchMedia !== 'undefined'
+  );
+};
+
 export const formatByAcpCode = (
   defaultFormList: CommonSearchProps<AnyObject, AnyObject, unknown>['formList'],
   accessCollection: string[],

@@ -20,7 +20,5 @@ declare module '@wangeditor/editor' {
 }
 
 declare global {
-  interface Window {
-    osc: OscillatorNode;
-  }
+  interface Window {}
 }

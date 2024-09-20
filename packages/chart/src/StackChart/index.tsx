@@ -64,7 +64,7 @@ const StackChart = (props: IStackChartProps) => {
         (item) => chartConfig?.find((ele: any) => ele?.name == item)?.dataKey,
       );
 
-      const newData = ([...data] || []).map((item: any) => {
+      const newData = (data || []).map((item: any) => {
         let total = 0;
         otherKeyList.forEach((ele) => {
           total = total + (Number(item?.[ele]) || 0);

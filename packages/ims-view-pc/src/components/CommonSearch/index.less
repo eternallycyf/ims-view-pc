@@ -45,51 +45,50 @@
     }
   }
 
-  :global {
-    .ant-form-item {
-      margin-right: 0;
+  .ant-form-item {
+    margin-right: 0;
+    margin-bottom: var(--itemBottomHeight, 4px) !important;
 
-      .ant-row {
-        width: 100%;
-      }
-
-      .ant-picker {
-        width: 100%;
-      }
+    .ant-row {
+      width: 100%;
     }
 
-    .ant-select-arrow {
-      right: 9px;
+    .ant-picker {
+      width: 100%;
+    }
+  }
+
+  .ant-select-arrow {
+    right: 9px;
+  }
+
+  .ant-form-item,
+  .ant-legacy-form-item {
+    display: flex;
+    align-items: center;
+    margin-right: 0;
+    margin-bottom: 5px;
+
+    .ant-form-item-label {
+      overflow: hidden;
+      padding-right: 8px;
+      max-width: 120px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      word-break: break-all;
+      line-height: normal;
     }
 
-    .ant-form-item,
-    .ant-legacy-form-item {
-      display: flex;
-      align-items: center;
-      margin-right: 0;
-      margin-bottom: 5px;
+    .ant-form-item-control {
+      line-height: normal;
 
-      .ant-form-item-label {
-        overflow: hidden;
-        padding-right: 8px;
-        max-width: 120px;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        word-break: break-all;
-        line-height: normal;
-      }
-
-      .ant-form-item-control {
-        line-height: normal;
-
-        &-wrapper {
-          flex: 1;
-        }
+      &-wrapper {
+        flex: 1;
       }
     }
   }
 }
 
 .CommonSearch-Ellipsis {
-  max-width: 100px;
+  white-space: break-spaces;
 }

@@ -13,8 +13,10 @@ export interface CommonSearchProps<Values = AnyObject, Params = AnyObject, Rest 
       span?: number;
     }
   >[];
+  loading?: boolean;
+  labelWidth?: number;
+  itemBottomHeight?: number;
   collapsed?: boolean;
-  columnNumber?: number;
   accessCollection?: string[];
 
   onCollapse?: (collapsed: boolean) => void;
@@ -23,12 +25,7 @@ export interface CommonSearchProps<Values = AnyObject, Params = AnyObject, Rest 
   onReset?: (values: Values) => void;
 
   className?: string;
-  children?: (context: CommonSearchContext<Values, Params, Rest>) => React.ReactNode;
-}
-
-export interface CommonSearchContext<Values = AnyObject, Params = AnyObject, Rest = AnyObject> {
-  form: FormInstance<Values>;
-  values: Values;
+  children?: React.ReactNode;
 }
 
 export type CommonSearchHandle<Values = AnyObject, Params = AnyObject, Rest = AnyObject> = {

@@ -20,17 +20,17 @@
     "test": "jest"
   },
   "dependencies": {
+    "@babel/runtime": "^7.23.1",
     "react-use": "^17.4.0",
     "lodash": "^4.17.21",
     "axios": "^1.5.1"
   },
-  "devDependencies": {
-    "@babel/runtime": "^7.23.1"
-  },
   "peerDependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "@ant-design/icons": "^5.2.6",
+    "antd": "^5"
   },
   "publishConfig": {
     "access": "public",

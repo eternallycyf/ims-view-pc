@@ -1,19 +1,31 @@
-import { DownOutlined, ReloadOutlined, SearchOutlined } from '@ant-design/icons';
-import { Button, Col, Form, Row, Space, type FormInstance } from 'antd';
+import { DownOutlined } from '@ant-design/icons';
+import { Button, Col, Form, Row, Space } from 'antd';
 import { renderFormItem, type ISearchesType } from 'ims-view-pc';
 import _ from 'lodash';
-import React, { useImperativeHandle, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import RcResizeObserver from 'rc-resize-observer';
+import React, { useCallback, useEffect, useImperativeHandle, useState } from 'react';
 import { variables } from '../../styles/variables';
 import ErrorBoundary from '../ErrorBoundary';
 import './index.less';
-import type { CommonSearchContext, CommonSearchHandle, CommonSearchProps } from './interface';
-import useSize from './useSize';
-import { formatByAcpCode } from './utils';
+import type { CommonSearchHandle, CommonSearchProps } from './interface';
+import { formatByAcpCode, isBrowser } from './utils';
 
 const dateFormat = 'YYYYMMDD';
 const monthFormat = 'YYYYMM';
 const yearFormat = 'YYYY';
 const quarterFormat = 'YYYY-Q';
+
+const BREAKPOINTS = {
+  default: [
+    [0, 531, 1],
+    [531, 701, 2],
+    [701, 1062, 3],
+    [1062, 1352, 3],
+    [1352, Infinity, 4],
+  ],
+} as const;
+
+const defaultWidth = isBrowser() ? document.body.clientWidth : 1024;
 
 const CommonSearch: React.ForwardRefRenderFunction<CommonSearchHandle, CommonSearchProps> = (
   props,
@@ -23,7 +35,6 @@ const CommonSearch: React.ForwardRefRenderFunction<CommonSearchHandle, CommonSea
     formList: defaultFormList = [],
     accessCollection = [],
     collapsed: defaultCollapsed = false,
-    columnNumber = 4,
 
     onCollapse,
     onChange,
@@ -31,16 +42,31 @@ const CommonSearch: React.ForwardRefRenderFunction<CommonSearchHandle, CommonSea
     onSearch,
     className,
     children,
+
+    loading,
+    labelWidth = 80,
+    itemBottomHeight = 4,
   } = props;
 
   const [form] = Form.useForm();
-  const wrapperRef = useRef<HTMLDivElement>(null!);
 
   const [collapsed, setCollapsed] = useState(defaultCollapsed);
   const [searchParams, setSearchParams] = useState({});
-  const { size, span, calcSpan } = useSize({ wrapperRef });
+
+  const [width, setWidth] = useState<number>(defaultWidth);
+  const [spanSize, setSpanSize] = useState<number>(0);
+  const [showIndex, setShowIndex] = useState<number>(1);
 
   const formList = formatByAcpCode(defaultFormList, accessCollection);
+
+  useEffect(() => {
+    const { default: defaultBreakPoints } = BREAKPOINTS;
+    const filterItem = defaultBreakPoints.filter((item) => {
+      return width >= item[0] && width < item[1];
+    });
+    setSpanSize(24 / filterItem[0][2]);
+    setShowIndex(filterItem[0][2]);
+  }, [width]);
 
   const formatValues = (values) => {
     const _formList: ISearchesType = [];
@@ -59,7 +85,7 @@ const CommonSearch: React.ForwardRefRenderFunction<CommonSearchHandle, CommonSea
       if (!value && !_.isBoolean(value) && !_.isNumber(value)) return;
       data[key] = value;
 
-      if (sourceItem.type === 'select' || sourceItem.type === 'treeSelect') {
+      if (sourceItem?.type === 'select' || sourceItem?.type === 'treeSelect') {
         if (Array.isArray(value)) {
           data[key] = value.map((item) => item.key || item.value);
         } else {
@@ -67,19 +93,19 @@ const CommonSearch: React.ForwardRefRenderFunction<CommonSearchHandle, CommonSea
         }
       }
 
-      if (sourceItem.type === 'date') {
+      if (sourceItem?.type === 'date') {
         data[key] = (format && value.format(format)) || value.format(dateFormat);
       }
 
-      if (sourceItem.type === 'year') {
+      if (sourceItem?.type === 'year') {
         data[key] = (format && value.format(format)) || value.format(yearFormat);
       }
 
-      if (sourceItem.type === 'quarter') {
+      if (sourceItem?.type === 'quarter') {
         data[key] = (format && value.format(format)) || value.format(quarterFormat);
       }
 
-      if (sourceItem.type === 'dateRange') {
+      if (sourceItem?.type === 'dateRange') {
         const [startTime, endTime] = value || [];
         if (!startTime || !endTime) return;
 
@@ -90,11 +116,11 @@ const CommonSearch: React.ForwardRefRenderFunction<CommonSearchHandle, CommonSea
         delete data[key];
       }
 
-      if (sourceItem.type === 'month') {
+      if (sourceItem?.type === 'month') {
         data[key] = (format && value.format(format)) || value.format(monthFormat);
       }
 
-      if (sourceItem.type === 'monthRange') {
+      if (sourceItem?.type === 'monthRange') {
         const [startTime, endTime] = value || [];
         if (!startTime || !endTime) return;
 
@@ -105,18 +131,18 @@ const CommonSearch: React.ForwardRefRenderFunction<CommonSearchHandle, CommonSea
         delete data[key];
       }
 
-      if (sourceItem.type === 'datetime' || sourceItem.type === 'time') {
+      if (sourceItem?.type === 'datetime' || sourceItem?.type === 'time') {
         data[key] = value.unix();
       }
 
-      if (sourceItem.transform) {
+      if (sourceItem?.transform) {
         data[key] = sourceItem.transform(value);
       }
 
-      if (Array.isArray(sourceItem.fields) && sourceItem.transform) {
+      if (Array.isArray(sourceItem?.fields) && sourceItem?.transform) {
         const keyData = sourceItem.transform(value);
-        sourceItem.fields.forEach((value: any, index: any, array: any) => {
-          data[sourceItem.fields[index]] = keyData[index];
+        sourceItem?.fields.forEach((value: any, index: any, array: any) => {
+          data[sourceItem?.fields[index]] = keyData[index];
         });
       }
     });
@@ -170,75 +196,129 @@ const CommonSearch: React.ForwardRefRenderFunction<CommonSearchHandle, CommonSea
     document.dispatchEvent(new Event('toggleForm'));
   };
 
-  return (
-    <ErrorBoundary>
-      <div
-        ref={wrapperRef}
-        className={`ims-search-form-wrapper ${className}`}
-        style={{
-          '--colorPrimary': variables?.colorPrimary,
-          '--colorPrimaryHover': variables.colorPrimaryHover,
-          '--colorPrimaryActive': variables.colorPrimaryActive,
-        }}
-      >
-        <Form
-          size={size}
-          layout="horizontal"
-          onFieldsChange={onChange}
-          form={form}
-          onFinish={handleSubmit}
-          labelWrap
-          className="ims-search-form"
-        >
-          <Row align="middle" gutter={{ md: 4, lg: 12, xl: 24 }}>
-            {formList.map((field, index) => {
-              return (
-                <Col key={index} span={calcSpan}>
-                  {renderFormItem({ form, ...field }, index)}
-                </Col>
-              );
-            })}
+  const getFormItems = useCallback(() => {
+    let offset;
+    let spanSizeSum = spanSize;
+    let collapsedVisible = true;
+    const items = formList.map((item, index) => {
+      const field = { ...item };
 
-            <Col className="ims-search-form-action-wrapper">
-              <Form.Item noStyle>
+      if (collapsed && index && index > showIndex - 1) {
+        field.itemProps = {
+          ...field?.itemProps,
+          hidden: true,
+        };
+      } else {
+        spanSizeSum += spanSize;
+      }
+
+      return (
+        <Col span={!!field?.itemProps?.hidden ? 0 : spanSize} key={index}>
+          {renderFormItem({ form, ...field }, index)}
+        </Col>
+      );
+    });
+
+    collapsedVisible = spanSizeSum !== 24 && items?.length !== 0 && items?.length !== 1;
+    const spanSizeExtra = spanSizeSum % 24;
+    if (spanSizeSum < 24) {
+      offset = 0;
+      collapsedVisible = false;
+    } else if (spanSizeExtra === 0) {
+      offset = 0;
+    } else if (spanSizeExtra > spanSize && spanSizeExtra % spanSize !== 0) {
+      offset = 24 - (24 - spanSizeExtra);
+    } else if (spanSizeExtra % spanSize === 0) {
+      offset = 24 - spanSizeExtra;
+    } else {
+      offset = 0;
+    }
+    return (
+      <>
+        {items}
+        <Col style={{ textAlign: 'right' }} span={spanSize} offset={offset}>
+          <Form.Item
+            className="ims-search-form-action-wrapper"
+            wrapperCol={{
+              style: {
+                maxWidth: '100%',
+              },
+            }}
+          >
+            <Space size={'middle'}>
+              <Space>
+                <Button
+                  size="small"
+                  htmlType="reset"
+                  className="btn-default ims-search-form-action-reset"
+                  onClick={handleReset}
+                >
+                  重置
+                </Button>
+                <Button
+                  size="small"
+                  type="primary"
+                  htmlType="submit"
+                  className="ims-search-form-action-submit"
+                  loading={loading}
+                >
+                  查询
+                </Button>
+              </Space>
+              {(collapsedVisible || !!collapsed) && (
                 <Space>
-                  <Button
-                    size="small"
-                    htmlType="button"
-                    className="btn-default ims-search-form-action-reset"
-                    onClick={handleReset}
-                  >
-                    重置
-                  </Button>
-                  <Button
-                    className="ims-search-form-action-submit"
-                    type="primary"
-                    htmlType="submit"
-                    size="small"
-                  >
-                    查询
-                  </Button>
                   <a className="ims-search-form-action" onClick={toggleForm}>
-                    {collapsed ? '收起' : '展开'}
-                    <DownOutlined className={`${collapsed ? 'close' : 'expand'}`} />
+                    {collapsed ? '展开' : '收起'}
+                    <DownOutlined
+                      style={{
+                        marginLeft: '0.5em',
+                        transition: '0.3s all',
+                        transform: `rotate(${collapsed ? 0 : 0.5}turn)`,
+                      }}
+                    />
                   </a>
                 </Space>
-              </Form.Item>
-            </Col>
-          </Row>
+              )}
+            </Space>
+          </Form.Item>
+        </Col>
+      </>
+    );
+  }, [formList, spanSize, handleReset, loading, collapsed, toggleForm]);
 
-          {/* <Form.Item noStyle shouldUpdate={(pre, cru) => true}>
-            {(form) => {
-              const values = form.getFieldsValue();
-              return (
-                <div className="ims-search-form-children">
-                  {children && children({ form, values })}
-                </div>
-              );
+  return (
+    <ErrorBoundary>
+      <RcResizeObserver onResize={(size) => setWidth(size.width)}>
+        <div
+          className={`ims-search-form-wrapper ${className}`}
+          style={{
+            '--colorPrimary': variables?.colorPrimary,
+            '--colorPrimaryHover': variables.colorPrimaryHover,
+            '--colorPrimaryActive': variables.colorPrimaryActive,
+            '--itemBottomHeight': String(itemBottomHeight),
+          }}
+        >
+          <Form
+            layout="horizontal"
+            onFieldsChange={onChange}
+            form={form}
+            onFinish={handleSubmit}
+            labelWrap
+            className="ims-search-form"
+            labelCol={{ flex: `0 0 ${labelWidth}px` }}
+            wrapperCol={{
+              style: {
+                maxWidth: `calc(100% - ${labelWidth}px)`,
+              },
             }}
-          </Form.Item> */}
-        </Form>
-      </div>
+          >
+            <Row wrap gutter={{ md: 4, lg: 12, xl: 24 }}>
+              {getFormItems()}
+              {children}
+            </Row>
+          </Form>
+        </div>
+      </RcResizeObserver>
     </ErrorBoundary>
   );
 };
