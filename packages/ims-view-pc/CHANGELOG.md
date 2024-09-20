@@ -1,5 +1,24 @@
 # Changelog
 
+## [Version&nbsp;1.59.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.58.0...ims-view-pc@1.59.0)
+
+<sup>Released on **2024-09-20**</sup>
+
+#### ✨ 新特性
+
+- **ims-view-pc**: Update commonTable rules doc.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **ims-view-pc**: Update commonTable rules doc ([15081f6](https://github.com/eternallycyf/ims-view-pc/commit/15081f6))
+
+</details>
+
 ## [Version&nbsp;1.58.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.57.0...ims-view-pc@1.58.0)
 
 <sup>Released on **2024-09-20**</sup>
