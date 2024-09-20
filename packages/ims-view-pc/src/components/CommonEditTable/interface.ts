@@ -94,6 +94,9 @@ export interface ICommonEditTableProps<
   name?: FormListProps['name'];
   formListProps?: React.ComponentProps<typeof Form.List>;
   initialValues?: Values[];
+  /**
+   * @description 必须 button.htmlType === 'submit' 才能触发
+   */
   rules?: React.ComponentProps<typeof Form.List>['rules'];
 }
 

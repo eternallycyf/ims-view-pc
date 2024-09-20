@@ -369,7 +369,9 @@ const App: React.FC = () => {
         </Row>
       </Form>
 
-      <Button onClick={() => console.log(form.getFieldsValue())}>提交</Button>
+      <Button htmlType="submit" onClick={() => console.log(form.getFieldsValue())}>
+        提交
+      </Button>
     </div>
   );
 };

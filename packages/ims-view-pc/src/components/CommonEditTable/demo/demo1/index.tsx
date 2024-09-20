@@ -180,7 +180,7 @@ const Demo = () => {
           }}
         />
         <Form.Item>
-          <Button type="primary" onClick={handleOnSubmit}>
+          <Button htmlType="submit" type="primary" onClick={handleOnSubmit}>
             提交
           </Button>
         </Form.Item>
