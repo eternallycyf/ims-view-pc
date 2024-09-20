@@ -1,5 +1,30 @@
 # Changelog
 
+## [Version&nbsp;1.58.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.57.0...ims-view-pc@1.58.0)
+
+<sup>Released on **2024-09-20**</sup>
+
+#### ✨ 新特性
+
+- **ims-view-pc**: CommonSearch auto-size and remove piano && flow.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **ims-view-pc**: CommonSearch auto-size and remove piano && flow ([d07d0c4](https://github.com/eternallycyf/ims-view-pc/commit/d07d0c4))
+
+</details>
+
+### Dependencies
+
+- **@ims-view/chart:** upgraded to 1.8.0
+- **@ims-view/hooks:** upgraded to 1.18.0
+- **@ims-view/utils:** upgraded to 1.17.0
+
 ## [Version&nbsp;1.57.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.56.0...ims-view-pc@1.57.0)
 
 <sup>Released on **2024-09-07**</sup>
