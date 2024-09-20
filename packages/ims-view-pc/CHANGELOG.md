@@ -1,5 +1,32 @@
 # Changelog
 
+## [Version&nbsp;1.61.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.60.0...ims-view-pc@1.61.0)
+
+<sup>Released on **2024-09-20**</sup>
+
+#### ✨ 新特性
+
+- **ims-view-pc**: Update commonSearch BREAKPOINTS.
+
+#### 📝 文档
+
+- **ims-view-pc**: Update CommonSearch doc.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **ims-view-pc**: Update commonSearch BREAKPOINTS ([5133b11](https://github.com/eternallycyf/ims-view-pc/commit/5133b11))
+
+#### Documentation
+
+- **ims-view-pc**: Update CommonSearch doc ([922f68c](https://github.com/eternallycyf/ims-view-pc/commit/922f68c))
+
+</details>
+
 ## [Version&nbsp;1.60.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.59.0...ims-view-pc@1.60.0)
 
 <sup>Released on **2024-09-20**</sup>
