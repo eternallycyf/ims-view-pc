@@ -22,7 +22,10 @@ const BREAKPOINTS = {
     [531, 701, 2],
     [701, 1062, 3],
     [1062, 1352, 3],
-    [1352, Infinity, 4],
+    [1352, 1683, 4],
+    [1683, 2014, 5],
+    [2014, 2345, 6],
+    [2345, Infinity, 6],
   ],
 } as const;
 
@@ -317,12 +320,10 @@ const CommonSearch: React.ForwardRefRenderFunction<CommonSearchHandle, CommonSea
               },
             }}
           >
-            <SearchContext.Provider value={{ spanSize }}>
-              <Row wrap gutter={{ md: 4, lg: 12, xl: 24 }}>
-                {getFormItems()}
-                {children}
-              </Row>
-            </SearchContext.Provider>
+            <Row wrap gutter={{ md: 4, lg: 12, xl: 24 }}>
+              {getFormItems()}
+              {children}
+            </Row>
           </Form>
         </div>
       </RcResizeObserver>
