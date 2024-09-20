@@ -1,5 +1,24 @@
 # Changelog
 
+## [Version&nbsp;1.60.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.59.0...ims-view-pc@1.60.0)
+
+<sup>Released on **2024-09-20**</sup>
+
+#### ✨ 新特性
+
+- **ims-view-pc**: Update CommonSearch demo.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **ims-view-pc**: Update CommonSearch demo ([0dcb2c1](https://github.com/eternallycyf/ims-view-pc/commit/0dcb2c1))
+
+</details>
+
 ## [Version&nbsp;1.59.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.58.0...ims-view-pc@1.59.0)
 
 <sup>Released on **2024-09-20**</sup>
