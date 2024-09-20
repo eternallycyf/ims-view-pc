@@ -11,7 +11,7 @@ demo:
 
 ## CommonSearch
 
-<code src='./demo/demo1.tsx'>一个自适应的筛选</code>
+<code src='./demo/demo1.tsx'>一个根据屏幕大小 表单自适应 col 的筛选组件</code>
 
 ## 更多
 

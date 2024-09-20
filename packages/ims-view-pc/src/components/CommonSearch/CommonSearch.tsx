@@ -8,6 +8,7 @@ import { variables } from '../../styles/variables';
 import ErrorBoundary from '../ErrorBoundary';
 import './index.less';
 import type { CommonSearchHandle, CommonSearchProps } from './interface';
+import { SearchContext } from './SearchContext';
 import { formatByAcpCode, isBrowser } from './utils';
 
 const dateFormat = 'YYYYMMDD';
@@ -212,6 +213,10 @@ const CommonSearch: React.ForwardRefRenderFunction<CommonSearchHandle, CommonSea
         spanSizeSum += spanSize;
       }
 
+      if (item?.type === 'update') {
+        return renderFormItem({ form, ...field }, index);
+      }
+
       return (
         <Col span={!!field?.itemProps?.hidden ? 0 : spanSize} key={index}>
           {renderFormItem({ form, ...field }, index)}
@@ -312,10 +317,12 @@ const CommonSearch: React.ForwardRefRenderFunction<CommonSearchHandle, CommonSea
               },
             }}
           >
-            <Row wrap gutter={{ md: 4, lg: 12, xl: 24 }}>
-              {getFormItems()}
-              {children}
-            </Row>
+            <SearchContext.Provider value={{ spanSize }}>
+              <Row wrap gutter={{ md: 4, lg: 12, xl: 24 }}>
+                {getFormItems()}
+                {children}
+              </Row>
+            </SearchContext.Provider>
           </Form>
         </div>
       </RcResizeObserver>

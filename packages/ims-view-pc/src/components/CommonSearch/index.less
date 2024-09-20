@@ -87,6 +87,102 @@
       }
     }
   }
+
+  .ant-select-selection-overflow-item {
+    .ant-select-selection-item {
+      background: #ebf2ff;
+      color: #3363d7;
+      font-weight: 400;
+      font-size: 12px;
+    }
+  }
+
+  .ant-form-item {
+    margin-right: 0 !important;
+
+    margin-inline-end: 0;
+  }
+
+  .ant-form-item {
+    .ant-row {
+      width: 100%;
+    }
+
+    .ant-picker {
+      width: 100%;
+    }
+  }
+
+  .ant-picker.ant-picker-borderless {
+    left: 20% !important;
+    height: 32px;
+    border: 1px solid #b8cdff !important;
+    background-color: rgba(255, 255, 255, 1) !important;
+  }
+
+  .ant-radio-group {
+    margin-left: 0px;
+    height: 25px;
+  }
+
+  .ant-picker-large .ant-picker-input > input {
+    font-size: 12px;
+  }
+
+  .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled) {
+    &:focus-within {
+      box-shadow: none;
+    }
+  }
+
+  .ant-radio-button-wrapper {
+    border-color: rgba(184, 205, 255);
+    background-color: #fff;
+    color: rgba(11, 10, 25, 0.65);
+
+    &:hover {
+      color: #3363d7 !important;
+    }
+  }
+
+  .ant-radio-button-wrapper-checked:not(
+      [class*=' ant-radio-button-wrapper-disabled']
+    ).ant-radio-button-wrapper:first-child {
+    border-radius: 2px 0 0px 2px !important;
+  }
+
+  .ant-radio-button-wrapper-checked:not(
+      [class*=' ant-radio-button-wrapper-disabled']
+    ).ant-radio-button-wrapper:last-child {
+    border-radius: 0 2px 2px 0 !important;
+  }
+
+  .ant-radio-button-wrapper-checked:not(:first-child)::before {
+    background-color: rgba(184, 205, 255);
+  }
+
+  .ant-radio-button-wrapper:not(:first-child)::before {
+    background-color: rgba(184, 205, 255);
+  }
+
+  .ant-radio-button-wrapper-checked {
+    border-color: rgba(184, 205, 255) !important;
+    background: #e0ecff !important;
+    color: #3363d7 !important;
+
+    &:not(:first-child)::before {
+      background-color: #b8cdff !important;
+    }
+
+    &:hover {
+      border: 1px solid #3363d7 !important;
+      background-color: rgb(224, 236, 255);
+
+      &:not(:first-child)::before {
+        background-color: rgb(77, 120, 223) !important;
+      }
+    }
+  }
 }
 
 .CommonSearch-Ellipsis {
