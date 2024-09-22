@@ -1,7 +1,8 @@
-.btnGroup {
-  border-radius: 2px;
+.AccessBtn {
+  .btnGroup {
+    border: 1px solid var(--colorBorder);
+    border-radius: 2px;
 
-  :global {
     .ant-btn {
       margin: 0 !important;
       border-color: var(--colorBorder) !important;
@@ -27,5 +28,9 @@
       background: #e0ecff !important;
       color: var(--colorPrimary) !important;
     }
+  }
+
+  .ant-btn-link {
+    padding: 0;
   }
 }

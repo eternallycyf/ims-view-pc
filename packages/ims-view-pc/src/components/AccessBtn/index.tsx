@@ -1,5 +1,5 @@
 import { random } from '@ims-view/utils';
-import { Button, Popconfirm, Space } from 'antd';
+import { Button, Divider, Popconfirm, Space } from 'antd';
 import React, { Fragment, useEffect, useState } from 'react';
 import ButtonGroup from './ButtonGroup';
 import './index.less';
@@ -107,7 +107,14 @@ const AccessBtn: React.FC<IAccessBtnProps> = (props) => {
     return [...btnEleList, ...childrenList].filter((item) => item);
   };
 
-  return <Space className={className}>{button}</Space>;
+  return (
+    <Space
+      split={<Divider type="vertical" style={{ margin: 0, borderColor: 'rgb(76 76 76 / 19%)' }} />}
+      className={['AccessBtn', className].join(' ')}
+    >
+      {button}
+    </Space>
+  );
 };
 
 export default React.memo(AccessBtn);
