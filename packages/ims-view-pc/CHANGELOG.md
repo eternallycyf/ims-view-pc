@@ -1,5 +1,24 @@
 # Changelog
 
+## [Version&nbsp;1.62.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.61.0...ims-view-pc@1.62.0)
+
+<sup>Released on **2024-09-22**</sup>
+
+#### ✨ 新特性
+
+- **ims-view-pc**: AccessBtn add split divider.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **ims-view-pc**: AccessBtn add split divider ([511f5a9](https://github.com/eternallycyf/ims-view-pc/commit/511f5a9))
+
+</details>
+
 ## [Version&nbsp;1.61.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.60.0...ims-view-pc@1.61.0)
 
 <sup>Released on **2024-09-20**</sup>
