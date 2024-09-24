@@ -1,6 +1,7 @@
 import type { DrawerProps, FormInstance, FormProps, ModalProps } from 'antd';
-import { renderFormItem, Search } from 'ims-view-pc';
+import { Search } from 'ims-view-pc';
 import React, { RefObject } from 'react';
+import { renderFormItem } from '../../core/helpers';
 import CommonForm, { renderFormList } from './CustomForm';
 
 /**
