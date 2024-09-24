@@ -84,12 +84,24 @@ interface IRecord {
   month: dayjs.Dayjs;
   quarter: dayjs.Dayjs;
   year: dayjs.Dayjs;
-  timeRange: dayjs.Dayjs[];
-  dateRange: dayjs.Dayjs[];
-  weekRange: dayjs.Dayjs[];
-  monthRange: dayjs.Dayjs[];
-  quarterRange: dayjs.Dayjs[];
-  yearRange: dayjs.Dayjs[];
+  ['startTime,endTime']: dayjs.Dayjs[];
+  ['startDate,endDate']: dayjs.Dayjs[];
+  ['startWeek,endWeek']: dayjs.Dayjs[];
+  ['startMonth,endMonth']: dayjs.Dayjs[];
+  ['startQuerater,endQuerater']: dayjs.Dayjs[];
+  ['startYear,endYear']: dayjs.Dayjs[];
+  startTime: dayjs.Dayjs;
+  endTime: dayjs.Dayjs;
+  startDate: dayjs.Dayjs;
+  endDate: dayjs.Dayjs;
+  startWeek: dayjs.Dayjs;
+  endWeek: dayjs.Dayjs;
+  startMonth: dayjs.Dayjs;
+  endMonth: dayjs.Dayjs;
+  startQuerater: dayjs.Dayjs;
+  endQuerater: dayjs.Dayjs;
+  startYear: dayjs.Dayjs;
+  endYear: dayjs.Dayjs;
 }
 
 const Demo = () => {
@@ -142,12 +154,12 @@ const Demo = () => {
       type: 'year',
     },
     {
-      name: 'timeRange',
+      name: 'startTime,endTime',
       label: 'timeRange',
       type: 'timeRange',
     },
     {
-      name: 'dateRange',
+      name: 'startDate,endDate',
       label: 'dateRange',
       type: 'dateRange',
       itemProps: {
@@ -155,22 +167,22 @@ const Demo = () => {
       },
     },
     {
-      name: 'weekRange',
+      name: 'startWeek,endWeek',
       label: 'weekRange',
       type: 'weekRange',
     },
     {
-      name: 'monthRange',
+      name: 'startMonth,endMonth',
       label: 'monthRange',
       type: 'monthRange',
     },
     {
-      name: 'quarterRange',
+      name: 'startQuerater,endQuerater',
       label: 'quarterRange',
       type: 'quarterRange',
     },
     {
-      name: 'yearRange',
+      name: 'startYear,endYear',
       label: 'yearRange',
       type: 'yearRange',
     },

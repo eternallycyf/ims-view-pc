@@ -11,10 +11,12 @@ import type { CommonSearchHandle, CommonSearchProps } from './interface';
 import { SearchContext } from './SearchContext';
 import { formatByAcpCode, isBrowser } from './utils';
 
+const timeFormat = 'HH:mm:ss';
 const dateFormat = 'YYYYMMDD';
+const weekFormat = 'YYYYWW';
 const monthFormat = 'YYYYMM';
-const yearFormat = 'YYYY';
 const quarterFormat = 'YYYY-Q';
+const yearFormat = 'YYYY';
 
 const BREAKPOINTS = {
   default: [
@@ -97,16 +99,35 @@ const CommonSearch: React.ForwardRefRenderFunction<CommonSearchHandle, CommonSea
         }
       }
 
+      if (sourceItem?.type === 'datetime' || sourceItem?.type === 'time') {
+        data[key] = value.unix();
+      }
+
       if (sourceItem?.type === 'date') {
         data[key] = (format && value.format(format)) || value.format(dateFormat);
+      }
+
+      if (sourceItem?.type === 'month') {
+        data[key] = (format && value.format(format)) || value.format(monthFormat);
+      }
+
+      if (sourceItem?.type === 'quarter') {
+        data[key] = (format && value.format(format)) || value.format(quarterFormat);
       }
 
       if (sourceItem?.type === 'year') {
         data[key] = (format && value.format(format)) || value.format(yearFormat);
       }
 
-      if (sourceItem?.type === 'quarter') {
-        data[key] = (format && value.format(format)) || value.format(quarterFormat);
+      if (sourceItem?.type === 'timeRange') {
+        const [startTime, endTime] = value || [];
+        if (!startTime || !endTime) return;
+
+        const [startTimeKey, endTimeKey] = key.split(',');
+        data[startTimeKey] = (format && startTime.format(format)) || startTime.format(timeFormat);
+        data[endTimeKey] = (format && endTime.format(format)) || endTime.format(timeFormat);
+
+        delete data[key];
       }
 
       if (sourceItem?.type === 'dateRange') {
@@ -120,8 +141,15 @@ const CommonSearch: React.ForwardRefRenderFunction<CommonSearchHandle, CommonSea
         delete data[key];
       }
 
-      if (sourceItem?.type === 'month') {
-        data[key] = (format && value.format(format)) || value.format(monthFormat);
+      if (sourceItem?.type === 'weekRange') {
+        const [startTime, endTime] = value || [];
+        if (!startTime || !endTime) return;
+
+        const [startTimeKey, endTimeKey] = key.split(',');
+        data[startTimeKey] = (format && startTime.format(format)) || startTime.format(weekFormat);
+        data[endTimeKey] = (format && endTime.format(format)) || endTime.format(weekFormat);
+
+        delete data[key];
       }
 
       if (sourceItem?.type === 'monthRange') {
@@ -129,14 +157,33 @@ const CommonSearch: React.ForwardRefRenderFunction<CommonSearchHandle, CommonSea
         if (!startTime || !endTime) return;
 
         const [startTimeKey, endTimeKey] = key.split(',');
-        data[startTimeKey] = startTime;
-        data[endTimeKey] = endTime;
+        data[startTimeKey] = (format && startTime.format(format)) || startTime.format(monthFormat);
+        data[endTimeKey] = (format && endTime.format(format)) || endTime.format(monthFormat);
 
         delete data[key];
       }
 
-      if (sourceItem?.type === 'datetime' || sourceItem?.type === 'time') {
-        data[key] = value.unix();
+      if (sourceItem?.type === 'quarterRange') {
+        const [startTime, endTime] = value || [];
+        if (!startTime || !endTime) return;
+
+        const [startTimeKey, endTimeKey] = key.split(',');
+        data[startTimeKey] =
+          (format && startTime.format(format)) || startTime.format(quarterFormat);
+        data[endTimeKey] = (format && endTime.format(format)) || endTime.format(quarterFormat);
+
+        delete data[key];
+      }
+
+      if (sourceItem?.type === 'yearRange') {
+        const [startTime, endTime] = value || [];
+        if (!startTime || !endTime) return;
+
+        const [startTimeKey, endTimeKey] = key.split(',');
+        data[startTimeKey] = (format && startTime.format(format)) || startTime.format(yearFormat);
+        data[endTimeKey] = (format && endTime.format(format)) || endTime.format(yearFormat);
+
+        delete data[key];
       }
 
       if (sourceItem?.transform) {

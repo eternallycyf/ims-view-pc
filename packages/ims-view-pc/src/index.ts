@@ -18,7 +18,12 @@ export { default as CommonSearch } from './components/CommonSearch';
 export * from './components/CommonSearch/interface';
 export { default as CommonTable } from './components/CommonTable';
 export * from './components/CommonTable/interface';
+export { default as CustomForm } from './components/CustomForm';
 export type {
+  BaseCustomFormProps,
+  CustomFormHandle,
+  CustomFormList,
+  CustomFormProps,
   ICascadeControlProps,
   IEditorProps,
   IMentionsControlProps,
