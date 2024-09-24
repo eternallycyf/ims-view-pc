@@ -1,7 +1,7 @@
 import type { DrawerProps, FormInstance, FormProps, ModalProps } from 'antd';
-import { Search } from 'ims-view-pc';
+import { renderFormItem, Search } from 'ims-view-pc';
 import React, { RefObject } from 'react';
-import CommonForm from './CustomForm';
+import CommonForm, { renderFormList } from './CustomForm';
 
 /**
  * @name 弹窗类型
@@ -84,8 +84,14 @@ const CompoundedCustomFrom = React.forwardRef<CustomFormHandle, CustomFormProps>
   },
 ) => React.ReactElement;
 
-type CompoundedComponent = typeof CompoundedCustomFrom & {};
+type CompoundedComponent = typeof CompoundedCustomFrom & {
+  renderFormItem: typeof renderFormItem;
+  renderFormList: typeof renderFormList;
+};
 
 const CustomForm = CompoundedCustomFrom as CompoundedComponent;
+
+CustomForm.renderFormItem = renderFormItem;
+CustomForm.renderFormList = renderFormList;
 
 export default CustomForm;
