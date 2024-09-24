@@ -1,5 +1,24 @@
 # Changelog
 
+## [Version&nbsp;1.63.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.62.0...ims-view-pc@1.63.0)
+
+<sup>Released on **2024-09-24**</sup>
+
+#### ✨ 新特性
+
+- **ims-view-pc**: Add CustomForm.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **ims-view-pc**: Add CustomForm ([6941495](https://github.com/eternallycyf/ims-view-pc/commit/6941495))
+
+</details>
+
 ## [Version&nbsp;1.62.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.61.0...ims-view-pc@1.62.0)
 
 <sup>Released on **2024-09-22**</sup>
