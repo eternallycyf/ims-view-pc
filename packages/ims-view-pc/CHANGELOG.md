@@ -1,5 +1,25 @@
 # Changelog
 
+## [Version&nbsp;1.64.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.63.0...ims-view-pc@1.64.0)
+
+<sup>Released on **2024-09-24**</sup>
+
+#### ✨ 新特性
+
+- **ims-view-pc**: Add renderFormList, add renderFormList.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **ims-view-pc**: Add renderFormList ([8135aa4](https://github.com/eternallycyf/ims-view-pc/commit/8135aa4))
+- **ims-view-pc**: Add renderFormList ([c65cb3a](https://github.com/eternallycyf/ims-view-pc/commit/c65cb3a))
+
+</details>
+
 ## [Version&nbsp;1.63.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.62.0...ims-view-pc@1.63.0)
 
 <sup>Released on **2024-09-24**</sup>
