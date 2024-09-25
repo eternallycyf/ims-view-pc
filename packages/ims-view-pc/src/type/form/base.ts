@@ -50,7 +50,7 @@ export const FORM_TYPE_DICT = [
 export type FormControlType = (typeof FORM_TYPE_DICT)[number];
 
 export type ItemProps<Values, Rest, Extra> = FormItemProps<Values> & {
-  next?: IUpdateControlProps<Values, Rest, Extra>['itemProps']['next'];
+  next?: IUpdateControlProps<Values, Rest, Extra, Values>['itemProps']['next'];
 };
 
 export interface IFetchConfig<Record = AnyObject> {

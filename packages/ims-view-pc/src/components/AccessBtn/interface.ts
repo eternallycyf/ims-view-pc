@@ -36,7 +36,7 @@ export interface IButtonDeleteProps {
 }
 //#endregion
 
-export interface IButtonItemProps extends IButtonDeleteProps, IButtonGroupProps {
+export interface IButtonItemProps extends ButtonProps, IButtonDeleteProps, IButtonGroupProps {
   buttonGroupProps?: ButtonGroupProps;
   buttonProps?: ButtonProps;
   popConfirmProps?: PopconfirmProps;
