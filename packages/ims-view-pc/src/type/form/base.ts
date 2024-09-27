@@ -8,6 +8,7 @@ import {
   IMentionsControlProps,
   ISimpleControlProps,
   IUpdateControlProps,
+  type Next,
 } from 'ims-view-pc';
 import { Search } from '.';
 
@@ -50,7 +51,7 @@ export const FORM_TYPE_DICT = [
 export type FormControlType = (typeof FORM_TYPE_DICT)[number];
 
 export type ItemProps<Values, Rest, Extra> = FormItemProps<Values> & {
-  next?: IUpdateControlProps<Values, Rest, Extra, Values>['itemProps']['next'];
+  next?: Next<Values, Rest, Extra, Values>;
 };
 
 export interface IFetchConfig<Record = AnyObject> {

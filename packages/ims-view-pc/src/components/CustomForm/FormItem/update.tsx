@@ -9,6 +9,12 @@ import {
 } from 'ims-view-pc';
 import React, { Fragment, useImperativeHandle, useState } from 'react';
 
+export type Next<Values = AnyObject, Rest = AnyObject, Extra = unknown, FormValues = Values> = (
+  values: FormValues,
+  form: Omit<FormInstance<FormValues>, 'scrollToField' | 'getFieldInstance'>,
+  index?: number,
+) => false | React.ReactNode | DeepPartial<ISearchesType<Values, Rest, Extra>>;
+
 export interface IUpdateControlProps<
   Values = AnyObject,
   Rest = AnyObject,
@@ -18,11 +24,7 @@ export interface IUpdateControlProps<
   itemProps?: {
     shouldUpdate?: (prevValues: Values, nextValues: Values) => boolean;
     /**@name index使用commonEditable 自动注入 */
-    next?: (
-      values: FormValues,
-      form: Omit<FormInstance<FormValues>, 'scrollToField' | 'getFieldInstance'>,
-      index?: number,
-    ) => false | React.ReactNode | DeepPartial<ISearchesType<Values, Rest, Extra>>;
+    next?: Next<Values, Rest, Extra, FormValues>;
   };
 }
 

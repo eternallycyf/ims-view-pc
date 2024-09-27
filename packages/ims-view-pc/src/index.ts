@@ -29,6 +29,7 @@ export type {
   IMentionsControlProps,
   ISimpleControlProps,
   IUpdateControlProps,
+  Next,
 } from './components/CustomForm/interface';
 export { default as CustomModal } from './components/CustomModal';
 export type { FormModalProps, ICustomModalFormList } from './components/CustomModal/form';
