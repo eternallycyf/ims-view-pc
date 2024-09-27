@@ -1,5 +1,24 @@
 # Changelog
 
+### [Version&nbsp;1.64.2](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.64.1...ims-view-pc@1.64.2)
+
+<sup>Released on **2024-09-27**</sup>
+
+#### 🐛 修复
+
+- **ims-view-pc**: Types error.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- **ims-view-pc**: Types error ([fa1ab60](https://github.com/eternallycyf/ims-view-pc/commit/fa1ab60))
+
+</details>
+
 ### [Version&nbsp;1.64.1](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.64.0...ims-view-pc@1.64.1)
 
 <sup>Released on **2024-09-25**</sup>
