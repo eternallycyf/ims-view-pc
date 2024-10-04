@@ -30,6 +30,8 @@ demo:
 
 <code src="./demo/demo3.tsx" description="只有type='confirm'才可以">带 loading 的确定</code>
 
+### 待删除-迁移至 [customForm](/components/custom-form)
+
 <code src="./demo/demo4.tsx">formModal</code>
 
 ## API

@@ -1,0 +1,70 @@
+.CustomTooltip {
+  position: relative;
+  display: inline-block;
+  overflow: var(--overflow, unset);
+  margin-bottom: 0 !important;
+  max-height: var(--max-height, 100%);
+  white-space: break-spaces;
+  font-weight: 400;
+
+  .ant-typography {
+    margin-bottom: 0 !important;
+    width: 100%;
+  }
+}
+
+.ellipsis-symbol {
+  .ant-typography {
+    span[aria-hidden='true'] {
+      display: none;
+      color: #fff;
+    }
+  }
+}
+
+.CustomTooltip-Btn-left {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 12px;
+
+  user-select: none;
+}
+
+.CustomTooltip-Btn-right {
+  font-size: 12px;
+
+  user-select: none;
+}
+
+.expand-btn {
+  display: inline-block;
+  padding: 4px;
+  background: #ebf2ff;
+  color: #3363d7;
+  text-align: center;
+  font-size: 12px;
+
+  &:hover {
+    color: #5781df !important;
+  }
+}
+
+@keyframes shake {
+  10% {
+    transition: 0.3s;
+    transform: rotateZ(0deg);
+    transform-origin: center;
+  }
+
+  100% {
+    transition: 0.3s;
+    transform: rotateZ(180deg);
+    transform-origin: center;
+  }
+}
+
+.apply-shake {
+  font-size: 12px;
+  animation: shake 0.25s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}

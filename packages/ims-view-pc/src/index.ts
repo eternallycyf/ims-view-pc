@@ -33,6 +33,8 @@ export type {
 } from './components/CustomForm/interface';
 export { default as CustomModal } from './components/CustomModal';
 export type { FormModalProps, ICustomModalFormList } from './components/CustomModal/form';
+export * from './components/CustomTooltip';
+export { default as CustomTooltip } from './components/CustomTooltip';
 export { default as Ellipsis } from './components/Ellipsis';
 export * from './components/Ellipsis/interface';
 export { default as ErrorBoundary } from './components/ErrorBoundary';
