@@ -1,5 +1,24 @@
 # Changelog
 
+## [Version&nbsp;1.65.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.64.2...ims-view-pc@1.65.0)
+
+<sup>Released on **2024-10-04**</sup>
+
+#### ✨ 新特性
+
+- **ims-view-pc**: Add CustomTooltip.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **ims-view-pc**: Add CustomTooltip ([baf8dd8](https://github.com/eternallycyf/ims-view-pc/commit/baf8dd8))
+
+</details>
+
 ### [Version&nbsp;1.64.2](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.64.1...ims-view-pc@1.64.2)
 
 <sup>Released on **2024-09-27**</sup>
