@@ -42,6 +42,8 @@ export * from './components/ExpandSelect';
 export { default as ExpandSelect } from './components/ExpandSelect';
 export { default as ExportButton } from './components/ExportButton';
 export * from './components/ExportButton/interface';
+export { default as GraphChart } from './components/Graph';
+export * from './components/Graph/interface';
 export { default as Icon } from './components/Icon';
 export { default as Marker } from './components/Marker';
 export * from './components/Marker/interface';

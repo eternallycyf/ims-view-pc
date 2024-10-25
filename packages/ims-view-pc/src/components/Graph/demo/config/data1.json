@@ -1,0 +1,88 @@
+{
+  "code": 200,
+  "msg": "接口调用成功",
+  "data": {
+    "content": "腾讯",
+    "children": [
+      {
+        "title": "测试部",
+        "content": "测试部",
+        "children": [
+          {
+            "title": "需求合作点",
+            "content": "客户部合作",
+            "children": [
+              {
+                "title": "短期合作",
+                "content": "客户部合作1，客户部合作2，客户部合作3",
+                "keyPersonName": "张华;林东",
+                "children": []
+              }
+            ]
+          },
+          {
+            "title": "需求合作点",
+            "content": "服务部门服务222",
+            "children": [
+              {
+                "title": "服务部门1",
+                "content": "资金管理部1",
+                "keyPersonName": "王五1",
+                "children": []
+              },
+              {
+                "title": "服务部门2",
+                "content": "资金管理部2",
+                "keyPersonName": "王五2",
+                "children": []
+              },
+              {
+                "title": "服务部门3",
+                "content": "资金管理部3",
+                "keyPersonName": "王五3",
+                "children": []
+              },
+              {
+                "title": "服务部门4",
+                "content": "资金管理部4",
+                "keyPersonName": "王五4",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "客户部",
+        "content": "客户部",
+        "children": [
+          {
+            "title": "需求合作点",
+            "content": "客户部合作",
+            "children": [
+              {
+                "title": "短期合作",
+                "content": "客户部合作1，客户部合作2，客户部合作3",
+                "keyPersonName": "张华;林东",
+                "children": []
+              }
+            ]
+          },
+          {
+            "title": "需求合作点",
+            "content": "服务部门服务222",
+            "children": [
+              {
+                "title": "服务部门",
+                "content": "资金管理部",
+                "keyPersonName": "王五",
+                "children": []
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "success": true
+}

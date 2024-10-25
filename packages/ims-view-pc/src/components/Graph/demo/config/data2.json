@@ -1,0 +1,78 @@
+{
+  "code": 200,
+  "msg": "接口调用成功",
+  "data": {
+    "content": "腾讯科技",
+    "children": [
+      {
+        "title": "财务部门",
+        "content": "财务部门",
+        "children": [
+          {
+            "title": "部门职责",
+            "content": "管理财务",
+            "children": [
+              {
+                "title": "财务一级部1",
+                "content": "管理财务1",
+                "children": []
+              },
+              {
+                "title": "财务一级部2",
+                "content": "管理财务2",
+                "children": []
+              },
+              {
+                "title": "财务一级部3",
+                "content": "管理财务3",
+                "children": []
+              },
+              {
+                "title": "财务一级部4",
+                "content": "管理财务4",
+                "children": []
+              },
+              {
+                "title": "财务一级部5",
+                "content": "管理财务5",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "科技部门",
+        "content": "科技部门",
+        "children": [
+          {
+            "title": "科技部门1",
+            "content": "科技部门1",
+            "children": []
+          },
+          {
+            "title": "科技部门2",
+            "content": "科技部门2",
+            "children": []
+          },
+          {
+            "title": "科技部门3",
+            "content": "科技部门3",
+            "children": []
+          },
+          {
+            "title": "科技部门4",
+            "content": "科技部门4",
+            "children": []
+          },
+          {
+            "title": "科技部门5",
+            "content": "科技部门5",
+            "children": []
+          }
+        ]
+      }
+    ]
+  },
+  "success": true
+}
