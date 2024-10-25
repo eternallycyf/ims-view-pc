@@ -1,5 +1,24 @@
 # Changelog
 
+## [Version&nbsp;1.66.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.65.0...ims-view-pc@1.66.0)
+
+<sup>Released on **2024-10-25**</sup>
+
+#### ✨ 新特性
+
+- **ims-view-pc**: Add Graph.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **ims-view-pc**: Add Graph ([ceb7943](https://github.com/eternallycyf/ims-view-pc/commit/ceb7943))
+
+</details>
+
 ## [Version&nbsp;1.65.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.64.2...ims-view-pc@1.65.0)
 
 <sup>Released on **2024-10-04**</sup>
