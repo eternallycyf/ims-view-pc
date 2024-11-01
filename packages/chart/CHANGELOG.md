@@ -1,5 +1,24 @@
 # Changelog
 
+### [Version&nbsp;1.8.1](https://github.com/eternallycyf/ims-view-pc/compare/@ims-view/chart@1.8.0...@ims-view/chart@1.8.1)
+
+<sup>Released on **2024-11-01**</sup>
+
+#### 🐛 修复
+
+- EditTable shouldUpdate params index location.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- EditTable shouldUpdate params index location ([0a4d940](https://github.com/eternallycyf/ims-view-pc/commit/0a4d940))
+
+</details>
+
 ## [Version&nbsp;1.8.0](https://github.com/eternallycyf/ims-view-pc/compare/@ims-view/chart@1.7.0...@ims-view/chart@1.8.0)
 
 <sup>Released on **2024-09-20**</sup>
