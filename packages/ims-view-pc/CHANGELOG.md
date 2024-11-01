@@ -1,5 +1,24 @@
 # Changelog
 
+### [Version&nbsp;1.66.1](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.66.0...ims-view-pc@1.66.1)
+
+<sup>Released on **2024-11-01**</sup>
+
+#### 🐛 修复
+
+- Global styles classNames.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- Global styles classNames ([304b37b](https://github.com/eternallycyf/ims-view-pc/commit/304b37b))
+
+</details>
+
 ## [Version&nbsp;1.66.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.65.0...ims-view-pc@1.66.0)
 
 <sup>Released on **2024-10-25**</sup>
