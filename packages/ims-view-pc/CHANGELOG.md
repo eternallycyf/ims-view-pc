@@ -1,5 +1,24 @@
 # Changelog
 
+### [Version&nbsp;1.66.3](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.66.2...ims-view-pc@1.66.3)
+
+<sup>Released on **2024-11-01**</sup>
+
+#### 🐛 修复
+
+- EditTable multiple shouldupdate.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- EditTable multiple shouldupdate ([7145daa](https://github.com/eternallycyf/ims-view-pc/commit/7145daa))
+
+</details>
+
 ### [Version&nbsp;1.66.2](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.66.1...ims-view-pc@1.66.2)
 
 <sup>Released on **2024-11-01**</sup>
