@@ -1,5 +1,30 @@
 # Changelog
 
+### [Version&nbsp;1.66.2](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.66.1...ims-view-pc@1.66.2)
+
+<sup>Released on **2024-11-01**</sup>
+
+#### 🐛 修复
+
+- EditTable shouldUpdate params index location.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- EditTable shouldUpdate params index location ([0a4d940](https://github.com/eternallycyf/ims-view-pc/commit/0a4d940))
+
+</details>
+
+### Dependencies
+
+- **@ims-view/chart:** upgraded to 1.8.1
+- **@ims-view/hooks:** upgraded to 1.18.1
+- **@ims-view/utils:** upgraded to 1.17.1
+
 ### [Version&nbsp;1.66.1](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.66.0...ims-view-pc@1.66.1)
 
 <sup>Released on **2024-11-01**</sup>
