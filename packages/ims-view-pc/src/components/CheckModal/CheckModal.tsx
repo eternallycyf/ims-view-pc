@@ -162,11 +162,9 @@ const CheckModal: React.ForwardRefRenderFunction<CheckModalHandle, CheckModalPro
         cancelText="取消"
         onOk={handleOnOkModal}
         onCancel={handleOnCancelModal}
-        destroyOnClose
         centered
         maskClosable
-        getContainer={false}
-        className="check-modal-checkbox-group "
+        rootClassName="check-modal-checkbox-group "
         width={630}
         {...modalProps}
       >

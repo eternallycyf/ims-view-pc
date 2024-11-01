@@ -143,9 +143,7 @@ const CustomForm: ForwardRefRenderFunction<CustomFormHandle, CustomFormProps> = 
   let WrapperProps: any = {
     modalRender,
     afterClose: () => onDestroy && onDestroy(),
-    destroyOnClose: true,
     forceRender: true,
-    getContainer: false,
     open: visible,
     cancelButtonProps: { onClick: () => onCancel && onCancel(getFormValues()) },
     okButtonProps: {
@@ -153,7 +151,7 @@ const CustomForm: ForwardRefRenderFunction<CustomFormHandle, CustomFormProps> = 
       loading,
     },
     ...rest,
-    className: `plus-modal ${rest?.className}`,
+    rootClassName: `CustomForm  ${rest?.className}`,
   };
 
   const renderSummiter = (WrapperProps) => {
@@ -196,7 +194,7 @@ const CustomForm: ForwardRefRenderFunction<CustomFormHandle, CustomFormProps> = 
   }
 
   return (
-    <div className="CustomForm">
+    <>
       {modalType === 'normal' ? (
         <>
           {modalRender(
@@ -213,7 +211,7 @@ const CustomForm: ForwardRefRenderFunction<CustomFormHandle, CustomFormProps> = 
           {children}
         </Component>
       )}
-    </div>
+    </>
   );
 };
 

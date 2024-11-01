@@ -85,14 +85,12 @@ function FormModal<T = AnyObject, R = AnyObject>(props: FormModalProps<T, R>) {
       modalRender={modalRender}
       afterClose={() => onDestroy?.()}
       onCancel={() => onCancel?.(getFormValues())}
-      destroyOnClose
       cancelButtonProps={{ onClick: () => onCancel?.(getFormValues()) }}
       okButtonProps={{ htmlType: 'submit', loading }}
       forceRender
-      getContainer={false}
       open={visible}
       {...rest}
-      className={`plus-modal ${rest?.className}`}
+      rootClassName={`plus-modal ${rest?.className}`}
     >
       <Row gutter={16}>
         {(formList || []).map((item, index) => {

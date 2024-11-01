@@ -1,30 +1,24 @@
 @orange: #fa6a0a;
 
 .TreeModal {
-  .modal {
-    :global {
-      .ant-checkbox-wrapper + .ant-checkbox-wrapper {
-        margin-inline-start: 0 !important;
+  .ant-checkbox-wrapper + .ant-checkbox-wrapper {
+    margin-inline-start: 0 !important;
 
-        .ant-collapse-header {
-          padding: 5px !important;
-        }
-
-        .ant-collapse-content-box {
-          padding: 0 3px !important;
-        }
-
-        .ant-checkbox + span {
-          padding-inline-start: 10px;
-        }
-      }
+    .ant-collapse-header {
+      padding: 5px !important;
     }
 
-    :global {
-      .ant-form-item {
-        margin-bottom: 0;
-      }
+    .ant-collapse-content-box {
+      padding: 0 3px !important;
     }
+
+    .ant-checkbox + span {
+      padding-inline-start: 10px;
+    }
+  }
+
+  .ant-form-item {
+    margin-bottom: 0;
   }
 
   .TreeModalItem {
@@ -80,68 +74,64 @@
         margin-top: 8px;
         margin-bottom: 4px;
 
-        :global {
-          .ant-input-affix-wrapper {
-            height: 24px;
-            border: 1px solid #dee1e7;
-            border-radius: 2px;
-            background: #ffffff;
-          }
+        .ant-input-affix-wrapper {
+          height: 24px;
+          border: 1px solid #dee1e7;
+          border-radius: 2px;
+          background: #ffffff;
+        }
 
-          .ant-input-suffix {
-            color: #b3b8c2;
-          }
+        .ant-input-suffix {
+          color: #b3b8c2;
+        }
 
-          ::placeholder {
-            color: #caced7;
-            font-weight: 400;
-            font-size: 12px;
-            line-height: 12px;
-          }
+        ::placeholder {
+          color: #caced7;
+          font-weight: 400;
+          font-size: 12px;
+          line-height: 12px;
         }
       }
     }
 
-    :global {
-      svg {
-        width: 12px;
-        height: 12px;
-      }
+    svg {
+      width: 12px;
+      height: 12px;
+    }
 
-      .ant-tree-title {
-        color: #2a303b;
-        font-weight: 400;
-        font-size: 12px;
-      }
+    .ant-tree-title {
+      color: #2a303b;
+      font-weight: 400;
+      font-size: 12px;
+    }
 
-      .ant-collapse-header-text {
-        font-weight: 500;
-        font-size: 12px;
-        line-height: 21px;
-      }
+    .ant-collapse-header-text {
+      font-weight: 500;
+      font-size: 12px;
+      line-height: 21px;
+    }
 
-      .ant-tree-node-selected {
-        background: transparent !important;
-      }
+    .ant-tree-node-selected {
+      background: transparent !important;
+    }
 
-      ::-webkit-scrollbar {
-        width: 8px;
-        border-radius: 0px 0px 1px 0px;
-        background: #fafafb;
-      }
+    ::-webkit-scrollbar {
+      width: 8px;
+      border-radius: 0px 0px 1px 0px;
+      background: #fafafb;
+    }
 
-      /*定义滚动条轨道 内阴影+圆角*/
-      ::-webkit-scrollbar-track {
-        border-radius: 0px 0px 1px 0px;
-        background-color: #fafafb;
-      }
+    /*定义滚动条轨道 内阴影+圆角*/
+    ::-webkit-scrollbar-track {
+      border-radius: 0px 0px 1px 0px;
+      background-color: #fafafb;
+    }
 
-      /*定义滑块 内阴影+圆角*/
-      ::-webkit-scrollbar-thumb {
-        width: 3px;
-        border-radius: 5px;
-        background: #dee1e7;
-      }
+    /*定义滑块 内阴影+圆角*/
+    ::-webkit-scrollbar-thumb {
+      width: 3px;
+      border-radius: 5px;
+      background: #dee1e7;
     }
   }
 }

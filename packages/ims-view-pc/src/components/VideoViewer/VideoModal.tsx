@@ -39,7 +39,7 @@ class VideoModal extends React.Component<VideoModalProps> {
     const modalProps = {
       ...otherProps,
       wrapClassName: `${wrapClassName} ${MODAL_WRAP}`,
-      className: 'fishd-modal',
+      rootClassName: 'fishd-modal',
       styles: {
         backgroundColor: 'rgba(0,0,0,0.2)',
         ...otherProps?.styles,

@@ -142,7 +142,7 @@ const TreeModal = React.forwardRef<TreeModalHandle, TreeModalProps>((props, ref)
 
   return (
     <>
-      <Form.Item className="TreeModal" style={{ marginBottom: 0 }}>
+      <Form.Item style={{ marginBottom: 0 }}>
         <div>{typeof children === 'function' ? children(contextProvider) : children}</div>
         <Form.Item noStyle>
           <Modal
@@ -155,8 +155,7 @@ const TreeModal = React.forwardRef<TreeModalHandle, TreeModalProps>((props, ref)
             forceRender
             centered
             maskClosable
-            getContainer={false}
-            className="modal"
+            rootClassName="TreeModal"
             width={800}
             {...modalProps}
           >
