@@ -18,6 +18,7 @@ import { useState } from 'react';
 export interface ICustomerListRecord {
   time?: dayjs.Dayjs;
   customerName?: string;
+  age?: number;
 }
 
 export interface IColumnsExtraRecord {}
@@ -78,10 +79,14 @@ export const getColumns: (
       align: 'left',
       formItemProps: {
         itemProps: {
-          shouldUpdate: () => true,
+          shouldUpdate: (pre, cru, index) => {
+            return !_.isEqual(
+              pre?.activityList?.[field?.name]?.customerList?.[index]?.['age'],
+              cru?.activityList?.[field?.name]?.customerList?.[index]?.['age'],
+            );
+          },
           next: (values, form, index) => {
             const currentValues = values?.activityList?.[field?.name]?.customerList?.[index];
-            console.log(currentValues);
             return [
               {
                 name: [index, 'time'],
@@ -101,13 +106,12 @@ export const getColumns: (
       align: 'left',
       formItemProps: {
         itemProps: {
-          shouldUpdate: () => true,
+          shouldUpdate: () => false,
           next(values, form, index) {
             const currentValues = values?.activityList?.[field?.name]?.customerList?.[index];
             return [
               {
                 name: [index, 'customerName'],
-                title: '公司名称',
                 type: 'custom',
                 align: 'left',
                 ellipsis: true,
@@ -115,6 +119,28 @@ export const getColumns: (
                 Component() {
                   return currentValues?.customerName ?? '--';
                 },
+              },
+            ];
+          },
+        },
+      },
+    },
+    {
+      dataIndex: 'age',
+      title: '年龄',
+      hasRequiredMark: true,
+      type: 'update',
+      align: 'left',
+      formItemProps: {
+        itemProps: {
+          shouldUpdate: () => false,
+          next(values, form, index) {
+            const currentValues = values?.activityList?.[field?.name]?.customerList?.[index];
+            return [
+              {
+                name: [index, 'age'],
+                type: 'inputNumber',
+                ellipsis: true,
               },
             ];
           },

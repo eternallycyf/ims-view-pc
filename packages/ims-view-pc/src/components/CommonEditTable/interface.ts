@@ -117,6 +117,10 @@ export interface IColumnEditRestProps<Values> {
   name?: Values;
 }
 
+export type ShouldUpdate<Values = Record<string, unknown>> =
+  | boolean
+  | ((prevValues: Values, nextValues: Values, index: number) => boolean);
+
 /**
  * @name columns
  * 只有 type === 'custom' || item.transform && status == 'view' 时 render 才会生效
@@ -138,7 +142,7 @@ export type ICommonEditTableColumnsType<
     rules?: FormItemProps<Values>['rules'];
     controlProps?: Partial<Search['controlProps']>;
     itemProps?: Omit<Search<FormValues, Rest>['itemProps'], 'shouldUpdate' | 'next'> & {
-      shouldUpdate?: FormItemProps<FormValues>['shouldUpdate'];
+      shouldUpdate?: ShouldUpdate<FormValues>;
       next?: IUpdateControlProps<Values, Rest, unknown, FormValues>['itemProps']['next'];
     };
   };

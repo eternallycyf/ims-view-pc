@@ -51,7 +51,8 @@
     "rc-resize-observer": "1.4.0"
   },
   "peerDependencies": {
-    "@ant-design/icons": "^5.2.6",
+    "@ant-design/icons": "^5",
+    "@ant-design/pro-form": "^2",
     "antd": "^5",
     "axios": "^1.5.1",
     "lodash": "^4.17.21",

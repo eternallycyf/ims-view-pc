@@ -22,7 +22,7 @@ export interface IUpdateControlProps<
   FormValues = Values,
 > {
   itemProps?: {
-    shouldUpdate?: (prevValues: Values, nextValues: Values) => boolean;
+    shouldUpdate?: (prevValues: Values, nextValues: Values, index?: number) => boolean;
     /**@name index使用commonEditable 自动注入 */
     next?: Next<Values, Rest, Extra, FormValues>;
   };
@@ -36,10 +36,17 @@ const UpdateControl = React.forwardRef<any, IUpdateControlProps>((props, ref) =>
 
   if (!next) return null;
 
+  const shouldUpdateProps = shouldUpdate
+    ? {
+        shouldUpdate: (pre, cru) => shouldUpdate(pre, cru),
+      }
+    : {};
+
   return (
-    <Form.Item noStyle shouldUpdate={shouldUpdate}>
+    <Form.Item noStyle {...shouldUpdateProps}>
       {(form) => {
         const values = form.getFieldsValue();
+
         if (!next) return null;
         const nextValues = next(values, form);
         if (nextValues === false) return null;

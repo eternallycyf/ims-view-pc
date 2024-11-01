@@ -29,7 +29,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "lodash": "^4.17.21",
-    "@ant-design/icons": "^5.2.6",
+    "@ant-design/icons": "^5",
     "antd": "^5"
   },
   "publishConfig": {

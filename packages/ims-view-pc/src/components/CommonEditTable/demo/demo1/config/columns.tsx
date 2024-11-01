@@ -24,7 +24,12 @@ export const getColumns = (
         itemProps: {
           noStyle: true,
           style: { display: 'flex' },
-          shouldUpdate: (pre, cru) => true,
+          shouldUpdate: (pre, cru, index) => {
+            return !_.isEqual(
+              pre?.EditTable?.[index]?.['ratio'],
+              cru?.EditTable?.[index]?.['ratio'],
+            );
+          },
           next: (values, form, index) => {
             const record = values?.EditTable?.[index];
             if (record?.ratio === 10) return '---';
@@ -47,9 +52,7 @@ export const getColumns = (
       width: 100,
       formItemProps: {
         controlProps: {
-          onChange: (e) => {
-            console.log(e);
-          },
+          onChange: (e) => {},
         },
       },
     },

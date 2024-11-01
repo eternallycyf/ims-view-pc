@@ -13,6 +13,7 @@ import {
   ICommonEditTableHandle,
   ICommonEditTableProps,
 } from 'ims-view-pc';
+import _ from 'lodash';
 import React, { useEffect } from 'react';
 
 export interface IRecord {
@@ -41,16 +42,18 @@ export const columns: ICommonEditTableColumnsType<IRecord, IColumnsExtraRecord, 
     formItemProps: {
       itemProps: {
         noStyle: true,
-        rules: [{ required: true, message: '请输入姓名' }],
-        style: { display: 'flex' },
-        shouldUpdate: (pre, cru) => true,
+        shouldUpdate: (pre, cru, index) => {
+          return !_.isEqual(pre?.EditTable?.[index]?.['age'], cru?.EditTable?.[index]?.['age']);
+        },
         next: (values, form, index) => {
+          console.log(values, index, 'lo');
           const record = values?.EditTable?.[index];
           if (record?.age === 10) return '---';
           return [
             {
               name: [index, 'userName'],
               type: 'input',
+              rules: [{ required: true, message: '请输入姓名' }],
             },
           ];
         },

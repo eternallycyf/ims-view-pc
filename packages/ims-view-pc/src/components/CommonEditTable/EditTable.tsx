@@ -1,3 +1,4 @@
+import { random } from '@ims-view/utils';
 import { Col, Empty, Form, FormListFieldData, FormListOperation, Row } from 'antd';
 import {
   ErrorBoundary,
@@ -12,7 +13,8 @@ import {
   Theme,
   renderFormItem,
 } from 'ims-view-pc';
-import React, { Key, useImperativeHandle } from 'react';
+import _ from 'lodash';
+import React, { Fragment, Key, useImperativeHandle } from 'react';
 import { formatColumn } from '../../core/helpers';
 import { Table } from './';
 import TableBtn from './TableBtn';
@@ -144,24 +146,67 @@ const CommonEditTable: React.ForwardRefRenderFunction<
             formProps,
             index,
             type,
+            values,
           }: {
             form: any;
             formProps: any;
             index: number;
             type: any;
+            values: any;
           }) => {
-            if (type == 'update') {
+            const restItemProps = _.omit(itemProps, ['shouldUpdate']);
+            const updateProps = !isMultiple ? restItemProps : itemProps;
+
+            if (type === 'update' && isMultiple) {
               // FAQ: 可编辑表格使用 type == 'update'
               // 为Form.Item.type == 'update' 注入 index
+
               return (
-                <Row {...itemProps}>
+                <Row>
                   {renderFormItem({
                     ...formProps,
-                    itemProps: addExtraIndexParams(itemProps, index),
+                    itemProps: {
+                      ...addExtraIndexParams(itemProps, index),
+                    },
                   })}
                 </Row>
               );
             }
+
+            // 单行编辑内层不需要shouldUpdate了
+            if (type === 'update' && !isMultiple) {
+              if (!updateProps?.next) return null;
+              const nextValues = updateProps?.next(values, form, index);
+
+              if (nextValues === false) return null;
+              if (
+                typeof nextValues === 'string' ||
+                (React.isValidElement(nextValues) && !Array.isArray(nextValues))
+              ) {
+                return nextValues;
+              }
+
+              return (
+                <Fragment key={random.getUUID()}>
+                  {((nextValues as any[]) || []).map((item: any, index: number) => (
+                    <Col span={item?.['col'] == undefined ? 24 : item?.['col'] || 0} key={index}>
+                      <Form.Item
+                        labelAlign="right"
+                        label={item?.label}
+                        name={item?.name}
+                        rules={item?.rules || []}
+                        initialValue={item?.initialValue}
+                        {...item.layout}
+                        {...item.itemProps}
+                      >
+                        {renderFormItem(item)}
+                      </Form.Item>
+                    </Col>
+                  ))}
+                </Fragment>
+              );
+            }
+
             return (
               <Form.Item
                 labelAlign="right"
@@ -170,7 +215,7 @@ const CommonEditTable: React.ForwardRefRenderFunction<
                 key={key}
                 rules={rules || itemProps?.rules || []}
                 initialValue={initialValue}
-                {...itemProps}
+                {...(restItemProps as any)}
               >
                 {renderFormItem(formProps, index)}
               </Form.Item>
@@ -180,7 +225,15 @@ const CommonEditTable: React.ForwardRefRenderFunction<
           if (isMultiple) return getContent({ type, formProps, index, form } as any);
 
           return (
-            <Form.Item noStyle shouldUpdate={true}>
+            <Form.Item
+              noStyle
+              shouldUpdate={
+                typeof itemProps?.shouldUpdate === 'function'
+                  ? //@ts-ignore
+                    (pre, cru, source) => itemProps?.shouldUpdate(pre, cru, index)
+                  : () => false
+              }
+            >
               {(inLineForm) => {
                 const currentValue = inLineForm?.getFieldValue(tableFormName) || []?.[name as any];
                 if (!isMultiple && !editableKeys.includes(String(currentValue?.[index]?.key))) {
@@ -192,7 +245,13 @@ const CommonEditTable: React.ForwardRefRenderFunction<
                   }
                   return formatEditTableColumns(item, val);
                 }
-                return getContent({ type, formProps, index, form } as any);
+                return getContent({
+                  type,
+                  formProps,
+                  index,
+                  form,
+                  values: currentValue,
+                } as any);
               }}
             </Form.Item>
           );
