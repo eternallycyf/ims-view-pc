@@ -1,26 +1,15 @@
-import {
-  PlusCircleOutlined,
-  VerticalAlignBottomOutlined,
-  WarningOutlined,
-} from '@ant-design/icons';
-import { useForceUpdate } from '@ims-view/hooks';
+import { PlusCircleOutlined, WarningOutlined } from '@ant-design/icons';
 import { Button, Card, Form, message } from 'antd';
 import dayjs from 'dayjs';
-import {
-  CommonEditTable,
-  IBaseEditButtonProps,
-  ICommonEditTableColumnsType,
-  ICommonEditTableHandle,
-  ICommonEditTableProps,
-} from 'ims-view-pc';
+import { CommonEditTable, ICommonEditTableColumnsType, ICommonEditTableHandle } from 'ims-view-pc';
 import _ from 'lodash';
-import React, { useEffect } from 'react';
+import React from 'react';
 
 export interface IRecord {
-  userName: string;
+  userName?: string;
   time?: dayjs.Dayjs;
   age?: number;
-  key: string;
+  key?: string;
 }
 
 export interface IFormValues {
@@ -29,81 +18,91 @@ export interface IFormValues {
 
 export interface IColumnsExtraRecord {}
 
-export const columns: ICommonEditTableColumnsType<IRecord, IColumnsExtraRecord, IFormValues>[] = [
-  {
-    dataIndex: 'userName',
-    title: '姓名',
-    type: 'update',
-    align: 'center',
-    ellipsis: true,
-    width: 100,
-    tooltip: 'sss',
-    editable: true,
-    formItemProps: {
-      itemProps: {
-        noStyle: true,
-        shouldUpdate: (pre, cru, index) => {
-          return !_.isEqual(pre?.EditTable?.[index]?.['age'], cru?.EditTable?.[index]?.['age']);
-        },
-        next: (values, form, index) => {
-          console.log(values, index, 'lo');
-          const record = values?.EditTable?.[index];
-          if (record?.age === 10) return '---';
-          return [
-            {
-              name: [index, 'userName'],
-              type: 'input',
-              rules: [{ required: true, message: '请输入姓名' }],
-            },
-          ];
-        },
-      },
-    },
-  },
-  {
-    dataIndex: 'time',
-    title: '时间',
-    type: 'date',
-    align: 'center',
-    formatTime: true,
-    width: 100,
-    formItemProps: {
-      itemProps: {
-        rules: [{ required: true }],
-      },
-    },
-    editable: true,
-  },
-  {
-    dataIndex: 'age',
-    title: '数额',
-    type: 'inputNumber',
-    align: 'center',
-    formatNumber: true,
-    width: 100,
-    formItemProps: {
-      itemProps: {
-        rules: [{ required: true }],
-      },
-    },
-    editable: true,
-  },
-];
-
 const Demo2 = () => {
   const [form] = Form.useForm<IFormValues>();
-  const [editableKeys, setEditableKeys] = React.useState<string[]>([]);
-  const [currentEditValue, setCurrentEditValue] = React.useState<any[]>([]);
+  const currentEditValueRef = React.useRef<any[]>([]);
+  const editableKeysRef = React.useRef<string[]>([]);
+
   const EditTableRef = React.useRef<ICommonEditTableHandle<IRecord, IFormValues>>(null!);
 
   const handleOnSubmit = async () => {
-    const values = form.getFieldsValue();
-    if (editableKeys.length > 0) {
+    if (editableKeysRef.current.length > 0) {
       return message.warning('请先保存编辑项');
     }
-    await form.validateFields();
-    console.log(values, editableKeys);
+
+    form
+      .validateFields()
+      .then(() => message.success('校验成功'))
+      .catch((error) => {
+        console.log(error);
+        message.error(
+          `检验失败 ${error?.errorFields[0]?.errors[0]}
+          (请检查: 第${error?.errorFields[0]?.name?.[1] + 1}行)
+          `,
+        );
+      });
   };
+
+  const columns: ICommonEditTableColumnsType<IRecord, IColumnsExtraRecord, IFormValues>[] = [
+    {
+      dataIndex: 'userName',
+      title: '姓名',
+      type: 'update',
+      align: 'center',
+      ellipsis: true,
+      width: 100,
+      tooltip: 'sss',
+      editable: true,
+      formItemProps: {
+        itemProps: {
+          noStyle: true,
+          shouldUpdate: (pre, cru, index) => {
+            return !_.isEqual(pre?.EditTable?.[index]?.['age'], cru?.EditTable?.[index]?.['age']);
+          },
+          next: (values, form, index) => {
+            console.log(values, index, 'lo');
+            const record = values?.EditTable?.[index];
+            if (record?.age === 10) return '---';
+            return [
+              {
+                name: [index, 'userName'],
+                type: 'input',
+                rules: [{ required: true, message: '请输入姓名' }],
+              },
+            ];
+          },
+        },
+      },
+    },
+    {
+      dataIndex: 'time',
+      title: '时间',
+      type: 'date',
+      align: 'center',
+      formatTime: true,
+      width: 100,
+      formItemProps: {
+        itemProps: {
+          rules: [{ required: true }],
+        },
+      },
+      editable: true,
+    },
+    {
+      dataIndex: 'age',
+      title: '数额',
+      type: 'inputNumber',
+      align: 'center',
+      formatNumber: true,
+      width: 100,
+      formItemProps: {
+        itemProps: {
+          rules: [{ required: true }],
+        },
+      },
+      editable: true,
+    },
+  ];
 
   return (
     <Card>
@@ -112,7 +111,7 @@ const Demo2 = () => {
           form={form}
           ref={EditTableRef}
           isMultiple={false}
-          editableKeys={editableKeys}
+          editableKeys={editableKeysRef}
           // isVirtual
           initialValues={Array.from({ length: 3 }).map((_, index) => ({
             userName:
@@ -120,7 +119,7 @@ const Demo2 = () => {
             key: String(index),
             age: 21260,
           }))}
-          curryParams={{ editableKeys }}
+          curryParams={{ editableKeysRef }}
           columns={columns}
           buttonLeft={[]}
           buttonRight={[
@@ -157,11 +156,13 @@ const Demo2 = () => {
               itemProps: {
                 handleDeleteConfirm: (renderProps, operation, status, val) => {
                   operation.remove(renderProps.index);
+                  operation.add({ key: 'TIMEOUT' }, 0);
+                  operation.remove(0);
                 },
                 deleteText: '确认删除嘛',
               },
               visible: (renderProps, operation, status) => {
-                return !editableKeys.includes(renderProps?.record?.key);
+                return !editableKeysRef.current.includes(renderProps?.record?.key);
               },
             },
             {
@@ -170,17 +171,22 @@ const Demo2 = () => {
               element: '编辑',
               itemProps: {
                 buttonProps: {
-                  onClick: (renderProps) => {
-                    if (editableKeys?.length >= 2) {
+                  onClick: (renderProps, operation) => {
+                    if (editableKeysRef.current?.length >= 2) {
                       return message.error('最多只能同时编辑两项');
                     }
-                    setEditableKeys([...editableKeys, renderProps.record.key]);
-                    setCurrentEditValue([...currentEditValue, renderProps.record]);
+                    editableKeysRef.current = [...editableKeysRef.current, renderProps.record.key];
+                    currentEditValueRef.current = [
+                      ...currentEditValueRef.current,
+                      renderProps.record,
+                    ];
+                    operation.add({ key: 'TIMEOUT' }, 0);
+                    operation.remove(0);
                   },
                 },
               },
               visible: (renderProps) => {
-                return !editableKeys.includes(renderProps?.record?.key);
+                return !editableKeysRef.current.includes(renderProps?.record?.key);
               },
 
               // (renderProps, operation, status) => {
@@ -233,16 +239,25 @@ const Demo2 = () => {
               itemProps: {
                 buttonProps: {
                   onClick: async (renderProps, operation, status, val) => {
-                    await form.validateFields();
-                    setCurrentEditValue(
-                      currentEditValue.filter((item) => item.key !== renderProps.record.key),
+                    await form.validateFields([
+                      ['EditTable', renderProps.index, 'userName'],
+                      ['EditTable', renderProps.index, 'time'],
+                      ['EditTable', renderProps.index, 'age'],
+                    ]);
+
+                    currentEditValueRef.current = currentEditValueRef.current.filter(
+                      (item) => item.key !== renderProps.record.key,
                     );
-                    setEditableKeys(editableKeys.filter((item) => item !== renderProps.record.key));
+                    editableKeysRef.current = editableKeysRef.current.filter(
+                      (item) => item !== renderProps.record.key,
+                    );
+                    operation.add({ key: 'TIMEOUT' }, 0);
+                    operation.remove(0);
                   },
                 },
               },
               visible: (renderProps, operation, status) => {
-                return editableKeys.includes(renderProps.record.key);
+                return editableKeysRef.current.includes(renderProps.record.key);
               },
             },
             {
@@ -252,19 +267,24 @@ const Demo2 = () => {
                 buttonProps: {
                   onClick: (renderProps, operation, status, val) => {
                     const newValues = renderProps.arr;
-                    newValues[renderProps.index] = currentEditValue.find(
+                    newValues[renderProps.index] = currentEditValueRef.current.find(
                       (item) => item.key === renderProps.record.key,
                     );
                     form.setFieldsValue({ EditTable: newValues });
-                    setCurrentEditValue(
-                      currentEditValue.filter((item) => item.key !== renderProps.record.key),
+                    currentEditValueRef.current = currentEditValueRef.current.filter(
+                      (item) => item.key !== renderProps.record.key,
                     );
-                    setEditableKeys(editableKeys.filter((item) => item !== renderProps.record.key));
+
+                    editableKeysRef.current = editableKeysRef.current.filter(
+                      (item) => item !== renderProps.record.key,
+                    );
+                    operation.add({ key: 'TIMEOUT' }, 0);
+                    operation.remove(0);
                   },
                 },
               },
               visible: (renderProps, operation, status) => {
-                return editableKeys.includes(renderProps.record.key);
+                return editableKeysRef.current.includes(renderProps.record.key);
               },
             },
           ]}

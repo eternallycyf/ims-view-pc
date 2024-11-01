@@ -9,7 +9,7 @@ import {
   IUpdateControlProps,
   Search,
 } from 'ims-view-pc';
-import React from 'react';
+import React, { type RefObject } from 'react';
 import './index.less';
 import { IHandleExport } from './utils';
 
@@ -69,7 +69,7 @@ export interface ICommonEditTableProps<
   showIndex?: boolean;
   isVirtual?: boolean;
   isMultiple?: boolean;
-  editableKeys?: string[];
+  editableKeys?: RefObject<string[]>;
   itemButtonWidth?: number;
   curryParams?: any;
 
@@ -236,7 +236,7 @@ export type IEditButtonProps<Values = Record<string, unknown>, IsItemBtn extends
     ) =>
       | IBaseEditButtonProps<Values, IsItemBtn>
       | ((
-          ...arg: { editableKeys: string[]; [props: string]: any }[]
+          ...arg: { editableKeys: RefObject<string[]>; [props: string]: any }[]
         ) => IBaseEditButtonProps<Values, IsItemBtn>));
 
 export type IGetColumns<

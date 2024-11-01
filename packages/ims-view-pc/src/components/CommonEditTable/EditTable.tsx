@@ -37,7 +37,9 @@ const CommonEditTable: React.ForwardRefRenderFunction<
     showIndex = true,
     isVirtual = false,
     isMultiple = true,
-    editableKeys = [],
+    editableKeys = {
+      current: [],
+    },
     itemButtonWidth,
 
     beforeChildren,
@@ -56,6 +58,7 @@ const CommonEditTable: React.ForwardRefRenderFunction<
     initialValues,
     rules = [],
   } = props;
+
   const {} = tableProps;
   const EditTableContextInitProps = {
     form,
@@ -147,12 +150,14 @@ const CommonEditTable: React.ForwardRefRenderFunction<
             index,
             type,
             values,
+            hidden,
           }: {
             form: any;
             formProps: any;
             index: number;
             type: any;
             values: any;
+            hidden?: boolean;
           }) => {
             const restItemProps = _.omit(itemProps, ['shouldUpdate']);
             const updateProps = !isMultiple ? restItemProps : itemProps;
@@ -196,6 +201,7 @@ const CommonEditTable: React.ForwardRefRenderFunction<
                         name={item?.name}
                         rules={item?.rules || []}
                         initialValue={item?.initialValue}
+                        hidden={hidden}
                         {...item.layout}
                         {...item.itemProps}
                       >
@@ -215,6 +221,7 @@ const CommonEditTable: React.ForwardRefRenderFunction<
                 key={key}
                 rules={rules || itemProps?.rules || []}
                 initialValue={initialValue}
+                hidden={hidden}
                 {...(restItemProps as any)}
               >
                 {renderFormItem(formProps, index)}
@@ -236,14 +243,29 @@ const CommonEditTable: React.ForwardRefRenderFunction<
             >
               {(inLineForm) => {
                 const currentValue = inLineForm?.getFieldValue(tableFormName) || []?.[name as any];
-                if (!isMultiple && !editableKeys.includes(String(currentValue?.[index]?.key))) {
+                if (
+                  !isMultiple &&
+                  !editableKeys.current.includes(String(currentValue?.[index]?.key))
+                ) {
                   if (item.transform) {
                     return item.transform?.(val, currentValues, index, allValues);
                   }
                   if (item.render) {
                     return item.render?.(val, currentValues, index, allValues);
                   }
-                  return formatEditTableColumns(item, val);
+                  return (
+                    <>
+                      {formatEditTableColumns(item, val)}
+                      {getContent({
+                        type,
+                        formProps,
+                        index,
+                        form,
+                        values: currentValue,
+                        hidden: true,
+                      } as any)}
+                    </>
+                  );
                 }
                 return getContent({
                   type,
