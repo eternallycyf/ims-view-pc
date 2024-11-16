@@ -34,7 +34,7 @@ export default () => (
   <>
     <iframe
       style={{ width: '100%', height: '100vh' }}
-      src="https://www.ims-view.site/iconfont/index.html"
+      src="https://ims-view-pc-eternallycyfs-projects.vercel.app/iconfont/index.html"
     />
   </>
 );
