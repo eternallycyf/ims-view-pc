@@ -30,7 +30,6 @@ const RichText: FC<RichTextProps> = (props) => {
     (node: HTMLDivElement) => {
       requestAnimationFrame(() => {
         const height = node?.getBoundingClientRect()?.height || 0;
-        console.log(height);
         if (height > maxHeight) {
           setExpandable(true);
         } else {
@@ -90,7 +89,7 @@ const RichText: FC<RichTextProps> = (props) => {
               }
             >
               {isHiddenOverflow ? '展开' : '收起'}
-              <DownOutlined style={{}} rotate={isHiddenOverflow ? 0 : 180} />
+              <DownOutlined rotate={isHiddenOverflow ? 0 : 180} />
             </a>
           </div>
         )}
