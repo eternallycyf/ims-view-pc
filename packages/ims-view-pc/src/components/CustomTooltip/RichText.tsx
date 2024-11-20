@@ -91,6 +91,7 @@ const RichText: FC<RichTextProps> = (props) => {
               {isHiddenOverflow ? '展开' : '收起'}
               <DownOutlined rotate={isHiddenOverflow ? 0 : 180} />
             </a>
+            {isHiddenOverflow && '...'}
           </div>
         )}
       </div>
