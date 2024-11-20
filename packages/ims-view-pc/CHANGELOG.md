@@ -1,5 +1,32 @@
 # Changelog
 
+## [Version&nbsp;1.67.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.66.3...ims-view-pc@1.67.0)
+
+<sup>Released on **2024-11-20**</sup>
+
+#### ✨ 新特性
+
+- **ims-view-pc**: Add RichText.
+
+#### 📝 文档
+
+- Update iconfont iframe url.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **ims-view-pc**: Add RichText ([1af058c](https://github.com/eternallycyf/ims-view-pc/commit/1af058c))
+
+#### Documentation
+
+- Update iconfont iframe url ([d9e633c](https://github.com/eternallycyf/ims-view-pc/commit/d9e633c))
+
+</details>
+
 ### [Version&nbsp;1.66.3](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.66.2...ims-view-pc@1.66.3)
 
 <sup>Released on **2024-11-01**</sup>
