@@ -6,7 +6,7 @@ const Demo = () => {
     <>
       前面
       <CustomTooltip.RichText
-        html={'22'.repeat(42) + '<a href="https://www.baidu.com">测试不知道</a>'}
+        html={'22'.repeat(42) + '<a href="https://www.baidu.com">测试不知道</a>'.repeat(20)}
       />
       后面
     </>
