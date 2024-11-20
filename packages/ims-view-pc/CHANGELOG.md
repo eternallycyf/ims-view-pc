@@ -1,5 +1,24 @@
 # Changelog
 
+### [Version&nbsp;1.67.2](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.67.1...ims-view-pc@1.67.2)
+
+<sup>Released on **2024-11-20**</sup>
+
+#### 🐛 修复
+
+- Remove RichText empty attr.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- Remove RichText empty attr ([e03d2c3](https://github.com/eternallycyf/ims-view-pc/commit/e03d2c3))
+
+</details>
+
 ### [Version&nbsp;1.67.1](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.67.0...ims-view-pc@1.67.1)
 
 <sup>Released on **2024-11-20**</sup>
