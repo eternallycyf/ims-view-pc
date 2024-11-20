@@ -23,3 +23,14 @@ export interface CustomTooltipProps {
 
   ellipsisProps?: EllipsisConfig;
 }
+
+export interface RichTextProps {
+  html?: string;
+  htmlStyle?: CSSProperties;
+  htmlClassName?: string;
+  /**
+   * @description 富文本必须设置 收起时的最高高度
+   */
+  maxHeight?: number;
+  emptyText?: string;
+}

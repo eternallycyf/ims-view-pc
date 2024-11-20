@@ -29,6 +29,8 @@ group:
 
 <code src='./demo/table-rich.tsx'>4.富文本-table 中使用</code>
 
+<code src='./demo/richText.tsx'>5.任何富文本皆可</code>
+
 ## API
 
 ```ts

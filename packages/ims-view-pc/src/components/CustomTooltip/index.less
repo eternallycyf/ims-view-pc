@@ -68,3 +68,48 @@
   font-size: 12px;
   animation: shake 0.25s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
 }
+
+.richText {
+  position: relative;
+  z-index: 99;
+  display: flex;
+  overflow: var(--right-text-overflow);
+  flex-direction: row;
+  height: var(--rich-text-max-height);
+
+  .paragraph {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    flex: unset;
+    color: transparent;
+    opacity: 0;
+
+    user-select: none;
+
+    a {
+      display: none;
+    }
+  }
+
+  .content {
+    flex: auto;
+    width: calc(100% - var(--expand-btn-width));
+    word-break: break-all;
+  }
+
+  .btn {
+    position: relative;
+    right: 0;
+    z-index: 999;
+    flex: unset;
+    width: var(--expand-btn-width);
+
+    user-select: none;
+
+    svg {
+      transition: all 0.5s;
+    }
+  }
+}
