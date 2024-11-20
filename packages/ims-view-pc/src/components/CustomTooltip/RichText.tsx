@@ -1,5 +1,6 @@
 import { DownOutlined } from '@ant-design/icons';
 import { Typography } from 'antd';
+import _ from 'lodash';
 import { FC, useCallback, useMemo, useState, type CSSProperties } from 'react';
 import './index.less';
 import type { RichTextProps } from './interface';
@@ -16,10 +17,12 @@ const RichText: FC<RichTextProps> = (props) => {
     htmlStyle,
     htmlClassName,
   } = props;
-  const [expandable, setExpandable] = useState<boolean>(false);
+  const [_expandable, setExpandable] = useState<boolean>(false);
   const [overflow, setOverflow] = useState<CSSProperties['overflow']>('hidden');
+  const [expand, setExpand] = useState<boolean>(false);
 
   const isHiddenOverflow = overflow === 'hidden';
+  const expandable = _expandable || (!_expandable && expand);
 
   const noFlagHtml = useMemo(() => {
     if (typeof html !== 'string') return '';
@@ -31,9 +34,9 @@ const RichText: FC<RichTextProps> = (props) => {
       requestAnimationFrame(() => {
         const height = node?.getBoundingClientRect()?.height || 0;
         if (height > maxHeight) {
-          setExpandable(true);
+          setExpand(true);
         } else {
-          setExpandable(false);
+          setExpand(false);
         }
       });
 
@@ -91,7 +94,7 @@ const RichText: FC<RichTextProps> = (props) => {
               {isHiddenOverflow ? '展开' : '收起'}
               <DownOutlined rotate={isHiddenOverflow ? 0 : 180} />
             </a>
-            {isHiddenOverflow && '...'}
+            {isHiddenOverflow && _.isEqual(html, noFlagHtml) && '...'}
           </div>
         )}
       </div>
