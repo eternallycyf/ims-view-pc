@@ -1,5 +1,5 @@
 import { DownOutlined } from '@ant-design/icons';
-import { Typography } from 'antd';
+import { Tooltip, Typography } from 'antd';
 import _ from 'lodash';
 import { FC, useCallback, useMemo, useState, type CSSProperties } from 'react';
 import './index.less';
@@ -20,6 +20,13 @@ const RichText: FC<RichTextProps> = (props) => {
   const [_expandable, setExpandable] = useState<boolean>(false);
   const [overflow, setOverflow] = useState<CSSProperties['overflow']>('hidden');
   const [expand, setExpand] = useState<boolean>(false);
+  const contentProps = {
+    dangerouslySetInnerHTML: {
+      __html: html,
+    },
+    style: htmlStyle,
+    className: [htmlClassName].join(' '),
+  };
 
   const isHiddenOverflow = overflow === 'hidden';
   const expandable = _expandable || (!_expandable && expand);
@@ -54,7 +61,7 @@ const RichText: FC<RichTextProps> = (props) => {
         style={
           {
             '--expand-btn-width': expandable ? expandBtnWidth + 'px' : 0,
-            '--rich-text-max-height': isHiddenOverflow ? maxHeight + 'px' : 'auto',
+            '--rich-text-max-height': isHiddenOverflow && expandable ? maxHeight + 'px' : 'auto',
             '--right-text-overflow': overflow,
           } as any as CSSProperties
         }
@@ -70,16 +77,11 @@ const RichText: FC<RichTextProps> = (props) => {
           {noFlagHtml}
         </Typography.Paragraph>
 
-        <div className="content">
-          <div
-            ref={elementRef}
-            dangerouslySetInnerHTML={{
-              __html: html,
-            }}
-            style={htmlStyle}
-            className={[htmlClassName].join(' ')}
-          />
-        </div>
+        <Tooltip title={expandable ? <div {...contentProps} /> : null}>
+          <div className="content">
+            <div ref={elementRef} {...contentProps} />
+          </div>
+        </Tooltip>
 
         {expandable && (
           <div className="btn">

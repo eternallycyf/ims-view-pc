@@ -21,15 +21,15 @@ group:
 
 ## 示例
 
-<code src='./demo/string.tsx'>1.string</code>
+<code src='./demo/richText.tsx'>1.dangerouslySetInnerHTML</code>
 
-<code src='./demo/rich.tsx'>2.富文本</code>
+<code src='./demo/string.tsx'>2.string</code>
 
-<code src='./demo/table.tsx'>3.string-table 中使用</code>
+<code src='./demo/rich.tsx'>3.富文本</code>
 
-<code src='./demo/table-rich.tsx'>4.富文本-table 中使用</code>
+<code src='./demo/table.tsx'>4.string-table 中使用</code>
 
-<code src='./demo/richText.tsx'>5.任何富文本皆可</code>
+<code src='./demo/table-rich.tsx'>5.富文本-table 中使用</code>
 
 ## API
 
@@ -55,6 +55,19 @@ export interface CustomTooltipProps {
   tooltipClassName?: string;
 
   ellipsisProps?: EllipsisConfig;
+}
+```
+
+```ts
+export interface RichTextProps {
+  html?: string;
+  htmlStyle?: CSSProperties;
+  htmlClassName?: string;
+  /**
+   * @description 富文本必须设置 收起时的最高高度
+   */
+  maxHeight?: number;
+  emptyText?: string;
 }
 ```
 
