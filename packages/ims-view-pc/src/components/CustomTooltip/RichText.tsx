@@ -1,5 +1,5 @@
 import { DownOutlined } from '@ant-design/icons';
-import { Tooltip, Typography } from 'antd';
+import { Popover, Tooltip, Typography } from 'antd';
 import _ from 'lodash';
 import { FC, useCallback, useMemo, useState, type CSSProperties } from 'react';
 import './index.less';
@@ -77,11 +77,14 @@ const RichText: FC<RichTextProps> = (props) => {
           {noFlagHtml}
         </Typography.Paragraph>
 
-        <Tooltip title={expandable ? <div {...contentProps} /> : null}>
+        <Popover
+          overlayStyle={{ maxWidth: 500, wordBreak: 'break-all' }}
+          title={expandable ? <div {...contentProps} /> : null}
+        >
           <div className="content">
             <div ref={elementRef} {...contentProps} />
           </div>
-        </Tooltip>
+        </Popover>
 
         {expandable && (
           <div className="btn">
@@ -96,7 +99,7 @@ const RichText: FC<RichTextProps> = (props) => {
               {isHiddenOverflow ? '展开' : '收起'}
               <DownOutlined rotate={isHiddenOverflow ? 0 : 180} />
             </a>
-            {isHiddenOverflow && _.isEqual(html, noFlagHtml) && '...'}
+            {isHiddenOverflow && '...'}
           </div>
         )}
       </div>
