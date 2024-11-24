@@ -1,6 +1,5 @@
 import { DownOutlined } from '@ant-design/icons';
-import { Popover, Tooltip, Typography } from 'antd';
-import _ from 'lodash';
+import { Popover, Typography } from 'antd';
 import { FC, useCallback, useMemo, useState, type CSSProperties } from 'react';
 import './index.less';
 import type { RichTextProps } from './interface';
