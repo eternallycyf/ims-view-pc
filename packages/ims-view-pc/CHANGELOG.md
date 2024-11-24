@@ -1,5 +1,24 @@
 # Changelog
 
+### [Version&nbsp;1.67.7](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.67.6...ims-view-pc@1.67.7)
+
+<sup>Released on **2024-11-24**</sup>
+
+#### 🐛 修复
+
+- RichText.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- RichText ([b17c37f](https://github.com/eternallycyf/ims-view-pc/commit/b17c37f))
+
+</details>
+
 ### [Version&nbsp;1.67.6](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.67.5...ims-view-pc@1.67.6)
 
 <sup>Released on **2024-11-21**</sup>
