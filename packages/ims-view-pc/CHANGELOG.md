@@ -1,5 +1,24 @@
 # Changelog
 
+### [Version&nbsp;1.70.1](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.70.0...ims-view-pc@1.70.1)
+
+<sup>Released on **2024-12-13**</sup>
+
+#### 🐛 修复
+
+- **ims-view-pc**: Remove pro-skeleton.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- **ims-view-pc**: Remove pro-skeleton ([b77a13c](https://github.com/eternallycyf/ims-view-pc/commit/b77a13c))
+
+</details>
+
 ## [Version&nbsp;1.70.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.69.0...ims-view-pc@1.70.0)
 
 <sup>Released on **2024-12-13**</sup>
