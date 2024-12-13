@@ -55,7 +55,7 @@ export type IHandleFileChange = {
 };
 
 export type IFileListExtraRecord = {
-  uploadDatetime?: string;
+  uploadDateTime?: string;
   fileId?: string;
   id?: string;
   url?: string;

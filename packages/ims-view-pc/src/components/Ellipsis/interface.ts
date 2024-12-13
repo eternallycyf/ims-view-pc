@@ -45,5 +45,5 @@ export type EllipsisExpandProps = {
   stopPropagationForActionButtons?: PropagationEvent[];
   onContentClick?: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
   defaultExpanded?: boolean;
-  tooltip?: boolean | TooltipProps;
+  tooltip?: React.ReactNode;
 } & NativeProps;

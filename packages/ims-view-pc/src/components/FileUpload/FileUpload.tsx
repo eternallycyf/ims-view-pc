@@ -70,6 +70,7 @@ const FileUpload: React.FC<IFileUploadProps> = (props) => {
       marginBottom: 0,
       width: maxCount && (fileList || [])?.length >= maxCount ? 0 : '100%',
     },
+    maxCount,
     ...defaultUploadProps,
   };
   const UploadDraggerContent = (
@@ -118,7 +119,7 @@ const FileUpload: React.FC<IFileUploadProps> = (props) => {
         <Form.Item {...uploadFormItemProps}>
           <div onClick={() => setReplaceIndex(-1)}>
             <Upload.Dragger {...UploadProps} ref={uploadWrapperRef}>
-              {maxCount <= fileList?.length ? UploadDraggerContent : null}
+              {maxCount > fileList?.length ? UploadDraggerContent : null}
             </Upload.Dragger>
           </div>
         </Form.Item>

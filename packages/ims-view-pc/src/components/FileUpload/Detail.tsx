@@ -6,7 +6,8 @@ import {
   EyeOutlined,
   LoadingOutlined,
 } from '@ant-design/icons';
-import { Col, Progress, Row, Spin, Tooltip } from 'antd';
+import { Col, Form, Progress, Row, Spin, Tooltip } from 'antd';
+import dayjs from 'dayjs';
 import { AccessBtn, Ellipsis, variables } from 'ims-view-pc';
 import { FC } from 'react';
 import './index.less';
@@ -99,7 +100,18 @@ const Detail: FC<IFileUploadDetailProps> = (props) => {
               rows={1}
               direction="middle"
               content={fileName}
-              tooltip={fileName}
+              tooltip={
+                <>
+                  <Form.Item style={{ marginBottom: 0 }} label="文件名">
+                    {fileName}
+                  </Form.Item>
+                  {item?.uploadDateTime ? (
+                    <Form.Item style={{ marginBottom: 0 }} label="上传时间">
+                      {dayjs(item?.uploadDateTime).format('YYYY-MM-DD HH:mm:ss')}
+                    </Form.Item>
+                  ) : null}
+                </>
+              }
             />
           )}
 

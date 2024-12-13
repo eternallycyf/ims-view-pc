@@ -1,6 +1,7 @@
 import { random } from '@ims-view/utils';
 import { Form, type UploadProps } from 'antd';
 import { CustomForm, FileUpload, FormRules } from 'ims-view-pc';
+import { useRef } from 'react';
 
 interface IFormValues {
   file: any[];
@@ -25,7 +26,7 @@ const App: React.FC = () => {
 
     onProgress({ percent: 0 }, file);
 
-    setTimeout(function () {
+    setTimeout(() => {
       onProgress({ percent: 100 }, file);
 
       const uuid = random.getUUID();
@@ -36,8 +37,9 @@ const App: React.FC = () => {
           message: '上传成功',
           success: true,
           data: {
+            uploadDateTime: '2023-04-07T07:06:05.000Z',
             fileId: uuid,
-            fileName: uuid + '.png',
+            fileName: `${uuid}.png`,
             url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
           },
         },
@@ -70,6 +72,7 @@ const App: React.FC = () => {
                 status: 'done',
                 percent: 100,
                 fileId: '7e7d0d4c-60b9-4d4f-9f94-80a385d471ce',
+                uploadDateTime: '2023-04-07T07:06:05.000Z',
                 url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
               },
               {
