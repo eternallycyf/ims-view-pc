@@ -1,5 +1,24 @@
 # Changelog
 
+## [Version&nbsp;1.68.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.67.7...ims-view-pc@1.68.0)
+
+<sup>Released on **2024-12-13**</sup>
+
+#### ✨ 新特性
+
+- **ims-view-pc**: Add pro-skeleton.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **ims-view-pc**: Add pro-skeleton ([a06aabb](https://github.com/eternallycyf/ims-view-pc/commit/a06aabb))
+
+</details>
+
 ### [Version&nbsp;1.67.7](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.67.6...ims-view-pc@1.67.7)
 
 <sup>Released on **2024-11-24**</sup>
