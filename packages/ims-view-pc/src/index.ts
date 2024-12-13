@@ -71,3 +71,6 @@ export { getFieldComp, renderFormItem } from './core/helpers';
 export { default as FormRules } from './core/helpers/validate';
 export { CustomTheme, variables } from './styles/variables';
 export * from './type/index';
+
+export { default as FileUpload } from './components/FileUpload';
+export * from './components/FileUpload/interface';

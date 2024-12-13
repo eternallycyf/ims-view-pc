@@ -1,0 +1,105 @@
+@border-color: #eff1f4;
+
+.FileUpload {
+  margin-bottom: 12px;
+  background-color: #fff;
+
+  .uploadContent {
+    margin-bottom: 12px;
+    padding: 10px 24px 10px;
+    width: 100%;
+    border: 1px solid @border-color;
+
+    &:last-child {
+      margin-bottom: 0px;
+    }
+  }
+
+  .ant-form-item-required::before {
+    margin-top: 3px;
+  }
+
+  .ant-form-item-label {
+    color: #2a303b;
+    font-weight: 500;
+    font-size: 12px;
+  }
+
+  .ant-form-item {
+    margin-bottom: 0px !important;
+  }
+
+  .ant-upload-btn {
+    margin-top: 8px !important;
+    padding: 0 !important;
+    width: 100%;
+    background: #fff;
+    color: #8e96a4;
+  }
+
+  .ant-upload-wrapper {
+    width: auto !important;
+  }
+
+  .ant-upload-drag {
+    width: auto !important;
+    border: none !important;
+  }
+
+  .ant-form-item-no-colon {
+    font-weight: 600;
+  }
+}
+
+.Detail {
+  .DetailCard {
+    position: relative;
+    padding: 10px 16px;
+    background: #f5f8ff;
+
+    &:hover {
+      background: #ebf3ff;
+
+      .success {
+        display: none;
+      }
+
+      .delete {
+        display: inline-block;
+        cursor: pointer;
+      }
+    }
+
+    .success {
+      display: inline-block;
+    }
+
+    .delete {
+      display: none;
+    }
+
+    .fileName {
+      color: #15181e !important;
+      font-weight: 400;
+      font-size: 12px !important;
+    }
+
+    .time {
+      color: #8e96a4 !important;
+      font-weight: 400;
+      font-size: 12px !important;
+    }
+
+    .progress {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      margin: 0;
+      line-height: 0;
+
+      .ant-progress-bg {
+        background-color: var(--colorPrimary);
+      }
+    }
+  }
+}

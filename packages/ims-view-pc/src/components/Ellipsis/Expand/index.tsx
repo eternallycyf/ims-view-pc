@@ -1,4 +1,5 @@
 import { useResizeEffect } from '@ims-view/hooks';
+import { Tooltip } from 'antd';
 import { mergeProps } from 'ims-view-pc/core/helpers/utils';
 import React, { useLayoutEffect, useMemo, useRef, useState } from 'react';
 import runes from 'runes2';
@@ -211,7 +212,9 @@ const EllipsisExpand = (p: EllipsisExpandProps): React.ReactElement => {
         }
       }}
     >
-      {renderContent()}
+      <Tooltip title={exceeded && props?.tooltip ? props?.content : undefined}>
+        {renderContent()}
+      </Tooltip>
     </div>,
   );
 };

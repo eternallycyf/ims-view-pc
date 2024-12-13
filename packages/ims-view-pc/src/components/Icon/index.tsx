@@ -5,7 +5,7 @@ import { iconFontJSON } from './iconfont';
 
 type IconType = (typeof iconFontJSON)['glyphs'][number]['font_class'];
 type CapitalizeStr<Str extends string> = Str extends `${infer Rest}` ? `icon-${Rest}` : Str;
-interface IconProps extends React.HTMLProps<HTMLSpanElement> {
+export interface IconProps extends React.HTMLProps<HTMLSpanElement> {
   type: CapitalizeStr<IconType>;
   spin?: boolean;
   rotate?: number;
