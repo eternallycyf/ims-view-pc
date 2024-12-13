@@ -1,5 +1,4 @@
 import { FormItemProps } from 'antd';
-import { Method } from 'axios';
 import {
   AnyObject,
   IBaseCustomFormItemProps,

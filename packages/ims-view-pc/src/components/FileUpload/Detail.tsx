@@ -31,7 +31,6 @@ const Detail: FC<IFileUploadDetailProps> = (props) => {
     uploadRef,
     fileKeys,
     isDownloadByS3,
-    maxLength,
   } = props;
 
   const _getPercent = (item: any) => {

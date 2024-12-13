@@ -24,7 +24,6 @@ export interface IFileUploadProps {
   actionUrl?: string;
   isDetail?: boolean;
   colNumber?: number;
-  maxLength?: number;
 
   isDownloadByS3?: boolean;
   fileKeys?: {
@@ -79,10 +78,7 @@ export type IFileListResponse = {
 };
 
 export interface IFileUploadDetailProps
-  extends Pick<
-    IFileUploadProps,
-    'isDetail' | 'colNumber' | 'fileKeys' | 'isDownloadByS3' | 'maxLength'
-  > {
+  extends Pick<IFileUploadProps, 'isDetail' | 'colNumber' | 'fileKeys' | 'isDownloadByS3'> {
   fileList: IFileListExtraRecord[];
   setFileList: React.Dispatch<React.SetStateAction<IFileListExtraRecord[]>>;
   setReplaceIndex: React.Dispatch<React.SetStateAction<number>>;
