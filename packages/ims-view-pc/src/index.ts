@@ -53,8 +53,6 @@ export { default as Portal } from './components/Portal';
 export * from './components/Portal/interface';
 export { default as SectionTitle } from './components/SectionTitle';
 export * from './components/SectionTitle/interface';
-export * from './components/Skeleton';
-export { default as Skeleton } from './components/Skeleton';
 export { default as Sticky } from './components/Sticky';
 export * from './components/Sticky/interface';
 export { default as Theme } from './components/theme';
