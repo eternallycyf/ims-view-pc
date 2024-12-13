@@ -1,5 +1,25 @@
 # Changelog
 
+## [Version&nbsp;1.69.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.68.0...ims-view-pc@1.69.0)
+
+<sup>Released on **2024-12-13**</sup>
+
+#### ✨ 新特性
+
+- **ims-view-pc**: Add FileUpload, FileUpload maxCount.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **ims-view-pc**: Add FileUpload ([32da9b5](https://github.com/eternallycyf/ims-view-pc/commit/32da9b5))
+- **ims-view-pc**: FileUpload maxCount ([ad31ed9](https://github.com/eternallycyf/ims-view-pc/commit/ad31ed9))
+
+</details>
+
 ## [Version&nbsp;1.68.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.67.7...ims-view-pc@1.68.0)
 
 <sup>Released on **2024-12-13**</sup>
