@@ -13,6 +13,7 @@ const App: React.FC = () => {
   return (
     <ConfigProvider
       theme={{
+        cssVar: true,
         token: {
           // Seed Token，影响范围大
           colorPrimary: '#00b96b',

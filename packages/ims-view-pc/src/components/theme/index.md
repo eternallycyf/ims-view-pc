@@ -16,6 +16,7 @@ nav:
 
 - 与`antd v5`主题配置方法保持统一, 只需要使用 `ConfigProvider` 组件包裹即可
 - 具体可参考 antd [主题配置方法](https://ant-design.antgroup.com/docs/react/customize-theme-cn)
+- 需要开启 `cssVar: true`, 内部组件才可动态主题
 
 <code src="./demo/index.tsx"></code>
 

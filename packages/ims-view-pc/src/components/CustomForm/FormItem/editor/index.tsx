@@ -2,7 +2,7 @@ import { IDomEditor, IEditorConfig, IToolbarConfig, SlateNode } from '@wangedito
 import { Editor, Toolbar } from '@wangeditor/editor-for-react';
 import '@wangeditor/editor/dist/css/style.css';
 import { Flex } from 'antd';
-import { IBaseCustomFormItemProps, variables } from 'ims-view-pc';
+import { IBaseCustomFormItemProps } from 'ims-view-pc';
 import React, { FC, useEffect, useImperativeHandle, useState } from 'react';
 import './index.less';
 import { insertImg, uploadImg } from './utils';
