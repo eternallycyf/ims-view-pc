@@ -56,7 +56,7 @@ const App: React.FC = () => {
 
   return (
     <>
-      <div style={{ maxWidth: 700 }}>
+      <div style={{ maxWidth: 620 }}>
         <CustomForm<IFormValues, {}, 'normal'>
           modalType="normal"
           form={form}
@@ -76,20 +76,20 @@ const App: React.FC = () => {
                 url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
               },
               {
-                fileName: 'crud.png',
+                fileName: 'word.docx',
                 id: 'rc-upload-1734098585253-10',
                 status: 'done',
                 percent: 100,
                 fileId: 'b6bdc21f-6d82-47ed-b329-6d47af66e9af',
-                url: 'https://ims-view-pc-eternallycyfs-projects.vercel.app/images/crud.png',
+                url: 'https://ims-view-pc-eternallycyfs-projects.vercel.app/word.docx',
               },
               {
-                fileName: 'index.html',
+                fileName: '1.json',
                 id: 'rc-upload-1734098585253-12',
                 status: 'done',
                 percent: 100,
                 fileId: '14a57c3a-0864-409e-ab3b-3e5510d9c8dc',
-                url: 'https://ims-view-pc-eternallycyfs-projects.vercel.app/iconfont/index.html',
+                url: 'https://ims-view-pc-eternallycyfs-projects.vercel.app/1.json',
               },
             ],
           }}

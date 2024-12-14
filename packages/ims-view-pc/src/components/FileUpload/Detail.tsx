@@ -6,15 +6,15 @@ import {
   EyeOutlined,
   LoadingOutlined,
 } from '@ant-design/icons';
-import { Col, Form, Progress, Row, Spin, Tooltip } from 'antd';
+import { Col, Form, Progress, Row, Space, Spin, Tooltip } from 'antd';
 import dayjs from 'dayjs';
-import { AccessBtn, Ellipsis, variables } from 'ims-view-pc';
+import { AccessBtn, CustomTooltip, Ellipsis, variables } from 'ims-view-pc';
 import { FC } from 'react';
+import FileImage from './FileImage';
 import './index.less';
 import { IFileListExtraRecord, IFileUploadDetailProps } from './interface';
 import { handleAttachmentDelete, handleAttachmentReplace, handleDownloadByDefault } from './utils';
 
-const FileImage = () => <div>FileImage</div>;
 const FileView = () => <div>FileView</div>;
 
 const Detail: FC<IFileUploadDetailProps> = (props) => {
@@ -83,68 +83,56 @@ const Detail: FC<IFileUploadDetailProps> = (props) => {
           {isLoading ? (
             <Spin size="small" />
           ) : (
-            <Ellipsis.Expand
-              style={{ marginRight: 2 }}
-              rows={1}
-              direction="middle"
-              content={fileName}
-              tooltip={
-                <>
-                  <Form.Item style={{ marginBottom: 0 }} label="文件名">
-                    {fileName}
-                  </Form.Item>
-                  {item?.uploadDateTime ? (
-                    <Form.Item style={{ marginBottom: 0 }} label="上传时间">
-                      {dayjs(item?.uploadDateTime).format('YYYY-MM-DD HH:mm:ss')}
-                    </Form.Item>
-                  ) : null}
-                </>
-              }
-            />
+            <Space align="center">
+              <FileImage fileName={fileName} />
+              <CustomTooltip rows={1} content={fileName} />
+            </Space>
           )}
 
-          <AccessBtn
-            btnList={[
-              {
-                element: (
-                  <Tooltip title="查看">
-                    <EyeOutlined style={{ color: variables.colorInfo, cursor: 'pointer' }} />
-                  </Tooltip>
-                ),
-                type: 'custom',
-              },
-              {
-                element: isLoading ? (
-                  <Spin size="small" spinning />
-                ) : (
-                  <Tooltip title="替换">
-                    <DiffOutlined
-                      style={{ color: variables.colorInfo }}
-                      onClick={() => handleReplace(index)}
-                    />
-                  </Tooltip>
-                ),
-                type: 'custom',
-                visible: () => item?.[fileKeys?.fileId] && !isDetail,
-              },
-              {
-                element: (
-                  <Tooltip title="下载">
-                    <DownloadOutlined
-                      style={{ color: variables.colorInfo }}
-                      onClick={() => handleDownload(item)}
-                    />
-                  </Tooltip>
-                ),
-                type: 'custom',
-              },
-              {
-                element: isLoading ? <Spin size="small" spinning /> : getDeleteIcon(),
-                type: 'custom',
-                visible: () => item?.fileId && !isDetail,
-              },
-            ]}
-          />
+          <div style={{ marginLeft: 10 }}>
+            <AccessBtn
+              btnList={[
+                {
+                  element: (
+                    <Tooltip title="查看">
+                      <EyeOutlined style={{ color: variables.colorInfo, cursor: 'pointer' }} />
+                    </Tooltip>
+                  ),
+                  type: 'custom',
+                },
+                {
+                  element: isLoading ? (
+                    <Spin size="small" spinning />
+                  ) : (
+                    <Tooltip title="替换">
+                      <DiffOutlined
+                        style={{ color: variables.colorInfo }}
+                        onClick={() => handleReplace(index)}
+                      />
+                    </Tooltip>
+                  ),
+                  type: 'custom',
+                  visible: () => item?.[fileKeys?.fileId] && !isDetail,
+                },
+                {
+                  element: (
+                    <Tooltip title="下载">
+                      <DownloadOutlined
+                        style={{ color: variables.colorInfo }}
+                        onClick={() => handleDownload(item)}
+                      />
+                    </Tooltip>
+                  ),
+                  type: 'custom',
+                },
+                {
+                  element: isLoading ? <Spin size="small" spinning /> : getDeleteIcon(),
+                  type: 'custom',
+                  visible: () => item?.fileId && !isDetail,
+                },
+              ]}
+            />
+          </div>
         </Row>
         {!isDetail && (
           <Progress

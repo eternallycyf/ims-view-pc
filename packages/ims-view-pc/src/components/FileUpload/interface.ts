@@ -77,3 +77,9 @@ export interface IFileUploadDetailProps
   setReplaceIndex: React.Dispatch<React.SetStateAction<number>>;
   uploadRef: React.MutableRefObject<any>;
 }
+
+export interface FileImageProps {
+  fileName: string;
+  style?: React.CSSProperties;
+  className?: string;
+}
