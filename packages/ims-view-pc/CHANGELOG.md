@@ -1,5 +1,24 @@
 # Changelog
 
+### [Version&nbsp;1.73.2](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.73.1...ims-view-pc@1.73.2)
+
+<sup>Released on **2024-12-14**</sup>
+
+#### 🐛 修复
+
+- Image preview.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- Image preview ([2da88fd](https://github.com/eternallycyf/ims-view-pc/commit/2da88fd))
+
+</details>
+
 ### [Version&nbsp;1.73.1](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.73.0...ims-view-pc@1.73.1)
 
 <sup>Released on **2024-12-14**</sup>
