@@ -99,6 +99,14 @@ const App: React.FC = () => {
                 fileId: 'excelxlsx',
                 url: 'https://ims-view-pc-eternallycyfs-projects.vercel.app/excel.xlsx',
               },
+              {
+                fileName: 'pdf.pdf',
+                id: 'rc-upload-1734098585253-16',
+                status: 'done',
+                percent: 100,
+                fileId: 'pdf',
+                url: 'https://ims-view-pc-eternallycyfs-projects.vercel.app/pdf.pdf',
+              },
             ],
           }}
           formList={[

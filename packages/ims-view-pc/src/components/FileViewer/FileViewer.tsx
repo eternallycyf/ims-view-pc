@@ -1,4 +1,5 @@
 import { message, Modal } from 'antd';
+import axios from 'axios';
 import React, { PureComponent } from 'react';
 import { ExcelRenderer } from 'react-excel-renderer';
 import FileView from './FileView';
@@ -34,7 +35,7 @@ class FilePreView extends PureComponent<any, any> {
     };
   }
   //显隐状态的改变
-  controlIsShow = (params: {
+  controlIsShow = async (params: {
     src?: string;
     base64?: string;
     originFileObj?: any;
@@ -50,7 +51,13 @@ class FilePreView extends PureComponent<any, any> {
       return message.error('该文件不支持预览');
     }
     if (fileType == 'xlsx') {
-      ExcelRenderer(originFileObj, (err: Error, resp: any) => {
+      const url = src;
+      const res = await axios.get(url, {
+        responseType: 'blob',
+      });
+
+      const blob = res.data;
+      ExcelRenderer(blob, (err: Error, resp: any) => {
         this.setState({
           excelData: {
             cols: resp.cols,
