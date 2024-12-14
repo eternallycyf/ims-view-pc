@@ -1,5 +1,24 @@
 # Changelog
 
+## [Version&nbsp;1.74.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.73.2...ims-view-pc@1.74.0)
+
+<sup>Released on **2024-12-14**</sup>
+
+#### ✨ 新特性
+
+- Json-form add fileUpload.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- Json-form add fileUpload ([cac8d74](https://github.com/eternallycyf/ims-view-pc/commit/cac8d74))
+
+</details>
+
 ### [Version&nbsp;1.73.2](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.73.1...ims-view-pc@1.73.2)
 
 <sup>Released on **2024-12-14**</sup>
