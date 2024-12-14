@@ -12,4 +12,6 @@ demo:
 
 ## 示例
 
-<code src='./demo/index.tsx'>1.FileUpload</code>
+<code src='./demo/index.tsx'>单独使用</code>
+
+<code src='./demo/json.tsx'>组件内使用</code>

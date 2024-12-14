@@ -26,6 +26,7 @@ export type {
   CustomFormProps,
   ICascadeControlProps,
   IEditorProps,
+  IFileUploadControlProps,
   IMentionsControlProps,
   ISimpleControlProps,
   IUpdateControlProps,

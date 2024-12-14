@@ -1,4 +1,4 @@
-import { IButtonProps, type FileViewer } from 'ims-view-pc';
+import { IButtonProps, type FileViewer, type LiteralUnion } from 'ims-view-pc';
 
 import { FormItemProps, UploadFile, UploadProps } from 'antd';
 import type { RefObject } from 'react';
@@ -61,7 +61,7 @@ export type Attachment = {
   url?: string;
   fileName?: string;
   fileSize?: string;
-  status: UploadProps['fileList'][number]['status'];
+  status: LiteralUnion<UploadProps['fileList'][number]['status']>;
   percent: number;
   [props: string]: any;
 };

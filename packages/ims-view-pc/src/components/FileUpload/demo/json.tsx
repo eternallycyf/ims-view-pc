@@ -116,47 +116,41 @@ const App: React.FC = () => {
           }}
           formList={[
             {
-              type: 'custom',
-              label: '单独使用上传组件',
-              name: 'file',
+              label: 'JSON上传文件',
+              name: 'customFile',
+              type: 'upload',
               col: 24,
               itemProps: {
-                rules: FormRules.withName('单独使用上传组件').isRequired().create(),
+                rules: FormRules.withName('JSON上传文件').isRequired().create(),
               },
-              Component: (props) => {
-                return (
-                  <FileUpload
-                    value={props?.value}
-                    onChange={props?.onChange}
-                    uploadProps={{
-                      customRequest: customRequest,
-                    }}
-                    colNumber={12}
-                    maxCount={5}
-                    config={{
-                      label: '单独使用上传组件',
-                      tooltip: '最多上传5个',
-                      isRequired: true,
-                      extraRecord: {},
-                      extra: [
-                        {
-                          element: '测试按钮',
-                          itemProps: {
-                            buttonProps: {
-                              style: {},
-                              size: 'small',
-                            },
-                          },
-                        },
-                      ],
-                      headerItemProps: {
-                        style: {
-                          marginBottom: 2,
+              controlProps: {
+                uploadProps: {
+                  customRequest,
+                },
+                maxCount: 5,
+                colNumber: 12,
+                config: {
+                  label: 'JSON上传文件',
+                  tooltip: '最多上传5个',
+                  isRequired: true,
+                  extraRecord: {},
+                  extra: [
+                    {
+                      element: '测试按钮',
+                      itemProps: {
+                        buttonProps: {
+                          style: {},
+                          size: 'small',
                         },
                       },
-                    }}
-                  />
-                );
+                    },
+                  ],
+                  headerItemProps: {
+                    style: {
+                      marginBottom: 2,
+                    },
+                  },
+                },
               },
             },
           ]}

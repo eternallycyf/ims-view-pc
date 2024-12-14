@@ -4,9 +4,11 @@ import {
   IBaseCustomFormItemProps,
   ICascadeControlProps,
   IEditorProps,
+  IFileUploadControlProps,
   IMentionsControlProps,
   ISimpleControlProps,
   IUpdateControlProps,
+  type Attachment,
   type Next,
 } from 'ims-view-pc';
 import { Search } from '.';
@@ -41,6 +43,7 @@ export const FORM_TYPE_DICT = [
   'cascader',
   'select',
   'mentions',
+  'upload',
 
   'editor',
   'update',
@@ -83,4 +86,5 @@ export type IControlProps<
   IEditorProps['controlProps'] &
   ISimpleControlProps<Values>['controlProps'] &
   ICascadeControlProps<Values>['controlProps'] &
-  IMentionsControlProps<Values>['controlProps'];
+  IMentionsControlProps<Values>['controlProps'] &
+  IFileUploadControlProps<Attachment[]>['controlProps'];

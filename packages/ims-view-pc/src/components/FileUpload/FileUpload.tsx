@@ -118,7 +118,10 @@ const FileUpload: React.FC<FileUploadProps> = (props) => {
         {(fileList?.length != 0 || config?.extra || config?.label) && (
           <Divider dashed style={{ color: '#DEE1E7', margin: '4px 0 0 0' }} />
         )}
-        <Form.Item {...uploadFormItemProps}>
+        <Form.Item
+          hidden={maxCount != null && maxCount <= fileList?.length}
+          {...uploadFormItemProps}
+        >
           <div onClick={() => setReplaceIndex(-1)}>
             <Upload.Dragger {...UploadProps} ref={uploadWrapperRef}>
               {maxCount != null && maxCount <= fileList?.length ? null : UploadDraggerContent}

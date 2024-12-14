@@ -1,7 +1,6 @@
-import { random } from '@ims-view/utils';
 import { Form } from 'antd';
 import dayjs from 'dayjs';
-import { AddIndexSignature, Ellipsis, Search } from 'ims-view-pc';
+import { Ellipsis, Search } from 'ims-view-pc';
 import _ from 'lodash';
 import React from 'react';
 import { FieldCompType } from '../../type/form';
@@ -12,6 +11,7 @@ const Editor = React.lazy(() => import('../../components/CustomForm/FormItem/edi
 const Update = React.lazy(() => import('../../components/CustomForm/FormItem/update'));
 const Cascader = React.lazy(() => import('../../components/CustomForm/FormItem/cascader'));
 const Mentions = React.lazy(() => import('../../components/CustomForm/FormItem/mentions'));
+const Upload = React.lazy(() => import('../../components/CustomForm/FormItem/upload'));
 
 /**
  * 获取控件
@@ -96,6 +96,9 @@ export const getFieldComp: FieldCompType = ({
     //   if (dictConfig) formProps.dictConfig = dictConfig;
     //   FieldComp = require(`@/components/CustomForm/FormItem/select`).default;
     //   break;
+    case 'upload':
+      FieldComp = Upload;
+      break;
 
     case 'update':
       FieldComp = Update;
