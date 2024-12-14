@@ -25,7 +25,6 @@ export interface IFileUploadProps {
   isDetail?: boolean;
   colNumber?: number;
 
-  isDownloadByS3?: boolean;
   fileKeys?: {
     fileName?: string;
     fileId?: string;
@@ -61,12 +60,6 @@ export type IFileListExtraRecord = {
   url?: string;
   fileName?: string;
   fileSize?: string;
-  fdDownLoadUrl?: string;
-  fdEntityKey?: string;
-  fdExternalAttachId?: string;
-  fdFileName?: string;
-  fdFileSize?: string;
-  flowId?: string;
   [props: string]: any;
 };
 
@@ -78,7 +71,7 @@ export type IFileListResponse = {
 };
 
 export interface IFileUploadDetailProps
-  extends Pick<IFileUploadProps, 'isDetail' | 'colNumber' | 'fileKeys' | 'isDownloadByS3'> {
+  extends Pick<IFileUploadProps, 'isDetail' | 'colNumber' | 'fileKeys'> {
   fileList: IFileListExtraRecord[];
   setFileList: React.Dispatch<React.SetStateAction<IFileListExtraRecord[]>>;
   setReplaceIndex: React.Dispatch<React.SetStateAction<number>>;

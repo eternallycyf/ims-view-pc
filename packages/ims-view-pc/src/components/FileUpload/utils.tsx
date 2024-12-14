@@ -1,5 +1,4 @@
 import { message, UploadProps } from 'antd';
-// import axios from 'axios';
 import { Icon as IconFont } from 'ims-view-pc';
 import _ from 'lodash';
 import { IconProps } from '../Icon';
@@ -78,8 +77,6 @@ export const handleAttachmentReplace = (
   const { uploadRef, fileList, setReplaceIndex, index, fileKeys } = fileParams;
   setReplaceIndex(index);
 
-  console.log(uploadRef.current);
-
   if (uploadRef.current.upload) {
     uploadRef.current.upload.uploader.onClick({ target: {} });
   } else {
@@ -139,69 +136,62 @@ export const handleFileChange: IHandleFileChange = (
   }
 };
 
-export function exportFile(url: string, params: any) {
-  // return axios.get(url, {
-  //   params,
-  //   responseType: 'blob',
-  // });
+// 根据URL下载图片
+function downloadImgURL(url, name) {
+  let image = new Image();
+  image.setAttribute('crossOrigin', 'anonymous');
+  image.src = url;
+  image.onload = () => {
+    let canvas = document.createElement('canvas');
+    canvas.width = image.width;
+    canvas.height = image.height;
+    let ctx = canvas.getContext('2d');
+    ctx.drawImage(image, 0, 0, image.width, image.height);
+    canvas.toBlob((blob) => {
+      let url = URL.createObjectURL(blob);
+      let a = document.createElement('a');
+      a.download = name;
+      a.href = url;
+      a.click();
+      a.remove();
+      // 用完释放URL对象
+      URL.revokeObjectURL(url);
+      message.success('下载成功');
+    });
+  };
 }
 
-/**
- * 下载文件
- * @param searchParams
- * @param options
- * @param callback
- */
-export const handleDownload = (
-  searchParams: any,
-  options = { url: '', fileName: '' },
-  callback?: () => void,
-) => {
-  // exportFile(options.url, searchParams).then((response: any) => {
-  //   response.blob().then((blob: Blob) => {
-  //     if (response.status === 200) {
-  //       if (window.navigator && (window as any).navigator.msSaveOrOpenBlob) {
-  //         (window as any).navigator.msSaveOrOpenBlob(blob, options.fileName);
-  //       } else {
-  //         const blobUrl = window.URL.createObjectURL(blob);
-  //         const aElement = document.createElement('a');
-  //         const fileName = options.fileName;
-  //         aElement.href = blobUrl;
-  //         aElement.download = fileName;
-  //         aElement.click();
-  //         window.URL.revokeObjectURL(blobUrl);
-  //       }
-  //     } else if (callback) callback();
-  //   });
-  // });
+export const postDownloadFile = (params: { url: string; fileName: string; fileId?: any }) => {
+  const { url, fileName, fileId } = params;
+  fetch(url)
+    .then((res) => res.blob())
+    .then((blob) => {
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = fileName;
+      document.body.appendChild(a);
+      a.click();
+    });
 };
 
-export const postDownloadFile = (url: string, fileName: string, data: any = {}) => {
-  // function download(url: string, data: any) {
-  //   return axios(`/file/downloadByUrl`, {
-  //     method: 'get',
-  //     responseType: 'blob',
-  //     params: { url },
-  //     data,
-  //   });
-  // }
-  // return download(url, data).then((data: any) => {
-  //   if (!data || data?.size == 0) {
-  //     message.error('文件不存在');
-  //     return;
-  //   }
-  //   if (window.navigator && typeof (window as any).navigator.msSaveBlob !== undefined) {
-  //     (window.navigator as any).msSaveBlob(new Blob([data]), fileName);
-  //   } else {
-  //     const url = window.URL.createObjectURL(new Blob([data]));
-  //     let link = document.createElement('a');
-  //     link.style.display = 'none';
-  //     link.href = url;
-  //     link.setAttribute('download', fileName);
-  //     document.body.appendChild(link);
-  //     link.click();
-  //     document.body.removeChild(link);
-  //     window.URL.revokeObjectURL(url);
-  //   }
-  // });
+export const handleDownloadByDefault = (params: {
+  url: string;
+  fileName: string;
+  fileId: string;
+}) => {
+  const { url, fileName, fileId } = params;
+
+  if (!url || !fileId) {
+    message.error('文件不存在');
+    return;
+  }
+
+  // 判断是图片后缀
+  const isImg = /\.(jpeg|jpg|gif|png|bmp|webp)$/.test(fileName);
+
+  if (isImg) {
+    downloadImgURL(url, fileName);
+  } else {
+    postDownloadFile({ url, fileName, fileId });
+  }
 };

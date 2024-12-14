@@ -12,12 +12,7 @@ import { AccessBtn, Ellipsis, variables } from 'ims-view-pc';
 import { FC } from 'react';
 import './index.less';
 import { IFileListExtraRecord, IFileUploadDetailProps } from './interface';
-import {
-  handleAttachmentDelete,
-  handleAttachmentReplace,
-  handleDownload as handleDownloadByDefault,
-  postDownloadFile,
-} from './utils';
+import { handleAttachmentDelete, handleAttachmentReplace, handleDownloadByDefault } from './utils';
 
 const FileImage = () => <div>FileImage</div>;
 const FileView = () => <div>FileView</div>;
@@ -31,7 +26,6 @@ const Detail: FC<IFileUploadDetailProps> = (props) => {
     setReplaceIndex,
     uploadRef,
     fileKeys,
-    isDownloadByS3,
   } = props;
 
   const _getPercent = (item: any) => {
@@ -51,21 +45,15 @@ const Detail: FC<IFileUploadDetailProps> = (props) => {
   };
 
   const getViewUrl = (item: IFileListExtraRecord) => {
-    return isDownloadByS3
-      ? `/ims-base/file/downloadByUrl?url=${item?.[fileKeys?.url]}`
-      : `/ims/org/cust/download?id=${item?.[fileKeys?.fileId]}`;
+    return `/ims/org/cust/download?id=${item?.[fileKeys?.fileId]}`;
   };
 
   const handleDownload = (item: IFileListExtraRecord) => {
-    return isDownloadByS3
-      ? postDownloadFile(item?.[fileKeys?.url], item?.fdFileName || item?.[fileKeys?.fileName])
-      : handleDownloadByDefault(
-          { id: item?.[fileKeys?.fileName] },
-          {
-            url: `/ims/org/cust/download`,
-            fileName: item?.fdFileName || item?.[fileKeys?.fileName],
-          },
-        );
+    return handleDownloadByDefault({
+      url: item?.url,
+      fileName: item?.[fileKeys?.fileName],
+      fileId: item?.[fileKeys?.fileId],
+    });
   };
 
   const renderContent = (item: IFileListExtraRecord, index: number) => {

@@ -19,7 +19,6 @@ const FileUpload: React.FC<IFileUploadProps> = (props) => {
     isDetail = false,
     colNumber = 24,
     header = {},
-    isDownloadByS3 = true,
     uploadProps: defaultUploadProps,
   } = props;
   const { headerItemProps = {}, maxCount, extraRecord } = attachment || {};
@@ -87,7 +86,6 @@ const FileUpload: React.FC<IFileUploadProps> = (props) => {
     setReplaceIndex,
     uploadRef: uploadWrapperRef,
     fileKeys,
-    isDownloadByS3,
   };
 
   if (isDetail) return <Detail {...detailProps} />;

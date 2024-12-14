@@ -67,37 +67,29 @@ const App: React.FC = () => {
           initialValues={{
             file: [
               {
-                fileName: '7e7d0d4c-60b9-4d4f-9f94-80a385d471ce.png',
+                fileName: '1.png',
                 id: 'rc-upload-1734098585253-8',
                 status: 'done',
                 percent: 100,
-                fileId: '7e7d0d4c-60b9-4d4f-9f94-80a385d471ce',
+                fileId: '1',
                 uploadDateTime: '2023-04-07T07:06:05.000Z',
                 url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
               },
               {
-                fileName: 'b6bdc21f-6d82-47ed-b329-6d47af66e9af.png',
+                fileName: 'crud.png',
                 id: 'rc-upload-1734098585253-10',
                 status: 'done',
                 percent: 100,
                 fileId: 'b6bdc21f-6d82-47ed-b329-6d47af66e9af',
-                url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+                url: 'https://ims-view-pc-eternallycyfs-projects.vercel.app/images/crud.png',
               },
               {
-                fileName: '14a57c3a-0864-409e-ab3b-3e5510d9c8dc.png',
+                fileName: 'index.html',
                 id: 'rc-upload-1734098585253-12',
                 status: 'done',
                 percent: 100,
                 fileId: '14a57c3a-0864-409e-ab3b-3e5510d9c8dc',
-                url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-              },
-              {
-                fileName: '8aeae013-1007-4eaf-83be-7a544f896fe0.png',
-                id: 'rc-upload-1734098585253-14',
-                status: 'done',
-                percent: 100,
-                fileId: '8aeae013-1007-4eaf-83be-7a544f896fe0',
-                url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+                url: 'https://ims-view-pc-eternallycyfs-projects.vercel.app/iconfont/index.html',
               },
             ],
           }}

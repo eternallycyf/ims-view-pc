@@ -1,0 +1,56 @@
+{
+  "bookSourceComment": "",
+  "bookSourceGroup": "🌸常用",
+  "bookSourceName": "🌸 3Q小说",
+  "bookSourceType": 0,
+  "bookSourceUrl": "http://www.3qxs.cc",
+  "bookUrlPattern": "http://www.3qxs.cc/article/\\d+/",
+  "customOrder": 100,
+  "enabled": true,
+  "enabledCookieJar": false,
+  "enabledExplore": true,
+  "exploreUrl": "玄幻小说::/fenlei/1_{{page}}/\n修真小说::/fenlei/2_{{page}}/\n都市小说::/fenlei/3_{{page}}/\n历史小说::/fenlei/4_{{page}}/\n网游小说::/fenlei/5_{{page}}/\n科幻小说::/fenlei/6_{{page}}/\n完本小说::/quanben/{{page}}",
+  "lastUpdateTime": 1693048796225,
+  "loginUrl": "",
+  "respondTime": 21580,
+  "ruleBookInfo": {
+    "author": "id.info@tag.p.0@text",
+    "coverUrl": "id.fmimg@img@src",
+    "init": "",
+    "intro": "id.intro@text",
+    "kind": "id.info@tag.p.2@text##更新时间：|\\[.*",
+    "lastChapter": "id.info@tag.p.3@tag.a@text##免费章节 |正文卷 |正文 |VIP章节 ",
+    "name": "id.info@tag.h1@text",
+    "wordCount": ""
+  },
+  "ruleContent": {
+    "content": "id.htmlContent@html##天翼小说.*最新章节！|一秒记住.*免费阅读！"
+  },
+  "ruleExplore": {
+    "author": "class.sp_4@text",
+    "bookList": "class.gx_cont@li!0",
+    "bookUrl": "class.sp_2@a@href",
+    "coverUrl": "class.sp_2@a@href<js>\nvar id = result.match(/(\\d+)\\/?$/)[1];\nvar iid = parseInt(id/1000);\n'http://www.3qxs.cc/files/article/image/'+iid+'/'+id+'/'+id+'s.jpg';\n</js>",
+    "kind": "class.sp_5@text",
+    "lastChapter": "class.sp_3@a@text",
+    "name": "class.sp_2@a@text"
+  },
+  "ruleReview": {},
+  "ruleSearch": {
+    "author": "tag.td.2@text||id.info@tag.p.0@text",
+    "bookList": "class.grid@tag.tr||id.maininfo",
+    "bookUrl": "tag.td.0@tag.a@href",
+    "coverUrl": "tag.td.0@tag.a@href<js>\nvar id = result.match(/(\\d+)\\/?$/)[1];\nvar iid = parseInt(id/1000);\n'http://www.3qxs.cc/files/article/image/'+iid+'/'+id+'/'+id+'s.jpg';\n</js>",
+    "kind": "tag.td.4@text&&\ntag.td.5@text",
+    "lastChapter": "tag.td.1@tag.a@text||id.info@tag.p.3@a@text##免费章节 |正文卷 |正文 |VIP章节 ",
+    "name": "tag.td.0@tag.a@text||id.info@tag.h1@text",
+    "wordCount": "tag.td.3@text"
+  },
+  "ruleToc": {
+    "chapterList": "class.mulu_list@tag.li",
+    "chapterName": "tag.a@text",
+    "chapterUrl": "tag.a@href"
+  },
+  "searchUrl": "http://www.3qxs.cc/modules/article/search.php?searchkey={{key}}&submit=%CB%D1%CB%F7&page={{page}},{\n  \"charset\": \"gbk\"\n}",
+  "weight": 0
+}
