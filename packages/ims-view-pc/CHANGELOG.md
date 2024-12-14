@@ -1,5 +1,24 @@
 # Changelog
 
+### [Version&nbsp;1.74.1](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.74.0...ims-view-pc@1.74.1)
+
+<sup>Released on **2024-12-14**</sup>
+
+#### 🐛 修复
+
+- FileUpload use theme color.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- FileUpload use theme color ([f0dfb8f](https://github.com/eternallycyf/ims-view-pc/commit/f0dfb8f))
+
+</details>
+
 ## [Version&nbsp;1.74.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.73.2...ims-view-pc@1.74.0)
 
 <sup>Released on **2024-12-14**</sup>
