@@ -104,8 +104,20 @@
       line-height: 0;
 
       .ant-progress-bg {
-        background-color: var(--colorPrimary);
+        background: var(--ant-color-primary, var(--colorPrimary));
       }
     }
+  }
+
+  .primary-color {
+    color: var(--ant-color-primary, var(--colorPrimary));
+  }
+
+  .success-color {
+    color: var(--ant-color-success, var(--colorSuccess));
+  }
+
+  .error-color {
+    color: var(--ant-color-error, var(--colorError));
   }
 }

@@ -7,7 +7,7 @@ import {
   LoadingOutlined,
 } from '@ant-design/icons';
 import { Col, Progress, Row, Space, Spin, Tooltip } from 'antd';
-import { AccessBtn, CustomTooltip, variables } from 'ims-view-pc';
+import { AccessBtn, CustomTooltip } from 'ims-view-pc';
 import { FC } from 'react';
 import FileImage from './FileImage';
 import './index.less';
@@ -20,8 +20,6 @@ import {
   handleDownloadByDefault,
   isImg,
 } from './utils';
-
-const FileView = () => <div>FileView</div>;
 
 const Detail: FC<FileUploadDetailProps> = (props) => {
   const {
@@ -88,10 +86,10 @@ const Detail: FC<FileUploadDetailProps> = (props) => {
         return (
           <span>
             <span className="success">
-              <CheckCircleFilled style={{ color: variables.colorSuccess }} />
+              <CheckCircleFilled className="success-color" />
             </span>
             <span className="delete" onClick={() => handleDelete(item)}>
-              <DeleteOutlined style={{ color: variables.colorError }} />
+              <DeleteOutlined className="error-color" />
             </span>
           </span>
         );
@@ -118,7 +116,10 @@ const Detail: FC<FileUploadDetailProps> = (props) => {
                     <Tooltip title="查看">
                       <EyeOutlined
                         onClick={() => handlePreview(item)}
-                        style={{ color: variables.colorInfo, cursor: 'pointer' }}
+                        className="primary-color"
+                        style={{
+                          cursor: 'pointer',
+                        }}
                       />
                     </Tooltip>
                   ),
@@ -130,7 +131,7 @@ const Detail: FC<FileUploadDetailProps> = (props) => {
                   ) : (
                     <Tooltip title="替换">
                       <DiffOutlined
-                        style={{ color: variables.colorInfo }}
+                        className="primary-color"
                         onClick={() => handleReplace(index)}
                       />
                     </Tooltip>
@@ -142,7 +143,7 @@ const Detail: FC<FileUploadDetailProps> = (props) => {
                   element: (
                     <Tooltip title="下载">
                       <DownloadOutlined
-                        style={{ color: variables.colorInfo }}
+                        className="primary-color"
                         onClick={() => handleDownload(item)}
                       />
                     </Tooltip>

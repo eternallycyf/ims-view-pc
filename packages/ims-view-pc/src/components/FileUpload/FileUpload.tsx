@@ -95,7 +95,14 @@ const FileUpload: React.FC<FileUploadProps> = (props) => {
   if (isDetail) return <Detail {...detailProps} />;
 
   return (
-    <div className="FileUpload" style={{ '--colorPrimary': variables?.colorPrimary }}>
+    <div
+      className="FileUpload"
+      style={{
+        '--colorPrimary': variables?.colorPrimary,
+        '--colorSuccess': variables?.colorSuccess,
+        '--colorError': variables?.colorError,
+      }}
+    >
       <div className="uploadContent" style={{ marginTop: fileList?.length != 0 ? 10 : 0 }}>
         {(config?.extra || config?.label) && (
           <Form.Item className="header" layout="horizontal" {...defaultHeaderFormItemProps}>
