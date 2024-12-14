@@ -1,5 +1,27 @@
 # Changelog
 
+## [Version&nbsp;1.73.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.72.0...ims-view-pc@1.73.0)
+
+<sup>Released on **2024-12-14**</sup>
+
+#### ✨ 新特性
+
+- **ims-view-pc**: Add FileViewer.
+- FileUpload view, FileUpload view.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **ims-view-pc**: Add FileViewer ([de61b2c](https://github.com/eternallycyf/ims-view-pc/commit/de61b2c))
+- FileUpload view ([4ea6369](https://github.com/eternallycyf/ims-view-pc/commit/4ea6369))
+- FileUpload view ([83e7cc5](https://github.com/eternallycyf/ims-view-pc/commit/83e7cc5))
+
+</details>
+
 ## [Version&nbsp;1.72.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.71.0...ims-view-pc@1.72.0)
 
 <sup>Released on **2024-12-14**</sup>
