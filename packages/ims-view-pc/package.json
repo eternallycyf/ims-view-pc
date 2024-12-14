@@ -20,6 +20,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "axios": "^1.5.1",
     "@babel/runtime": "^7.23.1",
     "@ims-view/chart": "1.8.1",
     "@ims-view/hooks": "1.18.1",
@@ -54,7 +55,6 @@
     "@ant-design/icons": "^5",
     "@ant-design/pro-form": "^2",
     "antd": "^5",
-    "axios": "^1.5.1",
     "lodash": "^4.17.21",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
