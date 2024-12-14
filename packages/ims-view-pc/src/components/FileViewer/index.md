@@ -10,4 +10,4 @@ demo:
 
 ## FileViewer 文件预览
 
-[FileViewer](https://github.com/eternallycyf/Antd-CustomComponent/blob/main/src/pages/FileViewer/index.tsx)
+<code src='./demo/index.tsx'>1.FileUpload</code>

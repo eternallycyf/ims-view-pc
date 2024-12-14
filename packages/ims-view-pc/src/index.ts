@@ -72,3 +72,5 @@ export * from './type/index';
 
 export { default as FileUpload } from './components/FileUpload';
 export * from './components/FileUpload/interface';
+
+export { default as FileViewer } from './components/FileViewer';
