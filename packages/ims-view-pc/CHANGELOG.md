@@ -1,5 +1,24 @@
 # Changelog
 
+## [Version&nbsp;1.72.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.71.0...ims-view-pc@1.72.0)
+
+<sup>Released on **2024-12-14**</sup>
+
+#### ✨ 新特性
+
+- **ims-view-pc**: Add FileImage.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **ims-view-pc**: Add FileImage ([fa2d5c9](https://github.com/eternallycyf/ims-view-pc/commit/fa2d5c9))
+
+</details>
+
 ## [Version&nbsp;1.71.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.70.1...ims-view-pc@1.71.0)
 
 <sup>Released on **2024-12-14**</sup>
