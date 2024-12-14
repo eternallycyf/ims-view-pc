@@ -1,6 +1,7 @@
-import { IButtonProps } from 'ims-view-pc';
+import { IButtonProps, type FileViewer } from 'ims-view-pc';
 
 import { FormItemProps, UploadFile, UploadProps } from 'antd';
+import type { RefObject } from 'react';
 
 export interface IAttachment {
   label?: string;
@@ -76,6 +77,7 @@ export interface IFileUploadDetailProps
   setFileList: React.Dispatch<React.SetStateAction<IFileListExtraRecord[]>>;
   setReplaceIndex: React.Dispatch<React.SetStateAction<number>>;
   uploadRef: React.MutableRefObject<any>;
+  FileViewerRef: RefObject<InstanceType<typeof FileViewer>>;
 }
 
 export interface FileImageProps {

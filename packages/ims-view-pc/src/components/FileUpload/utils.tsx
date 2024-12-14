@@ -1,4 +1,5 @@
 import { message, UploadProps } from 'antd';
+import axios from 'axios';
 import { Icon as IconFont } from 'ims-view-pc';
 import _ from 'lodash';
 import { IconProps } from '../Icon';
@@ -18,6 +19,8 @@ export const AFTER_NAMES = [
   '.html',
   '.aspx',
 ];
+
+export const isImg = (fileName: string) => /\.(jpeg|jpg|gif|png|bmp|webp)$/.test(fileName);
 
 // eslint-disable-next-line no-useless-escape
 export const BAFAULT_NAMES = `.%'&\></${'`'}~:--`.split('');
@@ -186,12 +189,23 @@ export const handleDownloadByDefault = (params: {
     return;
   }
 
-  // 判断是图片后缀
-  const isImg = /\.(jpeg|jpg|gif|png|bmp|webp)$/.test(fileName);
-
-  if (isImg) {
+  if (isImg(fileName)) {
     downloadImgURL(url, fileName);
   } else {
     postDownloadFile({ url, fileName, fileId });
   }
 };
+
+export const getBase64 = (file: Blob, cb: (result: string | ArrayBuffer | null) => void) => {
+  const reader = new FileReader();
+  reader.addEventListener('load', () => cb(reader.result));
+  reader.readAsDataURL(file);
+};
+
+export async function getFileBlob(url: string, params: any) {
+  const res = await axios.get(url, {
+    params,
+    responseType: 'blob',
+  });
+  return res?.data;
+}

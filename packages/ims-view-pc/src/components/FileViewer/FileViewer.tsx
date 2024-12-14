@@ -34,10 +34,16 @@ class FilePreView extends PureComponent<any, any> {
     };
   }
   //显隐状态的改变
-  controlIsShow = (params: { src?: string; base64?: string; originFileObj?: any }) => {
+  controlIsShow = (params: {
+    src?: string;
+    base64?: string;
+    originFileObj?: any;
+    fileName?: string;
+  }) => {
     const { modalVisible } = this.state;
-    const { src, base64, originFileObj } = params;
-    const { name } = originFileObj;
+    const { src, base64, originFileObj = {}, fileName } = params;
+    const { name: defaultName = '' } = originFileObj;
+    const name = fileName || defaultName;
     const fileType = name.slice(name.lastIndexOf('.') + 1).toLowerCase();
 
     if (!fileAllTypes.includes(fileType)) {

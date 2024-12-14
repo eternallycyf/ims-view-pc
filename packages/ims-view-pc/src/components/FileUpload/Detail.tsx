@@ -13,7 +13,14 @@ import { FC } from 'react';
 import FileImage from './FileImage';
 import './index.less';
 import { IFileListExtraRecord, IFileUploadDetailProps } from './interface';
-import { handleAttachmentDelete, handleAttachmentReplace, handleDownloadByDefault } from './utils';
+import {
+  getBase64,
+  getFileBlob,
+  handleAttachmentDelete,
+  handleAttachmentReplace,
+  handleDownloadByDefault,
+  isImg,
+} from './utils';
 
 const FileView = () => <div>FileView</div>;
 
@@ -26,6 +33,7 @@ const Detail: FC<IFileUploadDetailProps> = (props) => {
     setReplaceIndex,
     uploadRef,
     fileKeys,
+    FileViewerRef,
   } = props;
 
   const _getPercent = (item: any) => {
@@ -44,8 +52,22 @@ const Detail: FC<IFileUploadDetailProps> = (props) => {
     handleAttachmentDelete({ fileKeys, fileId: item?.[fileKeys?.fileId], ...props });
   };
 
-  const getViewUrl = (item: IFileListExtraRecord) => {
-    return `/ims/org/cust/download?id=${item?.[fileKeys?.fileId]}`;
+  const handlePreview = async (item: IFileListExtraRecord) => {
+    const result: any = await getFileBlob(item?.url, item);
+
+    if (isImg(item?.[fileKeys?.fileName])) {
+      getBase64(result, (base64Url) => {
+        FileViewerRef.current.controlIsShow({
+          base64: base64Url as any,
+          fileName: item?.[fileKeys?.fileName],
+        });
+      });
+    } else {
+      FileViewerRef.current.controlIsShow({
+        src: item?.url,
+        fileName: item?.[fileKeys?.fileName],
+      });
+    }
   };
 
   const handleDownload = (item: IFileListExtraRecord) => {
@@ -95,7 +117,10 @@ const Detail: FC<IFileUploadDetailProps> = (props) => {
                 {
                   element: (
                     <Tooltip title="查看">
-                      <EyeOutlined style={{ color: variables.colorInfo, cursor: 'pointer' }} />
+                      <EyeOutlined
+                        onClick={() => handlePreview(item)}
+                        style={{ color: variables.colorInfo, cursor: 'pointer' }}
+                      />
                     </Tooltip>
                   ),
                   type: 'custom',

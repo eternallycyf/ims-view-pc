@@ -1,4 +1,5 @@
 import { Image, Skeleton } from 'antd';
+import axios from 'axios';
 import cx from 'classnames';
 import { renderAsync } from 'docx-preview';
 import type { CSSProperties } from 'react';
@@ -65,28 +66,39 @@ class FileView extends PureComponent<IProps, any> {
       } catch (err) {}
     }
 
-    if (fileType == 'word') {
-      // const url = `xxxxx/${src}`;
-      // const blob = await axios.get(url, {
-      //   responseType: 'blob'
-      // })
-      // renderAsync(
-      //   blob,
-      //   document.getElementById("file-preview-modal") as HTMLDivElement,
-      //   null as unknown as HTMLDivElement,
-      //   {
-      //     className: "docx", // 默认和文档样式类的类名/前缀
-      //     inWrapper: true, // 启用围绕文档内容渲染包装器
-      //     ignoreWidth: false, // 禁止页面渲染宽度
-      //     ignoreHeight: false, // 禁止页面渲染高度
-      //     ignoreFonts: false, // 禁止字体渲染
-      //     breakPages: true, // 在分页符上启用分页
-      //     ignoreLastRenderedPageBreak: true, //禁用lastRenderedPageBreak元素的分页
-      //     experimental: false, //启用实验性功能（制表符停止计算）
-      //     trimXmlDeclaration: true, //如果为真，xml声明将在解析之前从xml文档中删除
-      //     debug: false, // 启用额外的日志记录
-      //   },
-      // );
+    const url = src;
+    const res = await axios.get(url, {
+      responseType: 'blob',
+    });
+
+    const blob = res.data;
+
+    if (txtFileTypes.includes(fileType)) {
+      const Buffer = await this.readBuffer(blob);
+      const text = await this.readText(Buffer);
+      this.setState({
+        text,
+      });
+    }
+
+    if (fileType == 'docx' || fileType == 'doc') {
+      renderAsync(
+        blob,
+        document.getElementById('file-preview-modal') as HTMLDivElement,
+        null as unknown as HTMLDivElement,
+        {
+          className: 'docx', // 默认和文档样式类的类名/前缀
+          inWrapper: true, // 启用围绕文档内容渲染包装器
+          ignoreWidth: false, // 禁止页面渲染宽度
+          ignoreHeight: false, // 禁止页面渲染高度
+          ignoreFonts: false, // 禁止字体渲染
+          breakPages: true, // 在分页符上启用分页
+          ignoreLastRenderedPageBreak: true, //禁用lastRenderedPageBreak元素的分页
+          experimental: false, //启用实验性功能（制表符停止计算）
+          trimXmlDeclaration: true, //如果为真，xml声明将在解析之前从xml文档中删除
+          debug: false, // 启用额外的日志记录
+        },
+      );
     }
   };
 
@@ -191,7 +203,7 @@ class FileView extends PureComponent<IProps, any> {
     if (fileType == 'png' || fileType == 'jpg') {
       return (
         <div className="image">
-          <Image src={src} />
+          <Image src={this.props?.src || this.props?.base64} />
         </div>
       );
     }

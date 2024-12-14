@@ -1,6 +1,6 @@
 import { CloudUploadOutlined } from '@ant-design/icons';
 import { Divider, Form, Upload, UploadProps } from 'antd';
-import { AccessBtn, variables } from 'ims-view-pc';
+import { AccessBtn, FileViewer, variables } from 'ims-view-pc';
 import { useEffect, useRef, useState } from 'react';
 import Detail from './Detail';
 import './index.less';
@@ -12,6 +12,8 @@ const FileUpload: React.FC<IFileUploadProps> = (props) => {
   const [fileList, setFileList] = useState<IFileListExtraRecord[]>(value);
   const [replaceIndex, setReplaceIndex] = useState<number>(-1);
   const uploadWrapperRef = useRef<any>(null!);
+  const FileViewerRef = useRef<InstanceType<typeof FileViewer>>(null!);
+
   const {
     attachment,
     actionUrl: defaultActionUrl,
@@ -86,6 +88,7 @@ const FileUpload: React.FC<IFileUploadProps> = (props) => {
     setReplaceIndex,
     uploadRef: uploadWrapperRef,
     fileKeys,
+    FileViewerRef,
   };
 
   if (isDetail) return <Detail {...detailProps} />;
@@ -122,6 +125,7 @@ const FileUpload: React.FC<IFileUploadProps> = (props) => {
           </div>
         </Form.Item>
       </div>
+      <FileViewer ref={FileViewerRef} />
     </div>
   );
 };

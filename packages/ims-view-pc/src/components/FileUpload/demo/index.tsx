@@ -67,13 +67,13 @@ const App: React.FC = () => {
           initialValues={{
             file: [
               {
-                fileName: '1.png',
+                fileName: 'origin.png',
                 id: 'rc-upload-1734098585253-8',
                 status: 'done',
                 percent: 100,
                 fileId: '1',
                 uploadDateTime: '2023-04-07T07:06:05.000Z',
-                url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+                url: 'https://ims-view-pc-eternallycyfs-projects.vercel.app/images/origin.png',
               },
               {
                 fileName: 'word.docx',
@@ -90,6 +90,14 @@ const App: React.FC = () => {
                 percent: 100,
                 fileId: '14a57c3a-0864-409e-ab3b-3e5510d9c8dc',
                 url: 'https://ims-view-pc-eternallycyfs-projects.vercel.app/1.json',
+              },
+              {
+                fileName: 'excel.xlsx',
+                id: 'rc-upload-1734098585253-15',
+                status: 'done',
+                percent: 100,
+                fileId: 'excelxlsx',
+                url: 'https://ims-view-pc-eternallycyfs-projects.vercel.app/excel.xlsx',
               },
             ],
           }}
