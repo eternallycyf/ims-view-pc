@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Icon as IconFont } from 'ims-view-pc';
 import _ from 'lodash';
 import { IconProps } from '../Icon';
-import { IFileUploadDetailProps, IFileUploadProps, IHandleFileChange } from './interface';
+import { FileUploadDetailProps, FileUploadProps, HandleFileChange } from './interface';
 
 export const AFTER_NAMES = [
   '.exe',
@@ -60,9 +60,9 @@ export const beforeUpload: UploadProps['beforeUpload'] = (file) => {
 };
 
 export const handleAttachmentDelete = (
-  fileParams: IFileUploadDetailProps & {
+  fileParams: FileUploadDetailProps & {
     fileId?: string | number;
-    fileKeys: IFileUploadProps['fileKeys'];
+    fileKeys: FileUploadProps['fileKeys'];
   },
 ) => {
   const { fileId, fileList, setFileList, fileKeys } = fileParams;
@@ -75,7 +75,7 @@ export const handleAttachmentDelete = (
 };
 
 export const handleAttachmentReplace = (
-  fileParams: IFileUploadDetailProps & { index: number; fileKeys: IFileUploadProps['fileKeys'] },
+  fileParams: FileUploadDetailProps & { index: number; fileKeys: FileUploadProps['fileKeys'] },
 ) => {
   const { uploadRef, fileList, setReplaceIndex, index, fileKeys } = fileParams;
   setReplaceIndex(index);
@@ -87,7 +87,7 @@ export const handleAttachmentReplace = (
   }
 };
 
-export const handleFileChange: IHandleFileChange = (
+export const handleFileChange: HandleFileChange = (
   fileParams,
   setFileList,
   replaceIndex,

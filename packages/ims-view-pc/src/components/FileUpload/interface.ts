@@ -3,11 +3,10 @@ import { IButtonProps, type FileViewer } from 'ims-view-pc';
 import { FormItemProps, UploadFile, UploadProps } from 'antd';
 import type { RefObject } from 'react';
 
-export interface IAttachment {
+export interface UploadConfig {
   label?: string;
   tooltip?: string;
   isRequired?: boolean;
-  maxCount?: number;
 
   /**
    * @name 拓展的文件信息 和文件名同级
@@ -18,63 +17,66 @@ export interface IAttachment {
   headerItemProps?: FormItemProps;
 }
 
-export interface IFileUploadProps {
+export interface FileUploadProps {
   header?: any;
 
-  attachment?: IAttachment;
+  config?: UploadConfig;
   actionUrl?: string;
   isDetail?: boolean;
   colNumber?: number;
+  maxCount?: number;
 
   fileKeys?: {
     fileName?: string;
     fileId?: string;
     url?: string;
   };
-  uploadProps?: UploadProps<IFileListResponse>;
+  uploadProps?: UploadProps<FileListResponse>;
 
   /**
    * @name 集成到antd
    */
-  value?: UploadProps<IFileListResponse>[];
-  onChange?: (fileList: UploadProps<IFileListResponse>[]) => void;
+  value?: Attachment[];
+  onChange?: (fileList: Attachment[]) => void;
 }
 
-export type IHandleFileChange = {
+export type HandleFileChange = {
   (
     info: {
-      file: UploadFile<IFileListResponse>;
-      fileList: UploadFile<IFileListResponse>[];
+      file: UploadFile<FileListResponse>;
+      fileList: UploadFile<FileListResponse>[];
       extraRecord: any;
-      defaultList: IFileListExtraRecord[];
+      defaultList: Attachment[];
     },
-    setFileList: React.Dispatch<React.SetStateAction<IFileListExtraRecord[]>>,
+    setFileList: React.Dispatch<React.SetStateAction<Attachment[]>>,
     replaceIndex: number,
-    fileKeys: IFileUploadProps['fileKeys'],
+    fileKeys: FileUploadProps['fileKeys'],
   ): void;
 };
 
-export type IFileListExtraRecord = {
+export type Attachment = {
   uploadDateTime?: string;
   fileId?: string;
   id?: string;
   url?: string;
   fileName?: string;
   fileSize?: string;
+  status: UploadProps['fileList'][number]['status'];
+  percent: number;
   [props: string]: any;
 };
 
-export type IFileListResponse = {
+export type FileListResponse = {
   code: number;
   msg: string;
   success: boolean;
-  data: IFileListExtraRecord;
+  data: Attachment;
 };
 
-export interface IFileUploadDetailProps
-  extends Pick<IFileUploadProps, 'isDetail' | 'colNumber' | 'fileKeys'> {
-  fileList: IFileListExtraRecord[];
-  setFileList: React.Dispatch<React.SetStateAction<IFileListExtraRecord[]>>;
+export interface FileUploadDetailProps
+  extends Pick<FileUploadProps, 'isDetail' | 'colNumber' | 'fileKeys'> {
+  fileList: Attachment[];
+  setFileList: React.Dispatch<React.SetStateAction<Attachment[]>>;
   setReplaceIndex: React.Dispatch<React.SetStateAction<number>>;
   uploadRef: React.MutableRefObject<any>;
   FileViewerRef: RefObject<InstanceType<typeof FileViewer>>;

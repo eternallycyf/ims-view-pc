@@ -1,14 +1,15 @@
 import { random } from '@ims-view/utils';
 import { Form, type UploadProps } from 'antd';
-import { CustomForm, FileUpload, FormRules } from 'ims-view-pc';
+import { CustomForm, FileUpload, FormRules, type Attachment } from 'ims-view-pc';
 import { useRef } from 'react';
 
 interface IFormValues {
-  file: any[];
+  file: Attachment[];
 }
 
 const App: React.FC = () => {
   const [form] = Form.useForm<IFormValues>();
+
   const customRequest: UploadProps['customRequest'] = async ({
     data,
     file,
@@ -127,8 +128,28 @@ const App: React.FC = () => {
                       customRequest: customRequest,
                     }}
                     colNumber={12}
-                    attachment={{
-                      maxCount: 5,
+                    maxCount={5}
+                    config={{
+                      label: '上传文件',
+                      tooltip: '最多上传5个',
+                      isRequired: true,
+                      extraRecord: {},
+                      extra: [
+                        {
+                          element: '测试按钮',
+                          itemProps: {
+                            buttonProps: {
+                              style: {},
+                              size: 'small',
+                            },
+                          },
+                        },
+                      ],
+                      headerItemProps: {
+                        style: {
+                          marginBottom: 2,
+                        },
+                      },
                     }}
                   />
                 );

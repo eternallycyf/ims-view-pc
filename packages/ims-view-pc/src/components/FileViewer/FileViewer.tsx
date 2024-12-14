@@ -1,4 +1,4 @@
-import { message, Modal } from 'antd';
+import { Image, message, Modal } from 'antd';
 import axios from 'axios';
 import React, { PureComponent } from 'react';
 import { ExcelRenderer } from 'react-excel-renderer';
@@ -32,6 +32,7 @@ class FilePreView extends PureComponent<any, any> {
         cols: [],
         rows: [],
       },
+      imageVisible: false,
     };
   }
   //显隐状态的改变
@@ -46,10 +47,16 @@ class FilePreView extends PureComponent<any, any> {
     const { name: defaultName = '' } = originFileObj;
     const name = fileName || defaultName;
     const fileType = name.slice(name.lastIndexOf('.') + 1).toLowerCase();
+    const isImage = fileType == 'png' || fileType == 'jpg';
 
-    if (!fileAllTypes.includes(fileType)) {
-      return message.error('该文件不支持预览');
+    if (isImage) {
+      return this.setState({
+        src,
+        base64,
+        imageVisible: !this.state.imageVisible,
+      });
     }
+
     if (fileType == 'xlsx') {
       const url = src;
       const res = await axios.get(url, {
@@ -66,6 +73,7 @@ class FilePreView extends PureComponent<any, any> {
         });
       });
     }
+
     this.setState({
       modalVisible: !modalVisible,
       src,
@@ -75,37 +83,52 @@ class FilePreView extends PureComponent<any, any> {
   };
 
   render() {
-    const { modalVisible, src, base64, fileType, excelData } = this.state;
+    const { modalVisible, src, base64, fileType, excelData, imageVisible } = this.state;
+
     return (
-      <Modal
-        open={modalVisible}
-        title={fileType + ' 预览'}
-        onCancel={() => {
-          this.setState({
-            modalVisible: false,
-          });
-        }}
-        width={1200}
-        styles={{
-          body: {
-            overflow: 'scroll',
-            height: '70vh',
-          },
-        }}
-        footer={null}
-        destroyOnClose={true}
-      >
-        <FileView
-          id="file-preview-modal"
-          ref={this.pdfViewRef}
-          src={src}
-          base64={base64}
-          fileType={fileType}
-          excelData={excelData}
-          txtFileTypes={txtFileTypes}
-          styles={{ height: '600px' }}
+      <>
+        <Image
+          style={{ display: 'none' }}
+          width={200}
+          src={src || base64}
+          preview={{
+            visible: imageVisible,
+            src: src || base64,
+            onVisibleChange: (value) => {
+              this.setState({ imageVisible: value });
+            },
+          }}
         />
-      </Modal>
+        <Modal
+          open={modalVisible}
+          title={fileType + ' 预览'}
+          onCancel={() => {
+            this.setState({
+              modalVisible: false,
+            });
+          }}
+          width={1200}
+          styles={{
+            body: {
+              overflow: 'scroll',
+              height: '70vh',
+            },
+          }}
+          footer={null}
+          destroyOnClose={true}
+        >
+          <FileView
+            id="file-preview-modal"
+            ref={this.pdfViewRef}
+            src={src}
+            base64={base64}
+            fileType={fileType}
+            excelData={excelData}
+            txtFileTypes={txtFileTypes}
+            styles={{ height: '600px' }}
+          />
+        </Modal>
+      </>
     );
   }
 }

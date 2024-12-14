@@ -4,26 +4,27 @@ import { AccessBtn, FileViewer, variables } from 'ims-view-pc';
 import { useEffect, useRef, useState } from 'react';
 import Detail from './Detail';
 import './index.less';
-import { IFileListExtraRecord, IFileListResponse, IFileUploadProps } from './interface';
+import { Attachment, FileListResponse, FileUploadProps } from './interface';
 import { beforeUpload, handleFileChange } from './utils';
 
-const FileUpload: React.FC<IFileUploadProps> = (props) => {
+const FileUpload: React.FC<FileUploadProps> = (props) => {
   const { value = [], onChange } = props;
-  const [fileList, setFileList] = useState<IFileListExtraRecord[]>(value);
+  const [fileList, setFileList] = useState<Attachment[]>(value);
   const [replaceIndex, setReplaceIndex] = useState<number>(-1);
   const uploadWrapperRef = useRef<any>(null!);
   const FileViewerRef = useRef<InstanceType<typeof FileViewer>>(null!);
 
   const {
-    attachment,
+    config,
     actionUrl: defaultActionUrl,
     fileKeys: defaultFileKeys,
     isDetail = false,
     colNumber = 24,
     header = {},
     uploadProps: defaultUploadProps,
+    maxCount = null,
   } = props;
-  const { headerItemProps = {}, maxCount, extraRecord } = attachment || {};
+  const { headerItemProps = {}, extraRecord } = config || {};
   const actionUrl = defaultActionUrl || `flow/upload`;
   const fileKeys = {
     fileName: defaultFileKeys?.fileName || 'fileName',
@@ -42,17 +43,17 @@ const FileUpload: React.FC<IFileUploadProps> = (props) => {
   }, [value]);
 
   const defaultHeaderFormItemProps = {
-    label: attachment?.label,
-    tooltip: attachment?.tooltip,
-    required: attachment?.isRequired,
+    label: config?.label,
+    tooltip: config?.tooltip,
+    required: config?.isRequired,
     wrapperCol: { style: { textAlign: 'right' as 'right' } },
-    colon: attachment?.extra ? true : false,
+    colon: config?.extra ? true : false,
     style: { marginBottom: 0, ...headerItemProps?.style },
     ...headerItemProps,
   };
 
   const uploadFormItemProps = {};
-  const UploadProps: UploadProps<IFileListResponse> = {
+  const UploadProps: UploadProps<FileListResponse> = {
     name: 'file',
     multiple: false,
     showUploadList: false,
@@ -96,12 +97,12 @@ const FileUpload: React.FC<IFileUploadProps> = (props) => {
   return (
     <div className="FileUpload" style={{ '--colorPrimary': variables?.colorPrimary }}>
       <div className="uploadContent" style={{ marginTop: fileList?.length != 0 ? 10 : 0 }}>
-        {(attachment?.extra || attachment?.label) && (
-          <Form.Item {...defaultHeaderFormItemProps}>
+        {(config?.extra || config?.label) && (
+          <Form.Item className="header" layout="horizontal" {...defaultHeaderFormItemProps}>
             <AccessBtn
               btnList={
-                attachment?.extra &&
-                (attachment?.extra as any[]).map((item) => ({
+                config?.extra &&
+                (config?.extra as any[]).map((item) => ({
                   ...item,
                   size: item?.size || 'middle',
                 }))
@@ -114,13 +115,13 @@ const FileUpload: React.FC<IFileUploadProps> = (props) => {
             <Detail {...detailProps} />
           </Form.Item>
         )}
-        {(fileList?.length != 0 || attachment?.extra || attachment?.label) && (
+        {(fileList?.length != 0 || config?.extra || config?.label) && (
           <Divider dashed style={{ color: '#DEE1E7', margin: '4px 0 0 0' }} />
         )}
         <Form.Item {...uploadFormItemProps}>
           <div onClick={() => setReplaceIndex(-1)}>
             <Upload.Dragger {...UploadProps} ref={uploadWrapperRef}>
-              {maxCount > fileList?.length ? UploadDraggerContent : null}
+              {maxCount != null && maxCount <= fileList?.length ? null : UploadDraggerContent}
             </Upload.Dragger>
           </div>
         </Form.Item>

@@ -6,13 +6,12 @@ import {
   EyeOutlined,
   LoadingOutlined,
 } from '@ant-design/icons';
-import { Col, Form, Progress, Row, Space, Spin, Tooltip } from 'antd';
-import dayjs from 'dayjs';
-import { AccessBtn, CustomTooltip, Ellipsis, variables } from 'ims-view-pc';
+import { Col, Progress, Row, Space, Spin, Tooltip } from 'antd';
+import { AccessBtn, CustomTooltip, variables } from 'ims-view-pc';
 import { FC } from 'react';
 import FileImage from './FileImage';
 import './index.less';
-import { IFileListExtraRecord, IFileUploadDetailProps } from './interface';
+import { Attachment, FileUploadDetailProps } from './interface';
 import {
   getBase64,
   getFileBlob,
@@ -24,7 +23,7 @@ import {
 
 const FileView = () => <div>FileView</div>;
 
-const Detail: FC<IFileUploadDetailProps> = (props) => {
+const Detail: FC<FileUploadDetailProps> = (props) => {
   const {
     isDetail,
     colNumber,
@@ -48,11 +47,11 @@ const Detail: FC<IFileUploadDetailProps> = (props) => {
     handleAttachmentReplace({ index, fileKeys, ...props });
   };
 
-  const handleDelete = (item: IFileListExtraRecord) => {
+  const handleDelete = (item: Attachment) => {
     handleAttachmentDelete({ fileKeys, fileId: item?.[fileKeys?.fileId], ...props });
   };
 
-  const handlePreview = async (item: IFileListExtraRecord) => {
+  const handlePreview = async (item: Attachment) => {
     const result: any = await getFileBlob(item?.url, item);
 
     if (isImg(item?.[fileKeys?.fileName])) {
@@ -70,7 +69,7 @@ const Detail: FC<IFileUploadDetailProps> = (props) => {
     }
   };
 
-  const handleDownload = (item: IFileListExtraRecord) => {
+  const handleDownload = (item: Attachment) => {
     return handleDownloadByDefault({
       url: item?.url,
       fileName: item?.[fileKeys?.fileName],
@@ -78,7 +77,7 @@ const Detail: FC<IFileUploadDetailProps> = (props) => {
     });
   };
 
-  const renderContent = (item: IFileListExtraRecord, index: number) => {
+  const renderContent = (item: Attachment, index: number) => {
     const isLoading = item?.status === 'uploading';
     const fileName = item?.[fileKeys?.fileName];
 

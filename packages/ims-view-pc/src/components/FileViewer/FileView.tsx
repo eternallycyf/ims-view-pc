@@ -200,14 +200,6 @@ class FileView extends PureComponent<IProps, any> {
       );
     }
 
-    if (fileType == 'png' || fileType == 'jpg') {
-      return (
-        <div className="image">
-          <Image src={this.props?.src || this.props?.base64} />
-        </div>
-      );
-    }
-
     if (txtFileTypes?.includes(fileType)) {
       const newText = `
 ~~~${fileType}
@@ -223,7 +215,7 @@ ${text}
       );
     }
 
-    return <span>不支持</span>;
+    return <span>不支持预览</span>;
   }
 }
 export default FileView;
