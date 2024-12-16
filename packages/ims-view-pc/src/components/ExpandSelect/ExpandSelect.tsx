@@ -1,4 +1,5 @@
 import { Select } from 'antd';
+import { variables } from 'ims-view-pc';
 import { FC } from 'react';
 import './index.less';
 import type { ExpandSelectProps } from './interface';
@@ -7,7 +8,12 @@ const { Option } = Select;
 const ExpandSelect: FC<ExpandSelectProps> = (props) => {
   const { options = [], ...restProps } = props;
   return (
-    <div className="ExpandSelect">
+    <div
+      className="ExpandSelect"
+      style={{
+        '--colorPrimary': variables?.colorPrimary,
+      }}
+    >
       <Select
         defaultValue={[
           { label: 'jack', value: '1' },

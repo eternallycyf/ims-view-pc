@@ -2,6 +2,7 @@ import { DownOutlined, LeftOutlined, UpOutlined } from '@ant-design/icons';
 import { useForceUpdate } from '@ims-view/hooks';
 import { Typography } from 'antd';
 import type { ParagraphProps } from 'antd/es/typography/Paragraph';
+import { variables } from 'ims-view-pc';
 import { FC, useCallback, useMemo, useState, type CSSProperties } from 'react';
 import Empty from './Empty';
 import './index.less';
@@ -132,7 +133,10 @@ const CustomTooltip: FC<CustomTooltipProps> = (props) => {
       className={['CustomTooltip', ellipsisSymbol === false && 'ellipsis-symbol', className].join(
         ' ',
       )}
-      style={WrapperProps}
+      style={{
+        '--colorPrimary': variables?.colorPrimary,
+        ...WrapperProps,
+      }}
     >
       <Paragraph ref={contentRef} {...ParagraphProps}>
         {content ?? '--'}

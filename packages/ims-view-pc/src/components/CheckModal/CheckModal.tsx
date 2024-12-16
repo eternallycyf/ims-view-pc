@@ -1,4 +1,5 @@
 import { Button, Checkbox, Col, Form, Modal, Row, Tag } from 'antd';
+import { variables } from 'ims-view-pc';
 import _ from 'lodash';
 import React, { useImperativeHandle, useState } from 'react';
 import { useMap } from 'react-use';
@@ -20,7 +21,15 @@ const CustomCheckBox = (props: CheckModalBoxProps) => {
   };
 
   return (
-    <Form.Item label={label} key={label} labelCol={{ span: 4 }} wrapperCol={{ span: 20 }}>
+    <Form.Item
+      style={{
+        '--colorPrimary': variables?.colorPrimary,
+      }}
+      label={label}
+      key={label}
+      labelCol={{ span: 4 }}
+      wrapperCol={{ span: 20 }}
+    >
       <Checkbox.Group
         onChange={handleCheckBoxOnChange}
         value={Object.keys(value)?.length != 0 ? (value || [])?.map((item) => item.value) : []}
