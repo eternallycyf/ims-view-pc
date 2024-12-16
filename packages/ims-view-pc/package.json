@@ -1,6 +1,6 @@
 {
   "name": "ims-view-pc",
-  "version": "1.74.3",
+  "version": "1.74.4",
   "main": "lib/index.js",
   "unpkg": "dist/index.js",
   "module": "es/index.js",

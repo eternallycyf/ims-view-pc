@@ -1,5 +1,24 @@
 # Changelog
 
+### [Version&nbsp;1.74.4](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.74.3...ims-view-pc@1.74.4)
+
+<sup>Released on **2024-12-16**</sup>
+
+#### 🐛 修复
+
+- Theme color.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- Theme color ([3d9b80c](https://github.com/eternallycyf/ims-view-pc/commit/3d9b80c))
+
+</details>
+
 ### [Version&nbsp;1.74.3](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.74.2...ims-view-pc@1.74.3)
 
 <sup>Released on **2024-12-16**</sup>
