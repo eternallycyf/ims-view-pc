@@ -103,7 +103,7 @@ const Detail: FC<FileUploadDetailProps> = (props) => {
             <Spin size="small" />
           ) : (
             <Space align="center">
-              <FileImage fileName={fileName} />
+              <FileImage fileName={fileName} className="primary-color" />
               <CustomTooltip rows={1} content={fileName} />
             </Space>
           )}

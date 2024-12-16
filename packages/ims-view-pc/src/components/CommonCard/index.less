@@ -38,7 +38,7 @@
     flex-direction: column;
     padding-right: 8px;
     height: 100%;
-    background: var(--ant-color-primary-bg, --primary-bg-color);
+    background: var(--ant-color-primary-bg, var(--primary-bg-color));
 
     .header {
       position: relative;
@@ -71,7 +71,7 @@
       bottom: 0;
       width: 100%;
       height: 8px;
-      background: var(--ant-color-primary-bg, --primary-bg-color);
+      background: var(--ant-color-primary-bg, var(--primary-bg-color));
     }
   }
 
@@ -112,7 +112,7 @@
 
   .ant-tabs-ink-bar {
     height: 3px !important;
-    background-color: var(--ant-color-primary, --primary-color);
+    background-color: var(--ant-color-primary, var(--primary-color));
   }
 
   .ant-tabs-content-holder {
@@ -127,20 +127,20 @@
   }
 
   .antd-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-tbn {
-    color: var(--ant-color-primary, --primary-color);
+    color: var(--ant-color-primary, var(--primary-color));
 
     &:hover {
-      color: var(--ant-primary-hover, --primary-color-hover);
+      color: var(--ant-primary-hover, var(--primary-color-hover));
     }
 
     &:active {
-      color: var(--ant-primary-active, --primary-color-active);
+      color: var(--ant-primary-active, var(--primary-color-active));
     }
   }
 
   .ant-tabs-ink-bar {
     &.ant-tabs-ink-bar-animated {
-      background-color: var(--ant-color-primary, --primary-color);
+      background-color: var(--ant-color-primary, var(--primary-color));
     }
   }
 
@@ -166,7 +166,7 @@
 .line {
   width: 100%;
   height: 8px;
-  background: var(--ant-color-primary-bg, --primary-bg-color);
+  background: var(--ant-color-primary-bg, var(--primary-bg-color));
 }
 
 .AnchorCard {
@@ -207,14 +207,14 @@
     .ant-anchor .ant-anchor-ink:hover {
       border-bottom: 0;
       background: #ebf2ff;
-      color: var(--ant-color-primary, --primary-color);
+      color: var(--ant-color-primary, var(--primary-color));
       font-weight: 600;
     }
 
     .ant-anchor .ant-anchor-link-active {
       border-bottom: 0;
       background: #ebf2ff;
-      color: var(--ant-color-primary, --primary-color);
+      color: var(--ant-color-primary, var(--primary-color));
       font-weight: 600;
     }
   }
@@ -257,13 +257,13 @@
   .wrapper {
     overflow: auto;
     height: 100%;
-    border-right: 8px solid var(--ant-color-primary-bg, --primary-bg-color);
+    border-right: 8px solid var(--ant-color-primary-bg, var(--primary-bg-color));
 
     .header {
       position: relative;
       z-index: 999;
       padding: 16px;
-      border-bottom: 8px solid var(--ant-color-primary-bg, --primary-bg-color);
+      border-bottom: 8px solid var(--ant-color-primary-bg, var(--primary-bg-color));
       background: #fff;
     }
 
@@ -346,7 +346,7 @@
 
   .ant-tabs-tab-active {
     background: #f5f8ff !important;
-    color: var(--ant-color-primary, --primary-color) !important;
+    color: var(--ant-color-primary, var(--primary-color)) !important;
     font-weight: 600;
   }
 }
