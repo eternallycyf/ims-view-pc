@@ -21,15 +21,7 @@ const CustomCheckBox = (props: CheckModalBoxProps) => {
   };
 
   return (
-    <Form.Item
-      style={{
-        '--colorPrimary': variables?.colorPrimary,
-      }}
-      label={label}
-      key={label}
-      labelCol={{ span: 4 }}
-      wrapperCol={{ span: 20 }}
-    >
+    <Form.Item label={label} key={label} labelCol={{ span: 4 }} wrapperCol={{ span: 20 }}>
       <Checkbox.Group
         onChange={handleCheckBoxOnChange}
         value={Object.keys(value)?.length != 0 ? (value || [])?.map((item) => item.value) : []}
@@ -158,7 +150,13 @@ const CheckModal: React.ForwardRefRenderFunction<CheckModalHandle, CheckModalPro
   };
 
   return (
-    <Form.Item className="checkModal" style={{ marginBottom: 0 }}>
+    <Form.Item
+      className="checkModal"
+      style={{
+        marginBottom: 0,
+        '--colorPrimary': variables?.colorPrimary,
+      }}
+    >
       <Button onClick={handleSelect} className="parmary-btn" size="small" type="default">
         选择
       </Button>
