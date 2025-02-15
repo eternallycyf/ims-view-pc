@@ -1,5 +1,24 @@
 # Changelog
 
+## [Version&nbsp;1.75.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.74.4...ims-view-pc@1.75.0)
+
+<sup>Released on **2025-02-15**</sup>
+
+#### ✨ 新特性
+
+- **ims-view-pc**: Add commonTable.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **ims-view-pc**: Add commonTable ([f641d02](https://github.com/eternallycyf/ims-view-pc/commit/f641d02))
+
+</details>
+
 ### [Version&nbsp;1.74.4](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.74.3...ims-view-pc@1.74.4)
 
 <sup>Released on **2024-12-16**</sup>
