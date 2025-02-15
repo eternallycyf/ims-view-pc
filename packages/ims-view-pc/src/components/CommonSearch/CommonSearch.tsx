@@ -8,6 +8,7 @@ import { variables } from '../../styles/variables';
 import ErrorBoundary from '../ErrorBoundary';
 import './index.less';
 import type { CommonSearchHandle, CommonSearchProps } from './interface';
+import Line from './Line';
 import { SearchContext } from './SearchContext';
 import { formatByAcpCode, isBrowser } from './utils';
 
@@ -24,10 +25,7 @@ const BREAKPOINTS = {
     [531, 701, 2],
     [701, 1062, 3],
     [1062, 1352, 3],
-    [1352, 1683, 4],
-    [1683, 2014, 5],
-    [2014, 2345, 6],
-    [2345, Infinity, 6],
+    [1352, Infinity, 4],
   ],
 } as const;
 
@@ -52,6 +50,7 @@ const CommonSearch: React.ForwardRefRenderFunction<CommonSearchHandle, CommonSea
     loading,
     labelWidth = 80,
     itemBottomHeight = 4,
+    hasDivider = true,
   } = props;
 
   const [form] = Form.useForm();
@@ -372,6 +371,7 @@ const CommonSearch: React.ForwardRefRenderFunction<CommonSearchHandle, CommonSea
               {children}
             </Row>
           </Form>
+          {hasDivider && <Line />}
         </div>
       </RcResizeObserver>
     </ErrorBoundary>

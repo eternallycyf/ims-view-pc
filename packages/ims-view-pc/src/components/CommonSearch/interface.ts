@@ -40,6 +40,7 @@ export interface CommonSearchProps<Values = AnyObject, Rest = AnyObject, Extra =
 
   className?: string;
   children?: React.ReactNode;
+  hasDivider?: boolean;
 }
 
 export type CommonSearchHandle<Values = AnyObject, Rest = AnyObject, Extra = AnyObject> = {

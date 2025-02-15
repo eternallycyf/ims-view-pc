@@ -91,7 +91,7 @@ const Demo = () => {
     },
   };
   return (
-    <ExportButton
+    <ExportButton<any, any>
       columns={column}
       {...params}
       request={async () =>

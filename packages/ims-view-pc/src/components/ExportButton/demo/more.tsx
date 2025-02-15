@@ -109,7 +109,7 @@ const data2 = [
 
 const Demo = () => {
   return (
-    <ExportButton
+    <ExportButton<any, any>
       columns={[]}
       isMultiple
       multipleConfig={[

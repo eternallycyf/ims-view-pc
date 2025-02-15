@@ -1,10 +1,13 @@
 import { SyncOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
 import React, { FC, useCallback } from 'react';
+import type { AnyData } from '../CommonTable/interface';
 import { IExportButtonProps } from './interface';
 import * as TableHepler from './utils';
 
-const ExportButton: FC<IExportButtonProps> = (props) => {
+const ExportButton = <DataType extends any, Rest extends any>(
+  props: IExportButtonProps<DataType, Rest>,
+) => {
   const {
     params,
     request,
@@ -75,7 +78,6 @@ const ExportButton: FC<IExportButtonProps> = (props) => {
     };
     let otherExportConfig: any = {
       progress: (percent: number) => {
-        console.log(percent);
         if (percent === 100) {
           setLoading(false);
         }
@@ -114,4 +116,4 @@ const ExportButton: FC<IExportButtonProps> = (props) => {
   );
 };
 
-export default React.memo(ExportButton);
+export default ExportButton;

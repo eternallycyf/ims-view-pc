@@ -12,10 +12,6 @@ demo:
 
 ## CustomTable
 
-## 暂未整理完成
-
-![](../../../../../public/images/crud.png)
-
 <code src='./demo/demo1.tsx'></code>
 
 ## API

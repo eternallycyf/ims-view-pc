@@ -7,7 +7,7 @@ import { IAccessBtnProps, IButtonItemProps } from './interface';
 const { getUUID } = random;
 
 const AccessBtn: React.FC<IAccessBtnProps> = (props) => {
-  const { accessCollection = [], btnList, children, className } = props;
+  const { accessCollection = [], btnList, children, className, emptyText } = props;
   const [button, setButton] = useState([]);
 
   useEffect(() => {
@@ -112,7 +112,7 @@ const AccessBtn: React.FC<IAccessBtnProps> = (props) => {
       split={<Divider type="vertical" style={{ margin: 0, borderColor: 'rgb(76 76 76 / 19%)' }} />}
       className={['AccessBtn', className].join(' ')}
     >
-      {button}
+      {button?.length === 0 ? (emptyText ? emptyText : '') : button}
     </Space>
   );
 };

@@ -89,7 +89,7 @@ const data = [
 
 const Demo = () => {
   return (
-    <ExportButton
+    <ExportButton<any, any>
       columns={column}
       treeConfig={{
         treeNode: true,

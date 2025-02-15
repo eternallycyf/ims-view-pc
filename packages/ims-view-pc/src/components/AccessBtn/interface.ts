@@ -58,4 +58,5 @@ export interface IAccessBtnProps<Rest = Record<string, unknown>> {
   accessCollection?: string[];
   children?: React.ReactNode;
   btnList?: IButtonProps<Rest>[];
+  emptyText?: ReactNode;
 }

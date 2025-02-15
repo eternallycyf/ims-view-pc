@@ -10,7 +10,7 @@ const column = [
 
 const Demo = () => {
   return (
-    <ExportButton
+    <ExportButton<any, any>
       columns={column}
       request={async () =>
         await {

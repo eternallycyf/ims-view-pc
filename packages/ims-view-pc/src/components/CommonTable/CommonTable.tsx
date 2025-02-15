@@ -1,17 +1,14 @@
-import { Spin, Table, TableProps } from 'antd';
+import { Empty, Flex, Space, Spin, Table, TableProps } from 'antd';
 import { SorterResult } from 'antd/es/table/interface';
 import { PaginationProps } from 'antd/lib';
-import React, { useImperativeHandle, useState } from 'react';
+import { CustomTooltip, type IColumnsType } from 'ims-view-pc';
+import _ from 'lodash';
+import React, { useImperativeHandle, useMemo, useState } from 'react';
 import { useAsyncFn, useLatest, useMount } from 'react-use';
 import { formatColumn } from '../../core/helpers';
+import AccessBtn from '../AccessBtn';
 import './index.less';
-import {
-  CommonTableProps,
-  CommonTableRef,
-  RequestData,
-  RequestParams,
-  RequestSorter,
-} from './interface';
+import { CommonTableProps, CommonTableRef, RequestParams, RequestSorter } from './interface';
 
 //#region
 const getDefaultProps = (
@@ -21,8 +18,9 @@ const getDefaultProps = (
 } => ({
   ...p,
   theme: p.theme || 'light',
-  wrapperClassName: `${p?.wrapperClassName} common-table-wrap`,
-  className: `${p?.className} common-table-theme-${p.theme} common-table `,
+  isVirtual: p?.isVirtual ?? false,
+  wrapperClassName: [`${p?.wrapperClassName}`, 'common-table-wrap'].join(' '),
+  className: [p?.className, `common-table-theme-${p.theme}`, 'common-table'].join(' '),
   size: p.size || 'small',
   style: {
     '--alternateColor': '#fafafa',
@@ -30,7 +28,7 @@ const getDefaultProps = (
   },
   loading: p.loading || false,
   dataSource: p.dataSource || [],
-  initRequest: p.initRequest ?? true,
+  initRequest: p.initRequest ?? false,
   columns: p.columns || [],
   showSorterTooltip: p.showSorterTooltip ?? false,
   pagination: {
@@ -43,11 +41,23 @@ const getDefaultProps = (
     },
     defaultPageSize: 10,
     current: 1,
-    pageSize: 10,
+    pageSize: p?.defaultPageSize ?? 10,
     total: 0,
     ...p?.pagination,
   },
-  rowKey: 'index',
+  accessCollection: p?.accessCollection || [],
+  itemButtonWidth: p?.itemButtonWidth ?? 100,
+  itemButton: p?.itemButton || [],
+  buttonLeft: p?.buttonLeft || [],
+  buttonRight: p?.buttonRight || [],
+  rowKey: p?.rowKey ?? 'index',
+  selectedRowKeys: p?.selectedRowKeys || [],
+  selectedRows: p?.selectedRows || [],
+  selectType: p?.selectType ?? false,
+  isSummary: p?.isSummary ?? false,
+  summaryDataSource: p?.summaryDataSource || [],
+  summaryPosition: p?.summaryPosition ?? 'top',
+  removeSummary: p?.removeSummary ?? [],
 });
 //#endregion
 
@@ -67,49 +77,80 @@ const CommonTable: React.ForwardRefRenderFunction<CommonTableRef, CommonTablePro
     defaultParams,
     params,
     dataHandler,
+    summaryDataHandler,
     columns: defaultColumns,
     showSorterTooltip,
     pagination: defaultPagination,
     rowKey,
+    isVirtual,
+    itemButtonWidth,
+    itemButton,
+    accessCollection,
+    buttonLeft,
+    buttonRight,
+    children,
+    rowSelection,
+    selectedRowKeys,
+    selectedRows,
+    selectType,
+    onSelect,
+    expandable,
+    isSummary,
+    summaryDataSource: newSummaryDataSource,
+    summaryPosition,
+    removeSummary,
+    searchParams: defaultSearchParams,
+    setSearchParams: defaultSetSearchParams,
     ...restProps
   } = props;
   const [columns, setColumns] = useState<CommonTableProps['columns']>([]);
-  const [searchParams, setSearchParams] = useState<RequestParams>();
+  const [currentSearchParams, setCurrentSearchParams] = useState<RequestParams>();
   const [sorter, setSorter] = useState<RequestSorter>({
     order: undefined,
     sorter: undefined,
   });
   const [pagination, setPagination] = useState<PaginationProps>(defaultPagination);
 
+  const searchParams = defaultSetSearchParams ? defaultSearchParams : currentSearchParams;
+  const setSearchParams = defaultSetSearchParams ? defaultSetSearchParams : setCurrentSearchParams;
+
   // latest state
   const newSearchParams = useLatest<RequestParams>(searchParams);
   const newSorter = useLatest<RequestSorter>(sorter);
   const newPagination = useLatest<PaginationProps>(pagination);
+  const newParams = useLatest<any>(params);
   //#endregion
 
   useMount(() => {
-    setSearchParams((p) => ({ ...p, ...defaultParams }));
-    initRequest && loadData();
+    setSearchParams((p) => ({ ...p, ...defaultParams, ...newParams.current }));
+    if (initRequest) {
+      loadData();
+    } else {
+      handleColumns();
+    }
   });
 
   //#region
-  const [{ value: data = [], loading }, fetchData] = useAsyncFn<
+  const [{ value: tableResult = [[], []], loading }, fetchData] = useAsyncFn<
     (
       searchParams: RequestParams,
       pagination: { current: number; pageSize: number },
       sorter: RequestSorter,
-    ) => Promise<any[]>
+    ) => Promise<[any[], any[]]>
   >(async (searchParams, pagination, sorter) => {
     try {
       const currentSearchParams: RequestParams = {
         ...searchParams,
         page: pagination.current,
         pageSize: pagination.pageSize,
-        ...params,
       };
       const result = await request?.(currentSearchParams, sorter);
       let data: any[] = result?.data || [];
       let mergeData: any[] = [];
+
+      let summaryData: any[] = result?.summaryData || [];
+      let summaryMergeData: any[] = [];
+
       if (dataHandler) {
         mergeData = data.map((item, index) => ({
           ...item,
@@ -117,8 +158,20 @@ const CommonTable: React.ForwardRefRenderFunction<CommonTableRef, CommonTablePro
           rowKey: item?.[rowKey as 'index'],
         }));
       }
+      if (summaryDataHandler) {
+        summaryMergeData = summaryData.map((item, index) => ({
+          ...item,
+          index,
+          rowKey: item?.[rowKey as 'index'],
+        }));
+      }
+
       const resultData = dataHandler ? dataHandler(mergeData, data) || [] : result?.data || [];
       const total = result?.total || data?.length || 0;
+
+      const summaryResultData = summaryDataHandler
+        ? summaryDataHandler(summaryMergeData, summaryData) || []
+        : result?.summaryData || [];
 
       setSearchParams(currentSearchParams);
       setPagination((p) => ({
@@ -127,21 +180,29 @@ const CommonTable: React.ForwardRefRenderFunction<CommonTableRef, CommonTablePro
       }));
 
       if (result?.success) {
-        return resultData;
+        return [resultData, summaryResultData];
       } else {
-        return [];
+        return [[], []];
       }
     } catch (error) {
       console.error(error);
-      return [];
+      return [[], []];
     }
   }, []);
+
+  const data = useMemo(() => {
+    return tableResult?.[0] || [];
+  }, [tableResult]);
+
+  const summaryDataSource = useMemo(() => {
+    return tableResult?.[1] || [];
+  }, [tableResult]);
   //#endregion
 
   //#region
   const loadData = async () => {
     fetchData(
-      newSearchParams.current,
+      { ...newSearchParams.current, ...newParams.current },
       { current: pagination.current, pageSize: pagination.pageSize },
       newSorter.current,
     );
@@ -149,7 +210,28 @@ const CommonTable: React.ForwardRefRenderFunction<CommonTableRef, CommonTablePro
   };
 
   const handleColumns = () => {
-    setColumns(formatColumn(defaultColumns));
+    const columns: IColumnsType[number] = {
+      title: '操作',
+      dataIndex: 'operation',
+      align: 'center',
+      fixed: 'right',
+      width: itemButtonWidth,
+      useSummary: () => <CustomTooltip.Empty />,
+      render: (text, record, index) => {
+        let itemButtons = Array.isArray(itemButton)
+          ? itemButton || []
+          : itemButton(text, record, index) || [];
+
+        return (
+          <AccessBtn
+            emptyText={<CustomTooltip.Empty />}
+            btnList={itemButtons}
+            accessCollection={accessCollection}
+          />
+        );
+      },
+    };
+    setColumns(formatColumn([...defaultColumns, columns]));
   };
 
   const handleTableOnChange: TableProps<any>['onChange'] = (
@@ -172,31 +254,147 @@ const CommonTable: React.ForwardRefRenderFunction<CommonTableRef, CommonTablePro
       { order, sorter: sort },
     );
   };
+
+  const renderSummary = (currentData: any[], columns: any[]) => {
+    type IColumnsItemType = IColumnsType extends (infer U)[] ? U : any[];
+    let newColumns = formatColumn(_.flattenDeep(columns)) as IColumnsType;
+    let defaultIndex = 0;
+
+    if (onSelect) {
+      newColumns.unshift({} as any);
+      defaultIndex++;
+    }
+
+    if (expandable?.onExpand) {
+      newColumns.unshift({} as any);
+      defaultIndex++;
+    }
+
+    const renderCell = (item: IColumnsItemType, index: number, currentItemData: any) => {
+      const textAlign = item.align ? item.align : 'center';
+      const _renderSummaryCell = (
+        index: number,
+        content: React.ReactNode,
+        align: 'left' | 'right' | 'center' = 'left',
+      ) => {
+        return (
+          <Table.Summary.Cell key={index} index={index}>
+            <div style={{ textAlign: align }}>{content}</div>
+          </Table.Summary.Cell>
+        );
+      };
+      if (index == defaultIndex) {
+        const content = item.useSummary ? item.useSummary('合计', currentItemData) : '合计';
+        return _renderSummaryCell(defaultIndex, content, 'center');
+      }
+      if (
+        removeSummary &&
+        removeSummary?.length != 0 &&
+        removeSummary?.includes(item?.dataIndex as any)
+      ) {
+        return _renderSummaryCell(index, <CustomTooltip.Empty />, textAlign as any);
+      }
+      const text = currentItemData?.[item?.dataIndex as any];
+      let content =
+        text != '合计' ? (item.render ? item?.render(text, currentItemData, index) : text) : '';
+      if (item.useSummary) content = item.useSummary(content, currentItemData);
+
+      return _renderSummaryCell(index, content ?? <CustomTooltip.Empty />, textAlign as any);
+    };
+
+    return (
+      <Table.Summary fixed={summaryPosition}>
+        {(currentData || []).map((ele, index) => (
+          <Table.Summary.Row key={index}>
+            {newColumns.map((item, index) => renderCell(item, index, ele))}
+          </Table.Summary.Row>
+        ))}
+      </Table.Summary>
+    );
+  };
+
+  const handleOnSelectChange = (selectedRowKeys: any[], selectedRows: any[]) => {
+    if (onSelect) {
+      onSelect(selectedRowKeys, selectedRows);
+    }
+  };
+
   //#endregion
 
   useImperativeHandle(ref, () => ({
-    handleRefreshPage: () =>
-      fetchData(
-        newSearchParams.current,
-        { current: newPagination.current.current, pageSize: newPagination.current.pageSize },
-        newSorter.current,
-      ),
+    handleRefreshPage: async (customFn) => {
+      const newFn = () => {
+        return customFn(
+          { ...newSearchParams.current, ...newParams.current },
+          { current: newPagination.current.current, pageSize: newPagination.current.pageSize },
+          newSorter.current,
+        );
+      };
+      return await fetchData(...newFn());
+    },
+    getSearchParams: () => newSearchParams.current,
+    getPagination: () => newPagination.current || {},
+    getSorter: () => (newSorter.current || {}) as RequestSorter,
+    getDataSource: () => [data, summaryDataSource],
   }));
+
+  const selectOptions = onSelect
+    ? {
+        type: selectType === 'radio' ? ('radio' as const) : ('checkbox' as const),
+        selectedRowKeys,
+        columnWidth: 40,
+        onChange: handleOnSelectChange,
+        ...rowSelection,
+      }
+    : null;
 
   return (
     <div className={wrapperClassName} style={style}>
       <Spin spinning={defaultLoading || loading}>
-        <Table
-          rowKey={rowKey}
-          className={className}
-          size={size}
-          showSorterTooltip={showSorterTooltip}
-          columns={columns}
-          dataSource={props?.request ? data : dataSource}
-          pagination={p.pagination === false ? false : pagination}
-          onChange={handleTableOnChange}
-          {...restProps}
-        />
+        <Space size={8} direction="vertical">
+          <Flex gap="middle" justify="space-between" wrap align="center">
+            <AccessBtn btnList={buttonLeft} accessCollection={accessCollection} />
+            <AccessBtn btnList={buttonRight} accessCollection={accessCollection} />
+          </Flex>
+          <Table
+            rowKey={rowKey}
+            className={className}
+            size={size}
+            showSorterTooltip={showSorterTooltip}
+            columns={columns}
+            dataSource={props?.request ? data : dataSource}
+            pagination={p.pagination === false ? false : pagination}
+            onChange={handleTableOnChange}
+            virtual={isVirtual}
+            rowSelection={selectOptions}
+            summary={() =>
+              isSummary && (newSummaryDataSource || summaryDataSource)
+                ? renderSummary(
+                    newSummaryDataSource?.length != 0 ? newSummaryDataSource : summaryDataSource,
+                    columns,
+                  )
+                : null
+            }
+            bordered
+            locale={{
+              emptyText: (
+                <Empty
+                  description={'暂无数据'}
+                  style={{
+                    color: '#b3b8c2',
+                    fontSize: 12,
+                    height: 500,
+                    display: 'grid',
+                    placeContent: 'center',
+                  }}
+                />
+              ),
+            }}
+            expandable={expandable}
+            {...restProps}
+          />
+          {children}
+        </Space>
       </Spin>
     </div>
   );

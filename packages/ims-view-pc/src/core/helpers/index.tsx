@@ -1,6 +1,6 @@
 import { Form } from 'antd';
 import dayjs from 'dayjs';
-import { Ellipsis, Search } from 'ims-view-pc';
+import { CustomTooltip, Ellipsis, Search } from 'ims-view-pc';
 import _ from 'lodash';
 import React from 'react';
 import { FieldCompType } from '../../type/form';
@@ -166,18 +166,19 @@ export function formatColumn(columns: any[]) {
         ...defaultOptions,
         ...item,
       };
+      const emptyText = <CustomTooltip.Empty />;
 
       if (!item.render) {
         item.render = (newText: any) => {
           let text = newText;
-          return _.isNil(text) ? '--' : text;
+          return _.isNil(text) ? emptyText : text;
         };
 
         if (item.dict) {
           item.render = (newText: any) => {
             let text = newText;
             text = getDictMap(item.dict)[text];
-            return _.isNil(text) ? '--' : text;
+            return _.isNil(text) ? emptyText : text;
           };
         }
 
@@ -199,11 +200,11 @@ export function formatColumn(columns: any[]) {
             isShowTitle: false,
           };
           item.render = (text: any) => {
-            if (_.isNil(text)) return '--';
+            if (_.isNil(text)) return emptyText;
             let newText = text;
             if (item.dict) {
               const dictText = getDictMap(item.dict)[text];
-              newText = _.isNil(dictText) ? '--' : dictText;
+              newText = _.isNil(dictText) ? emptyText : dictText;
             }
             if (item.formatTime) newText = formatTime(options, text);
             if (item.formatPercent) newText = formatPercent(text);
