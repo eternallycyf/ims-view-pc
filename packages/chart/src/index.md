@@ -22,7 +22,7 @@ import { BaseChart, PieChart, SunburstChart, StackChart, ScatterChart } from '@i
 
 ## 组件
 
-### [BaseChart 基础图表](https://www.ims-view.site/charts/base-chart)
+### [BaseChart-基础图表](https://www.ims-view.site/charts/base-chart)
 
 ### [PieChart 饼图](https://www.ims-view.site/charts/pie-chart)
 
