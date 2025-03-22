@@ -7,6 +7,7 @@ interface IHandle {
   ref: echarts.ECharts;
 }
 
+// TODO
 const ReactEChart: React.ForwardRefRenderFunction<IHandle, EChartsReactProps> = (
   props,
   echartsRef,
