@@ -1,5 +1,24 @@
 # Changelog
 
+### [Version&nbsp;1.75.1](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.75.0...ims-view-pc@1.75.1)
+
+<sup>Released on **2025-05-14**</sup>
+
+#### 🐛 修复
+
+- **ims-view-pc**: Radio use theme color.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- **ims-view-pc**: Radio use theme color ([b1edee0](https://github.com/eternallycyf/ims-view-pc/commit/b1edee0))
+
+</details>
+
 ## [Version&nbsp;1.75.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.74.4...ims-view-pc@1.75.0)
 
 <sup>Released on **2025-02-15**</sup>
