@@ -1,4 +1,4 @@
-import { Form, InputNumber } from 'antd';
+import { ConfigProvider, Form, InputNumber } from 'antd';
 import { CommonSearch, CommonTable, ExportButton, useBaseComponent } from 'ims-view-pc';
 import { useState } from 'react';
 import { columns } from './config/columns';
@@ -36,6 +36,17 @@ const Demo = () => {
 
   return (
     <div>
+      {/* <ConfigProvider
+        theme={{
+          cssVar: true,
+          token: {
+            // Seed Token，影响范围大
+            colorPrimary: '#00b96b',
+          },
+        }}
+        getPopupContainer={() => document.querySelector('#root')}
+      > */}
+      {/* <div style={{ width: 300 }}> */}
       <CommonSearch<SearchesValues, RestParams>
         formList={formList}
         onSearch={handleSearch}
@@ -53,8 +64,9 @@ const Demo = () => {
         defaultPageSize={10}
         searchParams={searchParams}
         setSearchParams={setSearchParams}
+        scroll={{ x: 'auto', y: 300 }}
         // isVirtual
-        // scroll={{x:1000,y:300}}
+        // scroll={{ x: 'auto', y: 300 }}
         // bordered={false}
         selectType="checkbox"
         onSelect={handleSelect}
@@ -73,6 +85,7 @@ const Demo = () => {
             return true;
           },
           onExpand: handleExpand,
+          columnWidth: 40,
         }}
         accessCollection={['link', 'delete', 'group', 'custom']}
         selectedRows={selectedRows}
@@ -204,7 +217,11 @@ const Demo = () => {
         request={(searchParams, sorter) => {
           return new Promise((resolve) => {
             const params = new URLSearchParams(
-              Object.entries({ ...sorter, ...searchParams, results: searchParams.pageSize } as any),
+              Object.entries({
+                ...sorter,
+                ...searchParams,
+                results: searchParams.pageSize,
+              } as any),
             ).toString();
             fetch(`https://randomuser.me/api?${params}`)
               .then((res) => res.json())
@@ -219,6 +236,8 @@ const Demo = () => {
           });
         }}
       />
+      {/* </div> */}
+      {/* </ConfigProvider> */}
     </div>
   );
 };
