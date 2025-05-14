@@ -1,5 +1,16 @@
 # Changelog
 
+### [Version&nbsp;1.75.2](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.75.1...ims-view-pc@1.75.2)
+
+<sup>Released on **2025-05-14**</sup>
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+</details>
+
 ### [Version&nbsp;1.75.1](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.75.0...ims-view-pc@1.75.1)
 
 <sup>Released on **2025-05-14**</sup>
