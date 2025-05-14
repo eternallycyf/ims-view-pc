@@ -55,6 +55,7 @@ const Demo = () => {
         setSearchParams={setSearchParams}
         // isVirtual
         // scroll={{x:1000,y:300}}
+        // bordered={false}
         selectType="checkbox"
         onSelect={handleSelect}
         pagination={{ defaultPageSize: 30 }}

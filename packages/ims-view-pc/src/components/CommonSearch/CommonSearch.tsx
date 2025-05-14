@@ -350,6 +350,7 @@ const CommonSearch: React.ForwardRefRenderFunction<CommonSearchHandle, CommonSea
             '--colorPrimaryHover': variables.colorPrimaryHover,
             '--colorPrimaryActive': variables.colorPrimaryActive,
             '--itemBottomHeight': String(itemBottomHeight),
+            '--colorBgPrimary': variables.colorPrimaryBg,
           }}
         >
           <Form

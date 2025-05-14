@@ -25,3 +25,5 @@ demo:
 ### context
 
 ## FAQ
+
+### 1.`isVirtual` 开启时需要 `bordered={false}`
