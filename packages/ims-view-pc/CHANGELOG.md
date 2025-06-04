@@ -1,5 +1,24 @@
 # Changelog
 
+### [Version&nbsp;1.75.3](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.75.2...ims-view-pc@1.75.3)
+
+<sup>Released on **2025-06-04**</sup>
+
+#### 🐛 修复
+
+- CommonTable empty operate column.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- CommonTable empty operate column ([8680266](https://github.com/eternallycyf/ims-view-pc/commit/8680266))
+
+</details>
+
 ### [Version&nbsp;1.75.2](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.75.1...ims-view-pc@1.75.2)
 
 <sup>Released on **2025-05-14**</sup>
