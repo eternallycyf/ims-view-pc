@@ -47,7 +47,7 @@ const getDefaultProps = (
   },
   accessCollection: p?.accessCollection || [],
   itemButtonWidth: p?.itemButtonWidth ?? 100,
-  itemButton: p?.itemButton || [],
+  itemButton: p?.itemButton,
   buttonLeft: p?.buttonLeft || [],
   buttonRight: p?.buttonRight || [],
   rowKey: p?.rowKey ?? 'index',
@@ -210,28 +210,30 @@ const CommonTable: React.ForwardRefRenderFunction<CommonTableRef, CommonTablePro
   };
 
   const handleColumns = () => {
-    const columns: IColumnsType[number] = {
-      title: '操作',
-      dataIndex: 'operation',
-      align: 'center',
-      fixed: 'right',
-      width: itemButtonWidth,
-      useSummary: () => <CustomTooltip.Empty />,
-      render: (text, record, index) => {
-        let itemButtons = Array.isArray(itemButton)
-          ? itemButton || []
-          : itemButton(text, record, index) || [];
+    const columns: IColumnsType = [
+      {
+        title: '操作',
+        dataIndex: 'operation',
+        align: 'center',
+        fixed: 'right',
+        width: itemButtonWidth,
+        useSummary: () => <CustomTooltip.Empty />,
+        render: (text, record, index) => {
+          let itemButtons = Array.isArray(itemButton)
+            ? itemButton || []
+            : itemButton(text, record, index) || [];
 
-        return (
-          <AccessBtn
-            emptyText={<CustomTooltip.Empty />}
-            btnList={itemButtons}
-            accessCollection={accessCollection}
-          />
-        );
+          return (
+            <AccessBtn
+              emptyText={<CustomTooltip.Empty />}
+              btnList={itemButtons}
+              accessCollection={accessCollection}
+            />
+          );
+        },
       },
-    };
-    setColumns(formatColumn([...defaultColumns, columns]));
+    ];
+    setColumns(formatColumn([...defaultColumns, ...(itemButton === null ? [] : columns)]));
   };
 
   const handleTableOnChange: TableProps<any>['onChange'] = (
