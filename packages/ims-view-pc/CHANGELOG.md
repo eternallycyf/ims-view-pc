@@ -1,5 +1,24 @@
 # Changelog
 
+## [Version&nbsp;1.76.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.75.3...ims-view-pc@1.76.0)
+
+<sup>Released on **2025-07-05**</sup>
+
+#### ✨ 新特性
+
+- **ims-view-pc**: Add validate.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **ims-view-pc**: Add validate ([7c508e9](https://github.com/eternallycyf/ims-view-pc/commit/7c508e9))
+
+</details>
+
 ### [Version&nbsp;1.75.3](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.75.2...ims-view-pc@1.75.3)
 
 <sup>Released on **2025-06-04**</sup>
