@@ -45,11 +45,11 @@ export default class FormRules {
     let message: string;
     let prefix = type ? `:name必须是${type}` : '';
     if (existMax && existMin) {
-      message = `${prefix} ${unit} 在:min到:max之间`;
+      message = `${prefix} ${unit} 必须在:min到:max之间`;
     } else if (existMax) {
-      message = `${prefix} ${unit} 小于等于:max`;
+      message = `${prefix} ${unit} 必须小于等于:max`;
     } else if (existMin) {
-      message = `${prefix} ${unit} 大于等于:min`;
+      message = `${prefix} ${unit} 必须大于等于:min`;
     } else {
       message = `${prefix}`;
     }
