@@ -1,5 +1,32 @@
 # Changelog
 
+### [Version&nbsp;1.76.1](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.76.0...ims-view-pc@1.76.1)
+
+<sup>Released on **2025-08-02**</sup>
+
+#### 🐛 修复
+
+- (ims-view-pc):fileUpload demo use proxy.
+
+#### 📝 文档
+
+- Update docs.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- (ims-view-pc):fileUpload demo use proxy ([5d16361](https://github.com/eternallycyf/ims-view-pc/commit/5d16361))
+
+#### Documentation
+
+- Update docs ([c71fb75](https://github.com/eternallycyf/ims-view-pc/commit/c71fb75))
+
+</details>
+
 ## [Version&nbsp;1.76.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.75.3...ims-view-pc@1.76.0)
 
 <sup>Released on **2025-07-05**</sup>
