@@ -25,7 +25,7 @@ const FileUpload: React.FC<FileUploadProps> = (props) => {
     maxCount = null,
   } = props;
   const { headerItemProps = {}, extraRecord } = config || {};
-  const actionUrl = defaultActionUrl || `flow/upload`;
+  const actionUrl = defaultActionUrl || `/flow/upload`;
   const fileKeys = {
     fileName: defaultFileKeys?.fileName || 'fileName',
     fileId: defaultFileKeys?.fileId || 'id',

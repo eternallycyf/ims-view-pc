@@ -50,7 +50,10 @@ const Detail: FC<FileUploadDetailProps> = (props) => {
   };
 
   const handlePreview = async (item: Attachment) => {
-    const result: any = await getFileBlob(item?.url, item);
+    const result: any = await getFileBlob(item?.url, {
+      fileName: item?.[fileKeys?.fileName],
+      fileId: item?.[fileKeys?.fileId],
+    });
 
     if (isImg(item?.[fileKeys?.fileName])) {
       getBase64(result, (base64Url) => {
@@ -98,21 +101,29 @@ const Detail: FC<FileUploadDetailProps> = (props) => {
 
     return (
       <div className="DetailCard">
-        <Row justify="space-between" gutter={16} align="middle" wrap={false}>
-          {isLoading ? (
-            <Spin size="small" />
-          ) : (
-            <Space align="center">
-              <FileImage fileName={fileName} className="primary-color" />
-              <CustomTooltip rows={1} content={fileName} />
-            </Space>
-          )}
+        <Row justify="space-between" gutter={8} align="middle" wrap={false}>
+          <Col style={{ flex: 1 }}>
+            {isLoading ? (
+              <Spin size="small" />
+            ) : (
+              <Row gutter={8} justify="start" align="middle" style={{ width: '100%' }}>
+                <Col style={{ minWidth: 15 }}>
+                  <FileImage fileName={fileName} className="primary-color" />
+                </Col>
+                <Col style={{ flex: 1 }}>
+                  <CustomTooltip rows={1} content={fileName} />
+                </Col>
+              </Row>
+            )}
+          </Col>
 
-          <div style={{ marginLeft: 10 }}>
+          <Col style={{ minWidth: 120 }}>
             <AccessBtn
               btnList={[
                 {
-                  element: (
+                  element: isLoading ? (
+                    <Spin size="small" spinning />
+                  ) : (
                     <Tooltip title="查看">
                       <EyeOutlined
                         onClick={() => handlePreview(item)}
@@ -140,7 +151,9 @@ const Detail: FC<FileUploadDetailProps> = (props) => {
                   visible: () => item?.[fileKeys?.fileId] && !isDetail,
                 },
                 {
-                  element: (
+                  element: isLoading ? (
+                    <Spin size="small" spinning />
+                  ) : (
                     <Tooltip title="下载">
                       <DownloadOutlined
                         className="primary-color"
@@ -157,7 +170,7 @@ const Detail: FC<FileUploadDetailProps> = (props) => {
                 },
               ]}
             />
-          </div>
+          </Col>
         </Row>
         {!isDetail && (
           <Progress

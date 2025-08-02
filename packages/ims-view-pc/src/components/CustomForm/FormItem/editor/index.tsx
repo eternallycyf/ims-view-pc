@@ -103,7 +103,7 @@ const MyEditor = React.forwardRef<any, IEditorProps>((props, ref) => {
             mode="default"
             style={{ borderBottom: '1px solid #ccc' }}
           />
-          <div className="content">
+          <div className="editor-wrapper">
             <div className="editor-container">
               <div className="title-container">
                 <input placeholder="Page title..."></input>

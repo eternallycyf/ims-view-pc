@@ -8,6 +8,11 @@ interface IFormValues {
   customFile?: Attachment[];
 }
 
+const isProd = process.env.NODE_ENV === 'production';
+const baseUrl = isProd
+  ? 'https://ims-view-pc-eternallycyfs-projects.vercel.app'
+  : 'http://localhost:8000/ims-view-pc';
+
 const initFileList: Attachment[] = [
   {
     fileName: 'origin.png',
@@ -16,7 +21,7 @@ const initFileList: Attachment[] = [
     percent: 100,
     fileId: '1',
     uploadDateTime: '2023-04-07T07:06:05.000Z',
-    url: 'https://ims-view-pc-eternallycyfs-projects.vercel.app/images/origin.png',
+    url: `${baseUrl}/images/origin.png`,
   },
   {
     fileName: 'word.docx',
@@ -24,7 +29,7 @@ const initFileList: Attachment[] = [
     status: 'done',
     percent: 100,
     fileId: 'b6bdc21f-6d82-47ed-b329-6d47af66e9af',
-    url: 'https://ims-view-pc-eternallycyfs-projects.vercel.app/word.docx',
+    url: `${baseUrl}/word.docx`,
   },
   {
     fileName: '1.json',
@@ -32,7 +37,7 @@ const initFileList: Attachment[] = [
     status: 'done',
     percent: 100,
     fileId: '14a57c3a-0864-409e-ab3b-3e5510d9c8dc',
-    url: 'https://ims-view-pc-eternallycyfs-projects.vercel.app/1.json',
+    url: `${baseUrl}/1.json`,
   },
   {
     fileName: 'excel.xlsx',
@@ -40,7 +45,7 @@ const initFileList: Attachment[] = [
     status: 'done',
     percent: 100,
     fileId: 'excelxlsx',
-    url: 'https://ims-view-pc-eternallycyfs-projects.vercel.app/excel.xlsx',
+    url: `${baseUrl}/excel.xlsx`,
   },
   {
     fileName: 'pdf.pdf',
@@ -48,57 +53,12 @@ const initFileList: Attachment[] = [
     status: 'done',
     percent: 100,
     fileId: 'pdf',
-    url: 'https://ims-view-pc-eternallycyfs-projects.vercel.app/pdf.pdf',
+    url: `${baseUrl}/pdf.pdf`,
   },
 ];
 
 const App: React.FC = () => {
   const [form] = Form.useForm<IFormValues>();
-
-  const customRequest: UploadProps['customRequest'] = async ({
-    data,
-    file,
-    filename,
-    onProgress,
-    onSuccess,
-  }) => {
-    const formData = new FormData();
-    if (data) {
-      Object.keys(data).forEach((key) => {
-        formData.append(key, data[key] as string);
-      });
-    }
-    formData.append(filename, file);
-
-    onProgress({ percent: 0 }, file);
-
-    setTimeout(() => {
-      onProgress({ percent: 100 }, file);
-
-      const uuid = random.getUUID();
-
-      onSuccess(
-        {
-          code: 200,
-          message: '上传成功',
-          success: true,
-          data: {
-            uploadDateTime: '2023-04-07T07:06:05.000Z',
-            fileId: uuid,
-            fileName: `${uuid}.png`,
-            url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-          },
-        },
-        file,
-      );
-    }, 1000);
-
-    return {
-      abort() {
-        console.log('upload progress is aborted.');
-      },
-    };
-  };
 
   return (
     <>
@@ -128,9 +88,6 @@ const App: React.FC = () => {
                   <FileUpload
                     value={props?.value}
                     onChange={props?.onChange}
-                    uploadProps={{
-                      customRequest: customRequest,
-                    }}
                     colNumber={12}
                     maxCount={5}
                     config={{
