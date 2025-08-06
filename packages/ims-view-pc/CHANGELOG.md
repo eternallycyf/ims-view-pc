@@ -1,5 +1,24 @@
 # Changelog
 
+## [Version&nbsp;1.77.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.76.1...ims-view-pc@1.77.0)
+
+<sup>Released on **2025-08-06**</sup>
+
+#### ✨ 新特性
+
+- **ims-view-pc**: Update card demo.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **ims-view-pc**: Update card demo ([378659b](https://github.com/eternallycyf/ims-view-pc/commit/378659b))
+
+</details>
+
 ### [Version&nbsp;1.76.1](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.76.0...ims-view-pc@1.76.1)
 
 <sup>Released on **2025-08-02**</sup>
