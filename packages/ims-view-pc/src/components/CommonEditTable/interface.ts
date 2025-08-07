@@ -10,6 +10,7 @@ import {
   Search,
 } from 'ims-view-pc';
 import React, { type RefObject } from 'react';
+import type { ItemProps } from '../../type/form/base';
 import './index.less';
 import { IHandleExport } from './utils';
 
@@ -141,7 +142,7 @@ export type ICommonEditTableColumnsType<
   > & {
     rules?: FormItemProps<Values>['rules'];
     controlProps?: Partial<Search['controlProps']>;
-    itemProps?: Omit<Search<FormValues, Rest>['itemProps'], 'shouldUpdate' | 'next'> & {
+    itemProps?: Omit<ItemProps<FormValues, Rest, unknown>, 'shouldUpdate' | 'next'> & {
       shouldUpdate?: ShouldUpdate<FormValues>;
       next?: IUpdateControlProps<Values, Rest, unknown, FormValues>['itemProps']['next'];
     };
