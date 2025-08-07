@@ -1,5 +1,24 @@
 # Changelog
 
+### [Version&nbsp;1.77.1](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.77.0...ims-view-pc@1.77.1)
+
+<sup>Released on **2025-08-07**</sup>
+
+#### 🐛 修复
+
+- CommonEditTable type error.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- CommonEditTable type error ([9e8bbbb](https://github.com/eternallycyf/ims-view-pc/commit/9e8bbbb))
+
+</details>
+
 ## [Version&nbsp;1.77.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.76.1...ims-view-pc@1.77.0)
 
 <sup>Released on **2025-08-06**</sup>
