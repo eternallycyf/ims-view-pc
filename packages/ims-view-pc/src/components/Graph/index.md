@@ -7,6 +7,30 @@ group:
   order: 8
 ---
 
+:::info{title=可单独使用}
+[ims-graph](https://www.npmjs.com/package/ims-graph)
+:::
+
+## 安装方式
+
+:::code-group
+
+```bash [npm]
+npm install -D ims-graph
+```
+
+```bash [yarn]
+yarn add -D ims-graph
+```
+
+```bash [pnpm]
+pnpm add -D ims-graph
+```
+
+:::
+
+## 示例
+
 <code transform="true" src='./demo/index.tsx'>GraphChart</code>
 
 ## interface
