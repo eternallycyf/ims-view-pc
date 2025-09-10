@@ -1,5 +1,33 @@
 # Changelog
 
+### [Version&nbsp;1.77.2](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.77.1...ims-view-pc@1.77.2)
+
+<sup>Released on **2025-09-10**</sup>
+
+#### 🐛 修复
+
+- **ims-view-pc**: CommonTable default use full width.
+
+#### 📝 文档
+
+- Update FileUpload docs, update graph doc.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- **ims-view-pc**: CommonTable default use full width ([c8e5d44](https://github.com/eternallycyf/ims-view-pc/commit/c8e5d44))
+
+#### Documentation
+
+- Update FileUpload docs ([cfe5209](https://github.com/eternallycyf/ims-view-pc/commit/cfe5209))
+- Update graph doc ([bc28082](https://github.com/eternallycyf/ims-view-pc/commit/bc28082))
+
+</details>
+
 ### [Version&nbsp;1.77.1](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.77.0...ims-view-pc@1.77.1)
 
 <sup>Released on **2025-08-07**</sup>
