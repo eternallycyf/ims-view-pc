@@ -19,9 +19,17 @@ a antd component plus, and more component
 [semantic-release]: https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg
 [semantic-release-repo]: https://github.com/semantic-release/semantic-release
 
-## 快速上手
+## 本地运行
 
-使用指南: ➡️ [传送门](https://ims-view.site/)
+在线地址: ➡️ [传送门](https://ims-view-pc-eternallycyfs-projects.vercel.app/)
+
+```shell
+node v20.19.0
+
+pnpm i
+
+pnpm run start
+```
 
 ## 🖥 浏览器兼容性
 
