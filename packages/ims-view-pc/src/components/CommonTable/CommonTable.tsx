@@ -353,7 +353,7 @@ const CommonTable: React.ForwardRefRenderFunction<CommonTableRef, CommonTablePro
   return (
     <div className={wrapperClassName} style={style}>
       <Spin spinning={defaultLoading || loading}>
-        <Space size={8} direction="vertical">
+        <Space size={8} direction="vertical" style={{ width: '100%' }}>
           <Flex gap="middle" justify="space-between" wrap align="center">
             <AccessBtn btnList={buttonLeft} accessCollection={accessCollection} />
             <AccessBtn btnList={buttonRight} accessCollection={accessCollection} />
