@@ -42,7 +42,7 @@ const InternalAudioPlayer: React.ForwardRefRenderFunction<unknown, AudioPlayerPr
     ...otherProps
   } = props;
 
-  const [isPlay, setIsPlay] = React.useState<boolean>();
+  const [isPlay, setIsPlay] = React.useState<boolean>(props?.autoPlay);
   const [isMuted, setIsMuted] = React.useState<boolean>();
   const [currentVolume, setCurrentVolume] = React.useState<number>(
     parseInt(String((props.volume || 0) * 100)),

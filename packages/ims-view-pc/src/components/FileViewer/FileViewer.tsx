@@ -124,11 +124,12 @@ class FilePreView extends PureComponent<any, any> {
               modalVisible: false,
             });
           }}
-          width={1200}
+          centered
+          width={fileType === 'wav' ? 400 : fileType === 'mp4' ? 'auto' : 1200}
           styles={{
             body: {
               overflow: 'scroll',
-              height: '70vh',
+              height: fileType === 'wav' ? 400 : fileType === 'mp4' ? 'auto' : '70vh',
             },
           }}
           footer={null}
@@ -141,7 +142,6 @@ class FilePreView extends PureComponent<any, any> {
             base64={base64}
             fileType={fileType}
             txtFileTypes={txtFileTypes}
-            styles={{ height: '600px' }}
           />
         </Modal>
       </>

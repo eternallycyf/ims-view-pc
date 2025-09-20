@@ -15,6 +15,24 @@ const baseUrl = isProd
 
 const initFileList: Attachment[] = [
   {
+    fileName: 'oceans.mp4',
+    id: 'rc-upload-173123-8',
+    status: 'done',
+    percent: 100,
+    fileId: '0',
+    uploadDateTime: '2023-04-07T07:06:05.000Z',
+    url: `http://vjs.zencdn.net/v/oceans.mp4`,
+  },
+  {
+    fileName: '26952087D69B79839F17040A5DC2E775.wav',
+    id: 'rc-upload-17340985852123-8',
+    status: 'done',
+    percent: 100,
+    fileId: '0',
+    uploadDateTime: '2023-04-07T07:06:05.000Z',
+    url: `//ysf.qiyukf.net/26952087D69B79839F17040A5DC2E775.wav`,
+  },
+  {
     fileName: 'origin.png',
     id: 'rc-upload-1734098585253-8',
     status: 'done',

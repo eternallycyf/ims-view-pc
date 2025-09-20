@@ -1,9 +1,11 @@
-import { Skeleton } from 'antd';
+import { Flex, Skeleton } from 'antd';
 import axios from 'axios';
 import cx from 'classnames';
 import { renderAsync } from 'docx-preview';
 import type { CSSProperties } from 'react';
 import { PureComponent } from 'react';
+import AudioPlayer from '../AudioPlayer';
+import VideoViewer from '../VideoViewer';
 import ExcelView from './ExcelPreview';
 import './index.less';
 import MarkDown from './MarkDown';
@@ -200,6 +202,39 @@ class FileView extends PureComponent<IProps, any> {
 
     if (fileType == 'xlsx') {
       return <ExcelView fileSrc={this.state?.excelData || this.props?.src} />;
+    }
+
+    if (fileType === 'wav') {
+      return (
+        <div
+          style={{
+            padding: 20,
+            height: 300,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <AudioPlayer autoPlay src={this.props?.src} title="AudioPlayer" />
+        </div>
+      );
+    }
+
+    if (fileType === 'mp4') {
+      return (
+        <VideoViewer.Video
+          poster="//ysf.qiyukf.net/rygnbxiwcgoudyqnzzpypmtxlwpixigf"
+          autoplay
+          sources={[
+            {
+              src: this.props?.src,
+              type: 'video/mp4',
+            },
+          ]}
+          download
+          downloadSrc={this.props?.src}
+        />
+      );
     }
 
     if (txtFileTypes?.includes(fileType)) {
