@@ -50,24 +50,10 @@ const Detail: FC<FileUploadDetailProps> = (props) => {
   };
 
   const handlePreview = async (item: Attachment) => {
-    const result: any = await getFileBlob(item?.url, {
+    FileViewerRef.current.controlIsShow({
+      src: item?.url,
       fileName: item?.[fileKeys?.fileName],
-      fileId: item?.[fileKeys?.fileId],
     });
-
-    if (isImg(item?.[fileKeys?.fileName])) {
-      getBase64(result, (base64Url) => {
-        FileViewerRef.current.controlIsShow({
-          base64: base64Url as any,
-          fileName: item?.[fileKeys?.fileName],
-        });
-      });
-    } else {
-      FileViewerRef.current.controlIsShow({
-        src: item?.url,
-        fileName: item?.[fileKeys?.fileName],
-      });
-    }
   };
 
   const handleDownload = (item: Attachment) => {

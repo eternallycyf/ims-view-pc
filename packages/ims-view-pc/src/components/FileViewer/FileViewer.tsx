@@ -60,14 +60,22 @@ class FilePreView extends PureComponent<any, any> {
     const isImage = fileType == 'png' || fileType == 'jpg';
 
     if (isImage) {
-      getBase64(originFileObj, (fileURL: string | ArrayBuffer | null) => {
-        this.setState({
+      if (!src) {
+        getBase64(originFileObj, (fileURL: string | ArrayBuffer | null) => {
+          this.setState({
+            src,
+            base64: fileURL,
+            imageVisible: !this.state.imageVisible,
+          });
+        });
+        return;
+      } else {
+        return this.setState({
           src,
-          base64: fileURL,
+          base64,
           imageVisible: !this.state.imageVisible,
         });
-      });
-      return;
+      }
     }
 
     if (!src) {

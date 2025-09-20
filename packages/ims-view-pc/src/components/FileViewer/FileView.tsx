@@ -12,6 +12,7 @@ interface IProps {
   styles?: CSSProperties;
   src?: string;
   base64?: string;
+  modalVisible?: boolean;
   [onherProps: string]: any;
 }
 
@@ -36,17 +37,24 @@ class FileView extends PureComponent<IProps, any> {
     super(props);
     this.state = {
       pdfSrc: '',
-      loading: false,
+      loading: true,
       text: '',
+      excelData: null,
     };
   }
   componentDidMount() {
     const { src, base64 } = this.props;
+    this.setState({
+      loading: true,
+    });
     if (src) {
       this.showPDFBySrc(src);
     } else if (base64) {
       this.showPDFByBase64(base64);
     }
+    this.setState({
+      loading: false,
+    });
   }
   componentwillUnmount() {
     URL.revokeObjectURL(this.state.pdfSrc);
@@ -57,11 +65,7 @@ class FileView extends PureComponent<IProps, any> {
     if (fileType == 'pdf') {
       try {
         this.setState({
-          loading: true,
-        });
-        this.setState({
           pdfSrc: src,
-          loading: false,
         });
       } catch (err) {}
     }
@@ -78,6 +82,12 @@ class FileView extends PureComponent<IProps, any> {
       const text = await this.readText(Buffer);
       this.setState({
         text,
+      });
+    }
+
+    if (fileType == 'excel') {
+      this.setState({
+        excelData: blob,
       });
     }
 
@@ -141,7 +151,6 @@ class FileView extends PureComponent<IProps, any> {
     const fileUrl = URL.createObjectURL(blob);
     this.setState({
       pdfSrc: fileUrl,
-      loading: false,
     });
 
     if (txtFileTypes.includes(fileType)) {
@@ -190,7 +199,7 @@ class FileView extends PureComponent<IProps, any> {
     }
 
     if (fileType == 'xlsx') {
-      return <ExcelView fileSrc={this.props?.src} />;
+      return <ExcelView fileSrc={this.state?.excelData || this.props?.src} />;
     }
 
     if (txtFileTypes?.includes(fileType)) {
