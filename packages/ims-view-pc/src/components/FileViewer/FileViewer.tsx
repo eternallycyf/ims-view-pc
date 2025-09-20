@@ -1,7 +1,6 @@
 import { Image, message, Modal } from 'antd';
 import axios from 'axios';
 import React, { PureComponent } from 'react';
-import { ExcelRenderer } from 'react-excel-renderer';
 import FileView from './FileView';
 const txtFileTypes = [
   'txt',
@@ -19,19 +18,30 @@ const txtFileTypes = [
   'log',
 ];
 
+async function getBlobData(src) {
+  const url = src;
+  const res = await axios.get(url, {
+    responseType: 'blob',
+  });
+  const blob = res.data;
+  return blob;
+}
+
+const getBase64 = (file: Blob, cb: (result: string | ArrayBuffer | null) => void) => {
+  const reader = new FileReader();
+  reader.addEventListener('load', () => cb(reader.result));
+  reader.readAsDataURL(file);
+};
+
 const fileAllTypes = ['docx', 'xlsx', 'png', 'jpg', 'pdf', ...txtFileTypes];
 class FilePreView extends PureComponent<any, any> {
-  protected pdfViewRef: React.RefObject<any> = React.createRef();
+  protected pdfViewRef: React.RefObject<InstanceType<typeof FileView>> = React.createRef();
   protected previewWrapperRef: React.RefObject<HTMLDivElement> = React.createRef();
   constructor(props: any) {
     super(props);
     this.state = {
       modalVisible: false,
       fileType: '',
-      excelData: {
-        cols: [],
-        rows: [],
-      },
       imageVisible: false,
     };
   }
@@ -50,28 +60,27 @@ class FilePreView extends PureComponent<any, any> {
     const isImage = fileType == 'png' || fileType == 'jpg';
 
     if (isImage) {
-      return this.setState({
-        src,
-        base64,
-        imageVisible: !this.state.imageVisible,
-      });
-    }
-
-    if (fileType == 'xlsx') {
-      const url = src;
-      const res = await axios.get(url, {
-        responseType: 'blob',
-      });
-
-      const blob = res.data;
-      ExcelRenderer(blob, (err: Error, resp: any) => {
+      getBase64(originFileObj, (fileURL: string | ArrayBuffer | null) => {
         this.setState({
-          excelData: {
-            cols: resp.cols,
-            rows: resp.rows,
-          },
+          src,
+          base64: fileURL,
+          imageVisible: !this.state.imageVisible,
         });
       });
+      return;
+    }
+
+    if (!src) {
+      const blob = new Blob([originFileObj], { type: originFileObj.type });
+      const url = URL.createObjectURL(blob);
+
+      this.setState({
+        modalVisible: !modalVisible,
+        src: url,
+        base64,
+        fileType,
+      });
+      return;
     }
 
     this.setState({
@@ -83,7 +92,7 @@ class FilePreView extends PureComponent<any, any> {
   };
 
   render() {
-    const { modalVisible, src, base64, fileType, excelData, imageVisible } = this.state;
+    const { modalVisible, src, base64, fileType, imageVisible } = this.state;
 
     return (
       <>
@@ -123,7 +132,6 @@ class FilePreView extends PureComponent<any, any> {
             src={src}
             base64={base64}
             fileType={fileType}
-            excelData={excelData}
             txtFileTypes={txtFileTypes}
             styles={{ height: '600px' }}
           />

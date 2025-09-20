@@ -8,28 +8,14 @@ const normFile = (e: any) => {
   return e?.fileList;
 };
 
-const getBase64 = (file: Blob, cb: (result: string | ArrayBuffer | null) => void) => {
-  const reader = new FileReader();
-  reader.addEventListener('load', () => cb(reader.result));
-  reader.readAsDataURL(file);
-};
-
 const PdfPage = () => {
   const pdfRef = useRef<any>(null!);
   const [form] = Form.useForm();
 
   const handlePreviewPdf = ({ originFileObj }: any) => {
-    // 1.base64方式预览
-    getBase64(originFileObj, (fileURL: string | ArrayBuffer | null) => {
-      pdfRef.current.controlIsShow({
-        base64: fileURL,
-        originFileObj,
-      });
+    pdfRef.current.controlIsShow({
+      originFileObj,
     });
-    // 2.src方式预览 通过后端接口获取src路径
-    // pdfRef.current.controlIsShow({
-    //   src: "http://marsgis.cn/doc/study-gis.pdf",
-    // });
   };
 
   return (

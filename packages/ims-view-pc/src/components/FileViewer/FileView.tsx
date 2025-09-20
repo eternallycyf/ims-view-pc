@@ -1,10 +1,10 @@
-import { Image, Skeleton } from 'antd';
+import { Skeleton } from 'antd';
 import axios from 'axios';
 import cx from 'classnames';
 import { renderAsync } from 'docx-preview';
 import type { CSSProperties } from 'react';
 import { PureComponent } from 'react';
-import { OutTable } from 'react-excel-renderer';
+import ExcelView from './ExcelPreview';
 import './index.less';
 import MarkDown from './MarkDown';
 
@@ -130,7 +130,7 @@ class FileView extends PureComponent<IProps, any> {
       const reader = new FileReader();
       reader.onload = (loadEvent: any) => resolve(loadEvent.target.result);
       reader.onerror = (e) => reject(e);
-      reader.readAsText(new Blob([buffer]), 'utf-8');
+      reader.readAsText(new Blob([buffer as any]), 'utf-8');
     });
   };
 
@@ -177,7 +177,7 @@ class FileView extends PureComponent<IProps, any> {
   };
 
   render() {
-    const { styles, className, fileType, txtFileTypes, excelData } = this.props;
+    const { styles, className, fileType, txtFileTypes } = this.props;
     const { loading, pdfSrc, text } = this.state;
     const src = `${pdfSrc}`;
 
@@ -190,14 +190,7 @@ class FileView extends PureComponent<IProps, any> {
     }
 
     if (fileType == 'xlsx') {
-      return (
-        <OutTable
-          data={excelData.rows}
-          columns={excelData.cols}
-          tableClassName="ExcelTable2007"
-          tableHeaderRowClass="heading"
-        />
-      );
+      return <ExcelView fileSrc={this.props?.src} />;
     }
 
     if (txtFileTypes?.includes(fileType)) {
