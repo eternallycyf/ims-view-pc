@@ -1,5 +1,24 @@
 # Changelog
 
+### [Version&nbsp;1.77.3](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.77.2...ims-view-pc@1.77.3)
+
+<sup>Released on **2025-09-20**</sup>
+
+#### 🐛 修复
+
+- Update FileView component.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- Update FileView component ([4adaf09](https://github.com/eternallycyf/ims-view-pc/commit/4adaf09))
+
+</details>
+
 ### [Version&nbsp;1.77.2](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.77.1...ims-view-pc@1.77.2)
 
 <sup>Released on **2025-09-10**</sup>
