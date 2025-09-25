@@ -1,5 +1,24 @@
 # Changelog
 
+### [Version&nbsp;1.78.1](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.78.0...ims-view-pc@1.78.1)
+
+<sup>Released on **2025-09-25**</sup>
+
+#### 🐛 修复
+
+- **ims-view-pc**: Iconfont build error in esm.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- **ims-view-pc**: Iconfont build error in esm ([ee9ec44](https://github.com/eternallycyf/ims-view-pc/commit/ee9ec44))
+
+</details>
+
 ## [Version&nbsp;1.78.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.77.4...ims-view-pc@1.78.0)
 
 <sup>Released on **2025-09-20**</sup>
