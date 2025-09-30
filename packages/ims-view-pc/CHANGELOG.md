@@ -1,5 +1,24 @@
 # Changelog
 
+## [Version&nbsp;1.79.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.78.1...ims-view-pc@1.79.0)
+
+<sup>Released on **2025-09-30**</sup>
+
+#### ✨ 新特性
+
+- **ims-view-pc**: Add SelectControl.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **ims-view-pc**: Add SelectControl ([978a6cd](https://github.com/eternallycyf/ims-view-pc/commit/978a6cd))
+
+</details>
+
 ### [Version&nbsp;1.78.1](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.78.0...ims-view-pc@1.78.1)
 
 <sup>Released on **2025-09-25**</sup>
