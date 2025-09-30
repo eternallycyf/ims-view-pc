@@ -7,10 +7,10 @@ import {
   IFileUploadControlProps,
   IMentionsControlProps,
   ISimpleControlProps,
-  IUpdateControlProps,
   type Attachment,
   type Next,
 } from 'ims-view-pc';
+import type { SelectControlProps } from 'ims-view-pc/components/CustomForm/interface';
 import { Search } from '.';
 
 export const FORM_TYPE_DICT = [
@@ -87,4 +87,5 @@ export type IControlProps<
   ISimpleControlProps<Values>['controlProps'] &
   ICascadeControlProps<Values>['controlProps'] &
   IMentionsControlProps<Values>['controlProps'] &
-  IFileUploadControlProps<Attachment[]>['controlProps'];
+  IFileUploadControlProps<Attachment[]>['controlProps'] &
+  SelectControlProps<Values>['controlProps'];

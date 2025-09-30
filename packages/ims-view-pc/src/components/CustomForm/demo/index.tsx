@@ -78,6 +78,7 @@ interface IRecord {
   custom: any;
   update: AudioNode;
   updateInput: string;
+  select: (typeof dict)[number]['value'];
   time: dayjs.Dayjs;
   date: dayjs.Dayjs;
   week: dayjs.Dayjs;
@@ -200,6 +201,12 @@ export default () => {
         buttonStyle: 'solid',
       },
       initialValue: 1,
+    },
+    {
+      name: 'select',
+      label: 'select',
+      type: 'select',
+      dict,
     },
     {
       name: 'updateInput',

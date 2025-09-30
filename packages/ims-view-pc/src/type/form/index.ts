@@ -33,7 +33,7 @@ export interface IBaseFormControl<Values = AnyObject, Rest = AnyObject, Extra = 
     | dayjs.Dayjs
     | [dayjs.Dayjs, dayjs.Dayjs];
   record?: AddIndexSignature<Values>;
-  dict?: Dict;
+  dict?: any;
 
   fetchConfig?: IFetchConfig<any>;
   controlProps?: IControlProps<Values, Rest, Extra>;
