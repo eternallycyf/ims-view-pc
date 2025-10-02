@@ -1,5 +1,24 @@
 # Changelog
 
+### [Version&nbsp;1.80.1](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.80.0...ims-view-pc@1.80.1)
+
+<sup>Released on **2025-10-02**</sup>
+
+#### 🐛 修复
+
+- **ims-view-pc**: FormRenderer setup use Object.freeze.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- **ims-view-pc**: FormRenderer setup use Object.freeze ([848d485](https://github.com/eternallycyf/ims-view-pc/commit/848d485))
+
+</details>
+
 ## [Version&nbsp;1.80.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.79.0...ims-view-pc@1.80.0)
 
 <sup>Released on **2025-10-02**</sup>
