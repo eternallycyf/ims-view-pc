@@ -31,7 +31,8 @@ const colorPickerPlugin: PluginFunction<
 };
 
 const CustomformRenderer = new FormRenderer<IRecord, { customParams?: '2' }, CustomFormType>();
-CustomformRenderer.setup({ plugins: [colorPickerPlugin] });
+CustomformRenderer.use(colorPickerPlugin);
+CustomformRenderer.setup({});
 
 interface Option {
   value: string;

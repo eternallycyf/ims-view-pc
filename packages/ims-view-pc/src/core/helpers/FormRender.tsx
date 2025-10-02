@@ -27,12 +27,12 @@ export class FormRenderer<
   FormRendererConfig<Values, Rest, Extra>,
   FormRendererHooks<Values, Rest, Extra>
 > {
-  hooks: FormRendererHooks<Values, Rest, Extra> = {
+  hooks: FormRendererHooks<Values, Rest, Extra> = Object.freeze({
     renderFormItem: new SyncWaterfallHook<
       [Search<Values, Rest, Extra>, (item: Search<Values, Rest, Extra>) => ReactNode],
       ReactNode
     >(['item', 'getFieldComp']),
-  };
+  });
 
   getFieldComp = getFieldComp;
 
