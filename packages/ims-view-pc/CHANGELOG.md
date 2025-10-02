@@ -1,5 +1,24 @@
 # Changelog
 
+## [Version&nbsp;1.80.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.79.0...ims-view-pc@1.80.0)
+
+<sup>Released on **2025-10-02**</sup>
+
+#### ✨ 新特性
+
+- **ims-view-pc**: Add formRender plugin.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **ims-view-pc**: Add formRender plugin ([4da0a1a](https://github.com/eternallycyf/ims-view-pc/commit/4da0a1a))
+
+</details>
+
 ## [Version&nbsp;1.79.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.78.1...ims-view-pc@1.79.0)
 
 <sup>Released on **2025-09-30**</sup>
