@@ -5,6 +5,7 @@ import _ from 'lodash';
 import React from 'react';
 import { FieldCompType } from '../../type/form';
 import { formatNumber, formatPercent, formatTime, getDictMap, renderTooltip } from './utils';
+export { FormRenderer } from './FormRender';
 
 const Simple = React.lazy(() => import('../../components/CustomForm/FormItem/simple'));
 const Editor = React.lazy(() => import('../../components/CustomForm/FormItem/editor'));

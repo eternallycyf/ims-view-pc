@@ -59,11 +59,11 @@ demo:
 ### CustomModal.FormModal
 
 ```js
-export type ICustomModalFormList<Values = AnyObject, Rest = AnyObject, Extra = unknown> = (Search<
-  Values,
-  Rest,
-  Extra,
-> & {
+export type ICustomModalFormList<
+  Values = AnyObject,
+  Rest = AnyObject,
+  Extra = FormControlType,
+> = (Search<Values, Rest, Extra> & {
   col?: number,
   children?:
     | Search<Values, Rest, Extra>
@@ -73,7 +73,7 @@ export type ICustomModalFormList<Values = AnyObject, Rest = AnyObject, Extra = u
       ) => ICustomModalFormList<Values, Rest, Extra> | false),
 })[];
 
-export interface FormModalProps<Values = AnyObject, Rest = AnyObject, Extra = unknown>
+export interface FormModalProps<Values = AnyObject, Rest = AnyObject, Extra = FormControlType>
   extends Omit<ModalProps, 'onCancel'> {
   form?: FormInstance<Values>;
   formRef?: RefObject<FormInstance<Values>>;

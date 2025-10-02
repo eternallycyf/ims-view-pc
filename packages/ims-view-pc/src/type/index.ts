@@ -1,9 +1,15 @@
 export type { Column, IColumnsType } from './column/base';
-export type { ISearchesType, IUpdateSearchesType, IUpdateSearchType, Search } from './form';
+export type {
+  FieldCompType,
+  ISearchesType,
+  IUpdateSearchType,
+  IUpdateSearchesType,
+  Search,
+} from './form';
 export type {
   Dict,
-  FormControlType,
   FORM_TYPE_DICT,
+  FormControlType,
   IBaseControlProps,
   IControlProps,
   IFetchConfig,
@@ -21,7 +27,6 @@ export type {
   GetRequired,
   IsEqual,
   IsNever,
-  isRequired,
   IsTuple,
   IsUnion,
   LiteralUnion,
@@ -35,4 +40,5 @@ export type {
   UnionToIntersection,
   ValueOf,
   WithNativeStyle,
+  isRequired,
 } from './type';

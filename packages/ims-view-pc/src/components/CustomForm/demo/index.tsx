@@ -1,8 +1,37 @@
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
-import { Button, Col, Form, Input, Row, Switch } from 'antd';
+import { Button, Col, ColorPicker, Form, Input, Row, Switch } from 'antd';
 import dayjs from 'dayjs';
-import { ISearchesType, renderFormItem } from 'ims-view-pc';
-import React, { Fragment } from 'react';
+import {
+  FormRenderer,
+  ISearchesType,
+  type FormControlType,
+  type FormRendererConfig,
+  type FormRendererHooks,
+  type PluginFunction,
+} from 'ims-view-pc';
+import { Fragment } from 'react';
+
+type CustomFormType = FormControlType | 'color';
+
+const colorPickerPlugin: PluginFunction<
+  FormRenderer<IRecord, { customParams?: '2' }, CustomFormType>,
+  FormRendererConfig<IRecord, { customParams?: '2' }, CustomFormType>,
+  FormRendererHooks<IRecord, { customParams?: '2' }, CustomFormType>
+> = (host) => {
+  host.hooks.renderFormItem.tap('ColorPicker', (item, originalRender) => {
+    if (item.type === 'color') {
+      return (
+        <Form.Item name={item.name} label={item.label}>
+          <ColorPicker />
+        </Form.Item>
+      );
+    }
+    return originalRender(item);
+  });
+};
+
+const CustomformRenderer = new FormRenderer<IRecord, { customParams?: '2' }, CustomFormType>();
+CustomformRenderer.setup({ plugins: [colorPickerPlugin] });
 
 interface Option {
   value: string;
@@ -91,11 +120,12 @@ interface IRecord {
   monthRange: dayjs.Dayjs[];
   quarterRange: dayjs.Dayjs[];
   yearRange: dayjs.Dayjs[];
+  color: any;
 }
 
 export default () => {
   const [form] = Form.useForm();
-  const formList: ISearchesType<IRecord, { customParams?: '2' }> = [
+  const formList: ISearchesType<IRecord, { customParams?: '2' }, CustomFormType> = [
     {
       name: 'cascader',
       label: 'cascader',
@@ -295,6 +325,11 @@ export default () => {
         );
       },
     },
+    {
+      name: 'color',
+      label: 'color',
+      type: 'color',
+    },
   ];
 
   return (
@@ -307,9 +342,11 @@ export default () => {
       form={form}
       onFinish={(value) => console.log(value)}
     >
-      {formList.map((item, index) => (
-        <Fragment key={index}>{renderFormItem({ ...item, form })}</Fragment>
-      ))}
+      {formList.map((item, index) => {
+        return (
+          <Fragment key={index}>{CustomformRenderer.renderFormItem({ ...item, form })}</Fragment>
+        );
+      })}
       <div>
         <Button type="primary" htmlType="submit">
           submit

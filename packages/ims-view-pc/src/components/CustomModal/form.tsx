@@ -1,13 +1,13 @@
 import type { FormInstance, FormProps, ModalProps } from 'antd';
 import { Col, Form, Modal, Row, Spin } from 'antd';
-import { AnyObject, Search, renderFormItem } from 'ims-view-pc';
+import { AnyObject, Search, renderFormItem, type FormControlType } from 'ims-view-pc';
 import React, { RefObject, useState } from 'react';
 
-export type ICustomModalFormList<Values = AnyObject, Rest = AnyObject, Extra = unknown> = (Search<
-  Values,
-  Rest,
-  Extra
-> & {
+export type ICustomModalFormList<
+  Values = AnyObject,
+  Rest = AnyObject,
+  Extra = FormControlType,
+> = (Search<Values, Rest, Extra> & {
   col?: number;
   children?:
     | Search<Values, Rest, Extra>
@@ -17,7 +17,7 @@ export type ICustomModalFormList<Values = AnyObject, Rest = AnyObject, Extra = u
       ) => ICustomModalFormList<Values, Rest, Extra> | false);
 })[];
 
-export interface FormModalProps<Values = AnyObject, Rest = AnyObject, Extra = unknown>
+export interface FormModalProps<Values = AnyObject, Rest = AnyObject, Extra = FormControlType>
   extends Omit<ModalProps, 'onCancel'> {
   form?: FormInstance<Values>;
   formRef?: RefObject<FormInstance<Values>>;
@@ -32,7 +32,9 @@ export interface FormModalProps<Values = AnyObject, Rest = AnyObject, Extra = un
   onDestroy?: Function;
 }
 
-function FormModal<T = AnyObject, R = AnyObject>(props: FormModalProps<T, R>) {
+function FormModal<T = AnyObject, R = AnyObject, Extra = FormControlType>(
+  props: FormModalProps<T, R, Extra>,
+) {
   const {
     onCancel,
     onDestroy,

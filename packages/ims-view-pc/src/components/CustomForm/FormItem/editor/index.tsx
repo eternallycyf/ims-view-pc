@@ -2,12 +2,13 @@ import { IDomEditor, IEditorConfig, IToolbarConfig, SlateNode } from '@wangedito
 import { Editor, Toolbar } from '@wangeditor/editor-for-react';
 import '@wangeditor/editor/dist/css/style.css';
 import { Flex } from 'antd';
-import { IBaseCustomFormItemProps } from 'ims-view-pc';
+import { IBaseCustomFormItemProps, type FormControlType } from 'ims-view-pc';
 import React, { FC, useEffect, useImperativeHandle, useState } from 'react';
 import './index.less';
 import { insertImg, uploadImg } from './utils';
 
-export interface IEditorProps<T = string> extends IBaseCustomFormItemProps {
+export interface IEditorProps<T = string>
+  extends IBaseCustomFormItemProps<any, any, FormControlType> {
   controlProps: {
     maxLength?: number;
     toolbarConfig?: Partial<IToolbarConfig>;

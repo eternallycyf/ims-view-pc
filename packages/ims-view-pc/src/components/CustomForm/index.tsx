@@ -1,5 +1,5 @@
 import type { DrawerProps, FormInstance, FormProps, ModalProps } from 'antd';
-import { Search } from 'ims-view-pc';
+import { Search, type FormControlType } from 'ims-view-pc';
 import React, { RefObject } from 'react';
 import { renderFormItem } from '../../core/helpers';
 import CommonForm, { renderFormList } from './CustomForm';
@@ -23,7 +23,7 @@ export type ModalType = 'modal' | 'drawer' | 'normal';
 export type CustomFormList<
   Values = Record<string, unknown>,
   Rest = Record<string, unknown>,
-  Extra = unknown,
+  Extra = FormControlType,
 > = (Search<Values, Rest, Extra> & {
   col?: number;
   children?:
@@ -43,7 +43,7 @@ export type BaseCustomFormProps<
   form?: FormInstance<Values>;
   formRef?: RefObject<FormInstance<Values>>;
 
-  formList?: CustomFormList<Values, Rest, ModalType>;
+  formList?: CustomFormList<Values, Rest>;
   initialValues?: Values;
 
   onFinish?: FormProps<Values>['onFinish'];

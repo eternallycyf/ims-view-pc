@@ -6,10 +6,16 @@ import {
   IBaseCustomFormItemProps,
   ISearchesType,
   renderFormItem,
+  type FormControlType,
 } from 'ims-view-pc';
 import React, { Fragment, useImperativeHandle, useState } from 'react';
 
-export type Next<Values = AnyObject, Rest = AnyObject, Extra = unknown, FormValues = Values> = (
+export type Next<
+  Values = AnyObject,
+  Rest = AnyObject,
+  Extra = FormControlType,
+  FormValues = Values,
+> = (
   values: FormValues,
   form: Omit<FormInstance<FormValues>, 'scrollToField' | 'getFieldInstance'>,
   index?: number,
@@ -18,7 +24,7 @@ export type Next<Values = AnyObject, Rest = AnyObject, Extra = unknown, FormValu
 export interface IUpdateControlProps<
   Values = AnyObject,
   Rest = AnyObject,
-  Extra = unknown,
+  Extra = FormControlType,
   FormValues = Values,
 > {
   itemProps?: {

@@ -66,7 +66,7 @@ export { default as VideoViewer } from './components/VideoViewer';
 export * from './components/VideoViewer/interface';
 export { default as WaterMark } from './components/WaterMark';
 export * from './components/WaterMark/interface';
-export { getFieldComp, renderFormItem } from './core/helpers';
+export { FormRenderer, getFieldComp, renderFormItem } from './core/helpers';
 export { default as FormRules } from './core/helpers/validate';
 export { CustomTheme, variables } from './styles/variables';
 export * from './type/index';
@@ -76,3 +76,10 @@ export * from './components/FileUpload/interface';
 export * from './hooks';
 
 export { default as FileViewer } from './components/FileViewer';
+export { type FormRendererConfig, type FormRendererHooks } from './core/helpers/FormRender';
+export {
+  type Hooks,
+  type Plugin,
+  type PluginClass,
+  type PluginFunction,
+} from './core/helpers/Hookable';

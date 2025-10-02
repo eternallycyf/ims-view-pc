@@ -1,7 +1,10 @@
-import { AnyObject, Search } from 'ims-view-pc';
+import { AnyObject, Search, type FormControlType } from 'ims-view-pc';
 
-export interface IBaseCustomFormItemProps<Values = AnyObject, Rest = AnyObject, Extra = unknown>
-  extends Pick<
+export interface IBaseCustomFormItemProps<
+  Values = AnyObject,
+  Rest = AnyObject,
+  Extra = FormControlType,
+> extends Pick<
     Search<Values, Rest, Extra>,
     | 'form'
     | 'itemProps'

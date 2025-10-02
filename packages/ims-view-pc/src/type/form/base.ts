@@ -72,7 +72,7 @@ export type Dict = ReadonlyArray<{
 
 /*---------------------IControlProps--------------------------------- */
 
-export interface IBaseControlProps<Values = AnyObject, Rest = AnyObject, Extra = unknown>
+export interface IBaseControlProps<Values = AnyObject, Rest = AnyObject, Extra = FormControlType>
   extends Pick<
     Search<Values, Rest, Extra>,
     'fetchConfig' | 'itemProps' | 'dict' | 'Component' | 'label'
@@ -81,7 +81,7 @@ export interface IBaseControlProps<Values = AnyObject, Rest = AnyObject, Extra =
 export type IControlProps<
   Values = AnyObject,
   Rest = AnyObject,
-  Extra = unknown,
+  Extra = FormControlType,
 > = IBaseControlProps<Values, Rest, Extra> &
   IEditorProps['controlProps'] &
   ISimpleControlProps<Values>['controlProps'] &

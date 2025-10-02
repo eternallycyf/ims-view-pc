@@ -49,7 +49,8 @@
     "react-file-viewer": "^1.2.1",
     "rc-tree": "^5.8.7",
     "rc-resize-observer": "1.4.0",
-    "@js-preview/excel": "^1.7.12"
+    "@js-preview/excel": "^1.7.12",
+    "tapable": "^2.2.3"
   },
   "peerDependencies": {
     "@ant-design/icons": "^5",

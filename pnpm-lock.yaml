@@ -309,6 +309,9 @@ importers:
       runes2:
         specifier: ^1.1.2
         version: 1.1.4
+      tapable:
+        specifier: ^2.2.3
+        version: 2.2.3
       video.js:
         specifier: ^7.21.5
         version: 7.21.7
@@ -24326,7 +24329,6 @@ packages:
   /tapable@2.2.3:
     resolution: {integrity: sha512-ZL6DDuAlRlLGghwcfmSn9sK3Hr6ArtyudlSAiCqQ6IfE+b+HHbydbYDIG15IfS5do+7XQQBdBiubF/cV2dnDzg==}
     engines: {node: '>=6'}
-    dev: true
 
   /tar-stream@2.2.0:
     resolution: {integrity: sha512-ujeqbceABgwMZxEJnk2HDY2DlnUZ+9oEcb1KzTVfYHio0UE6dG71n60d8D2I4qNvleWrrXpmjpt7vZeF1LnMZQ==}

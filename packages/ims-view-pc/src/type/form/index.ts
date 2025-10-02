@@ -18,11 +18,11 @@ import { IBaseCustomFormItemProps } from './formItem';
 
 export type NameKey<Values = AnyObject> = (keyof Values & string) | [number, keyof Values & string];
 
-export interface IBaseFormControl<Values = AnyObject, Rest = AnyObject, Extra = unknown> {
+export interface IBaseFormControl<Values = AnyObject, Rest = AnyObject, Extra = FormControlType> {
   form?: FormInstance<Values>;
   name?: NameKey<Values>;
   label?: React.ReactNode;
-  type?: FormControlType;
+  type?: Extra;
   initialValue?:
     | ValueOf<Values>
     | AddIndexSignature<ValueOf<Values>>
@@ -53,20 +53,17 @@ export interface IBaseFormControl<Values = AnyObject, Rest = AnyObject, Extra = 
   ) => React.ReactNode;
 }
 
-export type Search<Values = AnyObject, Rest = AnyObject, Extra = unknown> = IBaseFormControl<
-  Values,
-  Rest,
-  Extra
-> &
-  Rest;
+export type Search<
+  Values = AnyObject,
+  Rest = AnyObject,
+  Extra = FormControlType,
+> = IBaseFormControl<Values, Rest, Extra> & Rest;
 
-export type FieldCompType = {
-  <Values = AnyObject, Rest = AnyObject, Extra = unknown>(
-    ...args: Search<Values, Rest, Extra>[]
-  ): React.ReactNode;
+export type FieldCompType<Values = AnyObject, Rest = AnyObject, Extra = FormControlType> = {
+  (...args: Search<Values, Rest, Extra>[]): React.ReactNode;
 };
 
-export type ISearchesType<Values = AnyObject, Rest = AnyObject, Extra = unknown> = Search<
+export type ISearchesType<Values = AnyObject, Rest = AnyObject, Extra = FormControlType> = Search<
   Values,
   Rest,
   Extra
@@ -75,7 +72,7 @@ export type ISearchesType<Values = AnyObject, Rest = AnyObject, Extra = unknown>
 export type IUpdateSearchType<
   Values = AnyObject,
   Rest = AnyObject,
-  Extra = unknown,
+  Extra = FormControlType,
   FormValues = Values,
 > = Omit<IBaseFormControl<FormValues, Rest, Extra>, 'itemProps' | 'name'> & {
   name?: NameKey<Values>;
@@ -88,6 +85,6 @@ export type IUpdateSearchType<
 export type IUpdateSearchesType<
   Values = AnyObject,
   Rest = AnyObject,
-  Extra = unknown,
+  Extra = FormControlType,
   FormValues = Values,
 > = IUpdateSearchType<Values, Rest, Extra, FormValues>[];
