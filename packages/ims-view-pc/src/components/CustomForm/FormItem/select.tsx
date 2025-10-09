@@ -4,9 +4,9 @@ import { Attachment, type DeepPartial, type IBaseCustomFormItemProps } from 'ims
 import React, { useImperativeHandle } from 'react';
 
 export interface SelectControlProps<T = any> extends IBaseCustomFormItemProps<T> {
-  controlProps: DeepPartial<ProFormSelectProps<T>> & {
+  controlProps: DeepPartial<Omit<ProFormSelectProps<T>, 'fieldProps'>> & {
     onChange?: any;
-  };
+  } & DeepPartial<ProFormSelectProps<T>['fieldProps']>;
   onChange: any;
   value?: T;
 }
@@ -35,8 +35,8 @@ const SelectControl = React.forwardRef<any, SelectControlProps<Attachment[]>>((p
         }
       }}
       fieldProps={{
-        notFoundContent: props?.controlProps?.fieldProps?.loading ? <Spin spinning /> : null,
-        ...controlProps?.fieldProps,
+        notFoundContent: props?.controlProps?.loading ? <Spin spinning /> : null,
+        ...controlProps,
       }}
     />
   );
