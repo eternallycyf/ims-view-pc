@@ -1,5 +1,5 @@
 import { random } from '@ims-view/utils';
-import { Col, Empty, Form, FormListFieldData, FormListOperation, Row } from 'antd';
+import { Col, Empty, Form, FormListFieldData, Row } from 'antd';
 import {
   ErrorBoundary,
   IButtonProps,
@@ -19,6 +19,7 @@ import { formatColumn } from '../../core/helpers';
 import { Table } from './';
 import TableBtn from './TableBtn';
 import './index.less';
+import { FormListOperation } from './interface';
 import {
   addExtraIndexParams,
   formatEditTableColumns,
@@ -82,7 +83,10 @@ const CommonEditTable: React.ForwardRefRenderFunction<
   //#endregion
 
   // #region
-  const getDefaultColumns: IGetColumns = (operation, status) => {
+  const getDefaultColumns = (
+    operation: FormListOperation,
+    status: ICommonEditTableProps['status'],
+  ) => {
     const values = form?.getFieldValue(tableFormName) || [];
 
     let newColumns = columns.map((item: ICommonEditTableColumnsType) => {
