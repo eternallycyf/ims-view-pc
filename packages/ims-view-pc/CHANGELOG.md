@@ -1,5 +1,25 @@
 # Changelog
 
+### [Version&nbsp;1.80.2](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.80.1...ims-view-pc@1.80.2)
+
+<sup>Released on **2025-10-09**</sup>
+
+#### 🐛 修复
+
+- **ims-view-pc**: update selectprops, update selectprops.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- **ims-view-pc**: update selectprops ([bae3ace](https://github.com/eternallycyf/ims-view-pc/commit/bae3ace))
+- **ims-view-pc**: update selectprops ([67caa48](https://github.com/eternallycyf/ims-view-pc/commit/67caa48))
+
+</details>
+
 ### [Version&nbsp;1.80.1](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.80.0...ims-view-pc@1.80.1)
 
 <sup>Released on **2025-10-02**</sup>
