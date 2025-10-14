@@ -83,3 +83,5 @@ export {
   type PluginClass,
   type PluginFunction,
 } from './core/helpers/Hookable';
+export { TableExtraBtn } from './components/TableExtraBtn';
+export * from './components/TableExtraBtn/interface';
