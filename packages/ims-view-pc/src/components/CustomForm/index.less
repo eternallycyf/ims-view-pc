@@ -23,3 +23,22 @@
     height: 100%;
   }
 }
+
+
+.CustomModalDefaultScroll {
+  :global {
+    .ant-modal-body {
+      padding: 0 20px;
+      max-height: calc(var(--body-scroll-height, 500) * 1px);
+      overflow: auto;
+    }
+  }
+}
+
+.w-full {
+  width: 100%;
+}
+
+.h-full {
+  height: 100%;
+}

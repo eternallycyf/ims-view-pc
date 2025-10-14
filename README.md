@@ -68,5 +68,3 @@ pnpm run start
 ## License
 
 [MIT](./LICENSE) ® eternallycyf
-
-1

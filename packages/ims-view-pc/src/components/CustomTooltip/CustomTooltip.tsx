@@ -34,6 +34,7 @@ const CustomTooltip: FC<CustomTooltipProps> = (props) => {
     tooltipClassName,
     expandMoreLength,
     ellipsisProps = {},
+    tooltipMaxHeight = 300,
   } = props;
 
   const isString = useMemo(() => {
@@ -108,13 +109,26 @@ const CustomTooltip: FC<CustomTooltipProps> = (props) => {
   const ParagraphProps: Partial<ParagraphProps> = isExpand
     ? {
         style: paragraphStyle,
+        ellipsis: {
+          tooltip: {
+            overlayInnerStyle: {
+              maxHeight: tooltipMaxHeight,
+              overflowY: 'auto',
+            },
+          },
+        },
       }
     : {
         style: paragraphStyle,
         ellipsis: {
           rows,
           expandable: hasExpend ? isExpand : false,
-          tooltip: content,
+          tooltip: {
+            overlayInnerStyle: {
+              maxHeight: tooltipMaxHeight,
+              overflowY: 'auto',
+            },
+          },
           onExpand: () => {
             setIsExpand(true);
             forceUpdate();

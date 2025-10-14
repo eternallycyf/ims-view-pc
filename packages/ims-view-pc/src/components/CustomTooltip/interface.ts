@@ -9,6 +9,7 @@ export interface CustomTooltipProps {
   expandMoreLength?: number;
   expandOnChange?: (setHasExpend: Dispatch<SetStateAction<boolean>>) => any;
 
+  tooltipMaxHeight?: number
   ellipsisSymbol?: boolean;
   buttonStyle?: CSSProperties;
   direction?: 'right' | 'default';

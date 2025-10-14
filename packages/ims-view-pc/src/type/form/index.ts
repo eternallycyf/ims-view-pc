@@ -24,20 +24,21 @@ export interface IBaseFormControl<Values = AnyObject, Rest = AnyObject, Extra = 
   label?: React.ReactNode;
   type?: Extra;
   initialValue?:
-    | ValueOf<Values>
-    | AddIndexSignature<ValueOf<Values>>
-    | string
-    | number
-    | { key: any }
-    | { label: any; value: any }
-    | dayjs.Dayjs
-    | [dayjs.Dayjs, dayjs.Dayjs];
+  | ValueOf<Values>
+  | AddIndexSignature<ValueOf<Values>>
+  | string
+  | number
+  | { key: any }
+  | { label: any; value: any }
+  | dayjs.Dayjs
+  | [dayjs.Dayjs, dayjs.Dayjs];
   record?: AddIndexSignature<Values>;
   dict?: any;
 
   fetchConfig?: IFetchConfig<any>;
   controlProps?: IControlProps<Values, Rest, Extra>;
   itemProps?: ItemProps<Values, Rest, Extra>;
+  visible?: boolean
 
   Component?: (
     props: IBaseCustomFormItemProps & {

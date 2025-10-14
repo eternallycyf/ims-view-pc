@@ -42,7 +42,7 @@ const App: React.FC = () => {
         modalType={groupValue}
         title="新增"
         initialValues={{ name: 'custom' }}
-        open={open}
+        open={groupValue === 'normal' ? true : open}
         form={form}
         formProps={{ form, layout: 'vertical' }}
         onFinish={async (values) => {

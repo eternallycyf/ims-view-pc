@@ -1,5 +1,6 @@
-import type { DrawerProps, FormInstance, FormProps, ModalProps } from 'antd';
-import { Search, type FormControlType } from 'ims-view-pc';
+import type { DrawerProps, FormInstance, FormProps, ModalProps, RowProps } from 'antd';
+import { Search, type AnyObject, type DeepPartial, type FormControlType } from 'ims-view-pc';
+import type { CSSProperties } from 'react';
 import React, { RefObject } from 'react';
 import { renderFormItem } from '../../core/helpers';
 import CommonForm, { renderFormList } from './CustomForm';
@@ -20,60 +21,58 @@ export enum ModalTypeEnum {
 
 export type ModalType = 'modal' | 'drawer' | 'normal';
 
-export type CustomFormList<
-  Values = Record<string, unknown>,
-  Rest = Record<string, unknown>,
-  Extra = FormControlType,
-> = (Search<Values, Rest, Extra> & {
+export type CustomFormList<Values = AnyObject, Rest = AnyObject, Extra = unknown> = (Search<
+  Values,
+  Rest,
+  Extra
+> & {
   col?: number;
   children?:
     | Search<Values, Rest, Extra>
     | ((values: Values, form: FormInstance<Values>) => CustomFormList<Values, Rest, Extra> | false);
 })[];
 
-export type BaseCustomFormProps<
+export interface CustomFormHandle<
   Values = Record<string, unknown>,
   Rest = Record<string, unknown>,
-  Type = 'normal',
-> = {
-  className?: string;
+  Type = ModalType,
+> {
+  form: FormInstance<Values>;
+}
+
+export interface BaseCustomFormProps<Values = AnyObject, Rest = AnyObject> {
+  form?: FormInstance<Values>;
+  formList?: CustomFormList<Values, Rest>;
   visible?: boolean;
   loading?: boolean;
-
-  form?: FormInstance<Values>;
-  formRef?: RefObject<FormInstance<Values>>;
-
-  formList?: CustomFormList<Values, Rest>;
-  initialValues?: Values;
-
+  initialValues?: DeepPartial<Values>;
   onFinish?: FormProps<Values>['onFinish'];
+  formProps?: Omit<FormProps<Values>, 'initialValues' | 'onFinish'>;
   onCancel?: (values: Values) => any;
   onDestroy?: Function;
-
-  formProps?: Omit<FormProps<Values>, 'initialValues' | 'onFinish'>;
-
   children?: React.ReactNode;
   modalType?: ModalType;
-};
+  rowProps?: RowProps;
+  bodyScrollHeight?: number;
+  style?: CSSProperties;
+  className?: string;
+  okButtonProps?: ModalProps['okButtonProps'];
+  cancelButtonProps?: ModalProps['cancelButtonProps'];
+  open?: boolean;
+}
 
 export type CustomFormProps<
   Values = Record<string, unknown>,
   Rest = Record<string, unknown>,
   Type = 'normal',
-> = BaseCustomFormProps<Values, Rest, Type> &
+> = BaseCustomFormProps<Values, Rest> &
   (Type extends 'modal'
-    ? Omit<ModalProps, 'onCancel'>
+    ? Omit<ModalProps, 'onCancel' | 'children'>
     : Type extends 'drawer'
-    ? Omit<DrawerProps, 'onCancel'>
-    : {});
-
-export interface CustomFormHandle<
-  Values = Record<string, unknown>,
-  Rest = Record<string, unknown>,
-  Type = 'normal',
-> {
-  form: FormInstance<Values>;
-}
+    ? Omit<DrawerProps, 'onCancel' | 'children'>
+    : {
+        footer?: React.ReactNode;
+      });
 
 const CompoundedCustomFrom = React.forwardRef<CustomFormHandle, CustomFormProps>(CommonForm) as <
   Values = Record<string, unknown>,
