@@ -1,5 +1,24 @@
 # Changelog
 
+## [Version&nbsp;1.81.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.80.3...ims-view-pc@1.81.0)
+
+<sup>Released on **2025-10-14**</sup>
+
+#### ✨ 新特性
+
+- Add TableExtarBtn.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- Add TableExtarBtn ([cd242a8](https://github.com/eternallycyf/ims-view-pc/commit/cd242a8))
+
+</details>
+
 ### [Version&nbsp;1.80.3](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.80.2...ims-view-pc@1.80.3)
 
 <sup>Released on **2025-10-14**</sup>
