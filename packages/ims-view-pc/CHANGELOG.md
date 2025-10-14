@@ -1,5 +1,24 @@
 # Changelog
 
+### [Version&nbsp;1.80.3](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.80.2...ims-view-pc@1.80.3)
+
+<sup>Released on **2025-10-14**</sup>
+
+#### 🐛 修复
+
+- **ims-view-pc**: fix CustomForm Error.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- **ims-view-pc**: fix CustomForm Error ([f5eb042](https://github.com/eternallycyf/ims-view-pc/commit/f5eb042))
+
+</details>
+
 ### [Version&nbsp;1.80.2](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.80.1...ims-view-pc@1.80.2)
 
 <sup>Released on **2025-10-09**</sup>
