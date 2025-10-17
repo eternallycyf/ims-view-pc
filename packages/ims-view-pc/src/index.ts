@@ -29,6 +29,7 @@ export type {
   IFileUploadControlProps,
   IMentionsControlProps,
   ISimpleControlProps,
+  ITreeSelectProps,
   IUpdateControlProps,
   Next,
 } from './components/CustomForm/interface';
@@ -76,6 +77,8 @@ export * from './components/FileUpload/interface';
 export * from './hooks';
 
 export { default as FileViewer } from './components/FileViewer';
+export { TableExtraBtn } from './components/TableExtraBtn';
+export * from './components/TableExtraBtn/interface';
 export { type FormRendererConfig, type FormRendererHooks } from './core/helpers/FormRender';
 export {
   type Hooks,
@@ -83,5 +86,3 @@ export {
   type PluginClass,
   type PluginFunction,
 } from './core/helpers/Hookable';
-export { TableExtraBtn } from './components/TableExtraBtn';
-export * from './components/TableExtraBtn/interface';

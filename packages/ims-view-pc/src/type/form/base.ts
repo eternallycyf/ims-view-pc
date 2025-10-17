@@ -42,6 +42,7 @@ export const FORM_TYPE_DICT = [
   'autoComplete',
   'cascader',
   'select',
+  'treeSelect',
   'mentions',
   'upload',
 

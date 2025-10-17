@@ -14,6 +14,7 @@ const Cascader = React.lazy(() => import('../../components/CustomForm/FormItem/c
 const Mentions = React.lazy(() => import('../../components/CustomForm/FormItem/mentions'));
 const Upload = React.lazy(() => import('../../components/CustomForm/FormItem/upload'));
 const Select = React.lazy(() => import('../../components/CustomForm/FormItem/select'));
+const TreeSelect = React.lazy(() => import('../../components/CustomForm/FormItem/treeSelect'));
 
 /**
  * 获取控件
@@ -96,6 +97,9 @@ export const getFieldComp: FieldCompType = ({
       break;
     case 'select':
       FieldComp = Select;
+      break;
+    case 'treeSelect':
+      FieldComp = TreeSelect;
       break;
     case 'upload':
       FieldComp = Upload;
