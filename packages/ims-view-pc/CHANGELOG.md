@@ -1,5 +1,24 @@
 # Changelog
 
+## [Version&nbsp;1.82.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.81.0...ims-view-pc@1.82.0)
+
+<sup>Released on **2025-10-17**</sup>
+
+#### ✨ 新特性
+
+- **ims-view-pc**: Add TreeSelect.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **ims-view-pc**: Add TreeSelect ([2070fce](https://github.com/eternallycyf/ims-view-pc/commit/2070fce))
+
+</details>
+
 ## [Version&nbsp;1.81.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.80.3...ims-view-pc@1.81.0)
 
 <sup>Released on **2025-10-14**</sup>
