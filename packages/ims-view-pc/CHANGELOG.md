@@ -1,5 +1,24 @@
 # Changelog
 
+### [Version&nbsp;1.82.1](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.82.0...ims-view-pc@1.82.1)
+
+<sup>Released on **2025-10-17**</sup>
+
+#### 🐛 修复
+
+- Revert customTooltip.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- Revert customTooltip ([d2c9355](https://github.com/eternallycyf/ims-view-pc/commit/d2c9355))
+
+</details>
+
 ## [Version&nbsp;1.82.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.81.0...ims-view-pc@1.82.0)
 
 <sup>Released on **2025-10-17**</sup>
