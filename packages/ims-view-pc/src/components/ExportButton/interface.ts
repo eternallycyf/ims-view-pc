@@ -17,9 +17,186 @@ export interface IBaseExportButtonProps<DataType = AnyData, Params = RequestPara
   fileName?: string;
 }
 
+// Excel Style Types
+export type ExcelAlignment = {
+  vertical?: 'top' | 'middle' | 'bottom';
+  horizontal?: 'left' | 'center' | 'right';
+  wrapText?: boolean;
+};
+
+export type ExcelFill = {
+  type?: 'pattern';
+  pattern?: 'solid' | 'darkVertical' | 'darkHorizontal' | 'darkGrid';
+  fgColor?: { argb: string };
+};
+
+export type ExcelBorder = {
+  top?: { style: 'thin' | 'medium' | 'thick'; color: { argb: string } };
+  left?: { style: 'thin' | 'medium' | 'thick'; color: { argb: string } };
+  bottom?: { style: 'thin' | 'medium' | 'thick'; color: { argb: string } };
+  right?: { style: 'thin' | 'medium' | 'thick'; color: { argb: string } };
+};
+
+export type ExcelFont = {
+  bold?: boolean;
+  italic?: boolean;
+  underline?: boolean;
+  color?: { argb: string };
+  size?: number;
+  name?: string;
+};
+
+export type ExcelCellStyle = {
+  alignment?: ExcelAlignment;
+  fill?: ExcelFill;
+  border?: ExcelBorder;
+  font?: ExcelFont;
+  numFmt?: string;
+};
+
+export type ExcelRowStyle = {
+  height?: number;
+  font?: ExcelFont;
+};
+
+export type ExcelColumnStyle = {
+  width?: number;
+};
+
+export type ExcelCellFormat = {
+  formula?: string;
+  result?: any;
+  date1904?: boolean;
+};
+
+export type ExcelImageConfig = {
+  width?: number;
+  height?: number;
+};
+
+export type ExcelCellData = {
+  text?: string | string[];
+  format?: ExcelCellFormat;
+  style?: ExcelCellStyle;
+  image?: ExcelImageConfig;
+};
+
+// Cell and Table Types
+export type CellPosition = {
+  row: number;
+  col: number;
+  rowspan: number;
+  colspan: number;
+  isNeedMerge?: boolean;
+};
+
+export type Cell = CellPosition & {
+  text?: string | string[];
+  format?: ExcelCellFormat;
+  style?: ExcelCellStyle;
+  isImage?: boolean;
+  image?: ExcelImageConfig;
+};
+
+export type TableData = {
+  cells: Cell[];
+  columnStyle: ExcelColumnStyle[];
+  rowStyle: ExcelRowStyle[];
+  rowLength: number;
+};
+
+export type TableType = 'header' | 'main' | 'footer' | 'insert-header';
+
+// Map Table Types
+export type MapTableHooks = {
+  beforeMapCreateColumn?: () => void;
+  mapCreateColumned?: () => void;
+  beforeMapCreateData?: () => void;
+  mapCreateDataed?: () => void;
+  mounted?: () => void;
+};
+
+export type MapCreateColumnParams = {
+  columnLen: number;
+};
+
+export type MapCreateDataParams<DataType = AnyData> = {
+  data?: any;
+  row?: DataType;
+  rowIndex: number;
+  column?: any;
+  columnIndex: number;
+};
+
+export type MapCreateDataResult = {
+  key: string;
+  value: any;
+  excel?: ExcelCellData;
+};
+
+export type SpanMethodParams<DataType = AnyData> = {
+  row: DataType;
+  column: any;
+  rowIndex: number;
+  columnIndex: number;
+};
+
+export type SpanMethodResult = {
+  rowspan: number;
+  colspan: number;
+};
+
+export type MapTableOptions<DataType = AnyData> = {
+  data?: any;
+  hooks?: MapTableHooks;
+  field?: string;
+  startCol?: number;
+  mapCreateColumn?: (params: MapCreateColumnParams) => any[];
+  mapCreateData?: (params: MapCreateDataParams<DataType>) => MapCreateDataResult | undefined;
+  spanMethod?: (params: SpanMethodParams<DataType>) => SpanMethodResult;
+};
+
+export type TableResult = {
+  columns: any[];
+  data: any[];
+  mergeCells: Cell[];
+  excel: {
+    columnStyle: ExcelColumnStyle[];
+    rowStyle: ExcelRowStyle[];
+  };
+};
+
+// Exporter Types
+export type SheetOptions = {
+  properties?: any;
+  views?: any[];
+  pageSetup?: any;
+};
+
+export type SheetCallbackParams = {
+  worksheet: any;
+  sheetIndex: number;
+};
+
+export type TableConfig = {
+  sheetName?: string;
+  options?: SheetOptions;
+  headerData?: TableData;
+  mainData?: TableData;
+  footerData?: TableData;
+  insertHeaderData?: TableData;
+  sheetCallback?: (params: SheetCallbackParams) => void;
+};
+
+export type ExporterOptions = {
+  tables: TableConfig[];
+  progress?: (percentage: number) => void;
+  keepAlive?: boolean;
+};
+
 interface RenderCellParams<DataType = AnyData> {
   data?: any;
-  type?: any;
+  type?: TableType;
   row?: DataType;
   column?: IColumnsType<DataType> extends Array<infer T> ? T : never;
   rowIndex?: number;
@@ -28,7 +205,7 @@ interface RenderCellParams<DataType = AnyData> {
 
 interface TreeConfig {
   treeNode?: boolean;
-  treeField?: 'name';
+  treeField?: string;
   indentSize?: number;
 }
 
@@ -39,13 +216,12 @@ export interface IExportButtonProps<DataType = AnyData, Params = RequestParams>
   treeConfig?: TreeConfig;
   sheetName?: string;
 
-  //TODO
-  setSheetStyle?: any;
-  setInsertHeader?: any;
-  setInsertFooter?: any;
-  setImageStyle?: any;
-  setWorkSheet?: any;
-  setColumnStyle?: (...args: RenderCellParams[]) => React.CSSProperties;
+  setSheetStyle?: (params: SheetCallbackParams) => void;
+  setInsertHeader?: (params: MapCreateDataParams<DataType>) => MapCreateDataResult | undefined;
+  setInsertFooter?: (params: MapCreateDataParams<DataType>) => MapCreateDataResult | undefined;
+  setImageStyle?: (params: RenderCellParams<DataType>) => ExcelImageConfig;
+  setWorkSheet?: (params: SheetCallbackParams) => void;
+  setColumnStyle?: (params: RenderCellParams<DataType>) => ExcelColumnStyle;
   /**
    *
    * @example
@@ -56,7 +232,7 @@ export interface IExportButtonProps<DataType = AnyData, Params = RequestParams>
    * }}
    * ```
    */
-  setRowStyle?: (...args: RenderCellParams[]) => React.CSSProperties;
+  setRowStyle?: (params: RenderCellParams<DataType>) => ExcelRowStyle;
   /**
    *
    * @example
@@ -66,8 +242,8 @@ export interface IExportButtonProps<DataType = AnyData, Params = RequestParams>
    * }}
    * ```
    */
-  setCellStyle?: (...args: RenderCellParams[]) => React.CSSProperties;
-  setCellFormat?: (...args: RenderCellParams[]) => React.CSSProperties;
+  setCellStyle?: (params: RenderCellParams<DataType>) => ExcelCellStyle;
+  setCellFormat?: (params: RenderCellParams<DataType>) => ExcelCellFormat;
 
   isMultiple?: boolean;
   multipleConfig?: {
