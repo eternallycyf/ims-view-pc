@@ -1,5 +1,24 @@
 # Changelog
 
+## [Version&nbsp;1.84.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.83.0...ims-view-pc@1.84.0)
+
+<sup>Released on **2025-11-10**</sup>
+
+#### ✨ 新特性
+
+- **ims-view-pc**: Add richText prop.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **ims-view-pc**: Add richText prop ([09a36c6](https://github.com/eternallycyf/ims-view-pc/commit/09a36c6))
+
+</details>
+
 ## [Version&nbsp;1.83.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.82.2...ims-view-pc@1.83.0)
 
 <sup>Released on **2025-11-10**</sup>
