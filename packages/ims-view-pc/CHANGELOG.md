@@ -1,5 +1,24 @@
 # Changelog
 
+## [Version&nbsp;1.83.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.82.2...ims-view-pc@1.83.0)
+
+<sup>Released on **2025-11-10**</sup>
+
+#### ✨ 新特性
+
+- **ims-view-pc**: Add Paragraph.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **ims-view-pc**: Add Paragraph ([eee49be](https://github.com/eternallycyf/ims-view-pc/commit/eee49be))
+
+</details>
+
 ### [Version&nbsp;1.82.2](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.82.1...ims-view-pc@1.82.2)
 
 <sup>Released on **2025-11-10**</sup>
