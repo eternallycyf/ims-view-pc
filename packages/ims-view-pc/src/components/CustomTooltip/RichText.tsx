@@ -15,6 +15,7 @@ const RichText: FC<RichTextProps> = (props) => {
     emptyText = <div>-</div>,
     htmlStyle,
     htmlClassName,
+    expandable: defaultExpandable = true,
   } = props;
   const [_expandable, setExpandable] = useState<boolean>(false);
   const [overflow, setOverflow] = useState<CSSProperties['overflow']>('hidden');
@@ -85,21 +86,29 @@ const RichText: FC<RichTextProps> = (props) => {
           </div>
         </Popover>
 
-        {expandable && (
-          <div className="btn">
-            <a
-              onClick={() =>
-                setOverflow((overflow) => {
-                  if (overflow === 'hidden') return 'auto';
-                  return 'hidden';
-                })
-              }
-            >
-              {isHiddenOverflow ? '展开' : '收起'}
-              <DownOutlined rotate={isHiddenOverflow ? 0 : 180} />
-            </a>
-            {isHiddenOverflow && '...'}
-          </div>
+        {defaultExpandable ? (
+          <>
+            {expandable && (
+              <div className="btn">
+                <a
+                  onClick={() =>
+                    setOverflow((overflow) => {
+                      if (overflow === 'hidden') return 'auto';
+                      return 'hidden';
+                    })
+                  }
+                >
+                  {isHiddenOverflow ? '展开' : '收起'}
+                  <DownOutlined rotate={isHiddenOverflow ? 0 : 180} />
+                </a>
+                {isHiddenOverflow && '...'}
+              </div>
+            )}
+          </>
+        ) : (
+          <>
+            <>{isHiddenOverflow && '...'}</>
+          </>
         )}
       </div>
     </>

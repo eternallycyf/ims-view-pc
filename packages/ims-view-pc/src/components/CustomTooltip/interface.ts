@@ -33,4 +33,6 @@ export interface RichTextProps {
    */
   maxHeight?: number;
   emptyText?: string;
+  expandable?: boolean;
+  rows?: number;
 }
