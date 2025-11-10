@@ -1,5 +1,24 @@
 # Changelog
 
+### [Version&nbsp;1.82.2](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.82.1...ims-view-pc@1.82.2)
+
+<sup>Released on **2025-11-10**</sup>
+
+#### 🐛 修复
+
+- Add export excel interface.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- Add export excel interface ([3b3f2d2](https://github.com/eternallycyf/ims-view-pc/commit/3b3f2d2))
+
+</details>
+
 ### [Version&nbsp;1.82.1](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.82.0...ims-view-pc@1.82.1)
 
 <sup>Released on **2025-10-17**</sup>
