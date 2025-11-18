@@ -1,5 +1,20 @@
 # Changelog
 
+### [Version&nbsp;1.84.1](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.84.0...ims-view-pc@1.84.1)
+
+<sup>Released on **2025-11-18**</sup>
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+</details>
+
+### Dependencies
+
+- **@ims-view/hooks:** upgraded to 1.19.0
+
 ## [Version&nbsp;1.84.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.83.0...ims-view-pc@1.84.0)
 
 <sup>Released on **2025-11-10**</sup>
