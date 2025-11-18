@@ -1,0 +1,38 @@
+.enterIcon {
+ font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s;
+  
+  &:hover {
+    color: #1890ff;
+  }
+}
+
+.exitIcon {
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s;
+  
+  &:hover {
+    color: #1890ff;
+  }
+}
+
+// 全屏容器基础样式
+:global(.fullscreen-container) {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  z-index: 999 !important;
+  background-color: #fff !important;
+  overflow: auto !important;
+  padding: 16px !important;
+  box-sizing: border-box !important;
+}
+
+// 暗色主题适配
+:global(.dark .fullscreen-container) {
+  background-color: #141414 !important;
+}
