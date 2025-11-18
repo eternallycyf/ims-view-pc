@@ -1,5 +1,24 @@
 # Changelog
 
+## [Version&nbsp;1.19.0](https://github.com/eternallycyf/ims-view-pc/compare/@ims-view/hooks@1.18.1...@ims-view/hooks@1.19.0)
+
+<sup>Released on **2025-11-18**</sup>
+
+#### ✨ 新特性
+
+- **ims-view-pc**: Add useFullScreen.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **ims-view-pc**: Add useFullScreen ([ee45abd](https://github.com/eternallycyf/ims-view-pc/commit/ee45abd))
+
+</details>
+
 ### [Version&nbsp;1.18.1](https://github.com/eternallycyf/ims-view-pc/compare/@ims-view/hooks@1.18.0...@ims-view/hooks@1.18.1)
 
 <sup>Released on **2024-11-01**</sup>
