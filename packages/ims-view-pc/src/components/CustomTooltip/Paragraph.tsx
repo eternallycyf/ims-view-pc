@@ -7,7 +7,8 @@ import Empty from './Empty';
 import './index.less';
 import { isEmpty } from './utils';
 
-interface ParagraphProps extends Omit<AntParagraphProps, 'ellipsis' | 'children' | 'content'> {
+export interface ParagraphProps
+  extends Omit<AntParagraphProps, 'ellipsis' | 'children' | 'content'> {
   rows?: number;
   content?: ReactNode;
   isLink?: boolean;

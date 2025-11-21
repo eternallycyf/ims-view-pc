@@ -217,14 +217,14 @@ importers:
         specifier: ^7.23.1
         version: 7.28.4
       '@ims-view/chart':
-        specifier: 1.8.1
+        specifier: 1.9.0
         version: link:../chart
       '@ims-view/hooks':
         specifier: 1.19.0
         version: link:../hooks
       '@ims-view/utils':
         specifier: 1.17.1
-        version: link:../utils
+        version: 1.17.1(@ant-design/icons@5.6.1)(antd@5.27.3)(lodash@4.17.21)(react-dom@18.3.1)(react@18.3.1)
       '@js-preview/excel':
         specifier: ^1.7.12
         version: 1.7.14
@@ -3037,6 +3037,25 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
+
+  /@ims-view/utils@1.17.1(@ant-design/icons@5.6.1)(antd@5.27.3)(lodash@4.17.21)(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-q+qhdleyLZq5IvaHximY52Lyw9T1OsO2fvti5BhBc9AR6/Ya9EBI9QZIVAtIKbausIZgsPY2iSMI4Y18TBzg/g==}
+    peerDependencies:
+      '@ant-design/icons': ^5
+      antd: ^5
+      lodash: ^4.17.21
+      react: ^18.2.0
+      react-dom: ^18.2.0
+    dependencies:
+      '@ant-design/icons': 5.6.1(react-dom@18.3.1)(react@18.3.1)
+      '@babel/runtime': 7.28.4
+      antd: 5.27.3(react-dom@18.3.1)(react@18.3.1)
+      decimal.js: 10.6.0
+      js-cookie: 3.0.5
+      lodash: 4.17.21
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+    dev: false
 
   /@isaacs/cliui@8.0.2:
     resolution: {integrity: sha512-O8jcjabXaleOG9DQ0+ARXWZBTfnP4WNAqzuiJK7ll44AmxGKv/J2M4TPjxjY3znBCfvBXFzucm1twdyFybFqEA==}
