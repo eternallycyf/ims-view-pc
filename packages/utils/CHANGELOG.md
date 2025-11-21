@@ -1,5 +1,24 @@
 # Changelog
 
+## [Version&nbsp;1.18.0](https://github.com/eternallycyf/ims-view-pc/compare/@ims-view/utils@1.17.1...@ims-view/utils@1.18.0)
+
+<sup>Released on **2025-11-21**</sup>
+
+#### ✨ 新特性
+
+- Add safeRequest.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- Add safeRequest ([aed7c23](https://github.com/eternallycyf/ims-view-pc/commit/aed7c23))
+
+</details>
+
 ### [Version&nbsp;1.17.1](https://github.com/eternallycyf/ims-view-pc/compare/@ims-view/utils@1.17.0...@ims-view/utils@1.17.1)
 
 <sup>Released on **2024-11-01**</sup>
