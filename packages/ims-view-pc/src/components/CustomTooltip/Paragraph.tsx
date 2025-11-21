@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import { variables } from 'ims-view-pc';
 import React, { type ReactNode } from 'react';
 import Empty from './Empty';
-import './indexless';
+import './index.less';
 import { isEmpty } from './utils';
 
 interface ParagraphProps extends Omit<AntParagraphProps, 'ellipsis' | 'children' | 'content'> {

@@ -4,7 +4,7 @@ import React from 'react';
 
 const App: React.FC = () => {
   const [form] = Form.useForm();
-  const CheckModalRef = React.useRef<React.ElementRef<typeof CheckModal>>(null!);
+  const CheckModalRef = React.useRef<React.ComponentRef<typeof CheckModal>>(null!);
 
   const onFinish = (values: any) => {
     const { modal } = values;
