@@ -1,5 +1,24 @@
 # Changelog
 
+## [Version&nbsp;1.9.0](https://github.com/eternallycyf/ims-view-pc/compare/@ims-view/chart@1.8.1...@ims-view/chart@1.9.0)
+
+<sup>Released on **2025-11-21**</sup>
+
+#### ✨ 新特性
+
+- **ims-view-pc**: Add customDescriptiopms.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **ims-view-pc**: Add customDescriptiopms ([ee86555](https://github.com/eternallycyf/ims-view-pc/commit/ee86555))
+
+</details>
+
 ### [Version&nbsp;1.8.1](https://github.com/eternallycyf/ims-view-pc/compare/@ims-view/chart@1.8.0...@ims-view/chart@1.8.1)
 
 <sup>Released on **2024-11-01**</sup>
