@@ -1,6 +1,6 @@
 {
   "name": "ims-view-pc",
-  "version": "1.85.0",
+  "version": "1.86.0",
   "main": "lib/index.js",
   "unpkg": "dist/index.js",
   "module": "es/index.js",
@@ -24,7 +24,7 @@
     "@babel/runtime": "^7.23.1",
     "@ims-view/chart": "1.9.0",
     "@ims-view/hooks": "1.19.0",
-    "@ims-view/utils": "1.17.1",
+    "@ims-view/utils": "1.18.0",
     "ims-graph": "^1.2.1",
     "@wangeditor/editor": "^5.1.23",
     "@wangeditor/editor-for-react": "^1.0.6",
