@@ -87,11 +87,13 @@ const CompoundedCustomFrom = React.forwardRef<CustomFormHandle, CustomFormProps>
 type CompoundedComponent = typeof CompoundedCustomFrom & {
   renderFormItem: typeof renderFormItem;
   renderFormList: typeof renderFormList;
+  ModalTypeEnum: typeof ModalTypeEnum;
 };
 
 const CustomForm = CompoundedCustomFrom as CompoundedComponent;
 
 CustomForm.renderFormItem = renderFormItem;
 CustomForm.renderFormList = renderFormList;
+CustomForm.ModalTypeEnum = ModalTypeEnum;
 
 export default CustomForm;

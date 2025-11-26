@@ -4,7 +4,7 @@ import {
   type PopconfirmProps,
   type PopoverProps,
   type SpaceProps,
-  type TypographyProps
+  type TypographyProps,
 } from 'antd';
 import { type Dispatch, type ReactNode, type SetStateAction } from 'react';
 import './index.less';
@@ -38,4 +38,5 @@ export interface TableExtraBtnProps<T extends Record<string, any> = any> {
   spaceProps?: SpaceProps;
   popoverProps?: PopoverProps;
   divider?: ReactNode | false;
+  isFrame?: boolean;
 }

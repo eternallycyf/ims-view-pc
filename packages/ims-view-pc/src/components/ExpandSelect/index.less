@@ -1,41 +1,66 @@
-.ExpandSelect {
-  height: 40vh;
+@colorLink: #1890ff;
 
-  .ant-select-selection-item {
-    background: #ebf2ff;
-    color: var(--ant-color-primary, var(--colorPrimary));
-    font-weight: 400;
-    font-size: 12px;
+.ExpandSelectBox {
+  .rc-virtual-list-holder-inner {
+    gap: 8px;
+    flex-direction: row !important;
+    flex-wrap: wrap;
   }
-}
 
-.ExpandSelectOptions {
-  display: inline-flex !important;
-  margin: 2px;
-  min-height: 14px !important;
-  background: #f5f5f5;
-  line-height: 1 !important;
-
-  gap: 8px;
+  .ant-select-item {
+    all: unset !important;
+  }
 
   .ant-select-item-option-state {
     display: none;
   }
+}
 
-  .ant-select-item-option-content {
-    display: inline-block !important;
+.expand-select-tag {
+  display: inline-flex;
+  align-items: center;
+  margin: 0.25rem 0.25rem 0.25rem 0;
+  padding: 2px 8px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.expand-select-tag-selected {
+  border-color: @colorLink !important;
+  background-color: rgba(0, 160, 233, 0.08) !important;
+  color: @colorLink !important;
+}
+
+.expand-select-tag-hoverable:hover {
+  background-color: #00005505;
+}
+
+.expand-select-tag-disabled {
+  cursor: not-allowed;
+  color: #00083045;
+}
+
+.expand-select-dropdown {
+  max-height: 400px;
+  min-width: 300px;
+  overflow: auto;
+  padding: 8px;
+}
+
+.expand-select-input {
+  flex: 1;
+  border: 1px solid #000B3618;
+
+  &:hover,
+  &:focus,
+  &:active {
+    border-color: #000B3618;
   }
 }
 
-.ExpandSelectBoxSelects {
-  .rc-virtual-list-holder-inner {
-    display: block !important;
-  }
-}
-
-.rc-virtual-list-holder-inner {
-  display: block !important;
-}
-
-.ExpandSelectBox {
+.add-link {
+  display: flex;
+  min-width: 30px;
+  align-items: center;
+  cursor: pointer;
 }

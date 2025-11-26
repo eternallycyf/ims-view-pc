@@ -1,9 +1,9 @@
-import { ExpandSelect } from 'ims-view-pc';
+import { CustomForm, ExpandSelect } from 'ims-view-pc';
 
 const options = [
-  { label: 'jack', value: '1' },
-  { label: 'lucy', value: '2' },
-  { label: 'Yiminghe', value: '3' },
+  { label: 'jack', value: 'jack' },
+  { label: 'lucy', value: 'lucy' },
+  { label: 'Yiminghe', value: 'Yiminghe' },
   { label: '4', value: '4' },
   { label: '5', value: '5' },
   { label: '6', value: '6' },
@@ -13,7 +13,32 @@ const options = [
 ];
 
 const App = () => {
-  return <ExpandSelect options={options} />;
+  return (
+    <CustomForm
+      onFinish={(values) => {
+        console.log(values);
+      }}
+      modalType={CustomForm.ModalTypeEnum.normal}
+      formList={[
+        {
+          label: 'ExpandSelect',
+          name: 'expandSelect',
+          type: 'custom',
+          col: 24,
+          Component: (props) => {
+            return (
+              <ExpandSelect
+                value={props?.value}
+                onChange={props?.onChange}
+                options={options}
+                style={{ width: 200 }}
+              />
+            );
+          },
+        },
+      ]}
+    />
+  );
 };
 
 export default App;

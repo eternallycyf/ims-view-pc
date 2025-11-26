@@ -15,6 +15,7 @@ const TableExtraBtn = <T extends Record<string, any> = any>(props: TableExtraBtn
     popoverProps,
     clickCallBack,
     divider,
+    isFrame = false,
   } = props;
 
   const newBtnList = useMemo(() => {
@@ -31,6 +32,23 @@ const TableExtraBtn = <T extends Record<string, any> = any>(props: TableExtraBtn
   }, [newBtnList.length, maxShowMoreCount]);
 
   if (newBtnList?.length === 0) return emptyText as ReactNode;
+
+  if (isFrame) {
+    return (
+      <Space direction="vertical">
+        {newBtnList.slice(maxShowMoreCount).map((item, index) => {
+          const elementText =
+            typeof item.element === 'string'
+              ? item.element
+              : typeof item.element === 'function'
+              ? 'fn'
+              : 'node';
+          const key = `more-${item.type || 'btn'}-${elementText}-${index}`;
+          return <BtnElement key={key} {...item} record={record} clickCallBack={clickCallBack} />;
+        })}
+      </Space>
+    );
+  }
 
   return (
     <>
