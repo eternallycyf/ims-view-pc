@@ -1,5 +1,24 @@
 # Changelog
 
+## [Version&nbsp;1.87.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.86.0...ims-view-pc@1.87.0)
+
+<sup>Released on **2025-11-26**</sup>
+
+#### ✨ 新特性
+
+- **ims-view-pc**: Update ExpandSelect.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **ims-view-pc**: Update ExpandSelect ([db83cd8](https://github.com/eternallycyf/ims-view-pc/commit/db83cd8))
+
+</details>
+
 ## [Version&nbsp;1.86.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.85.0...ims-view-pc@1.86.0)
 
 <sup>Released on **2025-11-21**</sup>
