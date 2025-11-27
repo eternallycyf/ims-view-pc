@@ -1,5 +1,24 @@
 # Changelog
 
+### [Version&nbsp;1.87.1](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.87.0...ims-view-pc@1.87.1)
+
+<sup>Released on **2025-11-27**</sup>
+
+#### 🐛 修复
+
+- **ims-view-pc**: ExpandSelect options.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- **ims-view-pc**: ExpandSelect options ([f480778](https://github.com/eternallycyf/ims-view-pc/commit/f480778))
+
+</details>
+
 ## [Version&nbsp;1.87.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.86.0...ims-view-pc@1.87.0)
 
 <sup>Released on **2025-11-26**</sup>
