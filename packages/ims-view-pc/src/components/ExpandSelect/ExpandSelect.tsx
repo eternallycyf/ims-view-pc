@@ -1,7 +1,7 @@
 import { App, Divider, Input, Select, Tag, Typography, type InputRef } from 'antd';
 import { variables } from 'ims-view-pc';
 import lodash from 'lodash';
-import { FC, useRef, useState } from 'react';
+import { FC, useEffect, useRef, useState } from 'react';
 import './index.less';
 
 import type { ExpandSelectProps, ExpandSelectValue } from './interface';
@@ -12,6 +12,11 @@ const ExpandSelect: FC<ExpandSelectProps> = (props) => {
   const [items, setItems] = useState(options);
   const [name, setName] = useState('');
   const inputRef = useRef<InputRef>(null);
+
+  useEffect(() => {
+    const customOptions = items.filter((ele) => ele?.isCustom);
+    setItems([...customOptions, ...options]);
+  }, [options, items]);
 
   const onNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value);
