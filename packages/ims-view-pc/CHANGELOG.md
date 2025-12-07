@@ -1,5 +1,24 @@
 # Changelog
 
+### [Version&nbsp;1.87.2](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.87.1...ims-view-pc@1.87.2)
+
+<sup>Released on **2025-12-07**</sup>
+
+#### 🐛 修复
+
+- **ims-view-pc**: RichText add dept.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- **ims-view-pc**: RichText add dept ([bf3441a](https://github.com/eternallycyf/ims-view-pc/commit/bf3441a))
+
+</details>
+
 ### [Version&nbsp;1.87.1](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.87.0...ims-view-pc@1.87.1)
 
 <sup>Released on **2025-11-27**</sup>
