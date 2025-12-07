@@ -34,6 +34,7 @@
     "file-saver": "^2.0.5",
     "mark.js": "^8.11.1",
     "react-use": "^17.4.0",
+    "ahooks": "^3.9.6",
     "resize-observer-polyfill": "1.5.1",
     "runes2": "^1.1.2",
     "video.js": "^7.21.5",

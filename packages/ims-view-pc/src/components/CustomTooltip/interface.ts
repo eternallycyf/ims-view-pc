@@ -1,3 +1,4 @@
+import type { PopoverProps } from "antd";
 import type { EllipsisConfig } from 'antd/es/typography/Base';
 import type { CSSProperties, Dispatch, SetStateAction } from 'react';
 
@@ -35,4 +36,6 @@ export interface RichTextProps {
   emptyText?: string;
   expandable?: boolean;
   rows?: number;
+  PopoverProps?: PopoverProps
+  dept?: any[]
 }
