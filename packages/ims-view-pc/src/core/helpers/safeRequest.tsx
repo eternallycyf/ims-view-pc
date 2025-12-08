@@ -2,6 +2,20 @@ import { applyAwait } from '@ims-view/utils';
 import { message } from 'antd';
 import axios, { type AxiosResponse } from 'axios';
 
+export enum SafeRequestErrorEnum {
+  CALCEL = '请求已取消',
+  NETWORK_ERROR = 'Network Error',
+}
+
+// 捕捉 请求取消的情况
+export const lazyRequest = <T extends any>(
+  fn: () => Promise<AxiosResponse<ApiResponse<T>>>,
+): Promise<AxiosResponse<ApiResponse<T>>> => {
+  return new Promise((resolve, reject) => {
+    fn().then(resolve).catch(reject);
+  });
+};
+
 export interface SafeRequestOptions {
   showError?: boolean;
   finallyCallback?: Function;
@@ -60,10 +74,14 @@ interface ApiResponse<T> {
  * message.success('删除成功')
  */
 export async function safeRequest<T = any>(
-  promise: Promise<AxiosResponse<ApiResponse<T>>>,
+  promiseOrFactory:
+    | Promise<AxiosResponse<ApiResponse<T>>>
+    | (() => Promise<AxiosResponse<ApiResponse<T>>>),
   options?: SafeRequestOptions,
 ): Promise<[Error, undefined] | [null, ApiResponse<T>]> {
   const { showError = true, finallyCallback, defaultMsg = '操作失败，请稍后重试' } = options || {};
+
+  const promise = typeof promiseOrFactory === 'function' ? promiseOrFactory() : promiseOrFactory;
 
   try {
     const [err, res] = (await applyAwait(promise)) as
@@ -72,6 +90,10 @@ export async function safeRequest<T = any>(
 
     if (err instanceof Error) {
       let finalMsg = defaultMsg;
+
+      if ((err as any).code === 'ERR_CANCELED') {
+        return [Object.assign(err, { message: '请求已取消' }), undefined];
+      }
 
       if (axios.isAxiosError(err)) {
         if (err.response?.data?.msg) {
