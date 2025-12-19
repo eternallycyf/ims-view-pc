@@ -1,5 +1,24 @@
 # Changelog
 
+## [Version&nbsp;1.20.0](https://github.com/eternallycyf/ims-view-pc/compare/@ims-view/hooks@1.19.0...@ims-view/hooks@1.20.0)
+
+<sup>Released on **2025-12-19**</sup>
+
+#### ✨ 新特性
+
+- **ims-view-pc**: Add customSeach and customTag.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **ims-view-pc**: Add customSeach and customTag ([7c7cb5a](https://github.com/eternallycyf/ims-view-pc/commit/7c7cb5a))
+
+</details>
+
 ### [Version&nbsp;1.19.1](https://github.com/eternallycyf/ims-view-pc/compare/@ims-view/hooks@1.19.0...@ims-view/hooks@1.19.1)
 
 <sup>Released on **2025-12-19**</sup>
