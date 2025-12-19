@@ -10,14 +10,14 @@ export { default as CommonCard } from './components/CommonCard';
 export * from './components/CommonCard/interface';
 export { default as CommonDemo } from './components/CommonDemo';
 export * from './components/CommonDemo/interface';
-export { default as CustomDescriptions } from './components/CustomDescriptions';
-export * from './components/CustomDescriptions/interface';
 export { default as CommonEditTable } from './components/CommonEditTable';
 export * from './components/CommonEditTable/interface';
 export { default as CommonSearch } from './components/CommonSearch';
 export * from './components/CommonSearch/interface';
 export { default as CommonTable } from './components/CommonTable';
 export * from './components/CommonTable/interface';
+export { default as CustomDescriptions } from './components/CustomDescriptions';
+export * from './components/CustomDescriptions/interface';
 export { default as CustomForm } from './components/CustomForm';
 export type {
   BaseCustomFormProps,
@@ -76,6 +76,10 @@ export { default as FileUpload } from './components/FileUpload';
 export * from './components/FileUpload/interface';
 export * from './hooks';
 
+export { default as CustomSearch } from './components/CustomSearch';
+export * from './components/CustomSearch/interface';
+export { default as CustomTag } from './components/CustomTag';
+export * from './components/CustomTag/interface';
 export { default as FileViewer } from './components/FileViewer';
 export { TableExtraBtn } from './components/TableExtraBtn';
 export * from './components/TableExtraBtn/interface';

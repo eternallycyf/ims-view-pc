@@ -3,16 +3,18 @@ import { message } from 'antd';
 import axios, { type AxiosResponse } from 'axios';
 
 export enum SafeRequestErrorEnum {
-  CALCEL = '请求已取消',
+  CALCEL = 'ERR_CANCELED',
   NETWORK_ERROR = 'Network Error',
 }
 
-// 捕捉 请求取消的情况
 export const lazyRequest = <T extends any>(
   fn: () => Promise<AxiosResponse<ApiResponse<T>>>,
+  wait: number = 0,
 ): Promise<AxiosResponse<ApiResponse<T>>> => {
   return new Promise((resolve, reject) => {
-    fn().then(resolve).catch(reject);
+    setTimeout(() => {
+      fn().then(resolve).catch(reject);
+    }, wait);
   });
 };
 

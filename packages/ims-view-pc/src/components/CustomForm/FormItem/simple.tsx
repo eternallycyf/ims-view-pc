@@ -18,8 +18,10 @@ import {
   Switch,
   SwitchProps,
   TimePicker,
+  type SelectProps,
 } from 'antd';
 import { CheckboxGroupProps } from 'antd/es/checkbox';
+import type { SizeType } from 'antd/es/config-provider/SizeContext';
 import { RangePickerProps } from 'antd/es/date-picker';
 import { PickerProps } from 'antd/es/date-picker/generatePicker';
 import locale from 'antd/es/date-picker/locale/zh_CN';
@@ -30,7 +32,7 @@ import dayjs, { Dayjs } from 'dayjs';
 import 'dayjs/locale/zh-cn';
 import { AnyObject, DeepPartial, IBaseControlProps, IBaseCustomFormItemProps } from 'ims-view-pc';
 import _ from 'lodash';
-import React, { useImperativeHandle } from 'react';
+import React, { useImperativeHandle, type ReactNode } from 'react';
 const RadioGroup = Radio.Group;
 const CheckboxGroup: any = Checkbox.Group;
 const { TextArea, Password, Search } = Input;
@@ -56,12 +58,17 @@ type ISimpleBaseControlProps = IBaseSimpleBaseControlProps &
 
 export interface ISimpleControlProps<T = AnyObject>
   extends Omit<IBaseCustomFormItemProps<T>, 'type'> {
-  controlProps: DeepPartial<Omit<ISimpleBaseControlProps, 'placeholder'>> &
-    DatePickerProps &
-    RangePickerProps & {
-      onChange?: any;
-      placeholder?: string | string[] | undefined;
+  controlProps: DeepPartial<
+    Omit<ISimpleBaseControlProps, 'placeholder' | 'prefix' | 'size' | 'mode'>
+  > &
+    DeepPartial<Omit<DatePickerProps, 'placeholder' | 'prefix' | 'size' | 'mode'>> &
+    DeepPartial<Omit<RangePickerProps, 'placeholder' | 'prefix' | 'size' | 'mode'>> & {
+      onChange?: (...args: any[]) => any;
+      placeholder?: any;
+      prefix?: ReactNode;
       picker?: PickerProps<Dayjs>['picker'];
+      size?: SizeType;
+      mode?: SelectProps['mode'];
     };
   defaultVal?: any;
   checked?: boolean;

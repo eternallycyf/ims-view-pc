@@ -22,7 +22,6 @@ const SelectControl = React.forwardRef<any, SelectControlProps<Attachment[]>>((p
         noStyle: true,
       }}
       id={id}
-      options={dict}
       value={value}
       showSearch
       {...(controlProps as any)}
@@ -35,6 +34,7 @@ const SelectControl = React.forwardRef<any, SelectControlProps<Attachment[]>>((p
         }
       }}
       fieldProps={{
+        options: dict,
         notFoundContent: props?.controlProps?.loading ? <Spin spinning /> : null,
         ...controlProps,
       }}

@@ -39,7 +39,7 @@ const Paragraph = (props: ParagraphProps) => {
       style={
         isLink
           ? { cursor: 'pointer', color: variables.colorLink, ...customStyle, ...style }
-          : { ...customStyle, ...style }
+          : { color: 'inherit', ...customStyle, ...style }
       }
       {...mergedProps}
     >

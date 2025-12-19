@@ -1,5 +1,28 @@
 # Changelog
 
+### [Version&nbsp;1.88.1](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.88.0...ims-view-pc@1.88.1)
+
+<sup>Released on **2025-12-19**</sup>
+
+#### 🐛 修复
+
+- Error.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- Error ([4eacc48](https://github.com/eternallycyf/ims-view-pc/commit/4eacc48))
+
+</details>
+
+### Dependencies
+
+- **@ims-view/hooks:** upgraded to 1.19.1
+
 ## [Version&nbsp;1.88.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.87.2...ims-view-pc@1.88.0)
 
 <sup>Released on **2025-12-08**</sup>

@@ -67,7 +67,7 @@ const RichText: FC<RichTextProps> = (props) => {
       requestAnimationFrame(() => {
         const height = node?.getBoundingClientRect()?.height || 0;
 
-        if (height > maxHeight) {
+        if (~~height > maxHeight) {
           setExpand(true);
         } else {
           setExpand(false);

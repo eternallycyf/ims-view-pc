@@ -3,6 +3,8 @@ import { Search, type AnyObject, type DeepPartial, type FormControlType } from '
 import type { CSSProperties } from 'react';
 import React, { RefObject } from 'react';
 import { renderFormItem } from '../../core/helpers';
+import CustomSearch from '../CustomSearch';
+import useCustomSearch from '../CustomSearch/useCustomSearch';
 import CommonForm, { renderFormList } from './CustomForm';
 
 /**
@@ -88,6 +90,8 @@ type CompoundedComponent = typeof CompoundedCustomFrom & {
   renderFormItem: typeof renderFormItem;
   renderFormList: typeof renderFormList;
   ModalTypeEnum: typeof ModalTypeEnum;
+  CustomSearch: typeof CustomSearch;
+  useCustomSearch: typeof useCustomSearch;
 };
 
 const CustomForm = CompoundedCustomFrom as CompoundedComponent;
@@ -95,5 +99,7 @@ const CustomForm = CompoundedCustomFrom as CompoundedComponent;
 CustomForm.renderFormItem = renderFormItem;
 CustomForm.renderFormList = renderFormList;
 CustomForm.ModalTypeEnum = ModalTypeEnum;
+CustomForm.CustomSearch = CustomSearch;
+CustomForm.useCustomSearch = useCustomSearch;
 
 export default CustomForm;
