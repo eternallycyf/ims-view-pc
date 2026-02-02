@@ -23,7 +23,7 @@
   ],
   "scripts": {
     "start": "dumi dev",
-    "docs:build": "dumi build",
+    "docs:build": "npx dumi build",
     "build": "lerna run build  --parallel",
     "clean": "lerna run clean && rm -rf es lib dist build coverage .umi .eslintcache apis",
     "doctor": "lerna run doctor",
