@@ -1,5 +1,24 @@
 # Changelog
 
+## [Version&nbsp;1.90.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.89.0...ims-view-pc@1.90.0)
+
+<sup>Released on **2026-02-02**</sup>
+
+#### ✨ 新特性
+
+- **ims-view-pc**: Add ScrollHorizontalCard.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **ims-view-pc**: Add ScrollHorizontalCard ([9c3378a](https://github.com/eternallycyf/ims-view-pc/commit/9c3378a))
+
+</details>
+
 ## [Version&nbsp;1.89.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.88.0...ims-view-pc@1.89.0)
 
 <sup>Released on **2025-12-19**</sup>
