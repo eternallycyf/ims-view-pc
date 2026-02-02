@@ -90,3 +90,5 @@ export {
   type PluginClass,
   type PluginFunction,
 } from './core/helpers/Hookable';
+export { default as ScrollHorizontalCard } from './components/ScrollHorizontalCard';
+export * from './components/ScrollHorizontalCard/interface';

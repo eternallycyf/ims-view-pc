@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "axios": "^1.5.1",
+    "rc-motion": "^2.9.5",
     "@babel/runtime": "^7.23.1",
     "@ims-view/chart": "1.9.0",
     "@ims-view/hooks": "1.20.0",

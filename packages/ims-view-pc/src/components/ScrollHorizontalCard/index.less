@@ -1,0 +1,133 @@
+@motionDurationSlow: 0.3s;
+@marginXS: 8px;
+@paddingSM: 8px;
+@padding: 16px;
+@motionDurationMid: 0.2s;
+@motionEaseOut: cubic-bezier(0.215, 0.61, 0.355, 1);
+
+.ScrollHorizontalScrollX {
+  overflow-x: auto;
+  overflow-y: hidden;
+  flex-wrap: nowrap !important;
+
+  &::before,
+  &::after {
+    top: 0;
+    bottom: 0;
+    width: 8px;
+  }
+
+  &::before {
+    left: 0;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.06), rgba(0, 0, 0, 0));
+  }
+
+  &::after {
+    right: 0;
+    background: linear-gradient(to left, rgba(0, 0, 0, 0.06), rgba(0, 0, 0, 0));
+  }
+}
+
+.ScrollHorizontalScrollX {
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    opacity: 0;
+    transition: opacity @motionDurationSlow;
+    z-index: 1;
+  }
+}
+
+.ScrollHorizontalCardList {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: @marginXS;
+  padding-block: @paddingSM;
+  padding-inline: @padding;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.ScrollHorizontalHiddenScrollBar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.ScrollHorizontalPingStart::before {
+  opacity: 1;
+}
+
+.ScrollHorizontalPingEnd::after {
+  opacity: 1;
+}
+
+
+.ScrollHorizontalCardWrapper {
+  position: relative;
+
+  .ScrollHorizontalMask {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100px;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .ScrollHorizontalMaskLeft {
+    left: 0;
+    background: linear-gradient(90deg, #FFF 0%, rgba(255, 255, 255, 0) 100%);
+  }
+
+  .ScrollHorizontalMaskRight {
+    right: 0;
+    background: linear-gradient(270deg, #FFF 0%, rgba(255, 255, 255, 0) 100%);
+  }
+}
+
+.ScrollHorizontalMotion {
+  transition: opacity @motionDurationSlow;
+
+  &LeaveActive {
+    opacity: 0;
+    margin-inline-end: calc(@marginXS * -1);
+  }
+}
+
+.ScrollHorizontalItem {
+  min-width: var(--min-width, 240px);
+  display: flex;
+  position: relative;
+}
+
+.ScrollHorizontalPrevBtn,
+.ScrollHorizontalNextBtn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  box-shadow: var(--boxShadowTertiary, 0 1px 2px 0 rgba(0, 0, 0, 0.03), 0 1px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px 0 rgba(0, 0, 0, 0.02));
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+  z-index: 2;
+  /* 保证在伪元素上方 */
+}
+
+.ScrollHorizontalPingStart .ScrollHorizontalPrevBtn,
+.ScrollHorizontalPingEnd .ScrollHorizontalNextBtn {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.ScrollHorizontalNextBtn {
+  right: @padding;
+}
