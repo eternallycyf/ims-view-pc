@@ -75,8 +75,8 @@ const ScrollHorizontalCard = <T extends { key: string }>({
           motionName="ScrollHorizontalMotion"
           component={false}
           motionAppear={false}
-          motionLeave
-          motionEnter
+          motionLeave={false}
+          motionEnter={false}
         >
           {({ key, index, item, className: motionCls, style: motionStyle }: any) => {
             return (
