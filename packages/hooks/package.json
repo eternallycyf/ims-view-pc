@@ -1,6 +1,6 @@
 {
   "name": "@ims-view/hooks",
-  "version": "1.20.0",
+  "version": "1.21.0",
   "main": "lib/index.js",
   "unpkg": "dist/index.js",
   "module": "es/index.js",

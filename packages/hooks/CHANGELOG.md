@@ -1,5 +1,24 @@
 # Changelog
 
+## [Version&nbsp;1.21.0](https://github.com/eternallycyf/ims-view-pc/compare/@ims-view/hooks@1.20.0...@ims-view/hooks@1.21.0)
+
+<sup>Released on **2026-02-24**</sup>
+
+#### ✨ 新特性
+
+- Update antd version to v6.x.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- Update antd version to v6.x ([8cd50d9](https://github.com/eternallycyf/ims-view-pc/commit/8cd50d9))
+
+</details>
+
 ## [Version&nbsp;1.20.0](https://github.com/eternallycyf/ims-view-pc/compare/@ims-view/hooks@1.19.0...@ims-view/hooks@1.20.0)
 
 <sup>Released on **2025-12-19**</sup>
