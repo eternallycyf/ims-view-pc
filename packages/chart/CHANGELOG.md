@@ -1,5 +1,24 @@
 # Changelog
 
+## [Version&nbsp;1.10.0](https://github.com/eternallycyf/ims-view-pc/compare/@ims-view/chart@1.9.0...@ims-view/chart@1.10.0)
+
+<sup>Released on **2026-02-24**</sup>
+
+#### ✨ 新特性
+
+- Update antd version to v6.x.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- Update antd version to v6.x ([8cd50d9](https://github.com/eternallycyf/ims-view-pc/commit/8cd50d9))
+
+</details>
+
 ## [Version&nbsp;1.9.0](https://github.com/eternallycyf/ims-view-pc/compare/@ims-view/chart@1.8.1...@ims-view/chart@1.9.0)
 
 <sup>Released on **2025-11-21**</sup>
