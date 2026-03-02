@@ -2,7 +2,7 @@ import { Form } from 'antd';
 import dayjs from 'dayjs';
 import { CustomTooltip, Ellipsis, Search } from 'ims-view-pc';
 import _ from 'lodash';
-import React from 'react';
+import React, { Suspense } from 'react';
 import { FieldCompType } from '../../type/form';
 import { formatNumber, formatPercent, formatTime, getDictMap, renderTooltip } from './utils';
 export { FormRenderer } from './FormRender';
@@ -117,6 +117,13 @@ export const getFieldComp: FieldCompType = ({
 
   if (!FieldComp) return null;
 
+  const LazyField = (
+    <Suspense fallback={<div>loading</div>}>
+      <FieldComp {...formProps} />
+    </Suspense>
+  )
+
+
   if (form) {
     return (
       <Form.Item name={name} label={label ?? ''} {...(formProps?.itemProps as any)}>
@@ -124,7 +131,7 @@ export const getFieldComp: FieldCompType = ({
       </Form.Item>
     );
   } else {
-    return <FieldComp {...formProps} />;
+    return LazyField
   }
 };
 
