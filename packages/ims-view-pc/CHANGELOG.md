@@ -1,5 +1,24 @@
 # Changelog
 
+### [Version&nbsp;1.91.1](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.91.0...ims-view-pc@1.91.1)
+
+<sup>Released on **2026-03-02**</sup>
+
+#### 🐛 修复
+
+- **ims-view-pc**: 修复问题.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- **ims-view-pc**: 修复问题 ([95d7ba8](https://github.com/eternallycyf/ims-view-pc/commit/95d7ba8))
+
+</details>
+
 ## [Version&nbsp;1.91.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.90.1...ims-view-pc@1.91.0)
 
 <sup>Released on **2026-02-24**</sup>
