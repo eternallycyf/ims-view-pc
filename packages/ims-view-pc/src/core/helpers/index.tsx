@@ -117,13 +117,6 @@ export const getFieldComp: FieldCompType = ({
 
   if (!FieldComp) return null;
 
-  const LazyField = (
-    <Suspense fallback={<div>loading</div>}>
-      <FieldComp {...formProps} />
-    </Suspense>
-  )
-
-
   if (form) {
     return (
       <Form.Item name={name} label={label ?? ''} {...(formProps?.itemProps as any)}>
@@ -131,7 +124,7 @@ export const getFieldComp: FieldCompType = ({
       </Form.Item>
     );
   } else {
-    return LazyField
+    return <FieldComp {...formProps} />
   }
 };
 

@@ -1,6 +1,6 @@
 import type { DrawerProps, FormInstance, FormProps, ModalProps, RowProps } from 'antd';
 import { Search, type AnyObject, type DeepPartial, type FormControlType } from 'ims-view-pc';
-import type { CSSProperties } from 'react';
+import type { CSSProperties, ReactNode } from 'react';
 import React, { RefObject } from 'react';
 import { renderFormItem } from '../../core/helpers';
 import CustomSearch from '../CustomSearch';
@@ -30,8 +30,8 @@ export type CustomFormList<Values = AnyObject, Rest = AnyObject, Extra = unknown
 > & {
   col?: number;
   children?:
-    | Search<Values, Rest, Extra>
-    | ((values: Values, form: FormInstance<Values>) => CustomFormList<Values, Rest, Extra> | false);
+  | Search<Values, Rest, Extra>
+  | ((values: Values, form: FormInstance<Values>) => CustomFormList<Values, Rest, Extra> | false);
 })[];
 
 export interface CustomFormHandle<
@@ -61,6 +61,7 @@ export interface BaseCustomFormProps<Values = AnyObject, Rest = AnyObject> {
   okButtonProps?: ModalProps['okButtonProps'];
   cancelButtonProps?: ModalProps['cancelButtonProps'];
   open?: boolean;
+  footer?: ReactNode | ((cancelBtn: ReactNode, confirmBtn: ReactNode) => ReactNode)
 }
 
 export type CustomFormProps<
@@ -69,12 +70,12 @@ export type CustomFormProps<
   Type = 'normal',
 > = BaseCustomFormProps<Values, Rest> &
   (Type extends 'modal'
-    ? Omit<ModalProps, 'onCancel' | 'children'>
+    ? Omit<ModalProps, 'onCancel' | 'children' | 'onOk' | 'footer'>
     : Type extends 'drawer'
-    ? Omit<DrawerProps, 'onCancel' | 'children'>
+    ? Omit<DrawerProps, 'onCancel' | 'children' | 'onOk' | 'footer'>
     : {
-        footer?: React.ReactNode;
-      });
+
+    });
 
 const CompoundedCustomFrom = React.forwardRef<CustomFormHandle, CustomFormProps>(CommonForm) as <
   Values = Record<string, unknown>,

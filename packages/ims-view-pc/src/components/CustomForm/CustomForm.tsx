@@ -1,7 +1,7 @@
 import type { DrawerProps, ModalProps } from 'antd';
 import { Button, Col, Drawer, Form, Modal, Row, Space, Spin } from 'antd';
 import { renderFormItem } from 'ims-view-pc';
-import React, { useImperativeHandle, useMemo, useState } from 'react';
+import React, { useImperativeHandle, useMemo, useState, type ReactNode } from 'react';
 import { ModalTypeEnum } from './';
 import './index.less';
 import type { CustomFormHandle, CustomFormList, CustomFormProps } from './interface';
@@ -181,21 +181,35 @@ function CustomForm<
   };
 
   const renderSummiter = (
-    params: Pick<ModalProps, 'footer' | 'cancelButtonProps' | 'okButtonProps'> & {
-      cancelText?: React.ReactNode;
-      okText?: React.ReactNode;
+    params: Pick<ModalProps, 'cancelButtonProps' | 'okButtonProps'> & {
+      cancelText?: React.ReactNode
+      okText?: React.ReactNode
+      footer?: any
     },
-  ) => {
-    if (props?.footer === null) return null;
+  ): ReactNode => {
+    if (props?.footer === null) return null
+    const cancelBtn = (
+      <Button {...params?.cancelButtonProps} type="primary" ghost>
+        {params?.cancelText || '取消'}
+      </Button>
+    )
+    const confirmBtn = (
+      <Button type="primary" htmlType="submit" {...params.okButtonProps}>
+        {params?.okText || '确定'}
+      </Button>
+    )
+
+    if (typeof footer === 'function') {
+      return <Space>{footer(cancelBtn, confirmBtn)}</Space>
+    }
+
     return (
       <Space>
-        <Button {...params?.cancelButtonProps}>{params?.cancelText || '取消'}</Button>
-        <Button type="primary" htmlType="submit" {...params.okButtonProps}>
-          {params?.okText || '确定'}
-        </Button>
+        {cancelBtn}
+        {confirmBtn}
       </Space>
-    );
-  };
+    )
+  }
 
   let Component: any = null;
   switch (modalType) {
@@ -205,7 +219,7 @@ function CustomForm<
         onClose: () => {
           onCancel && onCancel(getFormValues());
         },
-        footer: footer ?? renderSummiter(WrapperProps),
+        footer: typeof footer !== 'function' && footer ? footer : renderSummiter(WrapperProps),
         maskClosable: false,
         centered: true,
         ...WrapperProps,
@@ -221,7 +235,7 @@ function CustomForm<
         centered: true,
         maskClosable: false,
         ...WrapperProps,
-        footer: footer ?? renderSummiter(WrapperProps),
+        footer: typeof footer !== 'function' && footer ? footer : renderSummiter(WrapperProps),
         modalRender,
       } as ModalProps;
       break;
