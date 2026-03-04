@@ -1,5 +1,5 @@
 import { random } from '@ims-view/utils';
-import { Col, Empty, Form, FormListFieldData, Row } from 'antd';
+import { Col, Empty, Form, FormListFieldData, Row, Spin } from 'antd';
 import {
   ErrorBoundary,
   IButtonProps,
@@ -14,7 +14,7 @@ import {
   renderFormItem,
 } from 'ims-view-pc';
 import _ from 'lodash';
-import React, { Fragment, Key, useImperativeHandle } from 'react';
+import React, { Fragment, Key, Suspense, useImperativeHandle } from 'react';
 import { formatColumn } from '../../core/helpers';
 import { Table } from './';
 import TableBtn from './TableBtn';
@@ -60,7 +60,7 @@ const CommonEditTable: React.ForwardRefRenderFunction<
     rules = [],
   } = props;
 
-  const {} = tableProps;
+  const { } = tableProps;
   const EditTableContextInitProps = {
     form,
     operation: {},
@@ -241,7 +241,7 @@ const CommonEditTable: React.ForwardRefRenderFunction<
               shouldUpdate={
                 typeof itemProps?.shouldUpdate === 'function'
                   ? //@ts-ignore
-                    (pre, cru, source) => itemProps?.shouldUpdate(pre, cru, index)
+                  (pre, cru, source) => itemProps?.shouldUpdate(pre, cru, index)
                   : () => false
               }
             >
@@ -395,59 +395,61 @@ const CommonEditTable: React.ForwardRefRenderFunction<
 
   return (
     <ErrorBoundary>
-      <Form.List name={tableFormName} initialValue={initialValues} rules={rules} {...formListProps}>
-        {(fields, operation, { errors }) => {
-          return (
-            <EditTableContext.Provider value={{ ...EditTableContextProviderProps, operation }}>
-              <Form.Item noStyle>
-                <EditTableContext.Consumer>
-                  {typeof beforeChildren === 'function' ? beforeChildren : () => null}
-                </EditTableContext.Consumer>
-              </Form.Item>
-              {renderButtonRow(buttonLeft, buttonRight, operation)}
-              <Form.Item className="EditTableContent">
-                <Table
-                  className={`${fields?.length > 0 ? '' : 'noDataTable'} ${tableProps?.className}`}
-                  isVirtual={fields?.length >= 100 ? isVirtual : false}
-                  status={status}
-                  scroll={isVirtual ? { y: 800 } : false}
-                  onSearchOrReset={(scrollRef: any) =>
-                    scrollRef?.current?.dispatchEvent(new CustomEvent('scroll'))
-                  }
-                  dataSource={fields}
-                  columns={getDefaultColumns(operation, status)}
-                  rowKey={'key'}
-                  pagination={false}
-                  bordered
-                  size="small"
-                  locale={{
-                    emptyText: (
-                      <Empty
-                        description={<span style={{ color: '#B3B8C2' }}>暂无数据</span>}
-                        style={{
-                          color: '#B3B8C2',
-                          fontSize: 12,
-                          marginTop: 8,
-                          marginBottom: 10,
-                        }}
-                        image={<Theme.Empty.Doc />}
-                      />
-                    ),
-                  }}
-                  {...tableProps}
-                />
-              </Form.Item>
-              {renderButtonRow(buttonBottomLeft, buttonBottomRight, operation)}
-              <Form.Item noStyle>
-                <EditTableContext.Consumer>
-                  {typeof afterChildren === 'function' ? afterChildren : () => null}
-                </EditTableContext.Consumer>
-              </Form.Item>
-              <Form.ErrorList errors={errors} />
-            </EditTableContext.Provider>
-          );
-        }}
-      </Form.List>
+      <Suspense fallback={<Spin />}>
+        <Form.List name={tableFormName} initialValue={initialValues} rules={rules} {...formListProps}>
+          {(fields, operation, { errors }) => {
+            return (
+              <EditTableContext.Provider value={{ ...EditTableContextProviderProps, operation }}>
+                <Form.Item noStyle>
+                  <EditTableContext.Consumer>
+                    {typeof beforeChildren === 'function' ? beforeChildren : () => null}
+                  </EditTableContext.Consumer>
+                </Form.Item>
+                {renderButtonRow(buttonLeft, buttonRight, operation)}
+                <Form.Item className="EditTableContent">
+                  <Table
+                    className={`${fields?.length > 0 ? '' : 'noDataTable'} ${tableProps?.className}`}
+                    isVirtual={fields?.length >= 100 ? isVirtual : false}
+                    status={status}
+                    scroll={isVirtual ? { y: 800 } : false}
+                    onSearchOrReset={(scrollRef: any) =>
+                      scrollRef?.current?.dispatchEvent(new CustomEvent('scroll'))
+                    }
+                    dataSource={fields}
+                    columns={getDefaultColumns(operation, status)}
+                    rowKey={'key'}
+                    pagination={false}
+                    bordered
+                    size="small"
+                    locale={{
+                      emptyText: (
+                        <Empty
+                          description={<span style={{ color: '#B3B8C2' }}>暂无数据</span>}
+                          style={{
+                            color: '#B3B8C2',
+                            fontSize: 12,
+                            marginTop: 8,
+                            marginBottom: 10,
+                          }}
+                          image={<Theme.Empty.Doc />}
+                        />
+                      ),
+                    }}
+                    {...tableProps}
+                  />
+                </Form.Item>
+                {renderButtonRow(buttonBottomLeft, buttonBottomRight, operation)}
+                <Form.Item noStyle>
+                  <EditTableContext.Consumer>
+                    {typeof afterChildren === 'function' ? afterChildren : () => null}
+                  </EditTableContext.Consumer>
+                </Form.Item>
+                <Form.ErrorList errors={errors} />
+              </EditTableContext.Provider>
+            );
+          }}
+        </Form.List>
+      </Suspense>
     </ErrorBoundary>
   );
 };

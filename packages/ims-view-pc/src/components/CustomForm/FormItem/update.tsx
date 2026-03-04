@@ -1,5 +1,5 @@
 import { random } from '@ims-view/utils';
-import { Col, Form, FormInstance, Row } from 'antd';
+import { Col, Form, FormInstance, Row, Spin } from 'antd';
 import {
   AnyObject,
   DeepPartial,
@@ -8,7 +8,7 @@ import {
   renderFormItem,
   type FormControlType,
 } from 'ims-view-pc';
-import React, { Fragment, useImperativeHandle, useState } from 'react';
+import React, { Fragment, Suspense, useImperativeHandle, useState } from 'react';
 
 export type Next<
   Values = AnyObject,
@@ -44,46 +44,48 @@ const UpdateControl = React.forwardRef<any, IUpdateControlProps>((props, ref) =>
 
   const shouldUpdateProps = shouldUpdate
     ? {
-        shouldUpdate: (pre, cru) => shouldUpdate(pre, cru),
-      }
+      shouldUpdate: (pre, cru) => shouldUpdate(pre, cru),
+    }
     : {};
 
   return (
-    <Form.Item noStyle {...shouldUpdateProps}>
-      {(form) => {
-        const values = form.getFieldsValue();
+    <Suspense fallback={<Spin />}>
+      <Form.Item noStyle {...shouldUpdateProps}>
+        {(form) => {
+          const values = form.getFieldsValue();
 
-        if (!next) return null;
-        const nextValues = next(values, form);
-        if (nextValues === false) return null;
-        if (
-          typeof nextValues === 'string' ||
-          (React.isValidElement(nextValues) && !Array.isArray(nextValues))
-        ) {
-          return nextValues;
-        }
+          if (!next) return null;
+          const nextValues = next(values, form);
+          if (nextValues === false) return null;
+          if (
+            typeof nextValues === 'string' ||
+            (React.isValidElement(nextValues) && !Array.isArray(nextValues))
+          ) {
+            return nextValues;
+          }
 
-        return (
-          <Fragment key={random.getUUID()}>
-            {((nextValues as any[]) || []).map((item: any, index: number) => (
-              <Col span={item?.['col'] == undefined ? 24 : item?.['col'] || 0} key={index}>
-                <Form.Item
-                  labelAlign="right"
-                  label={item?.label}
-                  name={item?.name}
-                  rules={item?.rules || []}
-                  initialValue={item?.initialValue}
-                  {...item.layout}
-                  {...item.itemProps}
-                >
-                  {renderFormItem(item)}
-                </Form.Item>
-              </Col>
-            ))}
-          </Fragment>
-        );
-      }}
-    </Form.Item>
+          return (
+            <Fragment key={random.getUUID()}>
+              {((nextValues as any[]) || []).map((item: any, index: number) => (
+                <Col span={item?.['col'] == undefined ? 24 : item?.['col'] || 0} key={index}>
+                  <Form.Item
+                    labelAlign="right"
+                    label={item?.label}
+                    name={item?.name}
+                    rules={item?.rules || []}
+                    initialValue={item?.initialValue}
+                    {...item.layout}
+                    {...item.itemProps}
+                  >
+                    {renderFormItem(item)}
+                  </Form.Item>
+                </Col>
+              ))}
+            </Fragment>
+          );
+        }}
+      </Form.Item>
+    </Suspense>
   );
 });
 

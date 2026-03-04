@@ -1,7 +1,7 @@
 import type { DrawerProps, ModalProps } from 'antd';
 import { Button, Col, Drawer, Form, Modal, Row, Space, Spin } from 'antd';
 import { renderFormItem } from 'ims-view-pc';
-import React, { useImperativeHandle, useMemo, useState, type ReactNode } from 'react';
+import React, { Suspense, useImperativeHandle, useMemo, useState, type ReactNode } from 'react';
 import { ModalTypeEnum } from './';
 import './index.less';
 import type { CustomFormHandle, CustomFormList, CustomFormProps } from './interface';
@@ -142,7 +142,9 @@ function CustomForm<
         {...formInstanceProps}
         className={`h-full w-full ${formProps?.className}`}
       >
-        {node}
+        <Suspense fallback={<Spin />}>
+          {node}
+        </Suspense>
       </Form>
     );
   };

@@ -1,9 +1,9 @@
 import { DownOutlined } from '@ant-design/icons';
-import { Button, Col, Form, Row, Space } from 'antd';
+import { Button, Col, Form, Row, Space, Spin } from 'antd';
 import { renderFormItem, type ISearchesType } from 'ims-view-pc';
 import _ from 'lodash';
 import RcResizeObserver from 'rc-resize-observer';
-import React, { useCallback, useEffect, useImperativeHandle, useState } from 'react';
+import React, { Suspense, useCallback, useEffect, useImperativeHandle, useState } from 'react';
 import { variables } from '../../styles/variables';
 import ErrorBoundary from '../ErrorBoundary';
 import './index.less';
@@ -367,10 +367,12 @@ const CommonSearch: React.ForwardRefRenderFunction<CommonSearchHandle, CommonSea
               },
             }}
           >
-            <Row wrap gutter={{ md: 4, lg: 12, xl: 24 }}>
-              {getFormItems()}
-              {children}
-            </Row>
+            <Suspense fallback={<Spin />}>
+              <Row wrap gutter={{ md: 4, lg: 12, xl: 24 }}>
+                {getFormItems()}
+                {children}
+              </Row>
+            </Suspense>
           </Form>
           {hasDivider && <Line />}
         </div>

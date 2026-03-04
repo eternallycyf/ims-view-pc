@@ -1,6 +1,6 @@
 import { CloseOutlined, PlusCircleFilled, WarningOutlined } from '@ant-design/icons';
 import { random } from '@ims-view/utils';
-import { Button, Card, Col, Form, FormListFieldData, Row } from 'antd';
+import { Button, Card, Col, Form, FormListFieldData, Row, Spin } from 'antd';
 import { FormInstance } from 'antd/lib';
 import { LabeledValue } from 'antd/lib/select';
 import dayjs from 'dayjs';
@@ -12,7 +12,7 @@ import {
   renderFormItem,
 } from 'ims-view-pc';
 import _ from 'lodash';
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
 
 //#region
 export interface ICustomerListRecord {
@@ -21,7 +21,7 @@ export interface ICustomerListRecord {
   age?: number;
 }
 
-export interface IColumnsExtraRecord {}
+export interface IColumnsExtraRecord { }
 
 interface IActivityListBaseRecord {
   custName?: string;
@@ -67,88 +67,88 @@ export const getColumns: (
 ) => ICommonEditTableColumnsType<ICustomerListRecord, IColumnsExtraRecord, IFormValues>[] = (
   params,
 ) => {
-  // 第几个活动
-  const { field } = params;
+    // 第几个活动
+    const { field } = params;
 
-  return [
-    {
-      dataIndex: 'time',
-      title: '失效时间',
-      hasRequiredMark: true,
-      type: 'update',
-      align: 'left',
-      formItemProps: {
-        itemProps: {
-          shouldUpdate: (pre, cru, index) => {
-            return !_.isEqual(
-              pre?.activityList?.[field?.name]?.customerList?.[index]?.['age'],
-              cru?.activityList?.[field?.name]?.customerList?.[index]?.['age'],
-            );
-          },
-          next: (values, form, index) => {
-            const currentValues = values?.activityList?.[field?.name]?.customerList?.[index];
-            return [
-              {
-                name: [index, 'time'],
-                type: 'date',
-                rules: [],
-              },
-            ];
-          },
-        },
-      },
-    },
-    {
-      dataIndex: 'customerName',
-      title: '公司',
-      hasRequiredMark: true,
-      type: 'update',
-      align: 'left',
-      formItemProps: {
-        itemProps: {
-          shouldUpdate: () => false,
-          next(values, form, index) {
-            const currentValues = values?.activityList?.[field?.name]?.customerList?.[index];
-            return [
-              {
-                name: [index, 'customerName'],
-                type: 'custom',
-                align: 'left',
-                ellipsis: true,
-                editable: false,
-                Component() {
-                  return currentValues?.customerName ?? '--';
+    return [
+      {
+        dataIndex: 'time',
+        title: '失效时间',
+        hasRequiredMark: true,
+        type: 'update',
+        align: 'left',
+        formItemProps: {
+          itemProps: {
+            shouldUpdate: (pre, cru, index) => {
+              return !_.isEqual(
+                pre?.activityList?.[field?.name]?.customerList?.[index]?.['age'],
+                cru?.activityList?.[field?.name]?.customerList?.[index]?.['age'],
+              );
+            },
+            next: (values, form, index) => {
+              const currentValues = values?.activityList?.[field?.name]?.customerList?.[index];
+              return [
+                {
+                  name: [index, 'time'],
+                  type: 'date',
+                  rules: [],
                 },
-              },
-            ];
+              ];
+            },
           },
         },
       },
-    },
-    {
-      dataIndex: 'age',
-      title: '年龄',
-      hasRequiredMark: true,
-      type: 'update',
-      align: 'left',
-      formItemProps: {
-        itemProps: {
-          shouldUpdate: () => false,
-          next(values, form, index) {
-            const currentValues = values?.activityList?.[field?.name]?.customerList?.[index];
-            return [
-              {
-                name: [index, 'age'],
-                type: 'inputNumber',
-                ellipsis: true,
-              },
-            ];
+      {
+        dataIndex: 'customerName',
+        title: '公司',
+        hasRequiredMark: true,
+        type: 'update',
+        align: 'left',
+        formItemProps: {
+          itemProps: {
+            shouldUpdate: () => false,
+            next(values, form, index) {
+              const currentValues = values?.activityList?.[field?.name]?.customerList?.[index];
+              return [
+                {
+                  name: [index, 'customerName'],
+                  type: 'custom',
+                  align: 'left',
+                  ellipsis: true,
+                  editable: false,
+                  Component() {
+                    return currentValues?.customerName ?? '--';
+                  },
+                },
+              ];
+            },
           },
         },
       },
-    },
-  ];
-};
+      {
+        dataIndex: 'age',
+        title: '年龄',
+        hasRequiredMark: true,
+        type: 'update',
+        align: 'left',
+        formItemProps: {
+          itemProps: {
+            shouldUpdate: () => false,
+            next(values, form, index) {
+              const currentValues = values?.activityList?.[field?.name]?.customerList?.[index];
+              return [
+                {
+                  name: [index, 'age'],
+                  type: 'inputNumber',
+                  ellipsis: true,
+                },
+              ];
+            },
+          },
+        },
+      },
+    ];
+  };
 
 export const getFormList = (
   params: IGetFormListParams,
@@ -275,124 +275,125 @@ const App: React.FC = () => {
     <div>
       <Button onClick={handleInitPage}>填充表单</Button>
       <Form<IFormValues> form={form} initialValues={{ activityList: [{}] }} layout="vertical">
-        <Row gutter={16} style={{ width: '100%' }}>
-          <Form.List name="activityList">
-            {(activityListFields, { add, remove }, { errors }) => {
-              return (
-                <div
-                  style={{ display: 'flex', rowGap: 16, flexDirection: 'column', width: '100%' }}
-                >
-                  {activityListFields.map((activityListFields) => (
-                    <Card
-                      size="small"
-                      title={`活动${activityListFields.name + 1}`}
-                      key={activityListFields.key}
-                      extra={<CloseOutlined onClick={() => remove(activityListFields.name)} />}
-                    >
-                      {(
-                        (status == 'view'
-                          ? getFormList({ ...formListParams, field: activityListFields }) || []
-                          : getFormList({ ...formListParams, field: activityListFields })) || []
-                      ).map((item) => {
-                        const Content = (
-                          <Form.Item
-                            labelAlign="left"
-                            label={item.label as string}
-                            name={item.name}
-                            rules={item?.itemProps?.rules || []}
-                            initialValue={item?.initialValue}
-                            {...(item.itemProps as any)}
-                          >
-                            {renderFormItem(item)}
-                          </Form.Item>
-                        );
-                        if (item.type == 'update') return Content;
-                        return (
-                          <Col
-                            span={item?.['col'] ?? 12}
-                            key={(item?.name as string) || random.getUUID()}
-                          >
-                            {Content}
-                          </Col>
-                        );
-                      })}
-
-                      <CommonEditTable<ICustomerListRecord, IColumnsExtraRecord, IFormValues>
-                        form={form}
-                        isMultiple
-                        status={'edit'}
-                        columns={getColumns({ field: activityListFields })}
-                        buttonLeft={[]}
-                        name={[activityListFields.name, 'customerList']}
-                        buttonRight={[
-                          {
-                            type: 'default',
-                            element: '添加到头部',
-                            visible: (renderProps, operation, status) => status == 'edit',
-                            itemProps: {
-                              buttonProps: {
-                                onClick: (renderProps, operation, status, val) => {
-                                  operation.add({ customerName: '公司' }, 0);
-                                },
-                              },
-                            },
-                          },
-                          {
-                            buttonType: 'default',
-                            element: '全部删除',
-                            itemProps: {
-                              buttonProps: {
-                                onClick: (renderProps, operation, status, val) => {
-                                  form.setFieldValue('activityList', []);
-                                },
-                                disabled: status == 'view',
-                                icon: <WarningOutlined />,
-                              },
-                            },
-                            visible: (renderProps, operation, status) => status == 'edit',
-                          },
-                        ]}
-                        itemButton={[
-                          {
-                            type: 'delete',
-                            buttonType: 'default',
-                            element: '删除',
-                            itemProps: {
-                              deleteText: '确认删除嘛',
-                              handleDeleteConfirm: (renderProps, operation, status, val) => {
-                                operation.remove(renderProps.index);
-                              },
-                            },
-                          },
-                        ]}
-                        afterChildren={(values) => {
-                          if (status == 'view') return null;
-                          return (
-                            <div style={{ display: 'grid', placeContent: 'center' }}>
-                              <Button
-                                type="link"
-                                icon={<PlusCircleFilled />}
-                                onClick={() => values.operation.add({ customerName: '添加到尾部' })}
-                              >
-                                添加客户
-                              </Button>
-                            </div>
+        <Suspense fallback={<Spin />}>
+          <Row gutter={16} style={{ width: '100%' }}>
+            <Form.List name="activityList">
+              {(activityListFields, { add, remove }, { errors }) => {
+                return (
+                  <div
+                    style={{ display: 'flex', rowGap: 16, flexDirection: 'column', width: '100%' }}
+                  >
+                    {activityListFields.map((activityListFields) => (
+                      <Card
+                        size="small"
+                        title={`活动${activityListFields.name + 1}`}
+                        key={activityListFields.key}
+                        extra={<CloseOutlined onClick={() => remove(activityListFields.name)} />}
+                      >
+                        {(
+                          (status == 'view'
+                            ? getFormList({ ...formListParams, field: activityListFields }) || []
+                            : getFormList({ ...formListParams, field: activityListFields })) || []
+                        ).map((item) => {
+                          const Content = (
+                            <Form.Item
+                              labelAlign="left"
+                              label={item.label as string}
+                              name={item.name}
+                              rules={item?.itemProps?.rules || []}
+                              initialValue={item?.initialValue}
+                              {...(item.itemProps as any)}
+                            >
+                              {renderFormItem(item)}
+                            </Form.Item>
                           );
-                        }}
-                      />
-                    </Card>
-                  ))}
-                  <Form.Item>
-                    <Button type="dashed" onClick={() => add()} block>
-                      添加活动
-                    </Button>
-                  </Form.Item>
-                  <Form.ErrorList errors={errors} />
-                </div>
-              );
-            }}
-          </Form.List>
-        </Row>
+                          if (item.type == 'update') return Content;
+                          return (
+                            <Col
+                              span={item?.['col'] ?? 12}
+                              key={(item?.name as string) || random.getUUID()}
+                            >
+                              {Content}
+                            </Col>
+                          );
+                        })}
+
+                        <CommonEditTable<ICustomerListRecord, IColumnsExtraRecord, IFormValues>
+                          form={form}
+                          isMultiple
+                          status={'edit'}
+                          columns={getColumns({ field: activityListFields })}
+                          buttonLeft={[]}
+                          name={[activityListFields.name, 'customerList']}
+                          buttonRight={[
+                            {
+                              type: 'default',
+                              element: '添加到头部',
+                              visible: (renderProps, operation, status) => status == 'edit',
+                              itemProps: {
+                                buttonProps: {
+                                  onClick: (renderProps, operation, status, val) => {
+                                    operation.add({ customerName: '公司' }, 0);
+                                  },
+                                },
+                              },
+                            },
+                            {
+                              buttonType: 'default',
+                              element: '全部删除',
+                              itemProps: {
+                                buttonProps: {
+                                  onClick: (renderProps, operation, status, val) => {
+                                    form.setFieldValue('activityList', []);
+                                  },
+                                  disabled: status == 'view',
+                                  icon: <WarningOutlined />,
+                                },
+                              },
+                              visible: (renderProps, operation, status) => status == 'edit',
+                            },
+                          ]}
+                          itemButton={[
+                            {
+                              type: 'delete',
+                              buttonType: 'default',
+                              element: '删除',
+                              itemProps: {
+                                deleteText: '确认删除嘛',
+                                handleDeleteConfirm: (renderProps, operation, status, val) => {
+                                  operation.remove(renderProps.index);
+                                },
+                              },
+                            },
+                          ]}
+                          afterChildren={(values) => {
+                            if (status == 'view') return null;
+                            return (
+                              <div style={{ display: 'grid', placeContent: 'center' }}>
+                                <Button
+                                  type="link"
+                                  icon={<PlusCircleFilled />}
+                                  onClick={() => values.operation.add({ customerName: '添加到尾部' })}
+                                >
+                                  添加客户
+                                </Button>
+                              </div>
+                            );
+                          }}
+                        />
+                      </Card>
+                    ))}
+                    <Form.Item>
+                      <Button type="dashed" onClick={() => add()} block>
+                        添加活动
+                      </Button>
+                    </Form.Item>
+                    <Form.ErrorList errors={errors} />
+                  </div>
+                );
+              }}
+            </Form.List>
+          </Row></Suspense>
       </Form>
 
       <Button htmlType="submit" onClick={() => console.log(form.getFieldsValue())}>
