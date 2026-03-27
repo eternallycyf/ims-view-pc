@@ -1,23 +1,26 @@
 import type { ValueOf } from 'ims-view-pc';
 import lodash from 'lodash';
-import CustomForm from '../CustomForm';
+import CustomForm, { ModalTypeEnum, type ModalType } from '../CustomForm';
 import type { CustomSearchProps } from './interface';
 
-const CustomSearch = <T, R>(
-  props: CustomSearchProps<T, R, typeof CustomForm.ModalTypeEnum.normal>,
-) => {
-  const { formList = [], formProps, formValues, setSearchFormFields } = props;
+const CustomSearch = <T, R>(props: CustomSearchProps<T, R, ModalType>) => {
+  const {
+    formList = [],
+    formProps,
+    formValues,
+    setSearchFormFields,
+    children,
+    enabledColumnsSearch = false,
+  } = props;
 
   return (
     <>
-      <CustomForm<T, R, typeof CustomForm.ModalTypeEnum.normal>
-        modalType={CustomForm.ModalTypeEnum.normal}
+      <CustomForm<T, R, typeof ModalTypeEnum.normal>
+        modalType={ModalTypeEnum.normal}
         rowProps={{
+          className: `pl-1 ${enabledColumnsSearch && formProps?.className}`,
           wrap: true,
           gutter: [8, 8],
-          style: {
-            paddingLeft: 2,
-          },
         }}
         footer={null}
         {...props}
@@ -32,9 +35,11 @@ const CustomSearch = <T, R>(
               }, 700)
             : undefined,
           ...formProps,
-          className: formProps?.className,
+          className: enabledColumnsSearch ? undefined : formProps?.className,
         }}
-      />
+      >
+        {children}
+      </CustomForm>
     </>
   );
 };
