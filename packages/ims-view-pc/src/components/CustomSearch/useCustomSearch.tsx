@@ -11,6 +11,7 @@ const useCustomSearch = <T,>(props: UseCustomSearchProps<T>) => {
     defaultWrapperHeight = 170,
     className,
     TableHeightDept = [],
+    enabledColumnsSearch = false,
   } = props;
 
   const [searchForm] = Form.useForm<T>();
@@ -152,11 +153,9 @@ const useCustomSearch = <T,>(props: UseCustomSearchProps<T>) => {
       formValues: searchFormFields,
       setSearchFormFields,
       formProps: {
-        className: `${className}`,
-        style: {
-          gap: 8,
-        },
+        className: `${className} ${!enabledColumnsSearch && 'gap-[8px]'}`,
       },
+      enabledColumnsSearch,
     },
   };
 };

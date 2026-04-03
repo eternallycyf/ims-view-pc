@@ -23,5 +23,6 @@ export interface UseCustomSearchProps<T> {
   setTableHeight?: (totalHeight: number, searchHeight: number, defaultHeight: number) => number
   defaultWrapperHeight?: number
   TableHeightDept?: any[]
+  enabledColumnsSearch?: boolean
 }
 

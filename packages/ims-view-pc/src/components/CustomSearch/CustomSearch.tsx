@@ -15,18 +15,24 @@ const CustomSearch = <T, R>(props: CustomSearchProps<T, R, ModalType>) => {
 
   return (
     <>
-      <CustomForm<T, R, typeof ModalTypeEnum.normal>
-        modalType={ModalTypeEnum.normal}
-        rowProps={{
-          className: `pl-1 ${enabledColumnsSearch && formProps?.className}`,
-          wrap: true,
-          gutter: [8, 8],
-        }}
+      <CustomForm<T, R, typeof CustomForm.CONSTANT.MODAL_TYPE.normal>
+        modalType={CustomForm.CONSTANT.MODAL_TYPE.normal}
         footer={null}
         {...props}
+        rowProps={{
+          wrap: true,
+          gutter: [8, 8],
+          style: {
+            width: '100%',
+          },
+          ...props?.rowProps,
+          className: `pl-1 ${enabledColumnsSearch && formProps?.className} ${
+            props?.rowProps?.className
+          }`,
+        }}
         formList={formList}
         formProps={{
-          layout: 'inline',
+          layout: enabledColumnsSearch ? 'horizontal' : 'inline',
           autoComplete: 'off',
           fields: formValues,
           onFieldsChange: setSearchFormFields
