@@ -267,7 +267,7 @@ const SimpleControl = React.forwardRef<any, ISimpleControlProps>((props, ref) =>
         }
       : {};
     if (type === 'switch') {
-      controlProps = { ...controlProps, checked: !!checked };
+      controlProps = { ...controlProps };
     }
 
     if (type === 'custom') {

@@ -36,6 +36,7 @@ interface FileNameProps {
    */
   style?: React.CSSProperties;
   ParagraphProps?: ParagraphProps;
+  renderContent?: (result: string) => string;
 }
 
 const FileName = (props: FileNameProps) => {
@@ -51,6 +52,7 @@ const FileName = (props: FileNameProps) => {
     ParagraphProps,
     icon,
     onClick,
+    renderContent,
   } = props;
 
   useEffect(() => {
@@ -66,6 +68,8 @@ const FileName = (props: FileNameProps) => {
 
   const fileType =
     name?.lastIndexOf('.') !== -1 ? name?.slice(name?.lastIndexOf('.') + 1) : undefined;
+
+  const content = renderContent ? renderContent(name) : name;
 
   if (!fileType) return <Empty />;
 
@@ -102,7 +106,7 @@ const FileName = (props: FileNameProps) => {
 
       <div className="min-w-0 flex-1">
         <CustomTooltip.FileNameEllipsis
-          fileName={name}
+          fileName={content}
           {...ParagraphProps}
           className={`${ParagraphProps?.className} ${className}`}
           style={{

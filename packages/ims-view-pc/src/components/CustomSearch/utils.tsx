@@ -1,5 +1,6 @@
 import { CalendarOutlined, FilterOutlined, SearchOutlined } from '@ant-design/icons';
-import type { ReactNode } from 'react';
+import { Spin } from 'antd';
+import { Suspense, type ReactNode } from 'react';
 import { type Column, type FormControlType, type Search } from '../../type';
 import CustomForm from '../CustomForm';
 
@@ -52,17 +53,19 @@ export const getColumnSearchItem = <
       return (
         <>
           <div style={{ padding: 16 }}>
-            {CustomForm.renderFormItem({
-              ...config,
-              form: true as any,
-              itemProps: {
-                ...config?.itemProps,
-                style: {
-                  marginBottom: 0,
-                  ...config?.itemProps?.style,
+            <Suspense fallback={<Spin size="small" />}>
+              {CustomForm.renderFormItem({
+                ...config,
+                form: true as any,
+                itemProps: {
+                  ...config?.itemProps,
+                  style: {
+                    marginBottom: 0,
+                    ...config?.itemProps?.style,
+                  },
                 },
-              },
-            })}
+              })}
+            </Suspense>
           </div>
         </>
       );
