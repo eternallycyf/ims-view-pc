@@ -22,7 +22,7 @@
 
 <!-- docs url -->
 
-- https://ims-view.site/components/
+- https://ims-view-pc-eternallycyfs-projects.vercel.app/components/
 
 ## peerDependencies
 

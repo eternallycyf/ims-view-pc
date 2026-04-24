@@ -15,7 +15,7 @@
 
 <!-- docs url -->
 
-- https://ims-view.site/hooks
+- https://ims-view-pc-eternallycyfs-projects.vercel.app/hooks
 
 ## peerDependencies
 

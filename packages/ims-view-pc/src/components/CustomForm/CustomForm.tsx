@@ -1,6 +1,7 @@
+import { ExclamationCircleFilled } from '@ant-design/icons';
 import type { DrawerProps, ModalProps } from 'antd';
-import { Button, Col, Drawer, Form, Modal, Row, Space, Spin } from 'antd';
-import { renderFormItem } from 'ims-view-pc';
+import { Alert, Button, Col, Drawer, Form, Modal, Row, Space, Spin } from 'antd';
+import { renderFormItem, variables } from 'ims-view-pc';
 import React, { Suspense, useImperativeHandle, useMemo, useState, type ReactNode } from 'react';
 import { ModalTypeEnum } from './';
 import './index.less';
@@ -107,6 +108,7 @@ function CustomForm<
     footer,
     rowProps,
     bodyScrollHeight = 500,
+    tipMessage,
     ...rest
   } = props;
   const [_loading, setLoading] = useState<boolean>(false);
@@ -142,9 +144,7 @@ function CustomForm<
         {...formInstanceProps}
         className={`h-full w-full ${formProps?.className}`}
       >
-        <Suspense fallback={<Spin />}>
-          {node}
-        </Suspense>
+        <Suspense fallback={<Spin />}>{node}</Suspense>
       </Form>
     );
   };
@@ -184,25 +184,25 @@ function CustomForm<
 
   const renderSummiter = (
     params: Pick<ModalProps, 'cancelButtonProps' | 'okButtonProps'> & {
-      cancelText?: React.ReactNode
-      okText?: React.ReactNode
-      footer?: any
+      cancelText?: React.ReactNode;
+      okText?: React.ReactNode;
+      footer?: any;
     },
   ): ReactNode => {
-    if (props?.footer === null) return null
+    if (props?.footer === null) return null;
     const cancelBtn = (
       <Button {...params?.cancelButtonProps} type="primary" ghost>
         {params?.cancelText || '取消'}
       </Button>
-    )
+    );
     const confirmBtn = (
       <Button type="primary" htmlType="submit" {...params.okButtonProps}>
         {params?.okText || '确定'}
       </Button>
-    )
+    );
 
     if (typeof footer === 'function') {
-      return <Space>{footer(cancelBtn, confirmBtn)}</Space>
+      return <Space>{footer(cancelBtn, confirmBtn)}</Space>;
     }
 
     return (
@@ -210,8 +210,8 @@ function CustomForm<
         {cancelBtn}
         {confirmBtn}
       </Space>
-    )
-  }
+    );
+  };
 
   let Component: any = null;
   switch (modalType) {
@@ -267,9 +267,29 @@ function CustomForm<
       ) : (
         <>
           <Component {...WrapperProps}>
-            <Spin className="h-full w-full" spinning={loading}>
-              {content}
-            </Spin>
+            <div className="customFormContent">
+              {tipMessage && (
+                <div className="customFormContent-tip">
+                  <Alert
+                    type="warning"
+                    message={
+                      <div className="customFormContent-tipMessage">
+                        <div className="customFormContent-tipIcon">
+                          <ExclamationCircleFilled style={{ color: variables?.colorWarning }} />
+                        </div>
+                        <div className="customFormContent-tipText">{tipMessage}</div>
+                      </div>
+                    }
+                    className="customFormContent-tipAlert"
+                  />
+                </div>
+              )}
+              <div className="customFormContent-body">
+                <Spin className="customFormContent-spin" spinning={loading}>
+                  {content}
+                </Spin>
+              </div>
+            </div>
           </Component>
           {children}
         </>

@@ -7,16 +7,22 @@ export type CustomSearchProps<
   Type extends ModalType = 'normal',
 > = CustomFormProps<T, R, Type> & {
   formValues: {
-    name: [keyof T];
-    value: ValueOf<T>;
-  }[];
-  setSearchFormFields: (allFields: { name: [keyof T]; value: ValueOf<T> }[]) => void;
-};
+    name: [keyof T]
+    value: ValueOf<T>
+  }[]
+  setSearchFormFields: (allFields: { name: [keyof T]; value: ValueOf<T> }[]) => void
+  /**
+   * 允许columns行内搜索
+   */
+  enabledColumnsSearch?: boolean
+}
 
 export interface UseCustomSearchProps<T> {
-  initValues?: Partial<Record<keyof T, ValueOf<T>>>;
-  className?: string;
-  setTableHeight?: (totalHeight: number, searchHeight: number, defaultHeight: number) => number;
-  defaultWrapperHeight?: number;
-  TableHeightDept?: any[];
+  initValues?: Partial<Record<keyof T, ValueOf<T>>>
+  className?: string
+  setTableHeight?: (totalHeight: number, searchHeight: number, defaultHeight: number) => number
+  defaultWrapperHeight?: number
+  TableHeightDept?: any[]
+  enabledColumnsSearch?: boolean
 }
+

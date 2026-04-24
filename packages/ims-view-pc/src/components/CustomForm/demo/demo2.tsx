@@ -44,6 +44,7 @@ const App: React.FC = () => {
         initialValues={{ name: 'custom' }}
         open={groupValue === 'normal' ? true : open}
         form={form}
+        tipMessage="测试 这是提示信息"
         formProps={{ form, layout: 'vertical' }}
         onFinish={async (values) => {
           console.log(values);

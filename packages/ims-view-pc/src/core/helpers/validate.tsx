@@ -202,6 +202,10 @@ export default class FormRules {
     return this.match(/A[As]+$/, message);
   }
 
+  public withoutUnderscore(message = ':name禁止包含下划线'): FormRules {
+    return this.match(/^[^_]*$/, message);
+  }
+
   public object(message: string = ':name必须是对象类型'): FormRules {
     this.rules.push({
       type: FormRuleType.object,

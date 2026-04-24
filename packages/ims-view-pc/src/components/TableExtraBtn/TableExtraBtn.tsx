@@ -67,25 +67,31 @@ const TableExtraBtn = <T extends Record<string, any> = any>(props: TableExtraBtn
         {newBtnList.slice(0, maxShowMoreCount).map((item, index) => (
           <BtnElement key={index} {...item} record={record} clickCallBack={clickCallBack} />
         ))}
+
+        {isShowMoreBtns && (
+          <Popover
+            placement="top"
+            trigger="hover"
+            content={
+              <div className="table-extra-popover-content">
+                <Space direction="vertical">
+                  {newBtnList.slice(maxShowMoreCount).map((item, index) => (
+                    <BtnElement
+                      key={index}
+                      {...item}
+                      record={record}
+                      clickCallBack={clickCallBack}
+                    />
+                  ))}
+                </Space>
+              </div>
+            }
+            {...popoverProps}
+          >
+            <MoreOutlined className="table-extra-more-icon" />
+          </Popover>
+        )}
       </Space>
-      {isShowMoreBtns && (
-        <Popover
-          placement="top"
-          trigger="hover"
-          content={
-            <div className="table-extra-popover-content">
-              <Space direction="vertical">
-                {newBtnList.slice(maxShowMoreCount).map((item, index) => (
-                  <BtnElement key={index} {...item} record={record} clickCallBack={clickCallBack} />
-                ))}
-              </Space>
-            </div>
-          }
-          {...popoverProps}
-        >
-          <MoreOutlined className="table-extra-more-icon" />
-        </Popover>
-      )}
     </>
   );
 };

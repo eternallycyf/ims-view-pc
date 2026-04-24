@@ -15,7 +15,7 @@
 
 <!-- docs url -->
 
-- https://ims-view.site/chart
+- https://ims-view-pc-eternallycyfs-projects.vercel.app/chart
 
 ## peerDependencies
 

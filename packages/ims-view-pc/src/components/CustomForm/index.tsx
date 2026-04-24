@@ -3,8 +3,11 @@ import { Search, type AnyObject, type DeepPartial, type FormControlType } from '
 import type { CSSProperties, ReactNode } from 'react';
 import React, { RefObject } from 'react';
 import { renderFormItem } from '../../core/helpers';
+import FormRules from '../../core/helpers/validate';
+import { FORM_TYPE_DICT } from '../../type/form/base';
 import CustomSearch from '../CustomSearch';
 import useCustomSearch from '../CustomSearch/useCustomSearch';
+import { getColumnSearchItem, getColumnsFilterIcon } from '../CustomSearch/utils';
 import CommonForm, { renderFormList } from './CustomForm';
 
 /**
@@ -30,8 +33,8 @@ export type CustomFormList<Values = AnyObject, Rest = AnyObject, Extra = unknown
 > & {
   col?: number;
   children?:
-  | Search<Values, Rest, Extra>
-  | ((values: Values, form: FormInstance<Values>) => CustomFormList<Values, Rest, Extra> | false);
+    | Search<Values, Rest, Extra>
+    | ((values: Values, form: FormInstance<Values>) => CustomFormList<Values, Rest, Extra> | false);
 })[];
 
 export interface CustomFormHandle<
@@ -61,7 +64,8 @@ export interface BaseCustomFormProps<Values = AnyObject, Rest = AnyObject> {
   okButtonProps?: ModalProps['okButtonProps'];
   cancelButtonProps?: ModalProps['cancelButtonProps'];
   open?: boolean;
-  footer?: ReactNode | ((cancelBtn: ReactNode, confirmBtn: ReactNode) => ReactNode)
+  footer?: ReactNode | ((cancelBtn: ReactNode, confirmBtn: ReactNode) => ReactNode);
+  tipMessage?: ReactNode;
 }
 
 export type CustomFormProps<
@@ -73,9 +77,7 @@ export type CustomFormProps<
     ? Omit<ModalProps, 'onCancel' | 'children' | 'onOk' | 'footer'>
     : Type extends 'drawer'
     ? Omit<DrawerProps, 'onCancel' | 'children' | 'onOk' | 'footer'>
-    : {
-
-    });
+    : {});
 
 const CompoundedCustomFrom = React.forwardRef<CustomFormHandle, CustomFormProps>(CommonForm) as <
   Values = Record<string, unknown>,
@@ -93,6 +95,15 @@ type CompoundedComponent = typeof CompoundedCustomFrom & {
   ModalTypeEnum: typeof ModalTypeEnum;
   CustomSearch: typeof CustomSearch;
   useCustomSearch: typeof useCustomSearch;
+  FormRules: typeof FormRules;
+  CONSTANT: {
+    MODAL_TYPE: typeof ModalTypeEnum;
+    FORM_TYPE_DICT: typeof FORM_TYPE_DICT;
+  };
+  Utils: {
+    getColumnsFilterIcon: typeof getColumnsFilterIcon;
+    getColumnSearchItem: typeof getColumnSearchItem;
+  };
 };
 
 const CustomForm = CompoundedCustomFrom as CompoundedComponent;
@@ -102,5 +113,14 @@ CustomForm.renderFormList = renderFormList;
 CustomForm.ModalTypeEnum = ModalTypeEnum;
 CustomForm.CustomSearch = CustomSearch;
 CustomForm.useCustomSearch = useCustomSearch;
+CustomForm.FormRules = FormRules;
+CustomForm.CONSTANT = {
+  MODAL_TYPE: ModalTypeEnum,
+  FORM_TYPE_DICT: FORM_TYPE_DICT,
+};
+CustomForm.Utils = {
+  getColumnsFilterIcon: getColumnsFilterIcon,
+  getColumnSearchItem: getColumnSearchItem,
+};
 
 export default CustomForm;

@@ -1,29 +1,38 @@
 import type { ValueOf } from 'ims-view-pc';
 import lodash from 'lodash';
-import CustomForm from '../CustomForm';
+import CustomForm, { ModalTypeEnum, type ModalType } from '../CustomForm';
 import type { CustomSearchProps } from './interface';
 
-const CustomSearch = <T, R>(
-  props: CustomSearchProps<T, R, typeof CustomForm.ModalTypeEnum.normal>,
-) => {
-  const { formList = [], formProps, formValues, setSearchFormFields } = props;
+const CustomSearch = <T, R>(props: CustomSearchProps<T, R, ModalType>) => {
+  const {
+    formList = [],
+    formProps,
+    formValues,
+    setSearchFormFields,
+    children,
+    enabledColumnsSearch = false,
+  } = props;
 
   return (
     <>
-      <CustomForm<T, R, typeof CustomForm.ModalTypeEnum.normal>
-        modalType={CustomForm.ModalTypeEnum.normal}
+      <CustomForm<T, R, typeof CustomForm.CONSTANT.MODAL_TYPE.normal>
+        modalType={CustomForm.CONSTANT.MODAL_TYPE.normal}
+        footer={null}
+        {...props}
         rowProps={{
           wrap: true,
           gutter: [8, 8],
           style: {
-            paddingLeft: 2,
+            width: '100%',
           },
+          ...props?.rowProps,
+          className: `pl-1 ${enabledColumnsSearch && formProps?.className} ${
+            props?.rowProps?.className
+          }`,
         }}
-        footer={null}
-        {...props}
         formList={formList}
         formProps={{
-          layout: 'inline',
+          layout: enabledColumnsSearch ? 'horizontal' : 'inline',
           autoComplete: 'off',
           fields: formValues,
           onFieldsChange: setSearchFormFields
@@ -32,9 +41,11 @@ const CustomSearch = <T, R>(
               }, 700)
             : undefined,
           ...formProps,
-          className: formProps?.className,
+          className: enabledColumnsSearch ? undefined : formProps?.className,
         }}
-      />
+      >
+        {children}
+      </CustomForm>
     </>
   );
 };

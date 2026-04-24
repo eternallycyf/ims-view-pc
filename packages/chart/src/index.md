@@ -22,12 +22,12 @@ import { BaseChart, PieChart, SunburstChart, StackChart, ScatterChart } from '@i
 
 ## 组件
 
-### [BaseChart-基础图表](https://www.ims-view.site/charts/base-chart)
+### [BaseChart-基础图表](https://ims-view-pc-eternallycyfs-projects.vercel.app/charts/base-chart)
 
-### [PieChart 饼图](https://www.ims-view.site/charts/pie-chart)
+### [PieChart 饼图](https://ims-view-pc-eternallycyfs-projects.vercel.app/charts/pie-chart)
 
-### [SunburstChart 旭日图](https://www.ims-view.site/charts/sunburst-chart)
+### [SunburstChart 旭日图](https://ims-view-pc-eternallycyfs-projects.vercel.app/charts/sunburst-chart)
 
-### [StackChart 堆叠图](https://www.ims-view.site/charts/stack-chart)
+### [StackChart 堆叠图](https://ims-view-pc-eternallycyfs-projects.vercel.app/charts/stack-chart)
 
-### [ScatterChart 散点图](https://www.ims-view.site/charts/scatter-chart)
+### [ScatterChart 散点图](https://ims-view-pc-eternallycyfs-projects.vercel.app/charts/scatter-chart)
