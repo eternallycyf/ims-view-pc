@@ -65,6 +65,7 @@ export interface BaseCustomFormProps<Values = AnyObject, Rest = AnyObject> {
   cancelButtonProps?: ModalProps['cancelButtonProps'];
   open?: boolean;
   footer?: ReactNode | ((cancelBtn: ReactNode, confirmBtn: ReactNode) => ReactNode);
+  tipMessage?: ReactNode;
 }
 
 export type CustomFormProps<
