@@ -1,5 +1,30 @@
 # Changelog
 
+## [Version&nbsp;1.92.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.91.3...ims-view-pc@1.92.0)
+
+<sup>Released on **2026-04-24**</sup>
+
+#### ✨ 新特性
+
+- **ims-view-pc**: Add columns inline search.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **ims-view-pc**: Add columns inline search ([99d6467](https://github.com/eternallycyf/ims-view-pc/commit/99d6467))
+
+</details>
+
+### Dependencies
+
+- **@ims-view/chart:** upgraded to 1.11.0
+- **@ims-view/hooks:** upgraded to 1.22.0
+- **@ims-view/utils:** upgraded to 1.20.0
+
 ### [Version&nbsp;1.91.3](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.91.2...ims-view-pc@1.91.3)
 
 <sup>Released on **2026-03-04**</sup>
