@@ -33,8 +33,8 @@ export type CustomFormList<Values = AnyObject, Rest = AnyObject, Extra = unknown
 > & {
   col?: number;
   children?:
-    | Search<Values, Rest, Extra>
-    | ((values: Values, form: FormInstance<Values>) => CustomFormList<Values, Rest, Extra> | false);
+  | Search<Values, Rest, Extra>
+  | ((values: Values, form: FormInstance<Values>) => CustomFormList<Values, Rest, Extra> | false);
 })[];
 
 export interface CustomFormHandle<
@@ -65,6 +65,7 @@ export interface BaseCustomFormProps<Values = AnyObject, Rest = AnyObject> {
   cancelButtonProps?: ModalProps['cancelButtonProps'];
   open?: boolean;
   footer?: ReactNode | ((cancelBtn: ReactNode, confirmBtn: ReactNode) => ReactNode);
+  showTipMessageIcon?: boolean
   tipMessage?: ReactNode;
 }
 

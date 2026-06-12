@@ -10,12 +10,12 @@ jobs:
       - name: ⚙ 设置 pnpm
         uses: pnpm/action-setup@v2
         with:
-          version: latest
+          version: 10
 
       - name: 🏗 准备 Node.js 环境
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: '22'
 
       - name: 🗳 安装依赖
         run: pnpm install

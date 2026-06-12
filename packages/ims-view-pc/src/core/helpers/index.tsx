@@ -54,9 +54,7 @@ export const getFieldComp: FieldCompType = ({
   if (initValue) {
     itemProps.initialValue = initValue;
   }
-  if (type === 'switch') {
-    itemProps.valuePropName = 'checked';
-  }
+
   if (['date', 'year', 'quarter', 'dateRange', 'month', 'time', 'monthRange'].includes(type)) {
     itemProps.initialValue = initValue && dayjs.isDayjs(initValue) ? dayjs(initValue) : undefined;
   }

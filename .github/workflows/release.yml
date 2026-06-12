@@ -15,12 +15,12 @@ jobs:
       - name: ⚙ 设置 pnpm
         uses: pnpm/action-setup@v2
         with:
-          version: latest
+          version: 10
 
       - name: 🏗 准备 Node.js 环境
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: '22'
 
       - name: 🗳 安装依赖
         run: pnpm install
@@ -28,11 +28,8 @@ jobs:
       - name: 📦 构建 npm 包
         run: pnpm run build
 
-      # npm 8 和 9 会在 `npm version` 时执行依赖树命令，进而报错退出
-      # Refs: https://github.com/semantic-release/npm/issues/540
-      - name: Setup npm 7
-        run: npm i -g npm@7 --registry=https://registry.npmjs.org
-
+      # monorepo 发布时需关闭 workspaces-update，避免 npm version/publish 联动更新 workspace 依赖树报错
+      # Refs: https://github.com/dhoulb/multi-semantic-release#npm-v85-npm-err-notarget-no-matching-version-found-for
       - name: 🚀 npm 包发布
         run: pnpm run release
         env:

@@ -1,10 +1,6 @@
-import type { RuleObject } from 'antd/es/form';
+import type { RuleObject } from 'antd/es/form'
 
-type Validator = (
-  rule: RuleObject,
-  value: any,
-  callback: (error?: string) => void,
-) => Promise<void | any> | void;
+type Validator = (rule: RuleObject, value: any, callback: (error?: string) => void) => Promise<void | any> | void
 export enum FormRuleType {
   string = 'string',
   number = 'number',
@@ -23,78 +19,73 @@ export enum FormRuleType {
 
 export default class FormRules {
   public static withName(fieldLocalName: string): FormRules {
-    return new FormRules(fieldLocalName);
+    return new FormRules(fieldLocalName)
   }
 
   // 验证时转换数字类型（但是并不影响最终值）
   private static transformNumber(value?: string | number): number | undefined {
     if (typeof value === 'number') {
-      return value;
+      return value
     }
-    return typeof value === 'string' && value.length ? Number(value) : void 0;
+    return typeof value === 'string' && value.length ? Number(value) : void 0
   }
 
-  private static formatMessageByLimit(
-    min?: number,
-    max?: number,
-    type: string = '',
-    unit: string = '',
-  ): string {
-    const existMin = typeof min === 'number';
-    const existMax = typeof max === 'number';
-    let message: string;
-    let prefix = type ? `:name必须是${type}` : '';
+  private static formatMessageByLimit(min?: number, max?: number, type: string = '', unit: string = ''): string {
+    const existMin = typeof min === 'number'
+    const existMax = typeof max === 'number'
+    let message: string
+    const prefix = type ? `:name必须是${type}` : ''
     if (existMax && existMin) {
-      message = `${prefix} ${unit} 必须在:min到:max之间`;
+      message = `${prefix} ${unit} 必须在:min到:max之间`
     } else if (existMax) {
-      message = `${prefix} ${unit} 必须小于等于:max`;
+      message = `${prefix} ${unit} 必须小于等于:max`
     } else if (existMin) {
-      message = `${prefix} ${unit} 必须大于等于:min`;
+      message = `${prefix} ${unit} 必须大于等于:min`
     } else {
-      message = `${prefix}`;
+      message = `${prefix}`
     }
     if (existMin) {
-      message = message.replace(':min', String(min));
+      message = message.replace(':min', String(min))
     }
     if (existMax) {
-      message = message.replace(':max', String(max));
+      message = message.replace(':max', String(max))
     }
-    return message;
+    return message
   }
 
-  private readonly name: string;
-  private rules: RuleObject[] = [];
+  private readonly name: string
+  private rules: RuleObject[] = []
   constructor(name: string) {
-    this.name = name;
+    this.name = name
   }
 
   public isRequired(message = ':name是必填项'): FormRules {
     this.rules.push({
       required: true,
       message: message.replace(':name', this.name),
-    });
-    return this;
+    })
+    return this
   }
 
   public append(obj: RuleObject): FormRules {
-    const cloneObj = { ...obj };
+    const cloneObj = { ...obj }
     if (typeof cloneObj.message === 'string') {
-      cloneObj.message = cloneObj.message.replace(':name', this.name);
+      cloneObj.message = cloneObj.message.replace(':name', this.name)
     }
-    this.rules.push(cloneObj);
-    return this;
+    this.rules.push(cloneObj)
+    return this
   }
 
   public string(min?: number, max?: number, newMessage: string = ''): FormRules {
-    let message = newMessage;
-    message = message || FormRules.formatMessageByLimit(min, max, '', '长度');
+    let message = newMessage
+    message = message || FormRules.formatMessageByLimit(min, max, '', '长度')
     this.rules.push({
       type: FormRuleType.string,
       min,
       max,
       message: message.replace(':name', this.name),
-    });
-    return this;
+    })
+    return this
   }
 
   // switch回显严格校验
@@ -102,8 +93,8 @@ export default class FormRules {
     this.rules.push({
       type: FormRuleType.boolean,
       message: message.replace(':name', this.name),
-    });
-    return this;
+    })
+    return this
   }
 
   public phone(message = '请输入正确的:name'): FormRules {
@@ -111,115 +102,136 @@ export default class FormRules {
       type: FormRuleType.string,
       pattern: /^1[3-9] \d{9}$/,
       message: message.replace(':name', this.name),
-    });
-    return this;
+    })
+    return this
+  }
+
+  public switch(requiredTrue = false, message = ':name必须开启'): FormRules {
+    this.rules.push({
+      validator: (_, value) => {
+        if (requiredTrue) {
+          return value === true ? Promise.resolve() : Promise.reject(new Error(message.replace(':name', this.name)))
+        }
+
+        return typeof value === 'boolean' ? Promise.resolve() : Promise.reject(new Error(`${this.name}不能为空`))
+      },
+    })
+
+    return this
   }
 
   public number(min?: number, max?: number, newMessage: string = ''): FormRules {
-    let message = newMessage;
-    message = message || FormRules.formatMessageByLimit(min, max, '数字', '值');
+    let message = newMessage
+    message = message || FormRules.formatMessageByLimit(min, max, '数字', '值')
     this.rules.push({
       type: FormRuleType.number,
       transform: FormRules.transformNumber,
       min,
       max,
       message: message.replace(':name', this.name),
-    });
-    return this;
+    })
+    return this
   }
 
   public integer(min?: number, max?: number, newMessage = ''): FormRules {
-    let message = newMessage;
-    message = message || FormRules.formatMessageByLimit(min, max, '整数', '值');
+    let message = newMessage
+    message = message || FormRules.formatMessageByLimit(min, max, '整数', '值')
     this.rules.push({
       type: FormRuleType.integer,
       transform: FormRules.transformNumber,
       min,
       max,
       message: message.replace(':name', this.name),
-    });
-    return this;
+    })
+    return this
   }
 
   public email(message = '请输入正确的:name'): FormRules {
     this.rules.push({
       type: FormRuleType.email,
       message: message.replace(':name', this.name),
-    });
-    return this;
+    })
+    return this
   }
 
   public match(pattern: RegExp, message = ':name不符合规范'): FormRules {
     this.rules.push({
       pattern,
       message: message.replace(':name', this.name),
-    });
-    return this;
+    })
+    return this
   }
 
   public url(message = '请正输入正确的:name'): FormRules {
     this.rules.push({
       type: FormRuleType.url,
       message: message.replace(':name', this.name),
-    });
-    return this;
+    })
+    return this
   }
 
   public callback<T extends Error>(func: (value: any, field: string) => T | T[] | void): FormRules {
     this.rules.push({
       validator: (rule: any, value, callback) => {
-        const errors: T | T[] | void = func(value, rule.field);
+        const errors: T | T[] | void = func(value, rule.field)
 
         if (Array.isArray(errors)) {
-          callback(errors as any);
+          callback(errors as any)
         } else if (errors === undefined || errors === null) {
-          callback([] as any);
+          callback([] as any)
         } else {
-          callback([errors] as any);
+          callback([errors] as any)
         }
       },
-    });
-    return this;
+    })
+    return this
   }
 
   public validate(func: Validator): FormRules {
     this.rules.push({
       validator: (rule, value, callback) => {
-        const errors = func(rule, value, callback);
-        return errors || Promise.resolve();
+        const errors = func(rule, value, callback)
+        return errors || Promise.resolve()
       },
-    });
-    return this;
+    })
+    return this
   }
 
   public dynamic(rule: RuleObject & { visible?: boolean }): FormRules {
-    if (!rule || !(rule?.visible ?? true)) return this;
-    this.rules.push(rule);
-    return this;
+    if (!rule || !(rule?.visible ?? true)) return this
+    this.rules.push(rule)
+    return this
   }
 
   public withoutWhiteSpace(message = ':name禁止包含空格'): FormRules {
-    return this.match(/A[As]+$/, message);
+    return this.match(/^\S+$/, message)
   }
 
   public withoutUnderscore(message = ':name禁止包含下划线'): FormRules {
-    return this.match(/^[^_]*$/, message);
+    return this.match(/^[^_]*$/, message)
+  }
+
+  public withoutChineseText(message = ':name禁止包含中文'): FormRules {
+    return this.match(
+      /^(?:(?![\u3400-\u4DB5\u4E00-\u9FEA\uFA0E\uFA0F\uFA11\uFA13\uFA14\uFA1F\uFA21\uFA23\uFA24\uFA27-\uFA29]|[\uD840-\uD868\uD86A-\uD86C\uD86F-\uD872\uD874-\uD879][\uDC00-\uDFFF]|\uD869[\uDC00-\uDED6\uDF00-\uDFFF]|\uD86D[\uDC00-\uDF34\uDF40-\uDFFF]|\uD86E[\uDC00-\uDC1D\uDC20-\uDFFF]|\uD873[\uDC00-\uDEA1\uDEB0-\uDFFF]|\uD87A[\uDC00-\uDFE0]).)+$/,
+      message,
+    )
   }
 
   public object(message: string = ':name必须是对象类型'): FormRules {
     this.rules.push({
       type: FormRuleType.object,
       message: message.replace(':name', this.name),
-    });
-    return this;
+    })
+    return this
   }
 
   public resetRule(): FormRules {
-    this.rules = [];
-    return this;
+    this.rules = []
+    return this
   }
 
   public create(): RuleObject[] {
-    return this.rules;
+    return this.rules
   }
 }

@@ -109,6 +109,7 @@ function CustomForm<
     rowProps,
     bodyScrollHeight = 500,
     tipMessage,
+    showTipMessageIcon = true,
     ...rest
   } = props;
   const [_loading, setLoading] = useState<boolean>(false);
@@ -274,9 +275,11 @@ function CustomForm<
                     type="warning"
                     message={
                       <div className="customFormContent-tipMessage">
-                        <div className="customFormContent-tipIcon">
-                          <ExclamationCircleFilled style={{ color: variables?.colorWarning }} />
-                        </div>
+                        {showTipMessageIcon && (
+                          <div className="customContainer-tip-alert-message-icon">
+                            <ExclamationCircleFilled style={{ color: variables?.colorWarning }} />
+                          </div>
+                        )}
                         <div className="customFormContent-tipText">{tipMessage}</div>
                       </div>
                     }

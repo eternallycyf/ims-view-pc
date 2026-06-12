@@ -14,6 +14,10 @@
   },
   "repository": "git+https://github.com/eternallycyf/ims-view-pc.git",
   "license": "MIT",
+  "engines": {
+    "node": ">=22.13"
+  },
+  "packageManager": "pnpm@10.16.1",
   "author": "eternallycyf(969475322@qq.com)",
   "workspaces": [
     "packages/*"
