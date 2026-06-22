@@ -1,5 +1,24 @@
 # Changelog
 
+## [Version&nbsp;1.23.0](https://github.com/eternallycyf/ims-view-pc/compare/@ims-view/hooks@1.22.0...@ims-view/hooks@1.23.0)
+
+<sup>Released on **2026-06-22**</sup>
+
+#### ✨ 新特性
+
+- **ims-view-pc**: Update react version.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **ims-view-pc**: Update react version ([34aca21](https://github.com/eternallycyf/ims-view-pc/commit/34aca21))
+
+</details>
+
 ## [Version&nbsp;1.22.0](https://github.com/eternallycyf/ims-view-pc/compare/@ims-view/hooks@1.21.0...@ims-view/hooks@1.22.0)
 
 <sup>Released on **2026-04-24**</sup>
