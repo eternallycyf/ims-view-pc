@@ -18,7 +18,7 @@ pnpm i 'ims-view-pc'
 ```JSON
 "peerDependencies": {
   "@ant-design/icons": "^5.2.6",
-  "antd": "^5",
+  "antd": "^6",
   "axios": "^1.5.1",
   "lodash": "^4.17.21",
   "react": "^18",

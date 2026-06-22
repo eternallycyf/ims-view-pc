@@ -12,10 +12,10 @@ importers:
         specifier: ^7.23.1
         version: 7.28.4
       react:
-        specifier: ^18.2.0
+        specifier: 18.3.1
         version: 18.3.1
       react-dom:
-        specifier: ^18.2.0
+        specifier: 18.3.1
         version: 18.3.1(react@18.3.1)
     devDependencies:
       '@ant-design/icons':
@@ -37,10 +37,10 @@ importers:
         specifier: ^16
         version: 16.18.126
       '@types/react':
-        specifier: ^18.2.0
+        specifier: ^18.3.1
         version: 18.3.24
       '@types/react-dom':
-        specifier: ^18.2.0
+        specifier: ^18.3.1
         version: 18.3.7(@types/react@18.3.24)
       '@types/semantic-release':
         specifier: ^17
@@ -169,10 +169,10 @@ importers:
         specifier: ^4.17.21
         version: 4.17.21
       react:
-        specifier: ^18.2.0
+        specifier: 18.3.1
         version: 18.3.1
       react-dom:
-        specifier: ^18.2.0
+        specifier: 18.3.1
         version: 18.3.1(react@18.3.1)
 
   packages/hooks:
@@ -193,10 +193,10 @@ importers:
         specifier: ^4.17.21
         version: 4.17.21
       react:
-        specifier: ^18.2.0
+        specifier: 18.3.1
         version: 18.3.1
       react-dom:
-        specifier: ^18.2.0
+        specifier: 18.3.1
         version: 18.3.1(react@18.3.1)
       react-use:
         specifier: ^17.4.0
@@ -298,10 +298,10 @@ importers:
         specifier: ^5.8.7
         version: 5.13.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react:
-        specifier: ^18.2.0
+        specifier: 18.3.1
         version: 18.3.1
       react-dom:
-        specifier: ^18.2.0
+        specifier: 18.3.1
         version: 18.3.1(react@18.3.1)
       react-file-viewer:
         specifier: ^1.2.1
@@ -362,10 +362,10 @@ importers:
         specifier: ^4.17.21
         version: 4.17.21
       react:
-        specifier: ^18.2.0
+        specifier: 18.3.1
         version: 18.3.1
       react-dom:
-        specifier: ^18.2.0
+        specifier: 18.3.1
         version: 18.3.1(react@18.3.1)
     devDependencies:
       '@types/js-cookie':

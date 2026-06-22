@@ -31,7 +31,7 @@
     "react": "^18",
     "react-dom": "^18",
     "@ant-design/icons": "^5.2.6",
-    "antd": "^5",
+    "antd": "^6",
     "lodash": "^4.17.21",
     "axios": "^1.5.1"
 }
