@@ -1,0 +1,42 @@
+.excel-editor {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid #f0f0f0;
+  border-radius: 8px;
+  background: #fff;
+
+  &-container {
+    flex: 1;
+    width: 100%;
+    min-height: 0;
+  }
+
+  &-loading {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.75);
+  }
+
+  /** 简单模式：隐藏「数据」「公式」页签（保留开始 / 插入 / 导入导出） */
+  &--simple {
+    [role='tab'] {
+      &[title='数据'],
+      &[title='公式'],
+      &[title='Data'],
+      &[title='Formulas'],
+      &[aria-label='数据'],
+      &[aria-label='公式'],
+      &[aria-label='Data'],
+      &[aria-label='Formulas'] {
+        display: none !important;
+      }
+    }
+  }
+}

@@ -21,18 +21,22 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.23.1",
+    "@zwight/luckyexcel": "^1.1.6",
     "decimal.js": "^10.4.3",
-    "js-cookie": "^3.0.5"
+    "exceljs": "^4.4.0",
+    "js-cookie": "^3.0.5",
+    "jszip": "^3.10.1",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@types/js-cookie": "^3.0.6"
   },
   "peerDependencies": {
+    "@ant-design/icons": "^6",
+    "antd": "^6",
     "lodash": "^4.17.21",
     "react": "18.3.1",
-    "react-dom": "18.3.1",
-    "@ant-design/icons": "^6",
-    "antd": "^6"
+    "react-dom": "18.3.1"
   },
   "publishConfig": {
     "access": "public",

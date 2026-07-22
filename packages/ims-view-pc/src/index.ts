@@ -39,6 +39,8 @@ export * from './components/CustomTooltip';
 export { default as CustomTooltip } from './components/CustomTooltip';
 export { default as Ellipsis } from './components/Ellipsis';
 export * from './components/Ellipsis/interface';
+export { default as ExcelEditor } from './components/ExcelEditor';
+export * from './components/ExcelEditor/interface';
 export { default as ErrorBoundary } from './components/ErrorBoundary';
 export * from './components/ExpandSelect';
 export { default as ExpandSelect } from './components/ExpandSelect';

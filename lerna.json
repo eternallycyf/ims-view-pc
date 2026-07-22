@@ -3,6 +3,9 @@
   "command": {
     "bootstrap": {
       "hoist": true
+    },
+    "run": {
+      "ignore": ["@ims-view/server"]
     }
   },
   "useWorkspaces": true,

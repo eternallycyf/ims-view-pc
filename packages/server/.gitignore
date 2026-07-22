@@ -1,0 +1,6 @@
+# Excel exchange NestJS server
+.port
+.env
+dist
+node_modules
+*.log

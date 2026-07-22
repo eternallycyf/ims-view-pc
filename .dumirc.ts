@@ -1,5 +1,6 @@
 import { defineConfig } from 'dumi';
 import type { SiteThemeConfig } from 'dumi-theme-antd-style';
+import fs from 'fs';
 import { footer } from 'ims-template-config';
 import path from 'path';
 import { features } from './config/features';
@@ -8,6 +9,28 @@ import { homepage, name as repo } from './package.json';
 
 const basePath = `/${repo}/`;
 const isProd = process.env.NODE_ENV === 'production';
+
+/**
+ * 仅精确 alias 主入口，避免把 `@univerjs/core` 指到包根导致
+ * `@univerjs/core/facade` 等 exports 子路径失效。
+ */
+const resolveUniverCore = () => {
+  const presetsEntry = require.resolve('@univerjs/presets', {
+    paths: [path.join(__dirname, 'packages/ims-view-pc')],
+  });
+  let dir = path.dirname(presetsEntry);
+  for (let i = 0; i < 12; i += 1) {
+    const candidate = path.join(dir, 'node_modules/@univerjs/core');
+    if (fs.existsSync(path.join(candidate, 'package.json'))) {
+      return candidate;
+    }
+    dir = path.dirname(dir);
+  }
+  throw new Error('Cannot resolve @univerjs/core (expected 0.25.x via @univerjs/presets)');
+};
+
+const univerCorePath = resolveUniverCore();
+const univerCoreEs = path.join(univerCorePath, 'lib/es');
 
 const themeConfig: SiteThemeConfig = {
   name: repo,
@@ -62,6 +85,10 @@ export default defineConfig({
     '@ims-view/utils/src': path.join(__dirname, './packages/utils/src/*'),
     '@ims-view/chart/src': path.join(__dirname, './packages/chart/src/*'),
     'ims-view-pc/src': path.join(__dirname, './packages/ims-view-pc/src/*'),
+    // `$` 仅匹配精确导入，保留 `/facade` 等子路径
+    '@univerjs/core$': path.join(univerCoreEs, 'index.js'),
+    '@univerjs/core/facade': path.join(univerCoreEs, 'facade.js'),
+    '@univerjs/core/lib/facade': path.join(univerCoreEs, 'facade.js'),
   },
   resolve: {
     docDirs: ['docs'],
@@ -95,5 +122,7 @@ export default defineConfig({
   html2sketch: {},
   mfsu: {
     runtimePublicPath: true,
+    // LuckyExcel 预编译易踩 HTML/双 core；排除后走正常解析 + 上方 core alias
+    exclude: ['@zwight/luckyexcel', '@progress/jszip-esm', '@zwight/exceljs'],
   },
 });
