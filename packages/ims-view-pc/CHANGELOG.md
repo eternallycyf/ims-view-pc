@@ -1,5 +1,28 @@
 # Changelog
 
+## [Version&nbsp;1.94.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.93.1...ims-view-pc@1.94.0)
+
+<sup>Released on **2026-07-22**</sup>
+
+#### ✨ 新特性
+
+- Add ExcelEditor and @ims-view/server.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- Add ExcelEditor and @ims-view/server ([4821b25](https://github.com/eternallycyf/ims-view-pc/commit/4821b25))
+
+</details>
+
+### Dependencies
+
+- **@ims-view/utils:** upgraded to 1.22.0
+
 ### [Version&nbsp;1.93.1](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.93.0...ims-view-pc@1.93.1)
 
 <sup>Released on **2026-07-22**</sup>
