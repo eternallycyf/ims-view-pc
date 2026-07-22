@@ -2,6 +2,7 @@ import { ProFormTreeSelect } from '@ant-design/pro-form';
 import { Spin, type GetProps } from 'antd';
 import { DeepPartial, IBaseCustomFormItemProps } from 'ims-view-pc';
 import React, { useImperativeHandle } from 'react';
+import { renderMaxTagPlaceholder } from "../utils/maxTagPlaceholder";
 
 type ProFormTreeSelectProps = GetProps<typeof ProFormTreeSelect>;
 
@@ -24,7 +25,7 @@ const TreeSelectControl = React.forwardRef<any, ITreeSelectProps<any>>((props, r
         noStyle: true,
       }}
       id={id}
-      request={async () => dict}
+      request={async () => dict || []}
       value={value}
       {...(controlProps as any as any)}
       onChange={(...args: any[]) => {
@@ -47,6 +48,7 @@ const TreeSelectControl = React.forwardRef<any, ITreeSelectProps<any>>((props, r
         showSearch: true,
         filterTreeNode: true,
         treeNodeFilterProp: 'label',
+        maxTagPlaceholder: renderMaxTagPlaceholder,
         ...controlProps,
       }}
     />

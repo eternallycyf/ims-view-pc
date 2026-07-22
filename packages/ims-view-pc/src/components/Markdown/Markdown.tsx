@@ -95,6 +95,17 @@ export function CustomImage(props: CustomImageProps) {
   )
 }
 
+
+function MarkdownMultiImage(props: ComponentProps) {
+  const { children, ...imageProps } = props
+  return (
+    <>
+      <CustomImage {...imageProps} />
+      {children}
+    </>
+  )
+}
+
 const CustomCode: React.FC<ComponentProps> = (props) => {
   const { className, children } = props
   const lang = className?.match(/language-(\w+)/)?.[1] || ''
@@ -235,6 +246,8 @@ const streamPlaceholderComponents: NonNullable<XMarkdownProps['components']> = {
 const defaultMarkdownComponents: NonNullable<XMarkdownProps['components']> = {
   ...streamPlaceholderComponents,
   img: CustomImage,
+  multiimage: MarkdownMultiImage,
+  multimage: MarkdownMultiImage,
   code: CustomCode,
   welcome: MarkdownWelcome,
   table: MarkdownTable,

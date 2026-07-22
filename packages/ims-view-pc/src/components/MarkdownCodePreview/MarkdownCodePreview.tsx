@@ -70,6 +70,8 @@ export const MarkdownCodePreview = forwardRef<MarkdownCodePreviewHandle, Markdow
       className: mdLiteClassName,
       style: mdLiteStyle,
       view: userViewFromProps,
+      /** 默认关闭左右栏同步滚动；需要时可经 mdEditorProps 显式传入 */
+      syncScrollMode = [],
       ...restMdEditorProps
     } = mdEditorProps ?? {}
 
@@ -154,6 +156,7 @@ export const MarkdownCodePreview = forwardRef<MarkdownCodePreviewHandle, Markdow
           placeholder={placeholder}
           renderHTML={renderHTML}
           onChange={handleChange}
+          syncScrollMode={syncScrollMode}
           view={{ ...panelView, ...userViewFromProps }}
           htmlClass={clsx('custom-html-style', 'markdown-code-preview__html-pane')}
           className={clsx('markdown-code-preview__editor-lite', mdLiteClassName)}

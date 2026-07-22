@@ -2,6 +2,7 @@ import { ProFormSelect, type ProFormSelectProps } from '@ant-design/pro-form';
 import { Spin } from 'antd';
 import { Attachment, type DeepPartial, type IBaseCustomFormItemProps } from 'ims-view-pc';
 import React, { useImperativeHandle } from 'react';
+import { renderMaxTagPlaceholder } from "../utils/maxTagPlaceholder";
 
 export interface SelectControlProps<T = any> extends IBaseCustomFormItemProps<T> {
   controlProps: DeepPartial<Omit<ProFormSelectProps<T>, 'fieldProps'>> & {
@@ -34,8 +35,9 @@ const SelectControl = React.forwardRef<any, SelectControlProps<Attachment[]>>((p
         }
       }}
       fieldProps={{
-        options: dict,
+        options: dict || [],
         notFoundContent: props?.controlProps?.loading ? <Spin spinning /> : null,
+        maxTagPlaceholder: renderMaxTagPlaceholder,
         ...controlProps,
       }}
     />
