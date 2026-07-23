@@ -10,7 +10,10 @@ jobs:
     name: Release
     runs-on: ubuntu-latest
     steps:
+      # semantic-release 需要完整 commit 历史和 tags，否则会把已发布包当成首次 1.0.0 再次 publish
       - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
       - name: ⚙ 设置 pnpm
         uses: pnpm/action-setup@v2
