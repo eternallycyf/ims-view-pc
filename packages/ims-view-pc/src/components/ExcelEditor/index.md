@@ -71,7 +71,7 @@ import { ExcelEditor } from 'ims-view-pc';
 | src                  | Excel 文件地址（.xlsx / .xls）            | `string`                       | -                         |
 | data                 | 工作簿数据，优先级高于 `src`              | `Partial<IWorkbookData>`       | -                         |
 | exchangeEndpoint     | 大文件可选 Nest 服务地址                  | `string`                       | `http://localhost:3010`  |
-| serverSizeThreshold  | 超过该大小优先走 server（字节）           | `number`                       | `10485760`（10MB）        |
+| serverSizeThreshold  | 超过该大小优先走 server（字节）           | `number`                       | `1048576`（1MB）          |
 | showExchange         | Ribbon「导入导出」；未传时编辑视图为 true | `boolean`                      | `viewMode === 'edit'`     |
 | height               | 容器高度；不传则 `100%` 跟随父级           | `number \| string`             | `100%`                    |
 | width                | 容器宽度；不传则 `100%` 跟随父级           | `number \| string`             | `100%`                    |

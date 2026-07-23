@@ -2,18 +2,78 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "Start Server",
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": [
+        "--dir",
+        "packages/server",
+        "start:debug"
+      ],
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "restart": true,
+      "autoAttachChildProcesses": true,
+      "env": {
+        "IMS_SERVER_PORT": "3010"
+      },
+      "skipFiles": [
+        "<node_internals>/**",
+        "**/node_modules/**"
+      ]
+    },
+    {
+      "name": "Attach Nest Server",
+      "type": "node",
+      "request": "attach",
+      "port": 9229,
+      "restart": true,
+      "skipFiles": [
+        "<node_internals>/**",
+        "**/node_modules/**"
+      ]
+    },
+    {
+      "name": "Start Docs",
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": [
+        "start"
+      ],
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "env": {
+        "IMS_EXCHANGE_ENDPOINT": "http://localhost:3010"
+      },
+      "skipFiles": [
+        "<node_internals>/**",
+        "**/node_modules/**"
+      ]
+    },
+    {
       "name": "jest",
       "type": "node",
       "request": "launch",
       "program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
       "console": "integratedTerminal",
       "args": [
-        // 不再用 worker 进程并行跑测试用例，而是在当前进程串行跑：
         "-i",
         "${file}",
         "-t",
         "${input:case}"
       ]
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Docs + Nest Server",
+      "configurations": [
+        "Debug Nest Server",
+        "Start Docs (dumi)"
+      ],
+      "stopAll": true
     }
   ],
   "inputs": [

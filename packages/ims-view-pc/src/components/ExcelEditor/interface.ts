@@ -87,8 +87,8 @@ export interface ExcelEditorProps {
    */
   exchangeEndpoint?: string;
   /**
-   * 超过该大小优先走 server（字节），默认 10MB
-   * @default 10485760
+   * 超过该大小优先走 server（字节），默认 1MB
+   * @default 1048576
    */
   serverSizeThreshold?: number;
   /**

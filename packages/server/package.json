@@ -26,6 +26,7 @@
   "scripts": {
     "start": "nest start",
     "start:dev": "nest start --watch",
+    "start:debug": "nest start --debug --watch",
     "build": "nest build",
     "clean": "rm -rf lib dist",
     "doctor": "node -e \"require('fs').accessSync('src/index.ts'); console.log('[@ims-view/server] doctor ok')\"",

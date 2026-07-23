@@ -6,8 +6,8 @@ import {
   workbookDataToExcelBlob,
 } from './excelToWorkbookData';
 
-/** 小于该阈值优先浏览器本地处理（默认 10MB） */
-export const DEFAULT_SERVER_SIZE_THRESHOLD = 10 * 1024 * 1024;
+/** 小于该阈值优先浏览器本地处理（默认 1MB） */
+export const DEFAULT_SERVER_SIZE_THRESHOLD = 1 * 1024 * 1024;
 
 const trimSlash = (url: string) => url.replace(/\/$/, '');
 
