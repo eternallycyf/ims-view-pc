@@ -1,5 +1,24 @@
 # Changelog
 
+## [Version&nbsp;1.1.0](https://github.com/eternallycyf/ims-view-pc/compare/@ims-view/server@1.0.0...@ims-view/server@1.1.0)
+
+<sup>Released on **2026-07-23**</sup>
+
+#### ✨ 新特性
+
+- Add @ims-view/server.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- Add @ims-view/server ([2b9158d](https://github.com/eternallycyf/ims-view-pc/commit/2b9158d))
+
+</details>
+
 ## Version&nbsp;1.0.0
 
 <sup>Released on **2026-07-23**</sup>
