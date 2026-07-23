@@ -11,7 +11,9 @@ demo:
 
 ## ExcelEditor Excel 编辑器
 
-基于 [Univer](https://univer.ai/) 的 Excel 编辑器：`mode` 控制功能档位，`viewMode` 切换预览 / 编辑；本地 `.xlsx` 优先 `@zwight/luckyexcel`（[JSZip](https://github.com/Stuk/jszip)），失败回退 SheetJS；`.xls` 直接走 SheetJS（LuckyExcel 对旧格式易出空表）。大文件可走 Nest 服务。
+基于 [Univer](https://univer.ai/) 的 Excel 编辑器：`mode` 控制功能档位，`viewMode` 切换预览 / 编辑；本地 `.xlsx` 优先 `@zwight/luckyexcel`（[JSZip](https://github.com/Stuk/jszip)），失败回退 SheetJS；`.xls` 直接走 SheetJS（LuckyExcel 对旧格式易出空表）。
+
+导入导出：**默认走浏览器本地**；显式传入 `exchangeEndpoint` 后全部走 Nest 服务端（适合大文件，如 ≥1MB），不做按文件大小自动切换。
 
 主题色跟随宿主 `ConfigProvider`（`theme.useToken().colorPrimary`）；未包裹时回退到 `variables.colorPrimary`。
 
@@ -30,7 +32,7 @@ demo:
 ```tsx | pure
 import { ExcelEditor } from 'ims-view-pc';
 
-{/* 默认宽高 100%，跟随父容器 */}
+{/* 默认宽高 100%，跟随父容器；导入导出走前端本地 */}
 <div style={{ height: 500 }}>
   <ExcelEditor mode="simple" />
 </div>
@@ -39,6 +41,12 @@ import { ExcelEditor } from 'ims-view-pc';
 <ExcelEditor mode="all" height={500} width="100%" />
 <ExcelEditor mode="custom" features={{ filter: true, drawing: true }} height="60vh" />
 <ExcelEditor mode="simple" viewMode="preview" src="/excel.xlsx" height={480} />
+
+{/* 大文件：显式开启服务端导入导出（需先 pnpm start:server） */}
+<ExcelEditor
+  exchangeEndpoint="http://localhost:3010"
+  height={500}
+/>
 ```
 
 ## 示例
@@ -51,7 +59,9 @@ import { ExcelEditor } from 'ims-view-pc';
 
 <code description="通过 src 加载 Excel" src="./demo/src.tsx">加载远程文件</code>
 
-<code description="导入导出演示" src="./demo/exchange.tsx">导入导出</code>
+<code description="前端本地导入导出（默认）" src="./demo/exchange.tsx">导入导出</code>
+
+<code description="大文件（≥1MB）需配置 exchangeEndpoint，走 Nest 服务端" src="./demo/server.tsx">服务端导入</code>
 
 :::info{title=提示}
 - 默认宽高为 `100%`，需父容器有明确高度（如 `height: 500` / flex 子项）；也可传 `height` / `width` 覆盖。
@@ -59,6 +69,7 @@ import { ExcelEditor } from 'ims-view-pc';
 - 编辑视图默认展示 Ribbon「导入导出」；可用 `showExchange={false}` 关闭。
 - 预览模式走 Univer 自带只读（`setEditable(false)` + `setReadOnly`）；表头仍可调列宽 / 行高。
 - 远程 `src` 需可访问（注意跨域）。
+- 导入导出默认走前端本地；大文件请传 `exchangeEndpoint`（如 `http://localhost:3010`），并先启动 `pnpm start:server`。
 :::
 
 ## API
@@ -70,8 +81,7 @@ import { ExcelEditor } from 'ims-view-pc';
 | viewMode             | 预览 / 编辑（预览可调表头宽高，不可操作单元格） | `'preview' \| 'edit'`        | `'edit'`                  |
 | src                  | Excel 文件地址（.xlsx / .xls）            | `string`                       | -                         |
 | data                 | 工作簿数据，优先级高于 `src`              | `Partial<IWorkbookData>`       | -                         |
-| exchangeEndpoint     | 大文件可选 Nest 服务地址                  | `string`                       | `http://localhost:3010`  |
-| serverSizeThreshold  | 超过该大小优先走 server（字节）           | `number`                       | `1048576`（1MB）          |
+| exchangeEndpoint     | Nest 服务地址；传入后导入/导出走服务端（大文件推荐） | `string`                | -（默认本地）             |
 | showExchange         | Ribbon「导入导出」；未传时编辑视图为 true | `boolean`                      | `viewMode === 'edit'`     |
 | height               | 容器高度；不传则 `100%` 跟随父级           | `number \| string`             | `100%`                    |
 | width                | 容器宽度；不传则 `100%` 跟随父级           | `number \| string`             | `100%`                    |

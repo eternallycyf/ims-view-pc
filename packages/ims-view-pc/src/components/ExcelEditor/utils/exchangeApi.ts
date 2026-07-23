@@ -6,9 +6,6 @@ import {
   workbookDataToExcelBlob,
 } from './excelToWorkbookData';
 
-/** 小于该阈值优先浏览器本地处理（默认 1MB） */
-export const DEFAULT_SERVER_SIZE_THRESHOLD = 1 * 1024 * 1024;
-
 const trimSlash = (url: string) => url.replace(/\/$/, '');
 
 export const isExchangeServerAvailable = async (endpoint: string): Promise<boolean> => {
@@ -91,64 +88,39 @@ export type ExchangeResultMeta = {
   via: 'local' | 'server';
 };
 
-export const importWorkbookSmart = async (
+/**
+ * 导入：未传 endpoint 走浏览器本地；显式传入 exchangeEndpoint 则走 Nest 服务端（不做大小自动切换）
+ */
+export const importWorkbook = async (
   file: File,
-  options: {
-    endpoint?: string;
-    threshold?: number;
-  } = {},
+  options: { endpoint?: string } = {},
 ): Promise<{ result: ExcelImportResult; meta: ExchangeResultMeta }> => {
-  const threshold = options.threshold ?? DEFAULT_SERVER_SIZE_THRESHOLD;
-  const endpoint = options.endpoint;
-
-  if (file.size < threshold || !endpoint) {
+  const endpoint = options.endpoint?.trim();
+  if (!endpoint) {
     const result = await importLocal(file);
     return { result, meta: { via: 'local' } };
   }
 
-  const available = await isExchangeServerAvailable(endpoint);
-  if (available) {
-    try {
-      const result = await importFromServer(endpoint, file);
-      return { result, meta: { via: 'server' } };
-    } catch {
-      // fall through
-    }
-  }
-
-  const result = await importLocal(file);
-  return { result, meta: { via: 'local' } };
+  const result = await importFromServer(endpoint, file);
+  return { result, meta: { via: 'server' } };
 };
 
-export const exportWorkbookSmart = async (
+/**
+ * 导出：未传 endpoint 走浏览器本地；显式传入 exchangeEndpoint 则走 Nest 服务端
+ */
+export const exportWorkbook = async (
   data: Partial<IWorkbookData>,
   fileName = 'workbook.xlsx',
-  options: {
-    endpoint?: string;
-    threshold?: number;
-  } = {},
+  options: { endpoint?: string } = {},
 ): Promise<ExchangeResultMeta> => {
-  const threshold = options.threshold ?? DEFAULT_SERVER_SIZE_THRESHOLD;
-  const endpoint = options.endpoint;
-  const estimateSize = new Blob([JSON.stringify(data)]).size;
-
-  if (estimateSize < threshold || !endpoint) {
+  const endpoint = options.endpoint?.trim();
+  if (!endpoint) {
     await exportLocal(data, fileName);
     return { via: 'local' };
   }
 
-  const available = await isExchangeServerAvailable(endpoint);
-  if (available) {
-    try {
-      await exportToServer(endpoint, data, fileName);
-      return { via: 'server' };
-    } catch {
-      // fall through
-    }
-  }
-
-  await exportLocal(data, fileName);
-  return { via: 'local' };
+  await exportToServer(endpoint, data, fileName);
+  return { via: 'server' };
 };
 
 /** 将导入的图片插入到 Univer sheet（需 drawing preset） */

@@ -24,18 +24,14 @@ import {
   pickThemeColorsFromToken,
 } from './utils/buildUniverTheme';
 import { DEFAULT_WORKBOOK_DATA } from './utils/defaultWorkbookData';
-import { getDefaultExchangeEndpoint } from './utils/env';
 import {
-  DEFAULT_SERVER_SIZE_THRESHOLD,
   applyImportedImages,
-  exportWorkbookSmart,
-  importWorkbookSmart,
+  exportWorkbook,
+  importWorkbook,
 } from './utils/exchangeApi';
 import type { ExcelImportResult } from './utils/excelToWorkbookData';
 import { loadImportResultFromUrl } from './utils/excelToWorkbookData';
 import { registerExchangeRibbonMenus } from './utils/registerExchangeMenus';
-
-const DEFAULT_EXCHANGE_ENDPOINT = getDefaultExchangeEndpoint();
 
 /**
  * mergeLocales 内部是 Object.assign 浅合并。
@@ -190,8 +186,7 @@ const InternalExcelEditor: React.ForwardRefRenderFunction<ExcelEditorHandle, Exc
     viewMode = 'edit',
     src,
     data,
-    exchangeEndpoint = DEFAULT_EXCHANGE_ENDPOINT,
-    serverSizeThreshold = DEFAULT_SERVER_SIZE_THRESHOLD,
+    exchangeEndpoint,
     showExchange,
     onReady,
     onError,
@@ -227,7 +222,6 @@ const InternalExcelEditor: React.ForwardRefRenderFunction<ExcelEditorHandle, Exc
   const onReadyRef = useRef(onReady);
   const onErrorRef = useRef(onError);
   const exchangeEndpointRef = useRef(exchangeEndpoint);
-  const thresholdRef = useRef(serverSizeThreshold);
   const importXlsxRef = useRef<(file: File) => Promise<Partial<IWorkbookData>>>(async () => ({}));
   const exportXlsxRef = useRef<(fileName?: string) => Promise<void>>(async () => undefined);
   const enableDrawingRef = useRef(false);
@@ -241,7 +235,6 @@ const InternalExcelEditor: React.ForwardRefRenderFunction<ExcelEditorHandle, Exc
   onReadyRef.current = onReady;
   onErrorRef.current = onError;
   exchangeEndpointRef.current = exchangeEndpoint;
-  thresholdRef.current = serverSizeThreshold;
 
   const replaceWorkbook = async (importResult: ExcelImportResult) => {
     const univerAPI = univerAPIRef.current;
@@ -267,9 +260,8 @@ const InternalExcelEditor: React.ForwardRefRenderFunction<ExcelEditorHandle, Exc
   const importXlsx = async (file: File) => {
     setExchanging(true);
     try {
-      const { result, meta } = await importWorkbookSmart(file, {
+      const { result, meta } = await importWorkbook(file, {
         endpoint: exchangeEndpointRef.current,
-        threshold: thresholdRef.current,
       });
       fileNameRef.current = toExportFileName(file.name);
       await replaceWorkbook(result);
@@ -299,9 +291,8 @@ const InternalExcelEditor: React.ForwardRefRenderFunction<ExcelEditorHandle, Exc
 
     setExchanging(true);
     try {
-      const meta = await exportWorkbookSmart(snapshot, exportName, {
+      const meta = await exportWorkbook(snapshot, exportName, {
         endpoint: exchangeEndpointRef.current,
-        threshold: thresholdRef.current,
       });
       message.success(meta.via === 'server' ? '导出成功（服务端）' : '导出成功（本地）');
     } catch (error) {
@@ -466,8 +457,6 @@ ExcelEditor.defaultProps = {
   prefixCls: 'excel-editor',
   mode: 'simple',
   viewMode: 'edit',
-  exchangeEndpoint: DEFAULT_EXCHANGE_ENDPOINT,
-  serverSizeThreshold: DEFAULT_SERVER_SIZE_THRESHOLD,
 };
 
 export default ExcelEditor;

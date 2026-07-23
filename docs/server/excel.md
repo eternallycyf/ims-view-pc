@@ -169,4 +169,4 @@ const blob = await res.blob();
 
 ### 与 ExcelEditor
 
-`ExcelEditor` 通过 `exchangeEndpoint` / `IMS_EXCHANGE_ENDPOINT` 调用以上接口；大文件优先服务端，失败回退本地 `@ims-view/utils`。
+`ExcelEditor` **默认走浏览器本地**导入导出；显式传入 `exchangeEndpoint`（如 `http://localhost:3010`）后才调用以上 Nest 接口，适合大文件（建议 ≥1MB）。不再按文件大小自动切换。

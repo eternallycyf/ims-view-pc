@@ -1,6 +1,5 @@
 import type { FUniver, IWorkbookData } from '@univerjs/presets';
 import type { CSSProperties } from 'react';
-import { DEFAULT_SERVER_SIZE_THRESHOLD } from './utils/exchangeApi';
 
 /** 功能档位：simple 核心+插入+导入导出；all 开启开源能力；custom 按 features 勾选 */
 export type ExcelEditorFeatureMode = 'simple' | 'all' | 'custom';
@@ -40,9 +39,9 @@ export interface ExcelEditorHandle {
   getUniverAPI: () => FUniver | null;
   /** 获取当前工作簿快照数据 */
   getWorkbookData: () => Partial<IWorkbookData> | null;
-  /** 导入 xlsx（小文件本地，大文件优先 server，失败回退本地） */
+  /** 导入 xlsx（默认本地；配置了 exchangeEndpoint 则走服务端） */
   importXlsx: (file: File) => Promise<Partial<IWorkbookData>>;
-  /** 导出 xlsx（小文件本地，大文件优先 server，失败回退本地） */
+  /** 导出 xlsx（默认本地；配置了 exchangeEndpoint 则走服务端） */
   exportXlsx: (fileName?: string) => Promise<void>;
 }
 
@@ -81,16 +80,11 @@ export interface ExcelEditorProps {
   /** 工作簿数据，优先级高于 src */
   data?: Partial<IWorkbookData>;
   /**
-   * Excel 导入导出 Nest 服务地址（大文件可选）
-   * 未启动时自动回退本地处理
-   * @default process.env.IMS_EXCHANGE_ENDPOINT || `http://localhost:${IMS_SERVER_PORT||PORT||3010}`
+   * Nest 导入导出服务地址。默认不开启（走浏览器本地）；
+   * 显式传入后导入/导出全部走服务端（适合大文件，如 ≥1MB）
+   * @example 'http://localhost:3010'
    */
   exchangeEndpoint?: string;
-  /**
-   * 超过该大小优先走 server（字节），默认 1MB
-   * @default 1048576
-   */
-  serverSizeThreshold?: number;
   /**
    * 是否在 Ribbon「导入导出」页签展示导入/导出按钮（仅编辑视图）
    * 未传时：编辑视图默认 true
@@ -101,5 +95,3 @@ export interface ExcelEditorProps {
   /** 加载或渲染失败回调 */
   onError?: (error: Error) => void;
 }
-
-export { DEFAULT_SERVER_SIZE_THRESHOLD };
