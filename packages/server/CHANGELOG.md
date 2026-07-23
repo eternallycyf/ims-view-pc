@@ -1,5 +1,24 @@
 # Changelog
 
+## [Version&nbsp;1.2.0](https://github.com/eternallycyf/ims-view-pc/compare/@ims-view/server@1.1.0...@ims-view/server@1.2.0)
+
+<sup>Released on **2026-07-23**</sup>
+
+#### ✨ 新特性
+
+- 更新 Excel 导入导出服务配置，调整默认服务器大小阈值为 1MB，并添加调试启动脚本.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- 更新 Excel 导入导出服务配置，调整默认服务器大小阈值为 1MB，并添加调试启动脚本 ([4768698](https://github.com/eternallycyf/ims-view-pc/commit/4768698))
+
+</details>
+
 ## [Version&nbsp;1.1.0](https://github.com/eternallycyf/ims-view-pc/compare/@ims-view/server@1.0.0...@ims-view/server@1.1.0)
 
 <sup>Released on **2026-07-23**</sup>
