@@ -1,5 +1,24 @@
 # Changelog
 
+### [Version&nbsp;1.96.1](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.96.0...ims-view-pc@1.96.1)
+
+<sup>Released on **2026-07-23**</sup>
+
+#### 🐛 修复
+
+- 更新 Excel 导入导出逻辑，默认使用浏览器本地处理，显式传入 exchangeEndpoint 后走服务端，适合大文件（≥1MB）.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- 更新 Excel 导入导出逻辑，默认使用浏览器本地处理，显式传入 exchangeEndpoint 后走服务端，适合大文件（≥1MB） ([c5670bb](https://github.com/eternallycyf/ims-view-pc/commit/c5670bb))
+
+</details>
+
 ## [Version&nbsp;1.96.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.95.0...ims-view-pc@1.96.0)
 
 <sup>Released on **2026-07-23**</sup>
