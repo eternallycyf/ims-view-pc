@@ -183,7 +183,8 @@ const InternalExcelEditor: React.ForwardRefRenderFunction<ExcelEditorHandle, Exc
     prefixCls = 'excel-editor',
     className,
     style,
-    height = 500,
+    height,
+    width,
     mode = 'simple',
     features,
     viewMode = 'edit',
@@ -428,7 +429,8 @@ const InternalExcelEditor: React.ForwardRefRenderFunction<ExcelEditorHandle, Exc
         [`${prefixCls}--preview`]: viewMode === 'preview',
       })}
       style={{
-        height,
+        ...(width != null ? { width } : {}),
+        ...(height != null ? { height } : {}),
         ...themeCssVars,
         ...style,
       }}
@@ -464,7 +466,6 @@ ExcelEditor.defaultProps = {
   prefixCls: 'excel-editor',
   mode: 'simple',
   viewMode: 'edit',
-  height: 500,
   exchangeEndpoint: DEFAULT_EXCHANGE_ENDPOINT,
   serverSizeThreshold: DEFAULT_SERVER_SIZE_THRESHOLD,
 };

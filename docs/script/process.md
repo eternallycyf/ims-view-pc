@@ -3,7 +3,7 @@ title: process
 order: 1
 nav:
   title: script
-  order: 4
+  order: 6
 ---
 
 ## 一个新建新流程代码的脚本

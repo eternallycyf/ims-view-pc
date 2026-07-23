@@ -28,8 +28,14 @@ node v20.19.0
 
 pnpm i
 
+# 文档站 / 组件开发
 pnpm run start
+
+# 可选：Excel 大文件导入导出 Nest 服务（packages/server）
+IMS_SERVER_PORT=3010 pnpm start:server
 ```
+
+文档导航：`components` / `chart` / `hooks` / `utils` / **`server`**（`@ims-view/server` API）。
 
 ## 🖥 浏览器兼容性
 
@@ -55,6 +61,7 @@ pnpm run start
 | [@ims-view/chart](https://www.npmjs.com/package/@ims-view/chart) | ![npm-image](http://img.shields.io/npm/v/@ims-view/chart?style=flat-square&color=deepgreen&label=latest)     | [![NPM downloads][@ims-view/chart-download-image]][@ims-view/chart-download-url] |
 | [@ims-view/hooks](https://www.npmjs.com/package/@ims-view/hooks) | ![npm-image](http://img.shields.io/npm/v/@ims-view/hooks.svg?style=flat-square&color=deepgreen&label=latest) | [![NPM downloads][@ims-view/hooks-download-image]][@ims-view/hooks-download-url] |
 | [@ims-view/utils](https://www.npmjs.com/package/@ims-view/utils) | ![npm-image](http://img.shields.io/npm/v/@ims-view/utils.svg?style=flat-square&color=deepgreen&label=latest) | [![NPM downloads][@ims-view/utils-download-image]][@ims-view/utils-download-url] |
+| [@ims-view/server](https://www.npmjs.com/package/@ims-view/server) | ![npm-image](http://img.shields.io/npm/v/@ims-view/server.svg?style=flat-square&color=deepgreen&label=latest) | [![NPM downloads][@ims-view/server-download-image]][@ims-view/server-download-url] |
 
 [ims-view-pc-download-url]: https://npmjs.org/package/ims-view-pc
 [ims-view-pc-download-image]: https://img.shields.io/npm/dm/ims-view-pc.svg?style=flat-square
@@ -64,6 +71,20 @@ pnpm run start
 [@ims-view/hooks-download-image]: https://img.shields.io/npm/dm/@ims-view/hooks.svg?style=flat-square
 [@ims-view/utils-download-url]: https://npmjs.org/package/@ims-view/utils
 [@ims-view/utils-download-image]: https://img.shields.io/npm/dm/@ims-view/utils.svg?style=flat-square
+[@ims-view/server-download-url]: https://npmjs.org/package/@ims-view/server
+[@ims-view/server-download-image]: https://img.shields.io/npm/dm/@ims-view/server.svg?style=flat-square
+
+## Monorepo 包
+
+| 包名 | 路径 | 说明 |
+| ---- | ---- | ---- |
+| `ims-view-pc` | `packages/ims-view-pc` | React 组件库（含 `ExcelEditor` 等） |
+| `@ims-view/chart` | `packages/chart` | 图表 |
+| `@ims-view/hooks` | `packages/hooks` | Hooks |
+| `@ims-view/utils` | `packages/utils` | 工具（含 Excel ↔ Univer 转换） |
+| `@ims-view/server` | `packages/server` | NestJS Excel 导入导出服务（`pnpm start:server` / `npx ims-view-server`） |
+
+文档站侧栏对应：`/components`、`/chart`、`/hooks`、`/utils`、`/server`。
 
 ## License
 

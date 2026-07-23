@@ -80,10 +80,12 @@ export default defineConfig({
     '@ims-view/hooks': path.join(__dirname, './packages/hooks/src'),
     '@ims-view/utils': path.join(__dirname, './packages/utils/src'),
     '@ims-view/chart': path.join(__dirname, './packages/chart/src'),
+    '@ims-view/server': path.join(__dirname, './packages/server/src'),
     'ims-view-pc': path.join(__dirname, './packages/ims-view-pc/src'),
     '@ims-view/hooks/src': path.join(__dirname, './packages/hooks/src/*'),
     '@ims-view/utils/src': path.join(__dirname, './packages/utils/src/*'),
     '@ims-view/chart/src': path.join(__dirname, './packages/chart/src/*'),
+    '@ims-view/server/src': path.join(__dirname, './packages/server/src/*'),
     'ims-view-pc/src': path.join(__dirname, './packages/ims-view-pc/src/*'),
     // `$` 仅匹配精确导入，保留 `/facade` 等子路径
     '@univerjs/core$': path.join(univerCoreEs, 'index.js'),

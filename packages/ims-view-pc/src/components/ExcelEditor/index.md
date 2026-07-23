@@ -30,10 +30,15 @@ demo:
 ```tsx | pure
 import { ExcelEditor } from 'ims-view-pc';
 
-<ExcelEditor mode="simple" height={500} />
-<ExcelEditor mode="all" height={500} />
-<ExcelEditor mode="custom" features={{ filter: true, drawing: true }} height={500} />
-<ExcelEditor mode="simple" viewMode="preview" src="/excel.xlsx" height={500} />
+{/* 默认宽高 100%，跟随父容器 */}
+<div style={{ height: 500 }}>
+  <ExcelEditor mode="simple" />
+</div>
+
+{/* 也可显式指定 */}
+<ExcelEditor mode="all" height={500} width="100%" />
+<ExcelEditor mode="custom" features={{ filter: true, drawing: true }} height="60vh" />
+<ExcelEditor mode="simple" viewMode="preview" src="/excel.xlsx" height={480} />
 ```
 
 ## 示例
@@ -49,6 +54,7 @@ import { ExcelEditor } from 'ims-view-pc';
 <code description="导入导出演示" src="./demo/exchange.tsx">导入导出</code>
 
 :::info{title=提示}
+- 默认宽高为 `100%`，需父容器有明确高度（如 `height: 500` / flex 子项）；也可传 `height` / `width` 覆盖。
 - `data` 与 `src` 同时传入时，优先使用 `data`。
 - 编辑视图默认展示 Ribbon「导入导出」；可用 `showExchange={false}` 关闭。
 - 预览模式走 Univer 自带只读（`setEditable(false)` + `setReadOnly`）；表头仍可调列宽 / 行高。
@@ -67,7 +73,8 @@ import { ExcelEditor } from 'ims-view-pc';
 | exchangeEndpoint     | 大文件可选 Nest 服务地址                  | `string`                       | `http://localhost:3010`  |
 | serverSizeThreshold  | 超过该大小优先走 server（字节）           | `number`                       | `10485760`（10MB）        |
 | showExchange         | Ribbon「导入导出」；未传时编辑视图为 true | `boolean`                      | `viewMode === 'edit'`     |
-| height               | 容器高度                                  | `number \| string`             | `500`                     |
+| height               | 容器高度；不传则 `100%` 跟随父级           | `number \| string`             | `100%`                    |
+| width                | 容器宽度；不传则 `100%` 跟随父级           | `number \| string`             | `100%`                    |
 | className            | 自定义类名                                | `string`                       | -                         |
 | style                | 自定义样式                                | `CSSProperties`                | -                         |
 | onReady              | 初始化完成回调                            | `(univerAPI: FUniver) => void` | -                         |

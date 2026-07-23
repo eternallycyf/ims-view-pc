@@ -29,6 +29,8 @@
       "@ims-view/utils/*": ["./packages/utils/src/*"],
       "@ims-view/chart": ["./packages/chart/src"],
       "@ims-view/chart/*": ["./packages/chart/src/*"],
+      "@ims-view/server": ["./packages/server/src"],
+      "@ims-view/server/*": ["./packages/server/src/*"],
       "ims-view-pc": ["./packages/ims-view-pc/src"],
       "ims-view-pc/*": ["./packages/ims-view-pc/src/*"]
     }

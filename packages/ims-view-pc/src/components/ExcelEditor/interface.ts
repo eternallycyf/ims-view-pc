@@ -50,8 +50,14 @@ export interface ExcelEditorProps {
   prefixCls?: string;
   className?: string;
   style?: CSSProperties;
-  /** 容器高度，默认 500 */
+  /**
+   * 容器高度；不传时默认 `100%` 跟随父级高度（父级需有明确高度，如 flex 布局 / `height: 100vh`）
+   */
   height?: number | string;
+  /**
+   * 容器宽度；不传时默认 `100%` 跟随父级宽度
+   */
+  width?: number | string;
   /**
    * 功能档位
    * - simple: 核心编辑 + 插入 + 导入导出（默认，无公式栏/数据能力）

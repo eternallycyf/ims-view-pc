@@ -1,13 +1,35 @@
 {
   "name": "@ims-view/server",
   "version": "1.0.0",
-  "private": true,
-  "description": "Simple NestJS service for Excel import/export used by ExcelEditor",
+  "description": "NestJS Excel import/export service for ExcelEditor (xlsx ↔ IWorkbookData)",
+  "license": "MIT",
+  "author": "eternallycyf(969475322@qq.com)",
+  "homepage": "https://github.com/eternallycyf/ims-view-pc#readme",
+  "bugs": {
+    "url": "https://github.com/eternallycyf/ims-view-pc/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eternallycyf/ims-view-pc.git",
+    "directory": "packages/server"
+  },
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "bin": {
+    "ims-view-server": "./bin/ims-view-server.js"
+  },
+  "files": [
+    "lib",
+    "bin",
+    "README.md"
+  ],
   "scripts": {
     "start": "nest start",
     "start:dev": "nest start --watch",
     "build": "nest build",
-    "clean": "rm -rf dist"
+    "clean": "rm -rf lib dist",
+    "doctor": "node -e \"require('fs').accessSync('src/index.ts'); console.log('[@ims-view/server] doctor ok')\"",
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {
     "@ims-view/utils": "1.22.0",
@@ -25,5 +47,19 @@
     "@types/multer": "^1.4.12",
     "@types/node": "^22.0.0",
     "typescript": "^5.4.5"
-  }
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "nestjs",
+    "excel",
+    "xlsx",
+    "univer",
+    "ims-view"
+  ]
 }

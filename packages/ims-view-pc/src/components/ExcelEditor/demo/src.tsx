@@ -16,8 +16,8 @@ const getDemoExcelUrl = () => {
 
 const App = () => {
   return (
-    <div style={{ width: '100%' }}>
-      <ExcelEditor src={getDemoExcelUrl()} mode="simple" viewMode="preview" height={480} />
+    <div style={{ width: '100%', height: '70vh' }}>
+      <ExcelEditor src={getDemoExcelUrl()} mode="simple" viewMode="preview" />
     </div>
   );
 };

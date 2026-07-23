@@ -1,6 +1,55 @@
 # @ims-view/server
 
-可选 NestJS 服务（不参与主项目 `start` / `build`），基于 NestJS + exceljs，与前端使用同一套 xlsx ↔ `IWorkbookData` 转换逻辑。
+[![NPM version][version-image]][version-url] [![NPM downloads][download-image]][download-url]
+
+## License
+
+[MIT](../../LICENSE) ® eternallycyf
+
+<!-- npm url -->
+
+[version-image]: http://img.shields.io/npm/v/@ims-view/server.svg?color=deepgreen&label=latest
+[version-url]: http://npmjs.org/package/@ims-view/server
+[download-image]: https://img.shields.io/npm/dm/@ims-view/server.svg
+[download-url]: https://npmjs.org/package/@ims-view/server
+
+<!-- docs url -->
+
+- https://ims-view-pc-eternallycyfs-projects.vercel.app/server
+
+## 安装
+
+```shell
+pnpm i @ims-view/server
+```
+
+## 独立启动
+
+```shell
+# 全局 / npx
+npx ims-view-server
+
+# 或指定端口
+IMS_SERVER_PORT=3010 npx ims-view-server
+```
+
+仓库内开发：
+
+```shell
+IMS_SERVER_PORT=3010 pnpm start:server
+```
+
+## 嵌入 Nest 应用
+
+```ts
+import { Module } from '@nestjs/common';
+import { ExcelModule } from '@ims-view/server';
+
+@Module({
+  imports: [ExcelModule],
+})
+export class AppModule {}
+```
 
 ## 环境变量
 
@@ -9,33 +58,11 @@
 | `IMS_SERVER_PORT` | 服务端口（优先） | `3010` |
 | `PORT` | 兼容通用端口变量 | - |
 
-前端对应：
-
-| 变量 | 说明 |
-| ---- | ---- |
-| `IMS_EXCHANGE_ENDPOINT` | 完整服务地址，如 `http://localhost:3010` |
-| `IMS_SERVER_PORT` / `PORT` | 未设 endpoint 时用于拼接本地地址 |
-
-可参考仓库根目录 `.env.example` 与 `packages/server/.env.example`。
-
-## 何时需要
-
-`ExcelEditor` 默认：
-
-- **&lt; 10MB**：浏览器本地处理（无需启动本服务）
-- **≥ 10MB**：优先请求本服务；服务未启动或失败时自动回退本地
-
-## 启动
-
-```bash
-IMS_SERVER_PORT=3010 pnpm start:server
-```
-
-若端口被占用会自动顺延，并提示设置 `IMS_EXCHANGE_ENDPOINT`。
-
-健康检查：`GET http://localhost:3010/excel/health`
+前端对接：`IMS_EXCHANGE_ENDPOINT=http://localhost:3010`
 
 ## API
 
-- `POST /excel/import` — multipart `file` → `IWorkbookData`
-- `POST /excel/export` — JSON `{ data, fileName }` → xlsx 流
+见文档站：
+
+- https://ims-view-pc-eternallycyfs-projects.vercel.app/server
+- https://ims-view-pc-eternallycyfs-projects.vercel.app/server/excel

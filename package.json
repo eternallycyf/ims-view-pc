@@ -31,7 +31,7 @@
     "docs:build": "pnpm dlx dumi build",
     "build": "lerna run build --parallel --ignore @ims-view/server",
     "clean": "lerna run clean --ignore @ims-view/server && rm -rf es lib dist build coverage .umi .eslintcache apis",
-    "doctor": "lerna run doctor --ignore @ims-view/server",
+    "doctor": "lerna run doctor",
     "postinstall": "npm run build",
     "lint": "npm run lint-eslint && npm run tsc",
     "lint-eslint": "eslint --cache --fix --ext .js,.jsx,.ts,.tsx packages/**/src",
