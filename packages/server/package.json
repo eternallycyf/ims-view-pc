@@ -34,7 +34,7 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "@ims-view/univer-import-excel": "0.1.0",
+    "@ims-view/univer-import-excel": "0.0.0-development",
     "@ims-view/utils": "1.22.1",
     "@nestjs/common": "^11.0.0",
     "@nestjs/core": "^11.0.0",

@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.23.1",
-    "@ims-view/univer-import-excel": "0.1.0",
+    "@ims-view/univer-import-excel": "0.0.0-development",
     "@zwight/luckyexcel": "^1.1.6",
     "decimal.js": "^10.4.3",
     "exceljs": "^4.4.0",

@@ -232,7 +232,7 @@ importers:
         specifier: 1.23.0
         version: link:../hooks
       '@ims-view/univer-import-excel':
-        specifier: 0.1.0
+        specifier: 0.0.0-development
         version: link:../univer-import-excel
       '@ims-view/utils':
         specifier: 1.22.1
@@ -398,7 +398,7 @@ importers:
   packages/server:
     dependencies:
       '@ims-view/univer-import-excel':
-        specifier: 0.1.0
+        specifier: 0.0.0-development
         version: link:../univer-import-excel
       '@ims-view/utils':
         specifier: 1.22.1
@@ -474,7 +474,7 @@ importers:
         specifier: ^7.23.1
         version: 7.28.4
       '@ims-view/univer-import-excel':
-        specifier: 0.1.0
+        specifier: 0.0.0-development
         version: link:../univer-import-excel
       '@zwight/luckyexcel':
         specifier: ^1.1.6

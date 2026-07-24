@@ -1,17 +1,31 @@
 {
   "name": "@ims-view/univer-import-excel",
-  "version": "0.1.0",
-  "description": "Excel → Univer import via ExcelJS (shared by browser and Nest workers)",
+  "version": "0.0.0-development",
+  "description": "Excel / CSV → Univer import via ExcelJS (shared by browser and Nest workers)",
+  "license": "MIT",
+  "author": "eternallycyf(969475322@qq.com)",
+  "homepage": "https://github.com/eternallycyf/ims-view-pc/tree/master/packages/univer-import-excel#readme",
+  "bugs": {
+    "url": "https://github.com/eternallycyf/ims-view-pc/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eternallycyf/ims-view-pc.git",
+    "directory": "packages/univer-import-excel"
+  },
   "main": "lib/index.js",
   "module": "es/index.js",
   "types": "es/index.d.ts",
   "files": [
     "lib",
-    "es"
+    "es",
+    "README.md"
   ],
   "scripts": {
     "build": "father build",
     "clean": "rm -rf es lib dist build coverage .eslintcache",
+    "doctor": "node -e \"require('fs').accessSync('src/index.ts'); console.log('[@ims-view/univer-import-excel] doctor ok')\"",
+    "prepublishOnly": "npm run build",
     "start": "father dev"
   },
   "dependencies": {
@@ -24,5 +38,13 @@
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org"
-  }
+  },
+  "keywords": [
+    "univer",
+    "excel",
+    "xlsx",
+    "csv",
+    "exceljs",
+    "ims-view"
+  ]
 }
