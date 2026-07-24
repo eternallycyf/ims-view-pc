@@ -1,5 +1,28 @@
 # Changelog
 
+### [Version&nbsp;1.2.1](https://github.com/eternallycyf/ims-view-pc/compare/@ims-view/server@1.2.0...@ims-view/server@1.2.1)
+
+<sup>Released on **2026-07-24**</sup>
+
+#### 🐛 修复
+
+- Update excel-editor.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- Update excel-editor ([fd6b69b](https://github.com/eternallycyf/ims-view-pc/commit/fd6b69b))
+
+</details>
+
+### Dependencies
+
+- **@ims-view/utils:** upgraded to 1.22.1
+
 ## [Version&nbsp;1.2.0](https://github.com/eternallycyf/ims-view-pc/compare/@ims-view/server@1.1.0...@ims-view/server@1.2.0)
 
 <sup>Released on **2026-07-23**</sup>

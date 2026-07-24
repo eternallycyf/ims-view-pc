@@ -1,6 +1,6 @@
 {
   "name": "@ims-view/server",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "NestJS Excel import/export service for ExcelEditor (xlsx ↔ IWorkbookData)",
   "license": "MIT",
   "author": "eternallycyf(969475322@qq.com)",
@@ -34,7 +34,7 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "@ims-view/utils": "1.22.0",
+    "@ims-view/utils": "1.22.1",
     "@nestjs/common": "^11.0.0",
     "@nestjs/core": "^11.0.0",
     "@nestjs/platform-express": "^11.0.0",
