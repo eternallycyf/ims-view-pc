@@ -1,6 +1,6 @@
 {
   "name": "@ims-view/univer-import-excel",
-  "version": "0.0.0-development",
+  "version": "1.0.0",
   "description": "Excel / CSV → Univer import via ExcelJS (shared by browser and Nest workers)",
   "license": "MIT",
   "author": "eternallycyf(969475322@qq.com)",
