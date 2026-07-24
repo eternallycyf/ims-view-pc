@@ -90,6 +90,13 @@ export interface ExcelEditorProps {
    * 未传时：编辑视图默认 true
    */
   showExchange?: boolean;
+  /**
+   * 表格 UI 主题：
+   * - office：Excel / SpreadJS 风格（Office 绿，默认）
+   * - brand：跟随 antd ConfigProvider 主色
+   * @default 'office'
+   */
+  themeMode?: 'office' | 'brand';
   /** 初始化完成回调 */
   onReady?: (univerAPI: FUniver) => void;
   /** 加载或渲染失败回调 */

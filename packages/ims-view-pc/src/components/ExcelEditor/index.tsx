@@ -21,7 +21,7 @@ import { buildUniverPresets } from './utils/buildUniverPresets';
 import {
   buildThemeCssVars,
   buildUniverTheme,
-  pickThemeColorsFromToken,
+  pickExcelEditorThemeColors,
 } from './utils/buildUniverTheme';
 import { DEFAULT_WORKBOOK_DATA } from './utils/defaultWorkbookData';
 import {
@@ -237,6 +237,7 @@ const InternalExcelEditor: React.ForwardRefRenderFunction<ExcelEditorHandle, Exc
     data,
     exchangeEndpoint,
     showExchange,
+    themeMode = 'office',
     onReady,
     onError,
   } = props;
@@ -248,13 +249,17 @@ const InternalExcelEditor: React.ForwardRefRenderFunction<ExcelEditorHandle, Exc
   const { token } = antdTheme.useToken();
   const themeColors = useMemo(
     () =>
-      pickThemeColorsFromToken({
-        colorPrimary: token.colorPrimary,
-        colorPrimaryHover: token.colorPrimaryHover,
-        colorPrimaryActive: token.colorPrimaryActive,
-        colorPrimaryBg: token.colorPrimaryBg,
-      }),
+      pickExcelEditorThemeColors(
+        {
+          colorPrimary: token.colorPrimary,
+          colorPrimaryHover: token.colorPrimaryHover,
+          colorPrimaryActive: token.colorPrimaryActive,
+          colorPrimaryBg: token.colorPrimaryBg,
+        },
+        { followBrand: themeMode === 'brand' },
+      ),
     [
+      themeMode,
       token.colorPrimary,
       token.colorPrimaryActive,
       token.colorPrimaryBg,
@@ -516,7 +521,7 @@ const InternalExcelEditor: React.ForwardRefRenderFunction<ExcelEditorHandle, Exc
     };
     // featuresKey 代替 features 对象引用，避免无意义重建
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data, featuresKey, mode, resolvedShowExchange, src, univerTheme, viewMode]);
+  }, [data, featuresKey, mode, resolvedShowExchange, src, themeMode, univerTheme, viewMode]);
 
   return (
     <div

@@ -85,6 +85,7 @@ import { ExcelEditor } from 'ims-view-pc';
 | width                | 容器宽度                                  | `number \| string`             | `100%`                    |
 | className            | 自定义类名                                | `string`                       | -                         |
 | style                | 自定义样式                                | `CSSProperties`                | -                         |
+| themeMode            | UI 主题：`office` Excel 绿 / `brand` 跟 antd 主色 | `'office' \| 'brand'` | `'office'` |
 | onReady              | 初始化完成回调                            | `(univerAPI: FUniver) => void` | -                         |
 | onError              | 失败回调                                  | `(error: Error) => void`       | -                         |
 

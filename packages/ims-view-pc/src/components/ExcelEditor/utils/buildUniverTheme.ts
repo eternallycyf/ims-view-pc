@@ -1,7 +1,6 @@
-import { defaultTheme, type Theme } from '@univerjs/presets';
+import { greenTheme, type Theme } from '@univerjs/presets';
 import type { GlobalToken } from 'antd';
 import type { CSSProperties } from 'react';
-import { variables } from '../../../styles/variables';
 
 const clamp = (value: number) => Math.min(255, Math.max(0, Math.round(value)));
 
@@ -42,6 +41,9 @@ const mix = (a: string, b: string, t: number) => {
   );
 };
 
+/** Microsoft Excel / SpreadJS 经典强调色 */
+export const OFFICE_EXCEL_GREEN = '#217346';
+
 export type ProjectThemeColors = {
   colorPrimary: string;
   colorPrimaryHover?: string;
@@ -49,7 +51,7 @@ export type ProjectThemeColors = {
   colorPrimaryBg?: string;
 };
 
-/** 从项目主色生成 Univer primary 色阶 */
+/** 从主色生成 Univer primary 色阶 */
 export const buildPrimaryScale = (colors: ProjectThemeColors): Theme['primary'] => {
   const primary = colors.colorPrimary;
   const hover = colors.colorPrimaryHover || mix(primary, '#FFFFFF', 0.18);
@@ -62,28 +64,71 @@ export const buildPrimaryScale = (colors: ProjectThemeColors): Theme['primary'] 
     200: mix(primary, '#FFFFFF', 0.7),
     300: mix(primary, '#FFFFFF', 0.5),
     400: hover,
-    500: primary,
-    600: active,
-    700: mix(primary, '#000000', 0.28),
-    800: mix(primary, '#000000', 0.4),
-    900: mix(primary, '#000000', 0.52),
+    500: mix(primary, '#FFFFFF', 0.08),
+    600: primary,
+    700: active,
+    800: mix(primary, '#000000', 0.28),
+    900: mix(primary, '#000000', 0.4),
   };
 };
 
-export const buildUniverTheme = (colors: ProjectThemeColors): Theme => ({
-  ...defaultTheme,
-  primary: buildPrimaryScale(colors),
-});
+/**
+ * Excel / SpreadJS 风格主题：
+ * - 默认 Office 绿（不跟 antd 蓝走，避免表格像后台管理系统）
+ * - 灰阶贴近 Excel 浅灰 Ribbon / 表头
+ */
+export const buildUniverTheme = (colors?: ProjectThemeColors): Theme => {
+  const primary = colors?.colorPrimary || OFFICE_EXCEL_GREEN;
+  return {
+    ...greenTheme,
+    primary: buildPrimaryScale({
+      colorPrimary: primary,
+      colorPrimaryHover: colors?.colorPrimaryHover,
+      colorPrimaryActive: colors?.colorPrimaryActive,
+      colorPrimaryBg: colors?.colorPrimaryBg || mix(primary, '#FFFFFF', 0.94),
+    }),
+    // 更接近 Office 的中性灰（表头 / 分隔线）
+    gray: {
+      ...greenTheme.gray,
+      50: '#FAFAFA',
+      100: '#F3F3F3',
+      200: '#E5E5E5',
+      300: '#D4D4D4',
+      400: '#BDBDBD',
+      500: '#9E9E9E',
+      600: '#757575',
+      700: '#616161',
+      800: '#424242',
+      900: '#212121',
+    },
+  };
+};
 
-/** antd token → 项目主色（优先 ConfigProvider） */
-export const pickThemeColorsFromToken = (token?: Partial<GlobalToken>): ProjectThemeColors => ({
-  colorPrimary: token?.colorPrimary || variables?.colorPrimary || '#1677ff',
-  colorPrimaryHover: token?.colorPrimaryHover || variables?.colorPrimaryHover,
-  colorPrimaryActive: token?.colorPrimaryActive || variables?.colorPrimaryActive,
-  colorPrimaryBg: token?.colorPrimaryBg || variables?.colorPrimaryBg,
-});
+/** ExcelEditor 默认用 Office 绿；仅当显式传入品牌色时覆盖 */
+export const pickExcelEditorThemeColors = (
+  token?: Partial<GlobalToken>,
+  options?: { followBrand?: boolean },
+): ProjectThemeColors => {
+  if (options?.followBrand) {
+    return {
+      colorPrimary: token?.colorPrimary || OFFICE_EXCEL_GREEN,
+      colorPrimaryHover: token?.colorPrimaryHover,
+      colorPrimaryActive: token?.colorPrimaryActive,
+      colorPrimaryBg: token?.colorPrimaryBg,
+    };
+  }
+  return {
+    colorPrimary: OFFICE_EXCEL_GREEN,
+    colorPrimaryHover: mix(OFFICE_EXCEL_GREEN, '#FFFFFF', 0.16),
+    colorPrimaryActive: mix(OFFICE_EXCEL_GREEN, '#000000', 0.12),
+    colorPrimaryBg: mix(OFFICE_EXCEL_GREEN, '#FFFFFF', 0.94),
+  };
+};
 
-/** 包裹层 CSS 变量，与项目其他组件保持一致 */
+/** @deprecated 请用 pickExcelEditorThemeColors；保留以免旧引用报错 */
+export const pickThemeColorsFromToken = pickExcelEditorThemeColors;
+
+/** 包裹层 CSS 变量 */
 export const buildThemeCssVars = (colors: ProjectThemeColors): CSSProperties =>
   ({
     '--colorPrimary': colors.colorPrimary,
@@ -93,4 +138,7 @@ export const buildThemeCssVars = (colors: ProjectThemeColors): CSSProperties =>
     '--primary-color': colors.colorPrimary,
     '--primary-color-hover': colors.colorPrimaryHover || colors.colorPrimary,
     '--primary-color-active': colors.colorPrimaryActive || colors.colorPrimary,
+    '--excel-office-green': OFFICE_EXCEL_GREEN,
+    '--excel-chrome-bg': '#F3F3F3',
+    '--excel-chrome-border': '#C6C6C6',
   }) as CSSProperties;
