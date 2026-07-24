@@ -142,6 +142,46 @@ const normalizeWorkbookData = (data?: Partial<IWorkbookData> | null): Partial<IW
   locale: data?.locale || 'zhCN',
 });
 
+/**
+ * 导入时换新 workbook id，并把 SHEET_DRAWING_PLUGIN 里的 unitId 一并改掉。
+ * 否则浮动图仍指向旧 unit，Univer 会算错尺寸 / 无法选中拖动。
+ */
+const rebaseWorkbookUnitId = (
+  data: Partial<IWorkbookData>,
+  nextId: string,
+): Partial<IWorkbookData> => {
+  const prevId = data.id;
+  const resources = (data.resources || []).map((res) => {
+    if (!res || res.name !== 'SHEET_DRAWING_PLUGIN' || typeof res.data !== 'string') {
+      return res;
+    }
+    if (!prevId || prevId === nextId) {
+      // 仍把 JSON 里的 unitId 统一成 nextId（兼容缺省 id）
+      try {
+        const parsed = JSON.parse(res.data) as Record<
+          string,
+          { data?: Record<string, { unitId?: string }>; order?: string[] }
+        >;
+        Object.values(parsed).forEach((sheetDrawings) => {
+          Object.values(sheetDrawings?.data || {}).forEach((drawing) => {
+            if (drawing && typeof drawing === 'object') drawing.unitId = nextId;
+          });
+        });
+        return { ...res, data: JSON.stringify(parsed) };
+      } catch {
+        return res;
+      }
+    }
+    // 字符串替换足够：unitId 只出现在 drawing 对象上
+    return { ...res, data: res.data.split(prevId).join(nextId) };
+  });
+
+  return {
+    ...data,
+    id: nextId,
+    resources: resources.length ? resources : data.resources,
+  };
+};
 /** 导出文件名统一为 .xlsx */
 const toExportFileName = (name?: string) => {
   const raw = (name || 'workbook').trim() || 'workbook';
@@ -251,8 +291,11 @@ const InternalExcelEditor: React.ForwardRefRenderFunction<ExcelEditorHandle, Exc
       throw new Error('ExcelEditor 尚未初始化完成');
     }
 
-    // 与可用 excel demo 一致：每次导入分配新 id，避免旧 unit 冲突导致空白
-    const workbookData = normalizeWorkbookData(importResult?.workbookData);
+    // 每次导入换新 id，避免旧 unit 冲突；同步改写浮动图 unitId（对齐 Lucky handleImage）
+    const workbookData = rebaseWorkbookUnitId(
+      normalizeWorkbookData(importResult?.workbookData),
+      `wb-${Date.now()}`,
+    );
 
     try {
       const active = univerAPI.getActiveWorkbook?.();
@@ -333,6 +376,7 @@ const InternalExcelEditor: React.ForwardRefRenderFunction<ExcelEditorHandle, Exc
     const exportName = toExportFileName(fileName || fileNameRef.current);
 
     setExchanging(true);
+    setExchangeTip('导出中...');
     try {
       await exportWorkbook(snapshot, exportName);
       message.success('导出成功');
@@ -343,6 +387,7 @@ const InternalExcelEditor: React.ForwardRefRenderFunction<ExcelEditorHandle, Exc
       // 已提示用户，不再向外抛，避免 Unhandled Rejection 白屏
     } finally {
       setExchanging(false);
+      setExchangeTip('处理中...');
     }
   };
 
@@ -490,7 +535,7 @@ const InternalExcelEditor: React.ForwardRefRenderFunction<ExcelEditorHandle, Exc
       <input
         ref={fileInputRef}
         type="file"
-        accept=".xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        accept=".xlsx,.csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,text/csv"
         style={{ display: 'none' }}
         onChange={(event) => {
           const file = event.target.files?.[0];

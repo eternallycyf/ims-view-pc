@@ -11,11 +11,12 @@ demo:
 
 ## ExcelEditor Excel 编辑器
 
-基于 [Univer](https://univer.ai/) 的表格组件，用于在页面里预览、编辑 Excel（仅 `.xlsx`），并支持导入导出。
+基于 [Univer](https://univer.ai/) 的表格组件，用于在页面里预览、编辑 Excel / CSV（`.xlsx` / `.csv`），并支持导入导出。
 
 - `mode`：功能档位（简单 / 全部 / 自定义）
 - `viewMode`：预览或编辑
-- 默认浏览器本地导入导出；大文件导入可配置 `exchangeEndpoint` 走服务端
+- 默认浏览器本地导入导出（ExcelJS→Univer 直出，轻样式；不配 `exchangeEndpoint`）
+- 大文件也可配 `exchangeEndpoint` 走服务端 ExcelJS Worker 分块
 
 ### 功能档位
 
@@ -61,10 +62,12 @@ import { ExcelEditor } from 'ims-view-pc';
 - 默认宽高 `100%`，请给父容器明确高度，或传 `height` / `width`。
 - `data` 优先于 `src`。
 - 编辑视图默认显示 Ribbon「导入导出」，可用 `showExchange={false}` 关闭。
-- 本地导入建议 ≤5MB；更大文件请配置 `exchangeEndpoint`（`pnpm start:server`）：
-  - **小文件**：Nest LuckyExcel → snapshot，前端一次挂载
-  - **大文件（默认 >2MB）**：同一套 Nest LuckyExcel 解析 → meta + blocks，前端骨架（含图片/样式）+ 分批挂载；默认最多约 15 万行（`IMS_EXCEL_MAX_ROWS`）
-- 仅支持 `.xlsx`，不支持旧版 `.xls`。
+- **本地导入**与**服务端导入**共用 `@ims-view/univer-import-excel` 的 ExcelJS→Univer 转换；大文件本地默认 `worker: 'auto'`（Web Worker 分块），服务端用 `worker_threads` 分块写盘。
+- **本地导出**默认 Web Worker（仅 LuckyExcel）；`POST /excel/export` 同套 LuckyExcel + Nest `worker_threads`。
+- 本地不再因 5MB 强制失败；超大文件也可本地 Worker 解析（仍建议极超大走服务端）。
+- 解析配置：`worker` / `workerThresholdBytes` / `blockRowSize` / `createWorker`（见包 README）。
+
+- 仅支持 `.xlsx` / `.csv`，不支持旧版 `.xls`。
 :::
 
 ## API
@@ -74,7 +77,7 @@ import { ExcelEditor } from 'ims-view-pc';
 | mode                 | 功能档位                                  | `'simple' \| 'all' \| 'custom'` | `'simple'`               |
 | features             | custom 模式下勾选的能力                   | `ExcelEditorFeatures`          | -                         |
 | viewMode             | 预览 / 编辑                               | `'preview' \| 'edit'`          | `'edit'`                  |
-| src                  | Excel 文件地址（仅 .xlsx）                | `string`                       | -                         |
+| src                  | Excel / CSV 文件地址（.xlsx / .csv）      | `string`                       | -                         |
 | data                 | 工作簿数据，优先级高于 `src`              | `Partial<IWorkbookData>`       | -                         |
 | exchangeEndpoint     | 大文件导入服务；上传后异步解析（snapshot / chunked）并轮询 | `string`                       | -                         |
 | showExchange         | Ribbon「导入导出」                        | `boolean`                      | `viewMode === 'edit'`     |

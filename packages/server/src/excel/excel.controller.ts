@@ -40,11 +40,11 @@ export class ExcelController {
     return ResponseEntity.ofSuccess({
       ok: true,
       service: 'excel-exchange',
-      importMode: 'async-snapshot-or-chunked',
+      importMode: 'async-chunked',
     });
   }
 
-  /** 上传 .xlsx：立即返回；后台 LuckyExcel(snapshot) 或 ExcelJS Worker(chunked) */
+  /** 上传 .xlsx / .csv：立即返回；后台 ExcelJS Worker 分块解析 */
   @Post('upload')
   @UseInterceptors(uploadInterceptor)
   async uploadExcel(@UploadedFile() file: Express.Multer.File, @Req() req: Request) {

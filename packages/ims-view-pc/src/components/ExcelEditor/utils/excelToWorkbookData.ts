@@ -12,7 +12,7 @@ export type ExcelImportResult = SharedExcelImportResult;
 
 export { fileToImportResult, workbookDataToExcelBlob };
 
-/** 二进制 → 共用 utils（LuckyExcel 优先） */
+/** 二进制 → 共用 utils（ExcelJS 导入） */
 export const excelBufferToImportResult = async (
   buffer: ArrayBuffer,
   fileName = 'workbook.xlsx',

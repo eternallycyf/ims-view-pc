@@ -94,10 +94,8 @@ export const splitWorkbookDataToChunks = async (
 ): Promise<{ meta: ChunkedWorkbookMeta; blocks: ChunkedBlock[] }> => {
   const fileName = options.fileName || workbookData.name || 'workbook.xlsx';
   const blockRowSize = Math.max(100, options.blockRowSize || DEFAULT_BLOCK_ROW_SIZE);
-  const maxRows =
-    options.maxRows === 0
-      ? Number.POSITIVE_INFINITY
-      : options.maxRows ?? DEFAULT_MAX_ROWS;
+  const requestedMaxRows = options.maxRows ?? DEFAULT_MAX_ROWS;
+  const maxRows = requestedMaxRows === 0 ? Number.POSITIVE_INFINITY : requestedMaxRows;
 
   options.onProgress?.({ percent: 35, parsedBlocks: 0, totalBlocks: 0, phase: 'convert' });
 
@@ -167,6 +165,7 @@ export const splitWorkbookDataToChunks = async (
       mergeData: clipMerges(sheet.mergeData, cappedRows),
       columnData: sheet.columnData,
       rowData: clipRowData(sheet.rowData, cappedRows),
+      freeze: sheet.freeze,
       defaultColumnWidth: sheet.defaultColumnWidth,
       defaultRowHeight: sheet.defaultRowHeight,
     });
@@ -180,7 +179,7 @@ export const splitWorkbookDataToChunks = async (
     sheets: sheetsMeta,
     blockRowSize,
     truncated: truncated || undefined,
-    maxRows: Number.isFinite(maxRows) ? maxRows : undefined,
+    maxRows: requestedMaxRows === 0 ? 0 : Number.isFinite(maxRows) ? maxRows : 0,
     styles: workbookData.styles,
     resources: workbookData.resources,
     appVersion: workbookData.appVersion,

@@ -41,7 +41,7 @@ IMS_SERVER_PORT=3010 pnpm start:server
 
 不需要热重载时：`pnpm --dir packages/server start:once`
 
-请求体校验使用 Zod（`createZodBaseModel` + `ZodValidationPipe`），JSON 接口统一 `ResponseEntity`：`{ code, data, msg }`（`code === 0` 成功）。`POST /excel/export` 仍直接返回 xlsx 二进制。
+请求体校验使用 Zod（`createZodBaseModel` + `ZodValidationPipe`），JSON 接口统一 `ResponseEntity`：`{ code, data, msg }`（`code === 0` 成功）。`POST /excel/export` 返回 xlsx 二进制，内部走 **ExcelJS `worker_threads`**（不堵 Nest 主线程）。
 
 ## 嵌入 Nest 应用
 
@@ -66,17 +66,19 @@ export class AppModule {}
 | `IMS_EXCEL_UPLOAD_DIR` | 上传文件目录 | `os.tmpdir()/ims-excel-uploads` |
 | `IMS_EXCEL_UPLOAD_TTL_MS` | 上传文件保留时长 | `3600000`（1h） |
 | `IMS_EXCEL_UPLOAD_CLEANUP_MS` | 定时清理间隔 | `600000`（10min） |
-| `IMS_EXCEL_CHUNK_BYTES` | 超过该体积走分块挂载（LuckyExcel 解析后切块） | `2097152`（2MB） |
-| `IMS_EXCEL_BLOCK_ROWS` | 渐进挂载每块行数（不是总行上限） | `5000` |
-| `IMS_EXCEL_MAX_ROWS` | 大文件导入行上限（`0`=不截断） | `150000` |
-| `IMS_EXCEL_PARSE_TIMEOUT_MS` | 单次解析超时 | `600000`（10min） |
+| `IMS_EXCEL_PARSE_TIMEOUT_MS` | 单次解析 / 导出超时 | `600000`（10min） |
 
 前端对接：`IMS_EXCHANGE_ENDPOINT=http://localhost:3010`
 
 ## 导入策略
 
-- **小文件**：LuckyExcel → `{id}.snapshot.json`，前端一次 `createWorkbook`
-- **大文件（默认 >2MB）**：同一套 **LuckyExcel** 解析 → `{id}.meta.json` + blocks，前端骨架（含 styles/resources）+ 分批 `setValues`
+参考 [CasualOffice/sheets large-file pipeline](https://github.com/CasualOffice/sheets/blob/main/docs/LARGE_FILE_PIPELINE.md)：解析放 Worker，前端渐进挂载。
+
+- 一律 **ExcelJS Worker** → meta + blocks（不堵 Nest，有进度日志）
+  - 目标：约 **10 万行级 xlsx，解析完成约 10s 内**
+  - 样式：默认映射（字体/填充/边框/对齐/数字格式/锁定 `lo` + `meta.styles` intern）
+  - 另支持：浮动图（`SHEET_DRAWING_PLUGIN`）、冻结窗格（`sheet.freeze`）
+  - **不做**：条件格式、数据验证、图表、EMF 等非位图
 ## API
 
 见文档站：

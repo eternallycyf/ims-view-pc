@@ -105,6 +105,8 @@ async function bootstrap() {
           'Content-Type',
           'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
         );
+      } else if (filePath.endsWith('.csv')) {
+        res.setHeader('Content-Type', 'text/csv; charset=utf-8');
       }
     },
   });

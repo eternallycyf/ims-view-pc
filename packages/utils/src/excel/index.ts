@@ -15,7 +15,6 @@ export {
   excelBufferToImportResult,
   excelBufferToWorkbookData,
   isLegacyExcelSource,
-  workbookDataToExcelBuffer,
   workbookDataToExcelBytes,
 } from './converter';
 
@@ -26,7 +25,7 @@ export {
   workbookHasCellValues,
 } from './sheetjsConverter';
 
-/** 大文件：分块挂载（解析优先 LuckyExcel，再切块） */
+/** 大文件：ExcelJS Worker 分块挂载 */
 export {
   CHUNKED_FILE_BYTES,
   CHUNKED_ROW_THRESHOLD,
@@ -36,6 +35,7 @@ export {
   chunkedBlockFileName,
   chunkedMetaFileName,
   excelBufferToChunkedWorkbook,
+  resolveWorksheetRowCount,
   shouldUseChunkedImport,
   skeletonWorkbookFromMeta,
 } from './exceljsChunked';
@@ -46,15 +46,39 @@ export type {
   ChunkedSheetMeta,
   ChunkedWorkbookMeta,
 } from './exceljsChunked';
+export {
+  BorderStyleTypes,
+  StyleInterner,
+  argbToRgb,
+  excelColorToRgb,
+  excelStyleToUniver,
+} from './exceljsStyle';
+export type { UniverStyleData } from './exceljsStyle';
+export {
+  collectWorkbookDrawingResources,
+  collectWorksheetFreeze,
+  emuToPx,
+} from './exceljsDrawings';
+export type { SheetFreeze } from './exceljsDrawings';
 export { splitWorkbookDataToChunks } from './workbookChunked';
 export type { SplitWorkbookOptions } from './workbookChunked';
 
-/** 仅 .xlsx：LuckyExcel 优先 */
+/** 导入 ExcelJS；导出仅 LuckyExcel */
 export {
   fileToImportResult,
   importExcelBinary,
   transformExcelToUniver,
   transformUniverToExcelBuffer,
   workbookDataToExcelBlob,
+  workbookDataToExcelBuffer,
   workbookHasDrawingResources,
 } from './luckyexcel';
+export type { ExcelExportOptions, ExcelExportWorkerMode } from './exportWorkerClient';
+export {
+  DEFAULT_EXPORT_WORKER_THRESHOLD_BYTES,
+  estimateWorkbookSnapshotBytes,
+  installExcelExportWorker,
+  resolveShouldUseExportWorker,
+  runExcelExportInBrowserWorker,
+  workbookDataToExcelArrayBuffer,
+} from './exportWorkerClient';

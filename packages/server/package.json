@@ -34,11 +34,13 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
+    "@ims-view/univer-import-excel": "0.1.0",
     "@ims-view/utils": "1.22.1",
     "@nestjs/common": "^11.0.0",
     "@nestjs/core": "^11.0.0",
     "@nestjs/platform-express": "^11.0.0",
     "compression": "^1.8.1",
+    "exceljs": "^4.4.0",
     "multer": "^1.4.5-lts.2",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.2",

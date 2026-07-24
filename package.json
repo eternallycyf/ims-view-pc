@@ -29,7 +29,7 @@
     "start": "dumi dev",
     "start:server": "pnpm --dir packages/server start:dev",
     "docs:build": "pnpm dlx dumi build",
-    "build": "lerna run build --parallel --ignore @ims-view/server",
+    "build": "pnpm --filter @ims-view/univer-import-excel run build && lerna run build --parallel --ignore @ims-view/server --ignore @ims-view/univer-import-excel",
     "clean": "lerna run clean --ignore @ims-view/server && rm -rf es lib dist build coverage .umi .eslintcache apis",
     "doctor": "lerna run doctor",
     "postinstall": "npm run build",

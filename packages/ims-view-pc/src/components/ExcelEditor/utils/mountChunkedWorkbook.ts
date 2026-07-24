@@ -16,6 +16,13 @@ export type ChunkedSheetMeta = {
   columnData?: Record<number, { w?: number; hd?: number }>;
   /** 行高 / 隐藏行 */
   rowData?: Record<number, { h?: number; hd?: number }>;
+  /** 冻结窗格（锁定行列） */
+  freeze?: {
+    xSplit: number;
+    ySplit: number;
+    startRow: number;
+    startColumn: number;
+  };
   defaultColumnWidth?: number;
   defaultRowHeight?: number;
 };
@@ -59,6 +66,7 @@ export const skeletonWorkbookFromMeta = (meta: ChunkedWorkbookMeta): Partial<IWo
       columnCount: Math.max(sheet.columnCount, 1),
       ...(sheet.columnData ? { columnData: sheet.columnData } : {}),
       ...(sheet.rowData ? { rowData: sheet.rowData } : {}),
+      ...(sheet.freeze ? { freeze: sheet.freeze } : {}),
       ...(sheet.defaultColumnWidth != null
         ? { defaultColumnWidth: sheet.defaultColumnWidth }
         : {}),
@@ -83,9 +91,80 @@ const sleep = (ms: number) =>
     setTimeout(resolve, ms);
   });
 
+const mergeCellData = (
+  target: Record<number, Record<number, ICellData>>,
+  source: Record<number, Record<number, ICellData>>,
+) => {
+  Object.keys(source || {}).forEach((rowKey) => {
+    const r = Number(rowKey);
+    if (!Number.isFinite(r)) return;
+    const row = source[r];
+    if (!row) return;
+    if (!target[r]) target[r] = {};
+    Object.keys(row).forEach((colKey) => {
+      const c = Number(colKey);
+      if (!Number.isFinite(c)) return;
+      const cell = row[c];
+      if (cell) target[r][c] = cell;
+    });
+  });
+};
+
 /**
- * 骨架 createWorkbook 后，按块 setValues 渐进挂载。
- * getRange(row, col, numRows, numColumns) —— 后两个是数量不是 end 下标。
+ * 拉取全部分块并合并进骨架，返回可一次性 createWorkbook 的完整数据。
+ * 不用逐块 setValues：Facade 对大表后续分块容易只留下第一块（≈5000 行）有数。
+ */
+export const assembleChunkedWorkbook = async (
+  meta: ChunkedWorkbookMeta,
+  fetchBlock: (sheetIndex: number, blockIndex: number) => Promise<ChunkedBlock>,
+  onProgress?: (percent: number) => void,
+): Promise<Partial<IWorkbookData>> => {
+  const workbook = skeletonWorkbookFromMeta(meta);
+  const sheets = workbook.sheets || {};
+  const totalBlocks = Math.max(
+    1,
+    meta.sheets.reduce((sum, sheet) => sum + sheet.blockCount, 0),
+  );
+  let done = 0;
+
+  for (let sheetIndex = 0; sheetIndex < meta.sheets.length; sheetIndex += 1) {
+    const sheetMeta = meta.sheets[sheetIndex];
+    const sheet = sheets[sheetMeta.id];
+    if (!sheet) {
+      done += sheetMeta.blockCount;
+      onProgress?.(Math.min(99, Math.round((done / totalBlocks) * 100)));
+      continue;
+    }
+
+    const cellData: Record<number, Record<number, ICellData>> = {
+      ...(sheet.cellData || {}),
+    };
+
+    for (let blockIndex = 0; blockIndex < sheetMeta.blockCount; blockIndex += 1) {
+      const block = await fetchBlock(sheetIndex, blockIndex);
+      mergeCellData(cellData, block.cellData || {});
+      done += 1;
+      onProgress?.(Math.min(99, Math.round((done / totalBlocks) * 100)));
+      // 让出主线程，避免合并大 JSON 时页面完全卡死
+      if (done % 2 === 0) await sleep(0);
+    }
+
+    sheet.cellData = cellData;
+    // 按实际合并结果再抬一次行数，防止 meta.rowCount 偏小导致表尾空白
+    let maxRow = sheet.rowCount || 1;
+    Object.keys(cellData).forEach((key) => {
+      const r = Number(key);
+      if (Number.isFinite(r)) maxRow = Math.max(maxRow, r + 1);
+    });
+    sheet.rowCount = Math.max(maxRow, sheetMeta.rowCount || 1, 1);
+  }
+
+  onProgress?.(100);
+  return workbook;
+};
+
+/**
+ * @deprecated 保留给调试；正式路径请用 assembleChunkedWorkbook + createWorkbook
  */
 export const mountChunkedBlocks = async (
   univerAPI: FUniver,
@@ -122,11 +201,12 @@ export const mountChunkedBlocks = async (
       const cellData = block.cellData || {};
       const rowKeys = Object.keys(cellData)
         .map(Number)
-        .filter((n) => Number.isFinite(n));
+        .filter((n) => Number.isFinite(n))
+        .sort((a, b) => a - b);
 
       if (rowKeys.length) {
-        const startRow = Math.min(...rowKeys);
-        const endRow = Math.max(...rowKeys);
+        const startRow = rowKeys[0];
+        const endRow = rowKeys[rowKeys.length - 1];
         let startCol = Number.POSITIVE_INFINITY;
         let endCol = 0;
         rowKeys.forEach((r) => {
@@ -138,7 +218,12 @@ export const mountChunkedBlocks = async (
         });
 
         if (Number.isFinite(startCol)) {
-          const relative: Record<number, Record<number, ICellData>> = {};
+          const numRows = endRow - startRow + 1;
+          const numCols = endCol - startCol + 1;
+          // 用二维数组，避免 sparse object 在部分 Facade 版本上丢行
+          const matrix: Array<Array<ICellData | null>> = Array.from({ length: numRows }, () =>
+            Array.from({ length: numCols }, () => null),
+          );
           rowKeys.forEach((r) => {
             const row = cellData[r];
             if (!row) return;
@@ -146,17 +231,24 @@ export const mountChunkedBlocks = async (
               const col = Number(c);
               const cell = row[col];
               if (!cell) return;
-              const rr = r - startRow;
-              const cc = col - startCol;
-              if (!relative[rr]) relative[rr] = {};
-              relative[rr][cc] = cell;
+              matrix[r - startRow][col - startCol] = cell;
             });
           });
 
-          const numRows = endRow - startRow + 1;
-          const numCols = endCol - startCol + 1;
-          const range = sheet.getRange?.(startRow, startCol, numRows, numCols);
-          range?.setValues?.(relative);
+          const range =
+            sheet.getRange?.({
+              startRow,
+              startColumn: startCol,
+              endRow,
+              endColumn: endCol,
+            }) || sheet.getRange?.(startRow, startCol, numRows, numCols);
+
+          if (!range?.setValues) {
+            throw new Error(
+              `挂载分块失败：sheet=${sheetMeta.name} block=${blockIndex} 无 setValues`,
+            );
+          }
+          range.setValues(matrix);
         }
       }
 

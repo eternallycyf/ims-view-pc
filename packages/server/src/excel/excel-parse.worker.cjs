@@ -1,6 +1,6 @@
 /**
- * Worker 入口（纯 CJS）：ExcelJS 分块写盘，不依赖 tsx。
- * 由 excel.service 用 worker_threads 拉起。
+ * Worker 入口（纯 CJS）：调用 @ims-view/univer-import-excel 公共转换，本文件只负责读盘/写盘/进度上报。
+ * 与本地导入同一套 ExcelJS→Univer 映射（excelBufferToChunkedWorkbook）。
  */
 const { parentPort, workerData } = require('worker_threads');
 const { readFile, writeFile } = require('fs/promises');
@@ -9,271 +9,106 @@ const { createRequire } = require('module');
 
 const requireFromHere = createRequire(__filename);
 
-const resolveExcelJS = () => {
+const resolveImportExcel = () => {
   const candidates = [
-    () => requireFromHere.resolve('exceljs'),
+    // monorepo 源码旁的构建产物（最稳）
+    () => path.resolve(__dirname, '../../../univer-import-excel/lib/index.js'),
+    () => requireFromHere.resolve('@ims-view/univer-import-excel'),
     () =>
-      requireFromHere.resolve('exceljs', {
-        paths: [path.resolve(__dirname, '../../../utils')],
-      }),
-    () =>
-      requireFromHere.resolve('exceljs', {
-        paths: [path.resolve(__dirname, '../../../../node_modules')],
+      requireFromHere.resolve('@ims-view/univer-import-excel', {
+        paths: [
+          path.resolve(__dirname, '../../..'),
+          path.resolve(__dirname, '../../../../node_modules'),
+        ],
       }),
   ];
   for (const tryResolve of candidates) {
     try {
+      const id = tryResolve();
       // eslint-disable-next-line import/no-dynamic-require
-      return require(tryResolve());
+      return require(id);
     } catch {
       // continue
     }
   }
-  throw new Error('无法解析 exceljs，请确认 monorepo 依赖已安装');
+  throw new Error('无法解析 @ims-view/univer-import-excel，请先在 packages/univer-import-excel 执行 pnpm build');
 };
 
-const ExcelJS = resolveExcelJS();
+const {
+  excelBufferToChunkedWorkbook,
+  chunkedBlockFileName,
+  chunkedMetaFileName,
+} = resolveImportExcel();
 
-const CellValueType = {
-  STRING: 1,
-  NUMBER: 2,
-  BOOLEAN: 3,
-};
+const post = (msg) => parentPort && parentPort.postMessage(msg);
+const log = (message) => post({ type: 'log', message });
 
-const argbToRgb = (argb) => {
-  if (!argb || typeof argb !== 'string') return undefined;
-  const hex = argb.replace(/^#/, '');
-  if (hex.length === 8) return `#${hex.slice(2)}`;
-  if (hex.length === 6) return `#${hex}`;
-  return undefined;
-};
-
-const excelColorToRgb = (color) => {
-  if (!color) return undefined;
-  if (color.argb) return argbToRgb(color.argb);
-  return undefined;
-};
-
-const cellFromExcelJs = (cell) => {
-  const value = cell.value;
-  if (value == null || value === '') return null;
-
-  let mapped = null;
-
-  if (typeof value === 'object' && value !== null && 'formula' in value) {
-    const formula = String(value.formula || '').replace(/^=/, '');
-    const result = value.result;
-    mapped = {
-      f: `=${formula}`,
-      v: result,
-      t:
-        typeof result === 'number'
-          ? CellValueType.NUMBER
-          : typeof result === 'boolean'
-            ? CellValueType.BOOLEAN
-            : CellValueType.STRING,
-    };
-  } else if (typeof value === 'object' && value !== null && 'richText' in value) {
-    const text = (value.richText || []).map((part) => part.text || '').join('');
-    if (!text) return null;
-    mapped = { v: text, t: CellValueType.STRING };
-  } else if (typeof value === 'object' && value !== null && 'text' in value && 'hyperlink' in value) {
-    mapped = { v: String(value.text || ''), t: CellValueType.STRING };
-  } else if (typeof value === 'object' && value !== null && 'error' in value) {
-    mapped = { v: String(value.error), t: CellValueType.STRING };
-  } else if (value instanceof Date) {
-    mapped = { v: value.toISOString(), t: CellValueType.STRING };
-  } else if (typeof value === 'number') {
-    mapped = { v: value, t: CellValueType.NUMBER };
-  } else if (typeof value === 'boolean') {
-    mapped = { v: value, t: CellValueType.BOOLEAN };
-  } else {
-    const text = String(value);
-    if (!text) return null;
-    mapped = { v: text, t: CellValueType.STRING };
-  }
-
-  const style = {};
-  const font = cell.font;
-  if (font) {
-    if (font.bold) style.bl = 1;
-    if (font.italic) style.it = 1;
-    if (font.size) style.fs = font.size;
-    if (font.name) style.ff = font.name;
-    const fc = excelColorToRgb(font.color);
-    if (fc) style.cl = { rgb: fc };
-  }
-  const fill = cell.fill;
-  if (fill && fill.type === 'pattern' && fill.fgColor) {
-    const bg = excelColorToRgb(fill.fgColor);
-    if (bg) style.bg = { rgb: bg };
-  }
-  if (Object.keys(style).length) mapped.s = style;
-  return mapped;
-};
-
-const collectMerges = (worksheet, maxRowExclusive) => {
-  const merges = [];
-  const raw = worksheet.model && worksheet.model.merges;
-  if (!Array.isArray(raw)) return merges;
-  raw.forEach((ref) => {
-    try {
-      const [start, end] = String(ref).split(':');
-      if (!start) return;
-      const startCell = worksheet.getCell(start);
-      const endCell = worksheet.getCell(end || start);
-      const top = Number(startCell.row) - 1;
-      const left = Number(startCell.col) - 1;
-      const bottom = Number(endCell.row) - 1;
-      const right = Number(endCell.col) - 1;
-      if (top >= maxRowExclusive) return;
-      merges.push({
-        startRow: top,
-        startColumn: left,
-        endRow: Math.min(bottom, maxRowExclusive - 1),
-        endColumn: right,
-      });
-    } catch {
-      // ignore
-    }
-  });
-  return merges;
-};
-
-const post = (msg) => {
-  if (parentPort) parentPort.postMessage(msg);
-};
-
-const main = async () => {
-  const data = workerData || {};
+(async () => {
+  const started = Date.now();
   const {
     id,
     xlsxPath,
+    outDir: outDirRaw,
     uploadDir,
-    fileName = 'workbook.xlsx',
-    blockRowSize = 2000,
-    maxRows = 100000,
-  } = data;
+    fileName,
+    blockRowSize = 5000,
+    maxRows = 0,
+    includeStyles = true,
+  } = workerData || {};
+  const outDir = outDirRaw || uploadDir;
 
-  if (!id || !xlsxPath || !uploadDir) {
-    throw new Error('workerData 缺少 id / xlsxPath / uploadDir');
+  if (!id || !xlsxPath || !outDir) {
+    throw new Error('workerData 缺少 id / xlsxPath / outDir(uploadDir)');
   }
 
-  const effectiveMaxRows = maxRows === 0 ? Number.POSITIVE_INFINITY : maxRows;
+  log(`worker start id=${id} file=${fileName || path.basename(xlsxPath)}`);
   const buffer = await readFile(xlsxPath);
+  log(`read xlsx ${(buffer.byteLength / 1024 / 1024).toFixed(2)}MB cost=${Date.now() - started}ms`);
 
-  post({ type: 'progress', percent: 5, parsedBlocks: 0, totalBlocks: 0 });
-
-  const workbook = new ExcelJS.Workbook();
-  await workbook.xlsx.load(buffer);
-
-  post({ type: 'progress', percent: 20, parsedBlocks: 0, totalBlocks: 0 });
-
-  const sheetsMeta = [];
-  const sheetOrder = [];
-  let truncated = false;
   let emittedBlocks = 0;
 
-  const sheetInfos = workbook.worksheets.map((worksheet, sheetIndex) => {
-    const sheetId = `sheet-${sheetIndex}`;
-    const actualRowCount = worksheet.rowCount || 0;
-    const cappedRows = Math.min(actualRowCount, effectiveMaxRows);
-    if (actualRowCount > effectiveMaxRows) truncated = true;
-    const blockCount = Math.max(1, Math.ceil(Math.max(cappedRows, 1) / blockRowSize));
-    return { worksheet, sheetIndex, sheetId, cappedRows, blockCount };
-  });
-
-  const totalBlocks = sheetInfos.reduce((sum, info) => sum + info.blockCount, 0) || 1;
-
-  for (const info of sheetInfos) {
-    const { worksheet, sheetIndex, sheetId, cappedRows, blockCount } = info;
-    sheetOrder.push(sheetId);
-
-    let maxCol = 0;
-    const mergeData = collectMerges(worksheet, cappedRows);
-
-    for (let blockIndex = 0; blockIndex < blockCount; blockIndex += 1) {
-      const startRow = blockIndex * blockRowSize;
-      const endRow = Math.min(cappedRows, startRow + blockRowSize) - 1;
-      const cellData = {};
-
-      if (cappedRows > 0 && endRow >= startRow) {
-        for (let excelRow = startRow + 1; excelRow <= endRow + 1; excelRow += 1) {
-          const row = worksheet.getRow(excelRow);
-          row.eachCell({ includeEmpty: false }, (cell, colNumber) => {
-            const mapped = cellFromExcelJs(cell);
-            if (!mapped) return;
-            const r = excelRow - 1;
-            const c = colNumber - 1;
-            if (!cellData[r]) cellData[r] = {};
-            cellData[r][c] = mapped;
-            maxCol = Math.max(maxCol, colNumber);
-          });
-        }
-      }
-
-      const blockName = `${id}.block.${sheetIndex}.${blockIndex}.json`;
-      await writeFile(
-        path.join(uploadDir, blockName),
-        JSON.stringify({
-          sheetId,
-          sheetIndex,
-          blockIndex,
-          startRow: Math.max(0, startRow),
-          endRow: Math.max(0, endRow),
-          cellData,
-        }),
-        'utf8',
-      );
-
-      emittedBlocks += 1;
-      const percent = Math.min(95, 20 + Math.round((emittedBlocks / totalBlocks) * 75));
+  const { meta } = await excelBufferToChunkedWorkbook(buffer, {
+    fileName: fileName || path.basename(xlsxPath),
+    blockRowSize,
+    maxRows,
+    includeStyles,
+    workbookId: `wb-chunked-${id}`,
+    onProgress: (progress) => {
       post({
         type: 'progress',
-        percent,
-        parsedBlocks: emittedBlocks,
-        totalBlocks,
+        percent: progress.percent,
+        parsedBlocks: progress.parsedBlocks,
+        totalBlocks: progress.totalBlocks,
+        phase: progress.phase,
       });
-    }
+    },
+    onBlock: async (block) => {
+      const name = chunkedBlockFileName(id, block.sheetIndex, block.blockIndex);
+      await writeFile(path.join(outDir, name), JSON.stringify(block), 'utf8');
+      emittedBlocks += 1;
+    },
+  });
 
-    sheetsMeta.push({
-      id: sheetId,
-      name: worksheet.name || `Sheet${sheetIndex + 1}`,
-      rowCount: Math.max(cappedRows, 1),
-      columnCount: Math.max(maxCol, 1),
-      blockCount,
-      mergeData: mergeData.length ? mergeData : undefined,
-    });
-  }
+  // onBlock 已写盘时 blocks 可能为空数组
+  const metaName = chunkedMetaFileName(id);
+  const metaPath = path.join(outDir, metaName);
+  await writeFile(metaPath, JSON.stringify(meta), 'utf8');
 
-  const meta = {
-    parseEngine: 'exceljs',
-    fileName,
-    name: String(fileName).replace(/\.xlsx$/i, '') || 'workbook',
-    sheetOrder,
-    sheets: sheetsMeta,
-    blockRowSize,
-    truncated: truncated || undefined,
-    maxRows: Number.isFinite(effectiveMaxRows) ? effectiveMaxRows : undefined,
-  };
-
-  const metaFileName = `${id}.meta.json`;
-  await writeFile(path.join(uploadDir, metaFileName), JSON.stringify(meta), 'utf8');
-
+  const costMs = Date.now() - started;
+  log(
+    `done id=${id} cost=${costMs}ms blocks=${emittedBlocks} styles=${Object.keys(meta.styles || {}).length} truncated=${Boolean(meta.truncated)}`,
+  );
   post({
     type: 'done',
-    metaPath: metaFileName,
-    metaFileName,
+    costMs,
     parsedBlocks: emittedBlocks,
-    totalBlocks,
-    truncated: meta.truncated,
+    totalBlocks: emittedBlocks,
+    truncated: Boolean(meta.truncated),
+    metaFile: metaName,
+    metaFileName: metaName,
   });
-};
-
-main().catch((error) => {
-  post({
-    type: 'error',
-    message: error instanceof Error ? error.message : String(error),
-  });
-  process.exitCode = 1;
+})().catch((error) => {
+  const message = error instanceof Error ? error.message : String(error);
+  const stack = error instanceof Error ? error.stack : undefined;
+  post({ type: 'error', message, error: message, stack });
 });

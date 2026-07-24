@@ -125,6 +125,12 @@ export default defineConfig({
   mfsu: {
     runtimePublicPath: true,
     // LuckyExcel 预编译易踩 HTML/双 core；排除后走正常解析 + 上方 core alias
-    exclude: ['@zwight/luckyexcel', '@progress/jszip-esm', '@zwight/exceljs'],
+    exclude: [
+      '@zwight/luckyexcel',
+      '@ims-view/univer-import-excel',
+      '@progress/jszip-esm',
+      '@zwight/exceljs',
+      'exceljs',
+    ],
   },
 });

@@ -45,6 +45,7 @@ export const preserveUploadFileName = (raw?: string): string => {
   name = name.replace(/[<>:"/\\|?*\u0000-\u001f]+/g, '_').trim();
   name = name.replace(/^\.+/, '') || 'workbook.xlsx';
 
+  if (/\.csv$/i.test(name)) return name;
   if (!/\.xlsx$/i.test(name)) {
     name = `${name.replace(/\.xls$/i, '') || 'workbook'}.xlsx`;
   }
@@ -66,7 +67,7 @@ export type ExcelParseMode = 'snapshot' | 'chunked';
 export type ExcelParseTask = {
   id: string;
   status: ExcelParseTaskStatus;
-  /** snapshot=LuckyExcel 整包；chunked=ExcelJS 分块 */
+  /** snapshot=整包 JSON；chunked=ExcelJS Worker 分块 */
   mode?: ExcelParseMode;
   fileName: string;
   /** 原始 xlsx 静态路径 */
@@ -119,21 +120,26 @@ export class ExcelStorageService implements OnModuleInit, OnModuleDestroy {
   }
 
   getXlsxFullPath(id: string) {
+    const task = this.tasks.get(id);
+    if (task?.xlsxPath) {
+      return path.join(this.uploadDir, path.basename(task.xlsxPath));
+    }
     return path.join(this.uploadDir, `${id}.xlsx`);
   }
 
-  /** 保存 .xlsx，并登记 pending 解析任务 */
+  /** 保存上传原文件（.xlsx / .csv），并登记 pending 解析任务 */
   async saveXlsx(buffer: Buffer, originalName: string): Promise<StoredExcelFile> {
     await mkdir(this.uploadDir, { recursive: true });
 
     const id = randomUUID().replace(/-/g, '');
-    const storedName = `${id}.xlsx`;
+    const fileName = preserveUploadFileName(originalName);
+    const ext = /\.csv$/i.test(fileName) ? 'csv' : 'xlsx';
+    const storedName = `${id}.${ext}`;
     const fullPath = path.join(this.uploadDir, storedName);
     await writeFile(fullPath, buffer);
 
     const ttl = getTtlMs();
     const expiresAt = Date.now() + ttl;
-    const fileName = preserveUploadFileName(originalName);
     const xlsxPath = `${EXCEL_STATIC_PREFIX}/${storedName}`;
 
     this.tasks.set(id, {
@@ -180,7 +186,7 @@ export class ExcelStorageService implements OnModuleInit, OnModuleDestroy {
     this.tasks.set(id, task);
   }
 
-  /** 写入 LuckyExcel 解析结果（IWorkbookData JSON） */
+  /** 写入解析结果（IWorkbookData JSON） */
   async saveSnapshot(id: string, workbookData: unknown): Promise<string> {
     const snapshotName = `${id}.snapshot.json`;
     const fullPath = path.join(this.uploadDir, snapshotName);
@@ -245,6 +251,7 @@ export class ExcelStorageService implements OnModuleInit, OnModuleDestroy {
   private isManagedFile(name: string): boolean {
     return (
       name.endsWith('.xlsx') ||
+      name.endsWith('.csv') ||
       name.endsWith('.snapshot.json') ||
       name.endsWith('.meta.json') ||
       /\.block\.\d+\.\d+\.json$/i.test(name)
@@ -254,12 +261,13 @@ export class ExcelStorageService implements OnModuleInit, OnModuleDestroy {
   private idFromFileName(name: string): string {
     return name
       .replace(/\.xlsx$/i, '')
+      .replace(/\.csv$/i, '')
       .replace(/\.snapshot\.json$/i, '')
       .replace(/\.meta\.json$/i, '')
       .replace(/\.block\.\d+\.\d+\.json$/i, '');
   }
 
-  /** 删除超过 TTL 的上传文件（xlsx + snapshot + meta + blocks） */
+  /** 删除超过 TTL 的上传文件（xlsx/csv + snapshot + meta + blocks） */
   async cleanupExpired(): Promise<number> {
     const ttl = getTtlMs();
     const now = Date.now();

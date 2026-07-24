@@ -32,7 +32,7 @@ export const registerExchangeRibbonMenus = (
       .createMenu({
         id: 'ims-excel-import',
         title: '导入',
-        tooltip: '导入 Excel（仅 .xlsx）',
+        tooltip: '导入 Excel / CSV（.xlsx / .csv）',
         icon: 'ImsExcelImportIcon',
         action: () => handlers.onImport(),
       })

@@ -39,9 +39,9 @@ export interface ExcelEditorHandle {
   getUniverAPI: () => FUniver | null;
   /** 获取当前工作簿快照数据 */
   getWorkbookData: () => Partial<IWorkbookData> | null;
-  /** 导入 xlsx（默认本地；配置了 exchangeEndpoint 则走服务端） */
+  /** 导入 xlsx / csv（默认本地；配置了 exchangeEndpoint 则走服务端） */
   importXlsx: (file: File) => Promise<Partial<IWorkbookData>>;
-  /** 导出 xlsx（始终浏览器本地生成） */
+  /** 导出 xlsx（浏览器本地 Web Worker 生成，不堵 UI） */
   exportXlsx: (fileName?: string) => Promise<void>;
 }
 
@@ -80,8 +80,8 @@ export interface ExcelEditorProps {
   /** 工作簿数据，优先级高于 src */
   data?: Partial<IWorkbookData>;
   /**
-   * Nest 导入服务地址。配置后：上传 → 服务端异步解析（小文件 LuckyExcel snapshot /
-   * 大文件 ExcelJS Worker 分块）→ 轮询并挂载。未配置时本地导入（≤5MB）。导出始终本地。
+   * Nest 导入服务地址。配置后：上传 → 服务端异步解析（ExcelJS Worker 分块）→ 轮询并挂载；导出可走 `POST /excel/export`（LuckyExcel）。
+   * 未配置时本地导入 / 导出（均为 Web Worker；导入 ExcelJS，导出 LuckyExcel）。
    * @example 'http://localhost:3010'
    */
   exchangeEndpoint?: string;

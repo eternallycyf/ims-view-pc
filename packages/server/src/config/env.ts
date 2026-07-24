@@ -3,6 +3,8 @@ import { z } from 'zod';
 /**
  * 进程环境变量（启动时校验一次）。
  * 未设置的项用默认值，不强制要求 .env。
+ *
+ * 解析固定走 ExcelJS Worker 分块（含样式）；不再用环境变量切换引擎 / 截断行数 / 关样式。
  */
 export const serverEnvSchema = z.object({
   IMS_SERVER_PORT: z.coerce.number().int().positive().default(3010),
@@ -19,13 +21,7 @@ export const serverEnvSchema = z.object({
   IMS_EXCEL_UPLOAD_DIR: z.string().optional(),
   IMS_EXCEL_UPLOAD_TTL_MS: z.coerce.number().int().positive().default(60 * 60 * 1000),
   IMS_EXCEL_UPLOAD_CLEANUP_MS: z.coerce.number().int().positive().default(10 * 60 * 1000),
-  /** 超过该体积走分块挂载（LuckyExcel 解析后切块） */
-  IMS_EXCEL_CHUNK_BYTES: z.coerce.number().int().positive().default(2 * 1024 * 1024),
-  /** 每块行数（渐进挂载切片，不是总行上限） */
-  IMS_EXCEL_BLOCK_ROWS: z.coerce.number().int().min(100).default(5_000),
-  /** 全量导入行上限；0=不截断 */
-  IMS_EXCEL_MAX_ROWS: z.coerce.number().int().nonnegative().default(150_000),
-  /** 单次解析超时（LuckyExcel 大文件可能较久） */
+  /** 单次解析 / 导出超时 */
   IMS_EXCEL_PARSE_TIMEOUT_MS: z.coerce.number().int().positive().default(10 * 60 * 1000),
 });
 

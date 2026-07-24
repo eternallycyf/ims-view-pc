@@ -1,4 +1,9 @@
 import type { FUniver, IWorkbookData } from '@univerjs/presets';
+import {
+  DEFAULT_PARSE_BLOCK_ROWS,
+  DEFAULT_WORKER_THRESHOLD_BYTES,
+  type TransformExcelToUniverOptions,
+} from '@ims-view/univer-import-excel';
 import type { ExcelImportResult } from './excelToWorkbookData';
 import {
   downloadBlob,
@@ -6,7 +11,7 @@ import {
   workbookDataToExcelBlob,
 } from './excelToWorkbookData';
 import {
-  mountChunkedBlocks,
+  assembleChunkedWorkbook,
   skeletonWorkbookFromMeta,
   type ChunkedBlock,
   type ChunkedWorkbookMeta,
@@ -14,8 +19,8 @@ import {
 
 const trimSlash = (url: string) => url.replace(/\/$/, '');
 
-/** 本地导入体积上限：超过需配置 exchangeEndpoint 走上传 */
-export const LOCAL_IMPORT_MAX_BYTES = 5 * 1024 * 1024; // 5MB
+/** 本地无 Worker 时的软提示阈值（仍允许导入，但建议用 Worker） */
+export const LOCAL_IMPORT_MAX_BYTES = 50 * 1024 * 1024;
 
 /** 上传超时 */
 export const SERVER_IMPORT_TIMEOUT_MS = 120 * 1000;
@@ -76,9 +81,11 @@ const parseUploadErrorMessage = (status: number, text: string) => {
   return message || `服务端上传失败: ${status}`;
 };
 
-const assertXlsxFile = (file: File) => {
-  if (/\.xls$/i.test(file?.name || '') && !/\.xlsx$/i.test(file?.name || '')) {
-    throw new Error('仅支持 .xlsx，不支持旧版 .xls');
+const assertImportableSpreadsheet = (file: File) => {
+  const name = file?.name || '';
+  if (/\.csv$/i.test(name)) return;
+  if (/\.xls$/i.test(name) && !/\.xlsx$/i.test(name)) {
+    throw new Error('仅支持 .xlsx / .csv，不支持旧版 .xls');
   }
 };
 
@@ -111,8 +118,33 @@ const unwrapResponseEntity = <T>(json: unknown): T => {
   return body.data as T;
 };
 
-/** 本地解析：统一 LuckyExcel（小文件） */
-const importLocal = async (file: File): Promise<ExcelImportResult> => fileToImportResult(file);
+/** 本地解析：ExcelJS 公共内核；大文件默认 Web Worker 分块 */
+const createLocalExcelParseWorker = () =>
+  new Worker(new URL('./excelParse.worker.ts', import.meta.url), { type: 'module' });
+
+/** 本地导出：仅 LuckyExcel，在 Web Worker 中生成，避免卡 UI */
+const createLocalExcelExportWorker = () =>
+  new Worker(new URL('./excelExport.worker.ts', import.meta.url), { type: 'module' });
+
+const importLocal = async (
+  file: File,
+  onProgress?: (info: ImportProgressInfo) => void,
+): Promise<ExcelImportResult> => {
+  const options: TransformExcelToUniverOptions = {
+    worker: 'auto',
+    workerThresholdBytes: DEFAULT_WORKER_THRESHOLD_BYTES,
+    blockRowSize: DEFAULT_PARSE_BLOCK_ROWS,
+    createWorker: createLocalExcelParseWorker,
+    onProgress: (percent) => {
+      onProgress?.({
+        stage: 'parse',
+        percent,
+        message: `本地解析 ${percent}%`,
+      });
+    },
+  };
+  return fileToImportResult(file, options);
+};
 
 type UploadResponse = {
   mode?: string;
@@ -325,8 +357,8 @@ export type ExchangeResultMeta = {
 
 /**
  * 导入：
- * - 未配置 endpoint：浏览器本地 LuckyExcel（≤5MB）
- * - 配置了 endpoint：上传后服务端异步解析（小文件 snapshot / 大文件 chunked）
+ * - 未配置 endpoint：浏览器本地 ExcelJS（大文件自动 Web Worker 分块，与服务端同一套内核）
+ * - 配置了 endpoint：上传后服务端异步解析（ExcelJS Worker chunked）
  */
 export const importWorkbook = async (
   file: File,
@@ -335,22 +367,14 @@ export const importWorkbook = async (
     onProgress?: (info: ImportProgressInfo) => void;
   } = {},
 ): Promise<{ payload: ServerImportPayload; meta: ExchangeResultMeta }> => {
-  assertXlsxFile(file);
+  assertImportableSpreadsheet(file);
 
   const endpoint = options.endpoint?.trim();
-  const fileSize = file?.size ?? 0;
 
   if (!endpoint) {
-    if (fileSize > LOCAL_IMPORT_MAX_BYTES) {
-      throw new Error(
-        `文件过大（${formatFileSize(fileSize)}），本地导入仅支持 ≤${formatFileSize(
-          LOCAL_IMPORT_MAX_BYTES,
-        )}；请配置 exchangeEndpoint 使用服务端导入`,
-      );
-    }
-    options.onProgress?.({ stage: 'parse', message: '本地解析中...' });
+    options.onProgress?.({ stage: 'parse', percent: 0, message: '本地解析中...' });
     await yieldToUI();
-    const result = await importLocal(file);
+    const result = await importLocal(file, options.onProgress);
     return {
       payload: { kind: 'snapshot', result },
       meta: { via: 'local' },
@@ -367,7 +391,7 @@ export const importWorkbook = async (
   };
 };
 
-/** 将服务端导入结果挂到已有 Univer 实例（chunked 时走渐进 setValues） */
+/** 将服务端导入结果挂到已有 Univer 实例（chunked：合并全部分块后一次 createWorkbook） */
 export const applyServerImportPayload = async (
   univerAPI: FUniver,
   payload: ServerImportPayload,
@@ -380,20 +404,26 @@ export const applyServerImportPayload = async (
     return payload.result.workbookData;
   }
 
-  onProgress?.({ stage: 'render', percent: 0, message: '渲染中 0%' });
-  await replaceWorkbook({ workbookData: payload.skeleton, images: [] });
-  await mountChunkedBlocks(univerAPI, payload.meta, payload.fetchBlock, (percent) => {
-    onProgress?.({
-      stage: 'render',
-      percent,
-      message: `渲染中 ${percent}%`,
-    });
-  });
-
-  return payload.skeleton;
+  onProgress?.({ stage: 'render', percent: 0, message: '合并分块 0%' });
+  // 先拉齐所有 block 合并进 snapshot，再 createWorkbook。
+  // 逐块 setValues 在大表上容易只留下第一块（常见正好 5000 行）有数据。
+  const workbookData = await assembleChunkedWorkbook(
+    payload.meta,
+    payload.fetchBlock,
+    (percent) => {
+      onProgress?.({
+        stage: 'render',
+        percent,
+        message: `合并分块 ${percent}%`,
+      });
+    },
+  );
+  onProgress?.({ stage: 'render', percent: 100, message: '渲染中...' });
+  await replaceWorkbook({ workbookData, images: [] });
+  return workbookData;
 };
 
-/** 导出：始终浏览器本地生成 xlsx */
+/** 导出：浏览器本地生成 xlsx（默认 Web Worker，与导入一致不堵主线程） */
 export const exportWorkbook = async (
   data: Partial<IWorkbookData>,
   fileName = 'workbook.xlsx',
@@ -402,7 +432,10 @@ export const exportWorkbook = async (
     throw new Error('导出数据为空');
   }
 
-  const blob = await workbookDataToExcelBlob(data, fileName);
+  const blob = await workbookDataToExcelBlob(data, fileName, {
+    worker: 'on',
+    createWorker: createLocalExcelExportWorker,
+  });
   downloadBlob(blob, fileName);
   return { via: 'local' };
 };

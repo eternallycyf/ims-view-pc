@@ -16,7 +16,12 @@ const toUint8Array = (input: ExcelBinary): Uint8Array => {
 };
 
 const isLegacyXlsName = (fileName?: string) =>
-  Boolean(fileName && /\.xls$/i.test(fileName) && !/\.xlsx$/i.test(fileName));
+  Boolean(
+    fileName &&
+      /\.xls$/i.test(fileName) &&
+      !/\.xlsx$/i.test(fileName) &&
+      !/\.csv$/i.test(fileName),
+  );
 
 const isOleCompoundBuffer = (bytes: Uint8Array) =>
   bytes.length >= 4 &&
@@ -34,11 +39,11 @@ const needsXlsToXlsx = (bytes: Uint8Array, fileName?: string) => {
   return false;
 };
 
-/** 仅接受 .xlsx；旧版 .xls / OLE 直接拒绝（不再做转换） */
+/** 仅接受 .xlsx / .csv；旧版 .xls / OLE 直接拒绝（不再做转换） */
 export const ensureXlsxBytes = (input: ExcelBinary, fileName?: string): Uint8Array => {
   const bytes = toUint8Array(input);
   if (needsXlsToXlsx(bytes, fileName)) {
-    throw new Error('仅支持 .xlsx，不支持旧版 .xls');
+    throw new Error('仅支持 .xlsx / .csv，不支持旧版 .xls');
   }
   return bytes;
 };
@@ -49,7 +54,7 @@ export const isLegacyExcelSource = (input: ExcelBinary, fileName?: string) =>
 
 export const assertSupportedExcelSource = (input: ExcelBinary, fileName?: string) => {
   if (isLegacyExcelSource(input, fileName)) {
-    throw new Error('仅支持 .xlsx，不支持旧版 .xls');
+    throw new Error('仅支持 .xlsx / .csv，不支持旧版 .xls');
   }
 };
 
@@ -57,7 +62,7 @@ export const excelBufferToImportResult = async (
   input: ExcelBinary,
   fileName = 'workbook.xlsx',
 ): Promise<ExcelImportResult> => {
-  // 与前端 / Nest 统一：走 LuckyExcel 优先的 importExcelBinary
+  // 与前端 / Nest 统一：ExcelJS 导入
   const { importExcelBinary } = await import('./luckyexcel');
   return importExcelBinary(input, fileName);
 };
@@ -70,6 +75,7 @@ export const excelBufferToWorkbookData = async (
   return result.workbookData;
 };
 
+/** ExcelJS 写出（低保真，仅值/公式/合并；正式导出请用 LuckyExcel） */
 export const workbookDataToExcelBytes = async (
   data: Partial<IWorkbookData>,
 ): Promise<Uint8Array> => {
@@ -130,15 +136,4 @@ export const workbookDataToExcelBytes = async (
 
   const arrayBuffer = await workbook.xlsx.writeBuffer();
   return toUint8Array(arrayBuffer as ArrayBuffer);
-};
-
-/** Node 侧便捷方法：返回 Buffer */
-export const workbookDataToExcelBuffer = async (
-  data: Partial<IWorkbookData>,
-): Promise<Buffer> => {
-  const bytes = await workbookDataToExcelBytes(data);
-  if (typeof Buffer === 'undefined') {
-    throw new Error('workbookDataToExcelBuffer 仅可在 Node.js 环境使用');
-  }
-  return Buffer.from(bytes);
 };

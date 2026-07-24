@@ -1,0 +1,28 @@
+{
+  "name": "@ims-view/univer-import-excel",
+  "version": "0.1.0",
+  "description": "Excel → Univer import via ExcelJS (shared by browser and Nest workers)",
+  "main": "lib/index.js",
+  "module": "es/index.js",
+  "types": "es/index.d.ts",
+  "files": [
+    "lib",
+    "es"
+  ],
+  "scripts": {
+    "build": "father build",
+    "clean": "rm -rf es lib dist build coverage .eslintcache",
+    "start": "father dev"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.23.1",
+    "exceljs": "^4.4.0"
+  },
+  "peerDependencies": {
+    "@univerjs/core": ">=0.6.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  }
+}

@@ -17,16 +17,22 @@ Excel 导入导出 HTTP 接口（`ExcelController`）。默认 Base URL：`http:
 | 方法 | 路径 | 说明 |
 | ---- | ---- | ---- |
 | `GET` | `/excel/health` | 健康检查 |
-| `POST` | `/excel/import` | 上传 Excel，返回工作簿快照 |
+| `POST` | `/excel/upload` | 上传 `.xlsx` / `.csv`，立即返回；后台异步解析 |
+| `GET` | `/excel/task/:id` | 轮询解析任务状态 |
+| `GET` | `/excel/static/*` | 下载 xlsx / snapshot / meta / block 产物 |
 | `POST` | `/excel/export` | 工作簿快照导出为 `.xlsx` |
 
 源码：[excel.controller.ts](https://github.com/eternallycyf/ims-view-pc/blob/master/packages/server/src/excel/excel.controller.ts)
 
+### 导入策略
+
+一律 **ExcelJS Worker** → `{id}.meta.json` + blocks（约 10 万行 / 10s 级；默认映射样式 + 浮动图 + 冻结窗格；不做条件格式/图表等）。
+
+可调环境变量：`IMS_EXCEL_PARSE_TIMEOUT_MS`（超时）、`IMS_EXCEL_UPLOAD_DIR` / `IMS_EXCEL_UPLOAD_TTL_MS`（上传目录与 TTL）。
+
 ---
 
 ### GET /excel/health
-
-检查服务是否可用。
 
 #### Response
 
@@ -34,82 +40,78 @@ Excel 导入导出 HTTP 接口（`ExcelController`）。默认 Base URL：`http:
 | ---- | ---- | ---- |
 | `ok` | `boolean` | 是否正常 |
 | `service` | `string` | 固定为 `excel-exchange` |
-
-#### Status
-
-| 状态码 | 说明 |
-| ------ | ---- |
-| `200` | 成功 |
-
-#### Example
+| `importMode` | `string` | `async-chunked` |
 
 ```bash
 curl http://localhost:3010/excel/health
 ```
 
-```json
-{ "ok": true, "service": "excel-exchange" }
-```
-
 ---
 
-### POST /excel/import
+### POST /excel/upload
 
-上传 `.xlsx` / `.xls`，返回 Univer 工作簿数据。
+上传 `.xlsx` / `.csv`（不支持旧版 `.xls`），落盘后立即返回；后台异步解析。最大约 50MB。
 
 #### Request
 
 | 位置 | 名称 | 类型 | 必填 | 说明 |
 | ---- | ---- | ---- | ---- | ---- |
 | Header | `Content-Type` | `string` | 是 | `multipart/form-data` |
-| Body | `file` | `File` | 是 | Excel 文件，最大 20MB |
+| Body | `file` | `File` | 是 | `.xlsx` / `.csv` 文件 |
 
-#### Response
+#### Response（`data`）
 
 | 字段 | 类型 | 说明 |
 | ---- | ---- | ---- |
-| `workbookData` | `Partial<IWorkbookData>` | Univer 工作簿快照 |
-| `images` | `ExcelSheetImage[]` | 可选，解析出的图片元数据 |
-
-```ts
-type ExcelImportResult = {
-  workbookData: Partial<IWorkbookData>;
-  images?: Array<{
-    sheetId: string;
-    dataUrl: string;
-    row: number;
-    col: number;
-    offsetX?: number;
-    offsetY?: number;
-  }>;
-};
-```
-
-#### Status
-
-| 状态码 | 说明 |
-| ------ | ---- |
-| `200` | 导入成功 |
-| `400` | 未上传文件：`请上传 Excel 文件（.xlsx / .xls）` |
-
-#### Example
+| `mode` | `string` | `async-snapshot` |
+| `id` | `string` | 任务 / 文件 id |
+| `fileName` | `string` | 原始文件名 |
+| `path` / `url` | `string` | 原始 xlsx 静态路径 |
+| `taskPath` / `taskUrl` | `string` | 任务查询路径 |
+| `size` | `number` | 字节数 |
+| `expiresAt` | `number` | 过期时间戳 |
+| `parseHint` | `string` | 固定 `chunked` |
 
 ```bash
-curl -X POST http://localhost:3010/excel/import \
+curl -X POST http://localhost:3010/excel/upload \
   -F "file=@./workbook.xlsx"
 ```
 
 ```ts
 const formData = new FormData();
 formData.append('file', file);
-
-const res = await fetch('http://localhost:3010/excel/import', {
+const res = await fetch('http://localhost:3010/excel/upload', {
   method: 'POST',
   body: formData,
 });
-const data = await res.json();
-// data.workbookData / data.images
+const { data } = await res.json();
+// data.id / data.taskUrl / data.parseHint
 ```
+
+---
+
+### GET /excel/task/:id
+
+轮询解析进度；`done` 后用 `snapshotUrl` 或 `metaUrl` 拉产物。
+
+#### Response（`data`）
+
+| 字段 | 类型 | 说明 |
+| ---- | ---- | ---- |
+| `status` | `string` | `pending` \| `done` \| `error` |
+| `mode` | `string` | `snapshot` \| `chunked` |
+| `progress` | `number` | 0–100 |
+| `parsedBlocks` / `totalBlocks` | `number` | chunked 进度 |
+| `snapshotUrl` | `string` | snapshot 模式产物 |
+| `metaUrl` | `string` | chunked 模式 meta |
+| `truncated` | `boolean` | 是否触达行上限截断 |
+| `error` | `string` | 失败原因 |
+
+```bash
+curl http://localhost:3010/excel/task/{id}
+```
+
+chunked 块文件路径约定：`/excel/static/{id}.block.{sheetIndex}.{blockIndex}.json`
 
 ---
 
@@ -123,29 +125,7 @@ const data = await res.json();
 | ---- | ---- | ---- | ---- | ---- |
 | Header | `Content-Type` | `string` | 是 | `application/json` |
 | Body | `data` | `Partial<IWorkbookData>` | 是 | 工作簿快照 |
-| Body | `fileName` | `string` | 否 | 下载名，默认 `data.name` 或 `workbook.xlsx` |
-
-```ts
-type ExportExcelDto = {
-  data: Partial<IWorkbookData>;
-  fileName?: string;
-};
-```
-
-#### Response
-
-| Header / Body | 说明 |
-| ------------- | ---- |
-| `Content-Type` | `application/vnd.openxmlformats-officedocument.spreadsheetml.sheet` |
-| `Content-Disposition` | `attachment; filename*=UTF-8''{fileName}` |
-| Body | `.xlsx` 二进制 |
-
-#### Status
-
-| 状态码 | 说明 |
-| ------ | ---- |
-| `200` | 导出成功 |
-| `400` | 缺少 `data`：`缺少工作簿数据 data` |
+| Body | `fileName` | `string` | 否 | 下载名 |
 
 #### Example
 
@@ -156,17 +136,8 @@ curl -X POST http://localhost:3010/excel/export \
   -o workbook.xlsx
 ```
 
-```ts
-const res = await fetch('http://localhost:3010/excel/export', {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({ data: workbookData, fileName: 'workbook.xlsx' }),
-});
-const blob = await res.blob();
-```
-
 ---
 
 ### 与 ExcelEditor
 
-`ExcelEditor` **默认走浏览器本地**导入导出；显式传入 `exchangeEndpoint`（如 `http://localhost:3010`）后才调用以上 Nest 接口，适合大文件（建议 ≥1MB）。不再按文件大小自动切换。
+`ExcelEditor` **默认走浏览器本地**导入导出；传入 `exchangeEndpoint`（如 `http://localhost:3010`）后走 upload → task 轮询 → 分块挂载。导入为 ExcelJS；导出浏览器 / Nest 均为 LuckyExcel（无 exceljs 回退）。
