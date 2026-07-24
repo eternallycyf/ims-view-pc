@@ -25,7 +25,7 @@ import {
 } from './utils/buildUniverTheme';
 import { DEFAULT_WORKBOOK_DATA } from './utils/defaultWorkbookData';
 import {
-  applyImportedImages,
+  applyServerImportPayload,
   exportWorkbook,
   importWorkbook,
 } from './utils/exchangeApi';
@@ -46,6 +46,15 @@ const patchRibbonExchangeLocale = (locales: Record<string, any>) => {
   ribbon.othersDesc = '导入和导出 Excel 文件';
   ui.ribbon = ribbon;
   next.ui = ui;
+
+  // Univer 0.25 sheets-ui 语言包缺 forceString 文案，悬浮会露出 key
+  const sheetsUi = { ...(next['sheets-ui'] || {}) };
+  const info = { ...(sheetsUi.info || {}) };
+  if (!info.error) info.error = '错误';
+  if (!info.forceStringInfo) info.forceStringInfo = '以文本形式存储的数字';
+  sheetsUi.info = info;
+  next['sheets-ui'] = sheetsUi;
+
   return next;
 };
 
@@ -126,11 +135,11 @@ const hideSimpleRibbonTabs = (root: HTMLElement | null) => {
   });
 };
 
-const normalizeWorkbookData = (data: Partial<IWorkbookData>): Partial<IWorkbookData> => ({
-  ...data,
-  id: data.id || `wb-${Date.now()}`,
-  appVersion: (data as { appVersion?: string }).appVersion || '0.25.1',
-  locale: data.locale || 'zhCN',
+const normalizeWorkbookData = (data?: Partial<IWorkbookData> | null): Partial<IWorkbookData> => ({
+  ...(data || DEFAULT_WORKBOOK_DATA),
+  id: data?.id || `wb-${Date.now()}`,
+  appVersion: (data as { appVersion?: string } | null | undefined)?.appVersion || '0.25.1',
+  locale: data?.locale || 'zhCN',
 });
 
 /** 导出文件名统一为 .xlsx */
@@ -224,13 +233,13 @@ const InternalExcelEditor: React.ForwardRefRenderFunction<ExcelEditorHandle, Exc
   const exchangeEndpointRef = useRef(exchangeEndpoint);
   const importXlsxRef = useRef<(file: File) => Promise<Partial<IWorkbookData>>>(async () => ({}));
   const exportXlsxRef = useRef<(fileName?: string) => Promise<void>>(async () => undefined);
-  const enableDrawingRef = useRef(false);
   /** 默认导出文件名：与最近一次上传 / src 加载的文件名保持一致 */
   const fileNameRef = useRef(
     toExportFileName(fileNameFromSrc(src) || (data as { name?: string } | undefined)?.name),
   );
   const [loading, setLoading] = useState(true);
   const [exchanging, setExchanging] = useState(false);
+  const [exchangeTip, setExchangeTip] = useState('处理中...');
 
   onReadyRef.current = onReady;
   onErrorRef.current = onError;
@@ -243,37 +252,71 @@ const InternalExcelEditor: React.ForwardRefRenderFunction<ExcelEditorHandle, Exc
     }
 
     // 与可用 excel demo 一致：每次导入分配新 id，避免旧 unit 冲突导致空白
-    const workbookData = normalizeWorkbookData(importResult.workbookData);
+    const workbookData = normalizeWorkbookData(importResult?.workbookData);
 
-    const active = univerAPI.getActiveWorkbook();
-    if (active) {
-      univerAPI.disposeUnit(active.getId());
+    try {
+      const active = univerAPI.getActiveWorkbook?.();
+      const activeId = active?.getId?.();
+      if (activeId) {
+        univerAPI.disposeUnit?.(activeId);
+      }
+    } catch {
+      // ignore dispose failure
     }
 
     univerAPI.createWorkbook(workbookData);
     await applyViewMode(univerAPI, viewMode);
-    if (enableDrawingRef.current) {
-      await applyImportedImages(univerAPI, importResult.images);
-    }
   };
 
   const importXlsx = async (file: File) => {
     setExchanging(true);
+    setExchangeTip('处理中...');
     try {
-      const { result, meta } = await importWorkbook(file, {
+      const { payload, meta } = await importWorkbook(file, {
         endpoint: exchangeEndpointRef.current,
+        onProgress: (info) => {
+          if (info.message) {
+            setExchangeTip(info.message);
+            return;
+          }
+          if (info.stage === 'upload') setExchangeTip('上传中...');
+          else if (info.stage === 'parse') setExchangeTip('服务端解析中...');
+          else setExchangeTip('渲染中...');
+        },
       });
       fileNameRef.current = toExportFileName(file.name);
-      await replaceWorkbook(result);
-      message.success(meta.via === 'server' ? '导入成功（服务端）' : '导入成功（本地）');
-      return result.workbookData;
+      const univerAPI = univerAPIRef.current;
+      if (!univerAPI) {
+        throw new Error('ExcelEditor 尚未初始化完成');
+      }
+
+      const workbookData = await applyServerImportPayload(
+        univerAPI,
+        payload,
+        replaceWorkbook,
+        (info) => {
+          if (info.message) setExchangeTip(info.message);
+        },
+      );
+
+      const successText =
+        meta.via === 'server-chunked'
+          ? meta.truncated
+            ? '导入成功（大数据分块加载，已按上限截断）'
+            : '导入成功（大数据分块加载）'
+          : meta.via === 'server'
+            ? '导入成功（服务端解析）'
+            : '导入成功（本地）';
+      message.success(successText);
+      return workbookData;
     } catch (error) {
       const err = error instanceof Error ? error : new Error(String(error));
       onErrorRef.current?.(err);
       message.error(err.message || '导入失败');
-      throw err;
+      return undefined;
     } finally {
       setExchanging(false);
+      setExchangeTip('处理中...');
     }
   };
 
@@ -284,22 +327,20 @@ const InternalExcelEditor: React.ForwardRefRenderFunction<ExcelEditorHandle, Exc
       const err = new Error('当前没有可导出的工作簿');
       onErrorRef.current?.(err);
       message.error(err.message);
-      throw err;
+      return;
     }
 
     const exportName = toExportFileName(fileName || fileNameRef.current);
 
     setExchanging(true);
     try {
-      const meta = await exportWorkbook(snapshot, exportName, {
-        endpoint: exchangeEndpointRef.current,
-      });
-      message.success(meta.via === 'server' ? '导出成功（服务端）' : '导出成功（本地）');
+      await exportWorkbook(snapshot, exportName);
+      message.success('导出成功');
     } catch (error) {
       const err = error instanceof Error ? error : new Error(String(error));
       onErrorRef.current?.(err);
       message.error(err.message || '导出失败');
-      throw err;
+      // 已提示用户，不再向外抛，避免 Unhandled Rejection 白屏
     } finally {
       setExchanging(false);
     }
@@ -323,88 +364,108 @@ const InternalExcelEditor: React.ForwardRefRenderFunction<ExcelEditorHandle, Exc
       return undefined;
     }
 
-    const isPreview = viewMode === 'preview';
-    const { presets, locales, resolvedFeatures } = buildUniverPresets({
-      container,
-      viewMode,
-      mode: mode as ExcelEditorFeatureMode,
-      features,
-    });
-    enableDrawingRef.current = resolvedFeatures.drawing;
+    let univer: { dispose?: () => void } | null = null;
+    let univerAPI: FUniver | null = null;
+    let lifecycleDisposable: { dispose?: () => void } | null = null;
 
-    // Preset 模式：createUniver 返回 { univer, univerAPI }，卸载时必须 dispose univer 本体
-    const { univer, univerAPI } = createUniver({
-      theme: univerTheme,
-      locale: LocaleType.ZH_CN,
-      logLevel: LogLevel.WARN,
-      locales: {
-        [LocaleType.ZH_CN]: patchRibbonExchangeLocale(mergeLocales(...locales)),
-      },
-      presets,
-    });
-
-    univerRef.current = univer;
-    univerAPIRef.current = univerAPI;
-
-    if (!isPreview && resolvedShowExchange) {
-      registerExchangeRibbonMenus(univerAPI, {
-        onImport: () => fileInputRef.current?.click(),
-        onExport: () => {
-          exportXlsxRef.current();
-        },
+    try {
+      const isPreview = viewMode === 'preview';
+      const { presets, locales } = buildUniverPresets({
+        container,
+        viewMode,
+        mode: mode as ExcelEditorFeatureMode,
+        features,
       });
-    }
 
-    const lifecycleDisposable = univerAPI.addEvent(univerAPI.Event.LifeCycleChanged, ({ stage }) => {
-      if (stage === univerAPI.Enum.LifecycleStages.Rendered) {
-        if (mode === 'simple') {
-          hideSimpleRibbonTabs(container);
-        }
-        applyViewMode(univerAPI, viewMode).catch((error) => {
-          onErrorRef.current?.(error instanceof Error ? error : new Error(String(error)));
+      // Preset 模式：createUniver 返回 { univer, univerAPI }，卸载时必须 dispose univer 本体
+      const created = createUniver({
+        theme: univerTheme,
+        locale: LocaleType.ZH_CN,
+        logLevel: LogLevel.WARN,
+        locales: {
+          [LocaleType.ZH_CN]: patchRibbonExchangeLocale(mergeLocales(...locales)),
+        },
+        presets,
+      });
+      univer = created.univer;
+      univerAPI = created.univerAPI;
+
+      univerRef.current = created.univer;
+      univerAPIRef.current = created.univerAPI;
+
+      if (!isPreview && resolvedShowExchange) {
+        registerExchangeRibbonMenus(created.univerAPI, {
+          onImport: () => fileInputRef.current?.click(),
+          onExport: () => {
+            void exportXlsxRef.current()?.catch(() => {});
+          },
         });
       }
-    });
 
-    const initWorkbook = async () => {
-      setLoading(true);
-
-      try {
-        const importResult = await resolveImportResult(data, src);
-
-        if (disposed) {
-          return;
-        }
-
-        univerAPI.createWorkbook(importResult.workbookData);
-        // src 加载时同步默认导出文件名
-        const fromSrc = fileNameFromSrc(src);
-        if (fromSrc) {
-          fileNameRef.current = toExportFileName(fromSrc);
-        } else if (importResult.workbookData.name) {
-          fileNameRef.current = toExportFileName(String(importResult.workbookData.name));
-        }
-        await applyViewMode(univerAPI, viewMode);
-        if (resolvedFeatures.drawing) {
-          await applyImportedImages(univerAPI, importResult.images);
-        }
-        onReadyRef.current?.(univerAPI);
-      } catch (error) {
-        onErrorRef.current?.(error instanceof Error ? error : new Error(String(error)));
-      } finally {
-        if (!disposed) {
-          setLoading(false);
-        }
+      const lifeCycleEvent = created.univerAPI.Event?.LifeCycleChanged;
+      const renderedStage = created.univerAPI.Enum?.LifecycleStages?.Rendered;
+      if (lifeCycleEvent != null && created.univerAPI.addEvent) {
+        lifecycleDisposable = created.univerAPI.addEvent(lifeCycleEvent, ({ stage }: { stage: unknown }) => {
+          if (renderedStage != null && stage === renderedStage) {
+            if (mode === 'simple') {
+              hideSimpleRibbonTabs(container);
+            }
+            applyViewMode(created.univerAPI, viewMode).catch((error) => {
+              onErrorRef.current?.(error instanceof Error ? error : new Error(String(error)));
+            });
+          }
+        });
       }
-    };
 
-    initWorkbook();
+      const initWorkbook = async () => {
+        setLoading(true);
+
+        try {
+          const importResult = await resolveImportResult(data, src);
+
+          if (disposed) {
+            return;
+          }
+
+          const workbookData = normalizeWorkbookData(importResult?.workbookData);
+          created.univerAPI.createWorkbook(workbookData);
+          // src 加载时同步默认导出文件名
+          const fromSrc = fileNameFromSrc(src);
+          if (fromSrc) {
+            fileNameRef.current = toExportFileName(fromSrc);
+          } else if (workbookData.name) {
+            fileNameRef.current = toExportFileName(String(workbookData.name));
+          }
+          await applyViewMode(created.univerAPI, viewMode);
+          onReadyRef.current?.(created.univerAPI);
+        } catch (error) {
+          onErrorRef.current?.(error instanceof Error ? error : new Error(String(error)));
+        } finally {
+          if (!disposed) {
+            setLoading(false);
+          }
+        }
+      };
+
+      void initWorkbook();
+    } catch (error) {
+      setLoading(false);
+      onErrorRef.current?.(error instanceof Error ? error : new Error(String(error)));
+    }
 
     return () => {
       disposed = true;
-      lifecycleDisposable.dispose();
-      // 按 univer-integrate React 规范销毁 Univer 实例
-      univer.dispose();
+      try {
+        lifecycleDisposable?.dispose?.();
+      } catch {
+        // ignore
+      }
+      try {
+        // 按 univer-integrate React 规范销毁 Univer 实例
+        univer?.dispose?.();
+      } catch {
+        // ignore
+      }
       univerRef.current = null;
       univerAPIRef.current = null;
     };
@@ -429,12 +490,12 @@ const InternalExcelEditor: React.ForwardRefRenderFunction<ExcelEditorHandle, Exc
       <input
         ref={fileInputRef}
         type="file"
-        accept=".xlsx,.xls,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        accept=".xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
         style={{ display: 'none' }}
         onChange={(event) => {
           const file = event.target.files?.[0];
           if (file) {
-            importXlsxRef.current(file);
+            void importXlsxRef.current?.(file)?.catch(() => {});
           }
           event.target.value = '';
         }}
@@ -442,7 +503,7 @@ const InternalExcelEditor: React.ForwardRefRenderFunction<ExcelEditorHandle, Exc
       <div ref={containerRef} className={`${prefixCls}-container`} />
       {loading || exchanging ? (
         <div className={`${prefixCls}-loading`}>
-          <Spin size="large" description={exchanging ? '处理中...' : '加载中...'}>
+          <Spin size="large" description={exchanging ? exchangeTip : '加载中...'}>
             <div style={{ width: 120, height: 64 }} />
           </Spin>
         </div>

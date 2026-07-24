@@ -27,6 +27,9 @@ export const excelBufferToWorkbookData = async (
 };
 
 export const downloadBlob = (blob: Blob, fileName: string) => {
+  if (!blob) {
+    throw new Error('导出结果为空');
+  }
   const name = fileName.endsWith('.xlsx') ? fileName : `${fileName}.xlsx`;
   const objectUrl = URL.createObjectURL(blob);
   const link = document.createElement('a');
@@ -51,6 +54,9 @@ export const loadImportResultFromUrl = async (src: string): Promise<ExcelImportR
   }
 
   const buffer = await response.arrayBuffer();
+  if (!buffer || buffer.byteLength === 0) {
+    throw new Error('Excel 文件内容为空');
+  }
   const fileName = src.split('?')[0].split('/').pop() || 'workbook.xlsx';
   return excelBufferToImportResult(buffer, fileName);
 };

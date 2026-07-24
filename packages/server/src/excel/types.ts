@@ -1,12 +1,17 @@
+import * as ExcelNS from '../../../utils/src/excel';
+
+const Excel: any = (ExcelNS as any).default ?? ExcelNS;
+
 export type {
   ICellData,
   IRange,
   IWorkbookData,
   IWorksheetData,
-} from '@ims-view/utils';
-export { CellValueType } from '@ims-view/utils';
+} from '../../../utils/src/excel';
 
-export interface ExportExcelDto {
-  data: Partial<import('@ims-view/utils').IWorkbookData>;
-  fileName?: string;
-}
+export const CellValueType = Excel.CellValueType;
+
+export type { ExportExcelDto, ExportExcelPlain } from './dto/export-excel.dto';
+export { exportExcelSchema } from './dto/export-excel.dto';
+export type { ExcelTaskIdDto, ExcelTaskIdPlain } from './dto/excel-task-id.dto';
+export { excelTaskIdSchema } from './dto/excel-task-id.dto';

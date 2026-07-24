@@ -11,42 +11,36 @@ demo:
 
 ## ExcelEditor Excel 编辑器
 
-基于 [Univer](https://univer.ai/) 的 Excel 编辑器：`mode` 控制功能档位，`viewMode` 切换预览 / 编辑；本地 `.xlsx` 优先 `@zwight/luckyexcel`（[JSZip](https://github.com/Stuk/jszip)），失败回退 SheetJS；`.xls` 直接走 SheetJS（LuckyExcel 对旧格式易出空表）。
+基于 [Univer](https://univer.ai/) 的表格组件，用于在页面里预览、编辑 Excel（仅 `.xlsx`），并支持导入导出。
 
-导入导出：**默认走浏览器本地**；显式传入 `exchangeEndpoint` 后全部走 Nest 服务端（适合大文件，如 ≥1MB），不做按文件大小自动切换。
-
-主题色跟随宿主 `ConfigProvider`（`theme.useToken().colorPrimary`）；未包裹时回退到 `variables.colorPrimary`。
+- `mode`：功能档位（简单 / 全部 / 自定义）
+- `viewMode`：预览或编辑
+- 默认浏览器本地导入导出；大文件导入可配置 `exchangeEndpoint` 走服务端
 
 ### 功能档位
 
 | mode | 说明 |
 | ---- | ---- |
-| `simple`（默认） | 核心编辑 + 插入 + 导入导出（无公式栏 / 数据能力） |
-| `all` | 开启筛选、排序、条件格式、数据验证、超链接、查找替换、备注、表格、图片等 |
+| `simple`（默认） | 核心编辑 + 插入 + 导入导出 |
+| `all` | 筛选、排序、条件格式、数据验证、超链接、查找替换、备注、表格、图片等 |
 | `custom` | 按 `features` 勾选 |
-
-评论（`threadComment`）默认关闭。
 
 ### 如何使用
 
 ```tsx | pure
 import { ExcelEditor } from 'ims-view-pc';
 
-{/* 默认宽高 100%，跟随父容器；导入导出走前端本地 */}
+{/* 父容器需有高度 */}
 <div style={{ height: 500 }}>
   <ExcelEditor mode="simple" />
 </div>
 
-{/* 也可显式指定 */}
 <ExcelEditor mode="all" height={500} width="100%" />
 <ExcelEditor mode="custom" features={{ filter: true, drawing: true }} height="60vh" />
 <ExcelEditor mode="simple" viewMode="preview" src="/excel.xlsx" height={480} />
 
-{/* 大文件：显式开启服务端导入导出（需先 pnpm start:server） */}
-<ExcelEditor
-  exchangeEndpoint="http://localhost:3010"
-  height={500}
-/>
+{/* 大文件导入：先 pnpm start:server，再传服务地址 */}
+<ExcelEditor exchangeEndpoint="http://localhost:3010" height={500} />
 ```
 
 ## 示例
@@ -61,15 +55,16 @@ import { ExcelEditor } from 'ims-view-pc';
 
 <code description="前端本地导入导出（默认）" src="./demo/exchange.tsx">导入导出</code>
 
-<code description="大文件（≥1MB）需配置 exchangeEndpoint，走 Nest 服务端" src="./demo/server.tsx">服务端导入</code>
+<code description="上传后服务端异步解析；大文件 ExcelJS 分块 + 渐进挂载" src="./demo/server.tsx">服务端导入</code>
 
 :::info{title=提示}
-- 默认宽高为 `100%`，需父容器有明确高度（如 `height: 500` / flex 子项）；也可传 `height` / `width` 覆盖。
-- `data` 与 `src` 同时传入时，优先使用 `data`。
-- 编辑视图默认展示 Ribbon「导入导出」；可用 `showExchange={false}` 关闭。
-- 预览模式走 Univer 自带只读（`setEditable(false)` + `setReadOnly`）；表头仍可调列宽 / 行高。
-- 远程 `src` 需可访问（注意跨域）。
-- 导入导出默认走前端本地；大文件请传 `exchangeEndpoint`（如 `http://localhost:3010`），并先启动 `pnpm start:server`。
+- 默认宽高 `100%`，请给父容器明确高度，或传 `height` / `width`。
+- `data` 优先于 `src`。
+- 编辑视图默认显示 Ribbon「导入导出」，可用 `showExchange={false}` 关闭。
+- 本地导入建议 ≤5MB；更大文件请配置 `exchangeEndpoint`（`pnpm start:server`）：
+  - **小文件**：Nest LuckyExcel → snapshot，前端一次挂载
+  - **大文件（默认 >2MB）**：同一套 Nest LuckyExcel 解析 → meta + blocks，前端骨架（含图片/样式）+ 分批挂载；默认最多约 15 万行（`IMS_EXCEL_MAX_ROWS`）
+- 仅支持 `.xlsx`，不支持旧版 `.xls`。
 :::
 
 ## API
@@ -78,17 +73,17 @@ import { ExcelEditor } from 'ims-view-pc';
 | -------------------- | ----------------------------------------- | ------------------------------ | ------------------------- |
 | mode                 | 功能档位                                  | `'simple' \| 'all' \| 'custom'` | `'simple'`               |
 | features             | custom 模式下勾选的能力                   | `ExcelEditorFeatures`          | -                         |
-| viewMode             | 预览 / 编辑（预览可调表头宽高，不可操作单元格） | `'preview' \| 'edit'`        | `'edit'`                  |
-| src                  | Excel 文件地址（.xlsx / .xls）            | `string`                       | -                         |
+| viewMode             | 预览 / 编辑                               | `'preview' \| 'edit'`          | `'edit'`                  |
+| src                  | Excel 文件地址（仅 .xlsx）                | `string`                       | -                         |
 | data                 | 工作簿数据，优先级高于 `src`              | `Partial<IWorkbookData>`       | -                         |
-| exchangeEndpoint     | Nest 服务地址；传入后导入/导出走服务端（大文件推荐） | `string`                | -（默认本地）             |
-| showExchange         | Ribbon「导入导出」；未传时编辑视图为 true | `boolean`                      | `viewMode === 'edit'`     |
-| height               | 容器高度；不传则 `100%` 跟随父级           | `number \| string`             | `100%`                    |
-| width                | 容器宽度；不传则 `100%` 跟随父级           | `number \| string`             | `100%`                    |
+| exchangeEndpoint     | 大文件导入服务；上传后异步解析（snapshot / chunked）并轮询 | `string`                       | -                         |
+| showExchange         | Ribbon「导入导出」                        | `boolean`                      | `viewMode === 'edit'`     |
+| height               | 容器高度                                  | `number \| string`             | `100%`                    |
+| width                | 容器宽度                                  | `number \| string`             | `100%`                    |
 | className            | 自定义类名                                | `string`                       | -                         |
 | style                | 自定义样式                                | `CSSProperties`                | -                         |
 | onReady              | 初始化完成回调                            | `(univerAPI: FUniver) => void` | -                         |
-| onError              | 加载或渲染失败回调                        | `(error: Error) => void`       | -                         |
+| onError              | 失败回调                                  | `(error: Error) => void`       | -                         |
 
 ### features
 
@@ -107,9 +102,9 @@ import { ExcelEditor } from 'ims-view-pc';
 
 ### Ref 方法
 
-| 方法            | 说明                        | 类型                                              |
-| --------------- | --------------------------- | ------------------------------------------------- |
-| getUniverAPI    | 获取 Univer Facade API      | `() => FUniver \| null`                           |
-| getWorkbookData | 获取当前工作簿快照          | `() => Partial<IWorkbookData> \| null`            |
-| importXlsx      | 导入 Excel                  | `(file: File) => Promise<Partial<IWorkbookData>>` |
-| exportXlsx      | 导出 Excel                  | `(fileName?: string) => Promise<void>`            |
+| 方法            | 说明               | 类型                                              |
+| --------------- | ------------------ | ------------------------------------------------- |
+| getUniverAPI    | 获取 Univer API    | `() => FUniver \| null`                           |
+| getWorkbookData | 获取当前工作簿快照 | `() => Partial<IWorkbookData> \| null`            |
+| importXlsx      | 导入 Excel         | `(file: File) => Promise<Partial<IWorkbookData>>` |
+| exportXlsx      | 导出 Excel         | `(fileName?: string) => Promise<void>`            |

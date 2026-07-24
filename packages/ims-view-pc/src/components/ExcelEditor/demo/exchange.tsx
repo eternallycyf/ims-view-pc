@@ -5,7 +5,7 @@ const App = () => {
   return (
     <div style={{ width: '100%', height: '70vh' }}>
       <p style={{ marginBottom: 8, color: '#666' }}>
-        默认前端本地导入导出（支持 .xlsx / .xls）。大文件请看「服务端导入」示例。
+        默认前端本地导入导出（仅 .xlsx）。大文件请看「服务端导入」示例。
       </p>
       <div style={{ height: 'calc(100% - 32px)' }}>
         <ExcelEditor mode="simple" viewMode="edit" />

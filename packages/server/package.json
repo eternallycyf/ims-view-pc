@@ -24,9 +24,10 @@
     "README.md"
   ],
   "scripts": {
-    "start": "nest start",
-    "start:dev": "nest start --watch",
-    "start:debug": "nest start --debug --watch",
+    "start": "node scripts/dev.cjs",
+    "start:dev": "node scripts/dev.cjs",
+    "start:once": "node scripts/dev.cjs --once",
+    "start:debug": "node scripts/dev.cjs --inspect-brk",
     "build": "nest build",
     "clean": "rm -rf lib dist",
     "doctor": "node -e \"require('fs').accessSync('src/index.ts'); console.log('[@ims-view/server] doctor ok')\"",
@@ -37,13 +38,16 @@
     "@nestjs/common": "^11.0.0",
     "@nestjs/core": "^11.0.0",
     "@nestjs/platform-express": "^11.0.0",
+    "compression": "^1.8.1",
     "multer": "^1.4.5-lts.2",
     "reflect-metadata": "^0.2.2",
-    "rxjs": "^7.8.2"
+    "rxjs": "^7.8.2",
+    "zod": "^3.25.76"
   },
   "devDependencies": {
     "@nestjs/cli": "^11.0.0",
     "@nestjs/schematics": "^11.0.0",
+    "@types/compression": "^1.8.1",
     "@types/express": "^5.0.0",
     "@types/multer": "^1.4.12",
     "@types/node": "^22.0.0",

@@ -41,7 +41,7 @@ export interface ExcelEditorHandle {
   getWorkbookData: () => Partial<IWorkbookData> | null;
   /** 导入 xlsx（默认本地；配置了 exchangeEndpoint 则走服务端） */
   importXlsx: (file: File) => Promise<Partial<IWorkbookData>>;
-  /** 导出 xlsx（默认本地；配置了 exchangeEndpoint 则走服务端） */
+  /** 导出 xlsx（始终浏览器本地生成） */
   exportXlsx: (fileName?: string) => Promise<void>;
 }
 
@@ -80,8 +80,8 @@ export interface ExcelEditorProps {
   /** 工作簿数据，优先级高于 src */
   data?: Partial<IWorkbookData>;
   /**
-   * Nest 导入导出服务地址。默认不开启（走浏览器本地）；
-   * 显式传入后导入/导出全部走服务端（适合大文件，如 ≥1MB）
+   * Nest 导入服务地址。配置后：上传 → 服务端异步解析（小文件 LuckyExcel snapshot /
+   * 大文件 ExcelJS Worker 分块）→ 轮询并挂载。未配置时本地导入（≤5MB）。导出始终本地。
    * @example 'http://localhost:3010'
    */
   exchangeEndpoint?: string;

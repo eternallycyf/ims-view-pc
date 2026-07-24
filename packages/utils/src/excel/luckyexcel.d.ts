@@ -12,7 +12,7 @@ declare module '@zwight/luckyexcel' {
 
   interface LuckyExcelStatic {
     transformExcelToUniver: (
-      file: File,
+      file: File | Blob | Uint8Array | ArrayBuffer,
       success: TransformSuccess<Record<string, unknown>>,
       error?: TransformError,
     ) => void;

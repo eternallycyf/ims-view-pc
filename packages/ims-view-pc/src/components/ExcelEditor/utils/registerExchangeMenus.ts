@@ -23,27 +23,31 @@ export const registerExchangeRibbonMenus = (
     return;
   }
 
-  univerAPI.registerComponent('ImsExcelImportIcon', ImsExcelImportIcon);
-  univerAPI.registerComponent('ImsExcelExportIcon', ImsExcelExportIcon);
+  try {
+    univerAPI.registerComponent('ImsExcelImportIcon', ImsExcelImportIcon);
+    univerAPI.registerComponent('ImsExcelExportIcon', ImsExcelExportIcon);
 
-  // ribbon.others.others === RibbonOthersGroup.OTHERS
-  univerAPI
-    .createMenu({
-      id: 'ims-excel-import',
-      title: '导入',
-      tooltip: '导入 Excel（支持 .xlsx / .xls）',
-      icon: 'ImsExcelImportIcon',
-      action: () => handlers.onImport(),
-    })
-    .appendTo('ribbon.others.others');
+    // ribbon.others.others === RibbonOthersGroup.OTHERS
+    univerAPI
+      .createMenu({
+        id: 'ims-excel-import',
+        title: '导入',
+        tooltip: '导入 Excel（仅 .xlsx）',
+        icon: 'ImsExcelImportIcon',
+        action: () => handlers.onImport(),
+      })
+      ?.appendTo?.('ribbon.others.others');
 
-  univerAPI
-    .createMenu({
-      id: 'ims-excel-export',
-      title: '导出',
-      tooltip: '导出为 .xlsx',
-      icon: 'ImsExcelExportIcon',
-      action: () => handlers.onExport(),
-    })
-    .appendTo('ribbon.others.others');
+    univerAPI
+      .createMenu({
+        id: 'ims-excel-export',
+        title: '导出',
+        tooltip: '导出为 .xlsx',
+        icon: 'ImsExcelExportIcon',
+        action: () => handlers.onExport(),
+      })
+      ?.appendTo?.('ribbon.others.others');
+  } catch {
+    // Ribbon 菜单注册失败不影响编辑器主体
+  }
 };

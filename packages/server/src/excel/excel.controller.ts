@@ -2,36 +2,61 @@ import {
   Body,
   Controller,
   Get,
+  Inject,
+  Param,
   Post,
+  Req,
   Res,
   UploadedFile,
   UseInterceptors,
+  UsePipes,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
-import type { Response } from 'express';
+import type { Request, Response } from 'express';
 import { memoryStorage } from 'multer';
+import { ResponseEntity, ZodValidationPipe } from '../shared';
+import { ExcelTaskIdDto } from './dto/excel-task-id.dto';
+import { ExportExcelDto } from './dto/export-excel.dto';
 import { ExcelService } from './excel.service';
-import type { ExportExcelDto } from './types';
 
-// excel import export
+const uploadInterceptor = FileInterceptor('file', {
+  storage: memoryStorage(),
+  limits: { fileSize: 50 * 1024 * 1024 },
+});
+
+const publicBaseUrl = (req: Request) => {
+  const proto = (req.headers['x-forwarded-proto'] as string) || req.protocol;
+  const host = req.get('host');
+  return host ? `${proto}://${host}` : undefined;
+};
+
 @Controller('excel')
+@UsePipes(ZodValidationPipe)
 export class ExcelController {
-  constructor(private readonly excelService: ExcelService) {}
+  constructor(@Inject(ExcelService) private readonly excelService: ExcelService) {}
 
   @Get('health')
   health() {
-    return { ok: true, service: 'excel-exchange' };
+    return ResponseEntity.ofSuccess({
+      ok: true,
+      service: 'excel-exchange',
+      importMode: 'async-snapshot-or-chunked',
+    });
   }
 
-  @Post('import')
-  @UseInterceptors(
-    FileInterceptor('file', {
-      storage: memoryStorage(),
-      limits: { fileSize: 20 * 1024 * 1024 },
-    }),
-  )
-  async importExcel(@UploadedFile() file: Express.Multer.File) {
-    return this.excelService.importFile(file);
+  /** 上传 .xlsx：立即返回；后台 LuckyExcel(snapshot) 或 ExcelJS Worker(chunked) */
+  @Post('upload')
+  @UseInterceptors(uploadInterceptor)
+  async uploadExcel(@UploadedFile() file: Express.Multer.File, @Req() req: Request) {
+    const data = await this.excelService.uploadFile(file, publicBaseUrl(req));
+    return ResponseEntity.ofSuccess(data);
+  }
+
+  /** 轮询解析任务状态 */
+  @Get('task/:id')
+  getTask(@Param() params: ExcelTaskIdDto, @Req() req: Request) {
+    const data = this.excelService.getTask(params.id, publicBaseUrl(req));
+    return ResponseEntity.ofSuccess(data);
   }
 
   @Post('export')
