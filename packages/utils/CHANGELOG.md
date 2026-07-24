@@ -1,5 +1,28 @@
 # Changelog
 
+### [Version&nbsp;1.22.2](https://github.com/eternallycyf/ims-view-pc/compare/@ims-view/utils@1.22.1...@ims-view/utils@1.22.2)
+
+<sup>Released on **2026-07-24**</sup>
+
+#### 🐛 修复
+
+- 修复问题.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- 修复问题 ([a593f2b](https://github.com/eternallycyf/ims-view-pc/commit/a593f2b))
+
+</details>
+
+### Dependencies
+
+- **@ims-view/univer-import-excel:** upgraded to 1.0.0
+
 ### [Version&nbsp;1.22.1](https://github.com/eternallycyf/ims-view-pc/compare/@ims-view/utils@1.22.0...@ims-view/utils@1.22.1)
 
 <sup>Released on **2026-07-24**</sup>

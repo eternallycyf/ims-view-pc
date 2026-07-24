@@ -1,6 +1,6 @@
 {
   "name": "@ims-view/utils",
-  "version": "1.22.1",
+  "version": "1.22.2",
   "main": "lib/index.js",
   "unpkg": "dist/index.js",
   "module": "es/index.js",
@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.23.1",
-    "@ims-view/univer-import-excel": "0.0.0-development",
+    "@ims-view/univer-import-excel": "1.0.0",
     "@zwight/luckyexcel": "^1.1.6",
     "decimal.js": "^10.4.3",
     "exceljs": "^4.4.0",
