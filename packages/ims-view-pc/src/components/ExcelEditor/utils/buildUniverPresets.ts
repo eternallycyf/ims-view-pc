@@ -113,7 +113,7 @@ export const buildUniverPresets = (options: BuildUniverPresetsOptions): BuiltUni
       contextMenu: !isPreview,
       // 简单模式不展示公式栏
       formulaBar: !isPreview && !isSimple,
-      footer: !isPreview,
+      footer: true,
       // 导入数据常把数字存成文本；关闭绿三角提示，避免露出未翻译 key
       sheets: {
         disableForceStringAlert: true,
