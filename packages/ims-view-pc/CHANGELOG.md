@@ -1,5 +1,24 @@
 # Changelog
 
+### [Version&nbsp;1.96.4](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.96.3...ims-view-pc@1.96.4)
+
+<sup>Released on **2026-07-27**</sup>
+
+#### 🐛 修复
+
+- Excel-editor preview open footer.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- Excel-editor preview open footer ([423dcae](https://github.com/eternallycyf/ims-view-pc/commit/423dcae))
+
+</details>
+
 ### [Version&nbsp;1.96.3](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.96.2...ims-view-pc@1.96.3)
 
 <sup>Released on **2026-07-24**</sup>
