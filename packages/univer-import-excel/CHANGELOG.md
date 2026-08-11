@@ -1,5 +1,24 @@
 # Changelog
 
+### [Version&nbsp;1.0.1](https://github.com/eternallycyf/ims-view-pc/compare/@ims-view/univer-import-excel@1.0.0...@ims-view/univer-import-excel@1.0.1)
+
+<sup>Released on **2026-08-11**</sup>
+
+#### 🐛 修复
+
+- Excel import error.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- Excel import error ([e394e99](https://github.com/eternallycyf/ims-view-pc/commit/e394e99))
+
+</details>
+
 ## Version&nbsp;1.0.0
 
 <sup>Released on **2026-07-24**</sup>
