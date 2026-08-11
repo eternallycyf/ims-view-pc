@@ -1,5 +1,5 @@
 // 虚拟表格导出excel
-import ExcelJS from 'exceljs';
+import ExcelJS from './exceljsCompat';
 import fileSaver from 'file-saver';
 import { STYLEMAP, TYPE2DATANAMEMAP } from './enum';
 import { getImageSuffix, isArray, isEmptyObj, isFunction, isObject, noop, warn } from './util';

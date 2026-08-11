@@ -1,4 +1,5 @@
-import ExcelJS from 'exceljs';
+import type ExcelJS from 'exceljs';
+import { ExcelJS as ExcelJSRuntime } from './exceljsCompat';
 import {
   type ExcelBinary,
   type ExcelImportResult,
@@ -79,7 +80,7 @@ export const excelBufferToWorkbookData = async (
 export const workbookDataToExcelBytes = async (
   data: Partial<IWorkbookData>,
 ): Promise<Uint8Array> => {
-  const workbook = new ExcelJS.Workbook();
+  const workbook = new ExcelJSRuntime.Workbook();
   workbook.creator = data.name || 'Workbook';
 
   const sheetOrder = data.sheetOrder?.length

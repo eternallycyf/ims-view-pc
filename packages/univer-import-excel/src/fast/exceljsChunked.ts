@@ -2,7 +2,8 @@
  * ExcelJS → Univer 分块导入（大文件快路径）。
  * 样式映射参考 @zwight/luckyexcel 基本字段，直出 Univer（跳过 LuckySheet 中间态）。
  */
-import ExcelJS from 'exceljs';
+import type ExcelJS from 'exceljs';
+import { ExcelJS as ExcelJSRuntime } from './exceljsCompat';
 import {
   collectWorkbookDrawingResources,
   collectWorksheetFreeze,
@@ -426,7 +427,7 @@ export const excelBufferToChunkedWorkbook = async (
   const bytes = ensureXlsxBytes(toUint8Array(input), fileName);
   options.onProgress?.({ percent: 5, parsedBlocks: 0, totalBlocks: 0, phase: 'load' });
 
-  const workbook = new ExcelJS.Workbook();
+  const workbook = new ExcelJSRuntime.Workbook();
   // exceljs 在 Node 接受 Buffer；浏览器用 Uint8Array
   const loadInput =
     typeof Buffer !== 'undefined' ? Buffer.from(bytes.buffer, bytes.byteOffset, bytes.byteLength) : bytes;

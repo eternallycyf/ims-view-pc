@@ -129,8 +129,6 @@ export default defineConfig({
       '@zwight/luckyexcel',
       '@ims-view/univer-import-excel',
       '@progress/jszip-esm',
-      '@zwight/exceljs',
-      'exceljs',
     ],
   },
 });
