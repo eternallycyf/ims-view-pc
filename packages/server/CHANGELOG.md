@@ -1,5 +1,20 @@
 # Changelog
 
+### [Version&nbsp;1.2.4](https://github.com/eternallycyf/ims-view-pc/compare/@ims-view/server@1.2.3...@ims-view/server@1.2.4)
+
+<sup>Released on **2026-08-28**</sup>
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+</details>
+
+### Dependencies
+
+- **@ims-view/utils:** upgraded to 1.22.4
+
 ### [Version&nbsp;1.2.3](https://github.com/eternallycyf/ims-view-pc/compare/@ims-view/server@1.2.2...@ims-view/server@1.2.3)
 
 <sup>Released on **2026-08-11**</sup>
