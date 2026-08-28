@@ -55,7 +55,8 @@
   },
   "pnpm": {
     "overrides": {
-      "@univerjs/core": "0.25.1"
+      "@univerjs/core": "0.25.1",
+      "xlsx": "https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz"
     }
   },
   "lint-staged": {

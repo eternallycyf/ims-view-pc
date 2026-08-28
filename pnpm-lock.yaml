@@ -6,6 +6,7 @@ settings:
 
 overrides:
   '@univerjs/core': 0.25.1
+  xlsx: https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz
 
 importers:
 
@@ -232,10 +233,10 @@ importers:
         specifier: 1.23.0
         version: link:../hooks
       '@ims-view/univer-import-excel':
-        specifier: 1.0.0
+        specifier: 1.0.1
         version: link:../univer-import-excel
       '@ims-view/utils':
-        specifier: 1.22.2
+        specifier: 1.22.3
         version: link:../utils
       '@js-preview/excel':
         specifier: ^1.7.12
@@ -385,8 +386,8 @@ importers:
         specifier: ^7.21.5
         version: 7.21.7
       xlsx:
-        specifier: ^0.18.5
-        version: 0.18.5
+        specifier: https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz
+        version: https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz
     devDependencies:
       '@types/tapable':
         specifier: ^2.2.7
@@ -398,10 +399,10 @@ importers:
   packages/server:
     dependencies:
       '@ims-view/univer-import-excel':
-        specifier: 1.0.0
+        specifier: 1.0.1
         version: link:../univer-import-excel
       '@ims-view/utils':
-        specifier: 1.22.2
+        specifier: 1.22.3
         version: link:../utils
       '@nestjs/common':
         specifier: ^11.0.0
@@ -474,7 +475,7 @@ importers:
         specifier: ^7.23.1
         version: 7.28.4
       '@ims-view/univer-import-excel':
-        specifier: 1.0.0
+        specifier: 1.0.1
         version: link:../univer-import-excel
       '@zwight/luckyexcel':
         specifier: ^1.1.6
@@ -504,8 +505,8 @@ importers:
         specifier: 18.3.1
         version: 18.3.1(react@18.3.1)
       xlsx:
-        specifier: ^0.18.5
-        version: 0.18.5
+        specifier: https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz
+        version: https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz
     devDependencies:
       '@types/js-cookie':
         specifier: ^3.0.6
@@ -14727,16 +14728,8 @@ packages:
       utf-8-validate:
         optional: true
 
-  xlsx@0.10.9:
-    resolution: {integrity: sha512-XZrdkPmoZt8qPpVmuKNe7EYXyckvBArwFI7SMKiqdXz9ZAXRWx6EFMKpGTyiKklPzRsm2n4cmzADinPIlPi1Jg==}
-    engines: {node: '>=0.8'}
-    deprecated: this version is no longer supported.  More info at https://cdn.sheetjs.com/xlsx/
-    hasBin: true
-
-  xlsx@0.18.5:
-    resolution: {integrity: sha512-dmg3LCjBPHZnQp5/F/+nnTa+miPJxUXB6vtk42YjBBKayDNagxGEeIdWApkYPOf3Z3pm3k62Knjzp7lMeTEtFQ==}
-    engines: {node: '>=0.8'}
-    hasBin: true
+  xlsx@https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz:
+    resolution: {tarball: https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz}
 
   xml-lexer@0.2.2:
     resolution: {integrity: sha512-G0i98epIwiUEiKmMcavmVdhtymW+pCAohMRgybyIME9ygfVu8QheIi+YoQh3ngiThsT0SQzJT4R0sKDEv8Ou0w==}
@@ -31293,7 +31286,7 @@ snapshots:
       react-dom: 18.3.1(react@18.3.1)
       react-visibility-sensor: 5.1.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       three: 0.85.2
-      xlsx: 0.10.9
+      xlsx: https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz
     transitivePeerDependencies:
       - webpack
 
@@ -34178,25 +34171,7 @@ snapshots:
 
   ws@8.18.3: {}
 
-  xlsx@0.10.9:
-    dependencies:
-      adler-32: 1.1.0
-      cfb: 0.12.1
-      codepage: 1.10.2
-      commander: 2.11.0
-      crc-32: 1.1.1
-      exit-on-epipe: 1.0.1
-      ssf: 0.10.3
-
-  xlsx@0.18.5:
-    dependencies:
-      adler-32: 1.3.1
-      cfb: 1.2.2
-      codepage: 1.15.0
-      crc-32: 1.2.2
-      ssf: 0.11.2
-      wmf: 1.0.2
-      word: 0.3.0
+  xlsx@https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz: {}
 
   xml-lexer@0.2.2:
     dependencies:

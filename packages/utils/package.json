@@ -27,7 +27,7 @@
     "exceljs": "^4.4.0",
     "js-cookie": "^3.0.5",
     "jszip": "^3.10.1",
-    "xlsx": "^0.18.5"
+    "xlsx": "https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz"
   },
   "devDependencies": {
     "@types/js-cookie": "^3.0.6"
