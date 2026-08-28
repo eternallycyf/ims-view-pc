@@ -1,5 +1,28 @@
 # Changelog
 
+### [Version&nbsp;1.96.6](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.96.5...ims-view-pc@1.96.6)
+
+<sup>Released on **2026-08-28**</sup>
+
+#### 🐛 修复
+
+- 修复问题.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- 修复问题 ([b232a39](https://github.com/eternallycyf/ims-view-pc/commit/b232a39))
+
+</details>
+
+### Dependencies
+
+- **@ims-view/utils:** upgraded to 1.22.4
+
 ### [Version&nbsp;1.96.5](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.96.4...ims-view-pc@1.96.5)
 
 <sup>Released on **2026-08-11**</sup>
