@@ -1,6 +1,5 @@
 import { defineConfig } from 'dumi';
 import type { SiteThemeConfig } from 'dumi-theme-antd-style';
-import fs from 'fs';
 import { footer } from 'ims-template-config';
 import path from 'path';
 import { features } from './config/features';
@@ -15,18 +14,14 @@ const isProd = process.env.NODE_ENV === 'production';
  * `@univerjs/core/facade` 等 exports 子路径失效。
  */
 const resolveUniverCore = () => {
-  const presetsEntry = require.resolve('@univerjs/presets', {
-    paths: [path.join(__dirname, 'packages/ims-view-pc')],
-  });
-  let dir = path.dirname(presetsEntry);
-  for (let i = 0; i < 12; i += 1) {
-    const candidate = path.join(dir, 'node_modules/@univerjs/core');
-    if (fs.existsSync(path.join(candidate, 'package.json'))) {
-      return candidate;
-    }
-    dir = path.dirname(dir);
+  try {
+    const coreEntry = require.resolve('@univerjs/core', {
+      paths: [path.join(__dirname, 'packages/ims-view-pc')],
+    });
+    return path.dirname(path.dirname(coreEntry));
+  } catch {
+    throw new Error('Cannot resolve @univerjs/core');
   }
-  throw new Error('Cannot resolve @univerjs/core (expected 0.25.x via @univerjs/presets)');
 };
 
 const univerCorePath = resolveUniverCore();

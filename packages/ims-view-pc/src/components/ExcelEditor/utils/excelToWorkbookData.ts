@@ -1,4 +1,4 @@
-import type { IWorkbookData } from '@univerjs/presets';
+import type { IWorkbookData } from '@univerjs/core';
 import {
   fileToImportResult,
   importExcelBinary,

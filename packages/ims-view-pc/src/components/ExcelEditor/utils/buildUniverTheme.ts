@@ -1,4 +1,5 @@
-import { greenTheme, type Theme } from '@univerjs/presets';
+import { greenTheme } from '@univerjs/themes';
+import type { Theme } from '@univerjs/themes';
 import type { GlobalToken } from 'antd';
 import type { CSSProperties } from 'react';
 

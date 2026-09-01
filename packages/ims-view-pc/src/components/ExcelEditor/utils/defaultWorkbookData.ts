@@ -1,4 +1,4 @@
-import { LocaleType, type IWorkbookData } from '@univerjs/presets';
+import { LocaleType, type IWorkbookData } from '@univerjs/core';
 
 export const DEFAULT_WORKBOOK_DATA: Partial<IWorkbookData> = {
   id: 'demo-workbook',

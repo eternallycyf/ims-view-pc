@@ -1,4 +1,5 @@
-import type { FUniver, IWorkbookData } from '@univerjs/presets';
+import type { IWorkbookData } from '@univerjs/core';
+import type { FUniver } from '@univerjs/core/lib/facade';
 import {
   DEFAULT_PARSE_BLOCK_ROWS,
   DEFAULT_WORKER_THRESHOLD_BYTES,
@@ -345,7 +346,7 @@ const uploadThenLoadServerResult = async (
 
   return {
     kind: 'snapshot',
-    result: { workbookData, images: [] },
+    result: { workbookData: workbookData as any, images: [] },
     truncated: task.truncated,
   };
 };
@@ -419,7 +420,7 @@ export const applyServerImportPayload = async (
     },
   );
   onProgress?.({ stage: 'render', percent: 100, message: '渲染中...' });
-  await replaceWorkbook({ workbookData, images: [] });
+  await replaceWorkbook({ workbookData: workbookData as any, images: [] });
   return workbookData;
 };
 
@@ -432,7 +433,7 @@ export const exportWorkbook = async (
     throw new Error('导出数据为空');
   }
 
-  const blob = await workbookDataToExcelBlob(data, fileName, {
+  const blob = await workbookDataToExcelBlob(data as any, fileName, {
     worker: 'on',
     createWorker: createLocalExcelExportWorker,
   });

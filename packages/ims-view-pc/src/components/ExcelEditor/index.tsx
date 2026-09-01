@@ -1,12 +1,11 @@
 import {
-  createUniver,
   LocaleType,
   LogLevel,
   mergeLocales,
-  type FUniver,
   type IWorkbookData,
   type Univer,
-} from '@univerjs/presets';
+} from '@univerjs/core';
+import type { FUniver } from '@univerjs/core/lib/facade';
 import { Spin, message, theme as antdTheme } from 'antd';
 import classNames from 'classnames';
 import React, { useEffect, useImperativeHandle, useMemo, useRef, useState } from 'react';
@@ -17,7 +16,7 @@ import type {
   ExcelEditorProps,
   ExcelEditorViewMode,
 } from './interface';
-import { buildUniverPresets } from './utils/buildUniverPresets';
+import { buildUniverPresets, createUniver } from './utils/buildUniverPresets';
 import {
   buildThemeCssVars,
   buildUniverTheme,
@@ -135,11 +134,15 @@ const hideSimpleRibbonTabs = (root: HTMLElement | null) => {
   });
 };
 
+/**
+ * 规范化工作簿数据。参数 / 返回值用 any 桥接 @univerjs/core 与 @ims-view/utils
+ * 两套 IWorkbookData 的细微差异（locale enum / ICellData.v 等）。
+ */
 const normalizeWorkbookData = (data?: Partial<IWorkbookData> | null): Partial<IWorkbookData> => ({
-  ...(data || DEFAULT_WORKBOOK_DATA),
+  ...((data || DEFAULT_WORKBOOK_DATA) as any),
   id: data?.id || `wb-${Date.now()}`,
   appVersion: (data as { appVersion?: string } | null | undefined)?.appVersion || '0.25.1',
-  locale: data?.locale || 'zhCN',
+  locale: (data?.locale || 'zhCN') as LocaleType,
 });
 
 /**
@@ -206,18 +209,18 @@ const resolveImportResult = async (
   src?: string,
 ): Promise<ExcelImportResult> => {
   if (data) {
-    return { workbookData: normalizeWorkbookData(data), images: [] };
+    return { workbookData: normalizeWorkbookData(data) as any, images: [] };
   }
 
   if (src) {
     const result = await loadImportResultFromUrl(src);
     return {
       ...result,
-      workbookData: normalizeWorkbookData(result.workbookData),
+      workbookData: normalizeWorkbookData(result.workbookData as any) as any,
     };
   }
 
-  return { workbookData: normalizeWorkbookData(DEFAULT_WORKBOOK_DATA), images: [] };
+  return { workbookData: normalizeWorkbookData(DEFAULT_WORKBOOK_DATA) as any, images: [] };
 };
 
 const InternalExcelEditor: React.ForwardRefRenderFunction<ExcelEditorHandle, ExcelEditorProps> = (
@@ -298,7 +301,7 @@ const InternalExcelEditor: React.ForwardRefRenderFunction<ExcelEditorHandle, Exc
 
     // 每次导入换新 id，避免旧 unit 冲突；同步改写浮动图 unitId（对齐 Lucky handleImage）
     const workbookData = rebaseWorkbookUnitId(
-      normalizeWorkbookData(importResult?.workbookData),
+      normalizeWorkbookData(importResult?.workbookData as any),
       `wb-${Date.now()}`,
     );
 
@@ -356,7 +359,7 @@ const InternalExcelEditor: React.ForwardRefRenderFunction<ExcelEditorHandle, Exc
             ? '导入成功（服务端解析）'
             : '导入成功（本地）';
       message.success(successText);
-      return workbookData;
+      return workbookData as Partial<IWorkbookData>;
     } catch (error) {
       const err = error instanceof Error ? error : new Error(String(error));
       onErrorRef.current?.(err);
@@ -477,7 +480,7 @@ const InternalExcelEditor: React.ForwardRefRenderFunction<ExcelEditorHandle, Exc
             return;
           }
 
-          const workbookData = normalizeWorkbookData(importResult?.workbookData);
+          const workbookData = normalizeWorkbookData(importResult?.workbookData as any);
           created.univerAPI.createWorkbook(workbookData);
           // src 加载时同步默认导出文件名
           const fromSrc = fileNameFromSrc(src);

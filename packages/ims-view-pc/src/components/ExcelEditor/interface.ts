@@ -1,4 +1,5 @@
-import type { FUniver, IWorkbookData } from '@univerjs/presets';
+import type { IWorkbookData } from '@univerjs/core';
+import type { FUniver } from '@univerjs/core/lib/facade';
 import type { CSSProperties } from 'react';
 
 /** 功能档位：simple 核心+插入+导入导出；all 开启开源能力；custom 按 features 勾选 */

@@ -1,4 +1,5 @@
-import type { FUniver, ICellData, IWorkbookData } from '@univerjs/presets';
+import { LocaleType, type ICellData, type IWorkbookData } from '@univerjs/core';
+import type { FUniver } from '@univerjs/core/lib/facade';
 
 export type ChunkedSheetMeta = {
   id: string;
@@ -78,7 +79,7 @@ export const skeletonWorkbookFromMeta = (meta: ChunkedWorkbookMeta): Partial<IWo
     id: meta.workbookId || `wb-chunked-${Date.now()}`,
     name: meta.name,
     appVersion: meta.appVersion || '0.25.1',
-    locale: meta.locale || 'zhCN',
+    locale: (meta.locale || 'zhCN') as LocaleType,
     sheetOrder: meta.sheetOrder,
     sheets,
     styles: meta.styles,

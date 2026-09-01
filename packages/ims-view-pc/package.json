@@ -41,7 +41,7 @@
     "@univerjs/preset-sheets-sort": "^0.25.1",
     "@univerjs/preset-sheets-table": "^0.25.1",
     "@univerjs/preset-sheets-thread-comment": "^0.25.1",
-    "@univerjs/presets": "^0.25.1",
+    "@univerjs/themes": "0.25.1",
     "@wangeditor/editor": "^5.1.23",
     "@wangeditor/editor-for-react": "^1.0.6",
     "ahooks": "^3.9.6",

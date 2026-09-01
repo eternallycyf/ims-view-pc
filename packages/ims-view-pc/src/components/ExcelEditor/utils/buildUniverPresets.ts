@@ -1,3 +1,5 @@
+import { Univer, LogLevel } from '@univerjs/core';
+import { FUniver } from '@univerjs/core/lib/facade';
 import { UniverSheetsConditionalFormattingPreset } from '@univerjs/preset-sheets-conditional-formatting';
 import UniverPresetSheetsConditionalFormattingZhCN from '@univerjs/preset-sheets-conditional-formatting/lib/locales/zh-CN';
 import { UniverSheetsCorePreset } from '@univerjs/preset-sheets-core';
@@ -166,4 +168,52 @@ export const buildUniverPresets = (options: BuildUniverPresetsOptions): BuiltUni
   }
 
   return { presets, locales, resolvedFeatures: resolved };
+};
+
+/**
+ * 本地复刻 `@univerjs/presets` 的 `createUniver`，避免依赖该商业合规风险包。
+ * 原函数仅做：new Univer → 收集 presets/plugins 去重注册 → FUniver.newAPI 返回 Facade。
+ */
+export type CreateUniverConfig = {
+  presets?: Array<ReturnType<typeof UniverSheetsCorePreset>>;
+  theme?: Record<string, unknown>;
+  locale?: string;
+  locales?: Record<string, object>;
+  logLevel?: number;
+};
+
+export const createUniver = (config: CreateUniverConfig = {}) => {
+  const { presets, theme, locale, locales, logLevel, ...rest } = config as Record<string, unknown>;
+  const override = (rest.override as any) || [];
+
+  const univer = new Univer({
+    logLevel: LogLevel.WARN,
+    ...(theme ? { theme } : {}),
+    ...(locale ? { locale } : {}),
+    ...(locales ? { locales } : {}),
+    override,
+  } as any);
+
+  // 收集所有 preset 内含的 plugin，按 pluginName 去重
+  const pluginMap = new Map<string, { plugin: unknown; options?: unknown }>();
+
+  if (Array.isArray(presets)) {
+    presets.forEach((preset) => {
+      const plugins: unknown[] = (preset as { plugins?: unknown[] })?.plugins || [];
+      plugins.forEach((entry) => {
+        const [plugin, options] = Array.isArray(entry) ? [entry[0], entry[1]] : [entry, undefined];
+        const name = (plugin as { pluginName?: string })?.pluginName;
+        if (name) {
+          pluginMap.set(name, { plugin, options });
+        }
+      });
+    });
+  }
+
+  pluginMap.forEach(({ plugin, options }) => {
+    univer.registerPlugin(plugin as Parameters<typeof univer.registerPlugin>[0], options as Parameters<typeof univer.registerPlugin>[1]);
+  });
+
+  const univerAPI = FUniver.newAPI(univer);
+  return { univer, univerAPI };
 };

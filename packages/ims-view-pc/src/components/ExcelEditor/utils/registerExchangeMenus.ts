@@ -1,5 +1,5 @@
 import { ExportIcon, FolderIcon } from '@univerjs/icons';
-import type { FUniver } from '@univerjs/presets';
+import type { FUniver } from '@univerjs/core/lib/facade';
 import React from 'react';
 
 /** 包一层普通组件，避免 Univer 以单参数调用 forwardRef 图标触发告警 */
