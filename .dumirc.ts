@@ -10,18 +10,23 @@ const basePath = `/${repo}/`;
 const isProd = process.env.NODE_ENV === 'production';
 
 /**
- * 仅精确 alias 主入口，避免把 `@univerjs/core` 指到包根导致
- * `@univerjs/core/facade` 等 exports 子路径失效。
+ * 通过 package.json 定位 @univerjs/core 包根，比 double dirname 更可靠。
+ * 多路径尝试：先从根 node_modules 解析，再从子包解析。
  */
 const resolveUniverCore = () => {
-  try {
-    const coreEntry = require.resolve('@univerjs/core', {
-      paths: [path.join(__dirname, 'packages/ims-view-pc')],
-    });
-    return path.dirname(path.dirname(coreEntry));
-  } catch {
-    throw new Error('Cannot resolve @univerjs/core');
+  const pkgJsonPath = '@univerjs/core/package.json';
+  const searchPaths = [
+    __dirname,
+    path.join(__dirname, 'packages/ims-view-pc'),
+  ];
+  for (const p of searchPaths) {
+    try {
+      const resolved = require.resolve(pkgJsonPath, { paths: [p] });
+      return path.dirname(resolved);
+    } catch { /* try next */ }
   }
+  // 兜底：返回相对路径，依赖 chainWebpack resolve.modules
+  return path.join(__dirname, 'node_modules/@univerjs/core');
 };
 
 const univerCorePath = resolveUniverCore();
@@ -125,5 +130,11 @@ export default defineConfig({
       '@ims-view/univer-import-excel',
       '@progress/jszip-esm',
     ],
+  },
+  chainWebpack(config) {
+    // 兜底：让 webpack 能从子包 node_modules 解析 @univerjs/*
+    config.resolve.modules
+      .add(path.join(__dirname, 'packages/ims-view-pc/node_modules'))
+      .add(path.join(__dirname, 'node_modules'));
   },
 });
