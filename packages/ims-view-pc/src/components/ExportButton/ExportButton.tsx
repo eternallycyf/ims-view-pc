@@ -1,13 +1,10 @@
 import { SyncOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
-import React, { FC, useCallback } from 'react';
-import type { AnyData } from '../CommonTable/interface';
-import { IExportButtonProps } from './interface';
+import React, { useCallback } from 'react';
+import type { IExportButtonProps } from './interface';
 import * as TableHepler from './utils';
 
-const ExportButton = <DataType extends any, Rest extends any>(
-  props: IExportButtonProps<DataType, Rest>,
-) => {
+const ExportButton = <DataType, Params>(props: IExportButtonProps<DataType, Params>) => {
   const {
     params,
     request,
@@ -23,7 +20,7 @@ const ExportButton = <DataType extends any, Rest extends any>(
     setCellStyle,
     setCellFormat,
     sheetName,
-    setSheetStyle = ({ sheetIndex }) => {
+    setSheetStyle = () => {
       return {
         views: [
           {
@@ -39,33 +36,67 @@ const ExportButton = <DataType extends any, Rest extends any>(
     setWorkSheet,
     isMultiple = false,
     multipleConfig = [],
+    buttonProps = {},
   } = props;
 
-  const [loading, setLoading] = React.useState<boolean>(false);
-  const fetchExportData = useCallback(
-    async (params) => {
-      setLoading(true);
-      try {
-        const { data, total, success } = await request(params);
-        setTimeout(function () {
-          handleExport(data);
-        }, 0);
-        return data;
-      } catch (error) {
-        setLoading(false);
-        console.log(error);
-        return [];
-      }
-    },
-    [params, loading],
-  );
+  const { children: buttonLabel, ...restButtonProps } = buttonProps;
 
-  const handleExport = (data: any[]) => {
-    const newData = !request ? dataSource : data;
-    let exportConfig: any = {
-      data: newData,
-      column: columns,
-      sheetName: sheetName || fileName || 'sheet1',
+  const [loading, setLoading] = React.useState<boolean>(false);
+
+  const handleExport = useCallback(
+    async (data: DataType[]) => {
+      const newData = !request ? dataSource : data;
+      let exportConfig: any = {
+        data: newData,
+        column: columns,
+        sheetName: sheetName || fileName || 'sheet1',
+        setImageStyle,
+        setColumnStyle,
+        setRowStyle,
+        setCellStyle,
+        setCellFormat,
+        setSheetStyle,
+        setInsertFooter,
+        setInsertHeader,
+        setWorkSheet,
+      };
+      let otherExportConfig: any = {
+        progress: (percent: number) => {
+          handleProgressOnChange(percent);
+        },
+      };
+      if (renderCell) {
+        exportConfig = {
+          ...exportConfig,
+          spanMethod: renderCell,
+        };
+      }
+      if (treeConfig?.treeNode) {
+        exportConfig = {
+          ...exportConfig,
+          ...treeConfig,
+        };
+        otherExportConfig = {
+          ...otherExportConfig,
+          indentSize: treeConfig?.indentSize || 1,
+        };
+      }
+      if (isMultiple) {
+        exportConfig = multipleConfig.map((item) => ({
+          ...item,
+          column: item.column ?? item.columns,
+        }));
+      }
+
+      const instance = new TableHepler.ElMapExportTable(exportConfig, otherExportConfig);
+      await instance.download(fileName || 'excel');
+    },
+    [
+      request,
+      dataSource,
+      columns,
+      sheetName,
+      fileName,
       setImageStyle,
       setColumnStyle,
       setRowStyle,
@@ -75,43 +106,41 @@ const ExportButton = <DataType extends any, Rest extends any>(
       setInsertFooter,
       setInsertHeader,
       setWorkSheet,
-    };
-    let otherExportConfig: any = {
-      progress: (percent: number) => {
-        if (percent === 100) {
-          setLoading(false);
-        }
-        handleProgressOnChange(percent);
-      },
-    };
-    if (renderCell) exportConfig.spanMethod = renderCell;
-    if (treeConfig?.treeNode) {
-      exportConfig = {
-        ...exportConfig,
-        ...treeConfig,
-      };
+      renderCell,
+      treeConfig,
+      isMultiple,
+      multipleConfig,
+      handleProgressOnChange,
+    ],
+  );
 
-      otherExportConfig = {
-        ...otherExportConfig,
-        indentSize: treeConfig?.indentSize || 1,
-      };
-    }
-    if (isMultiple) {
-      exportConfig = [...multipleConfig];
-    }
-
-    const instance = new TableHepler.ElMapExportTable(exportConfig, otherExportConfig);
-    instance.download(fileName || 'excel');
-  };
+  const fetchExportData = useCallback(
+    async (requestParams: Params | undefined) => {
+      if (!request || loading) return;
+      setLoading(true);
+      try {
+        const { data = [] } = await request(requestParams as Params);
+        await handleExport(data as DataType[]);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
+    },
+    [request, handleExport, loading],
+  );
 
   return (
     <Button
-      icon={loading && <SyncOutlined spin />}
-      onClick={() => fetchExportData(params)}
-      type="default"
-      size="small"
+      type="primary"
+      {...restButtonProps}
+      loading={loading || Boolean(restButtonProps.loading)}
+      icon={loading ? <SyncOutlined spin /> : restButtonProps.icon}
+      onClick={() => {
+        void fetchExportData(params);
+      }}
     >
-      导出
+      {buttonLabel ?? '导出'}
     </Button>
   );
 };

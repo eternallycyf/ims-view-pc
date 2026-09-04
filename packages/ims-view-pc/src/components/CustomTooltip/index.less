@@ -39,14 +39,17 @@
 
 .expand-btn {
   display: inline-block;
-  padding: 4px;
-  background: #ebf2ff;
-  color: var(--ant-color-primary, var(--colorPrimary));
+  padding: 1px 8px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--di-color-primary, var(--ant-color-primary, #1677ff)) 12%, transparent);
+  color: var(--di-color-primary, var(--ant-color-primary, var(--colorPrimary)));
   text-align: center;
   font-size: 12px;
+  line-height: 18px;
 
   &:hover {
-    color: var(--ant-color-primary, var(--colorPrimary)) !important;
+    background: color-mix(in srgb, var(--di-color-primary, var(--ant-color-primary, #1677ff)) 18%, transparent);
+    color: var(--di-color-primary, var(--ant-color-primary, var(--colorPrimary-hover))) !important;
   }
 }
 

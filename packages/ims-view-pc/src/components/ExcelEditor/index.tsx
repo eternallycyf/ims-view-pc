@@ -95,6 +95,11 @@ const applyViewMode = async (univerAPI: FUniver, viewMode: ExcelEditorViewMode) 
       const sheetPermission = sheet?.getWorksheetPermission?.();
       if (!sheetPermission) continue;
 
+      // Univer 设置 worksheet 权限点前要求先开启 worksheet protection
+      if (typeof sheetPermission.protect === 'function') {
+        await sheetPermission.protect();
+      }
+
       // 官方 worksheet 只读
       if (typeof sheetPermission.setReadOnly === 'function') {
         await sheetPermission.setReadOnly();
@@ -139,10 +144,10 @@ const hideSimpleRibbonTabs = (root: HTMLElement | null) => {
  * 两套 IWorkbookData 的细微差异（locale enum / ICellData.v 等）。
  */
 const normalizeWorkbookData = (data?: Partial<IWorkbookData> | null): Partial<IWorkbookData> => ({
-  ...((data || DEFAULT_WORKBOOK_DATA) as any),
+  ...(data || DEFAULT_WORKBOOK_DATA),
   id: data?.id || `wb-${Date.now()}`,
   appVersion: (data as { appVersion?: string } | null | undefined)?.appVersion || '0.25.1',
-  locale: (data?.locale || 'zhCN') as LocaleType,
+  locale: (data?.locale || 'zhCN') as IWorkbookData['locale'],
 });
 
 /**
@@ -204,16 +209,35 @@ const fileNameFromSrc = (src?: string) => {
   }
 };
 
+/**
+ * 跨域 src 走 exchangeEndpoint 的 /excel/fetch-url 代理，避免浏览器 CORS 拦截。
+ * 同源或非 http(s) 协议时直接返回原始 src。
+ */
+const resolveLoadableSrc = (src: string, exchangeEndpoint?: string) => {
+  const endpoint = exchangeEndpoint?.trim();
+  if (!endpoint || typeof window === 'undefined') return src;
+  let absolute: URL;
+  try {
+    absolute = new URL(src, window.location.href);
+  } catch {
+    return src;
+  }
+  if (absolute.origin === window.location.origin) return src;
+  if (absolute.protocol !== 'http:' && absolute.protocol !== 'https:') return src;
+  return `${endpoint.replace(/\/$/, '')}/excel/fetch-url?url=${encodeURIComponent(absolute.toString())}`;
+};
+
 const resolveImportResult = async (
   data?: Partial<IWorkbookData>,
   src?: string,
+  exchangeEndpoint?: string,
 ): Promise<ExcelImportResult> => {
   if (data) {
     return { workbookData: normalizeWorkbookData(data) as any, images: [] };
   }
 
   if (src) {
-    const result = await loadImportResultFromUrl(src);
+    const result = await loadImportResultFromUrl(resolveLoadableSrc(src, exchangeEndpoint));
     return {
       ...result,
       workbookData: normalizeWorkbookData(result.workbookData as any) as any,
@@ -279,7 +303,7 @@ const InternalExcelEditor: React.ForwardRefRenderFunction<ExcelEditorHandle, Exc
   const onReadyRef = useRef(onReady);
   const onErrorRef = useRef(onError);
   const exchangeEndpointRef = useRef(exchangeEndpoint);
-  const importXlsxRef = useRef<(file: File) => Promise<Partial<IWorkbookData>>>(async () => ({}));
+  const importXlsxRef = useRef<(file: File) => Promise<Partial<IWorkbookData> | undefined>>(async () => ({}));
   const exportXlsxRef = useRef<(fileName?: string) => Promise<void>>(async () => undefined);
   /** 默认导出文件名：与最近一次上传 / src 加载的文件名保持一致 */
   const fileNameRef = useRef(
@@ -417,20 +441,24 @@ const InternalExcelEditor: React.ForwardRefRenderFunction<ExcelEditorHandle, Exc
       return undefined;
     }
 
-    let univer: { dispose?: () => void } | null = null;
-    let univerAPI: FUniver | null = null;
+    // StrictMode 安全：用独立 mountEl 挂载 Univer，避免 React 18 双挂载导致 DOM 残留
+    const mountEl = document.createElement('div');
+    mountEl.style.width = '100%';
+    mountEl.style.height = '100%';
+    container.appendChild(mountEl);
+
+    let instance: { dispose?: () => void } | null = null;
     let lifecycleDisposable: { dispose?: () => void } | null = null;
 
     try {
       const isPreview = viewMode === 'preview';
       const { presets, locales } = buildUniverPresets({
-        container,
+        container: mountEl,
         viewMode,
         mode: mode as ExcelEditorFeatureMode,
         features,
       });
 
-      // Preset 模式：createUniver 返回 { univer, univerAPI }，卸载时必须 dispose univer 本体
       const created = createUniver({
         theme: univerTheme,
         locale: LocaleType.ZH_CN,
@@ -440,8 +468,7 @@ const InternalExcelEditor: React.ForwardRefRenderFunction<ExcelEditorHandle, Exc
         },
         presets,
       });
-      univer = created.univer;
-      univerAPI = created.univerAPI;
+      instance = created.univer;
 
       univerRef.current = created.univer;
       univerAPIRef.current = created.univerAPI;
@@ -461,7 +488,7 @@ const InternalExcelEditor: React.ForwardRefRenderFunction<ExcelEditorHandle, Exc
         lifecycleDisposable = created.univerAPI.addEvent(lifeCycleEvent, ({ stage }: { stage: unknown }) => {
           if (renderedStage != null && stage === renderedStage) {
             if (mode === 'simple') {
-              hideSimpleRibbonTabs(container);
+              hideSimpleRibbonTabs(mountEl);
             }
             applyViewMode(created.univerAPI, viewMode).catch((error) => {
               onErrorRef.current?.(error instanceof Error ? error : new Error(String(error)));
@@ -473,8 +500,12 @@ const InternalExcelEditor: React.ForwardRefRenderFunction<ExcelEditorHandle, Exc
       const initWorkbook = async () => {
         setLoading(true);
 
+        if (src) {
+          message.loading({ content: '正在加载远程 Excel...', key: 'excel-src-load', duration: 0 });
+        }
+
         try {
-          const importResult = await resolveImportResult(data, src);
+          const importResult = await resolveImportResult(data, src, exchangeEndpointRef.current);
 
           if (disposed) {
             return;
@@ -491,8 +522,20 @@ const InternalExcelEditor: React.ForwardRefRenderFunction<ExcelEditorHandle, Exc
           }
           await applyViewMode(created.univerAPI, viewMode);
           onReadyRef.current?.(created.univerAPI);
+          message.destroy('excel-src-load');
         } catch (error) {
-          onErrorRef.current?.(error instanceof Error ? error : new Error(String(error)));
+          message.destroy('excel-src-load');
+          const err = error instanceof Error ? error : new Error(String(error));
+          onErrorRef.current?.(err);
+          message.error(err.message || '加载失败');
+          // 加载失败时创建空白工作簿，避免白屏
+          if (!disposed) {
+            try {
+              created.univerAPI.createWorkbook(normalizeWorkbookData(DEFAULT_WORKBOOK_DATA));
+            } catch {
+              // ignore fallback failure
+            }
+          }
         } finally {
           if (!disposed) {
             setLoading(false);
@@ -513,14 +556,20 @@ const InternalExcelEditor: React.ForwardRefRenderFunction<ExcelEditorHandle, Exc
       } catch {
         // ignore
       }
-      try {
-        // 按 univer-integrate React 规范销毁 Univer 实例
-        univer?.dispose?.();
-      } catch {
-        // ignore
+      // StrictMode 安全：先移除 DOM，再延迟 dispose，避免 React 双挂载竞态
+      mountEl.remove();
+      setTimeout(() => {
+        try {
+          instance?.dispose?.();
+        } catch {
+          // ignore
+        }
+      }, 0);
+      // 仅当 ref 仍指向当前实例时才清空，避免误清 StrictMode 第二次挂载的实例
+      if (univerRef.current === instance) {
+        univerRef.current = null;
+        univerAPIRef.current = null;
       }
-      univerRef.current = null;
-      univerAPIRef.current = null;
     };
     // featuresKey 代替 features 对象引用，避免无意义重建
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -556,7 +605,7 @@ const InternalExcelEditor: React.ForwardRefRenderFunction<ExcelEditorHandle, Exc
       <div ref={containerRef} className={`${prefixCls}-container`} />
       {loading || exchanging ? (
         <div className={`${prefixCls}-loading`}>
-          <Spin size="large" description={exchanging ? exchangeTip : '加载中...'}>
+          <Spin size="large" tip={exchanging ? exchangeTip : '加载中...'}>
             <div style={{ width: 120, height: 64 }} />
           </Spin>
         </div>

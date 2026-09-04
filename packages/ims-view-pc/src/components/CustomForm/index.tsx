@@ -64,6 +64,8 @@ export interface BaseCustomFormProps<Values = AnyObject, Rest = AnyObject> {
   okButtonProps?: ModalProps['okButtonProps'];
   cancelButtonProps?: ModalProps['cancelButtonProps'];
   open?: boolean;
+  scrollX?: boolean;
+  scrollXMaxWidth?: number;
   footer?: ReactNode | ((cancelBtn: ReactNode, confirmBtn: ReactNode) => ReactNode);
   showTipMessageIcon?: boolean
   tipMessage?: ReactNode;

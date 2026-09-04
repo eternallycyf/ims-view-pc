@@ -3,6 +3,7 @@ import { Spin } from 'antd';
 import { Suspense, type ReactNode } from 'react';
 import { type Column, type FormControlType, type Search } from '../../type';
 import CustomForm from '../CustomForm';
+import { CUSTOM_SEARCH_FORM_ITEM_KEY } from './constants';
 
 export interface GetColumnSearchConfig {
   filterIcon: ReactNode | ((filtered: boolean) => ReactNode);
@@ -44,11 +45,14 @@ export const getColumnSearchItem = <
 >(
   config: Search<Values, Rest>,
   value?: any,
-): Pick<Column, 'filterDropdown' | 'filterIcon' | 'filteredValue'> => {
+): Pick<Column, 'filterDropdown' | 'filterIcon' | 'filteredValue'> & {
+  [CUSTOM_SEARCH_FORM_ITEM_KEY]?: Search<Values, Rest>;
+} => {
   const visible = config?.visible ?? true;
-  if (!visible) return {};
+  if (!visible) return { filteredValue: null } as any;
 
   return {
+    [CUSTOM_SEARCH_FORM_ITEM_KEY]: config,
     filterDropdown: () => {
       return (
         <>
@@ -57,11 +61,23 @@ export const getColumnSearchItem = <
               {CustomForm.renderFormItem({
                 ...config,
                 form: true as any,
+                label: undefined,
                 itemProps: {
                   ...config?.itemProps,
+                  label: undefined,
                   style: {
                     marginBottom: 0,
                     ...config?.itemProps?.style,
+                  },
+                },
+                controlProps: {
+                  ...config?.controlProps,
+                  popupMatchSelectWidth: config?.controlProps?.popupMatchSelectWidth ?? true,
+                  style: {
+                    ...config?.controlProps?.style,
+                    width: '100%',
+                    minWidth: 0,
+                    maxWidth: '100%',
                   },
                 },
               })}

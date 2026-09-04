@@ -1,11 +1,18 @@
-import { TooltipProps } from 'antd';
+import type { CSSProperties, ReactNode } from 'react'
+import type { TooltipProps } from 'antd'
 
-export interface ISectionTitle {
-  title?: React.ReactNode;
-  extraContent?: React.ReactNode;
-  rowStyle?: React.CSSProperties;
-  titleStyle?: React.CSSProperties;
-  tooltip?: React.ReactNode;
-  tooltipProps?: TooltipProps;
-  children?: React.ReactNode;
+export interface SectionTitleProps {
+  title?: ReactNode
+  /** 问号图标附加属性 */
+  iconProps?: React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>
+  extraContent?: ReactNode
+  className?: string
+  titleClassName?: string
+  rowStyle?: CSSProperties
+  titleStyle?: CSSProperties
+  tooltip?: ReactNode
+  tooltipProps?: TooltipProps
+  /** 是否展示标题前的主题色竖条，默认开启 */
+  showPrefixBar?: boolean
+  children?: ReactNode
 }

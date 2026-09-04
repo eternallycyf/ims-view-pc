@@ -40,6 +40,13 @@ export interface IBaseFormControl<Values = AnyObject, Rest = AnyObject, Extra = 
   itemProps?: ItemProps<Values, Rest, Extra>;
   visible?: boolean
 
+  /** 映射到筛选标签的字段名 */
+  tagName?: NameKey<Values>;
+  /** 自定义筛选标签值展示 */
+  tagValueRender?: (value: unknown, values: Record<string, unknown>) => string;
+  /** 是否展示该字段的筛选标签 */
+  showFilterTag?: boolean;
+
   Component?: (
     props: IBaseCustomFormItemProps & {
       controlProps: IControlProps & {

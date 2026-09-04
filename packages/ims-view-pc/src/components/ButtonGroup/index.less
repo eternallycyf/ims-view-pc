@@ -1,0 +1,41 @@
+.ims-btnGroup {
+  border: 1px solid var(--ant-color-border, var(--colorBorder));
+  border-radius: 2px;
+
+  .ant-btn {
+    margin: 0 !important;
+    border-color: var(--ant-color-border, var(--colorBorder)) !important;
+    border-top: none;
+    border-right: none;
+    border-bottom: none;
+    border-radius: 0;
+
+    &:hover {
+      color: var(--ant-color-primary, var(--colorPrimary)) !important;
+      background: var(--ant-color-primary-bg, #e0ecff) !important;
+    }
+
+    &:active {
+      color: var(--ant-color-primary, var(--colorPrimary)) !important;
+      background: var(--ant-color-primary-bg, #e0ecff) !important;
+    }
+
+    &:focus {
+      color: var(--ant-color-primary, var(--colorPrimary)) !important;
+      background: var(--ant-color-primary-bg, #e0ecff) !important;
+    }
+
+    &:first-child {
+      border-left: none;
+    }
+  }
+
+  .ant-btn:not(:first-child) {
+    border-left: 1px solid var(--ant-color-border, var(--colorBorder));
+  }
+
+  .ant-btn-primary {
+    background: var(--ant-color-primary-bg, #e0ecff) !important;
+    color: var(--ant-color-primary, var(--colorPrimary)) !important;
+  }
+}

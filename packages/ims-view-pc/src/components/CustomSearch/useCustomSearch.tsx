@@ -1,7 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Form } from 'antd';
+import { useSize } from 'ahooks';
 import type { ValueOf } from 'ims-view-pc';
 import { useEffect, useMemo, useRef, useState } from 'react';
+import { getOccupiedHeightWithMargin } from './constants';
 import type { UseCustomSearchProps } from './interface';
 
 const useCustomSearch = <T,>(props: UseCustomSearchProps<T>) => {
@@ -12,6 +14,9 @@ const useCustomSearch = <T,>(props: UseCustomSearchProps<T>) => {
     className,
     TableHeightDept = [],
     enabledColumnsSearch = false,
+    enabledFilterTags = true,
+    filterTagBarRender,
+    showFilterTagDivider = false,
   } = props;
 
   const [searchForm] = Form.useForm<T>();
@@ -24,6 +29,9 @@ const useCustomSearch = <T,>(props: UseCustomSearchProps<T>) => {
   });
 
   const [stableSearchHeight, setStableSearchHeight] = useState(0);
+  const filterTagContainerRef = useRef<HTMLDivElement>(null);
+  const filterTagSize = useSize(filterTagContainerRef);
+  const filterTagHeight = getOccupiedHeightWithMargin(filterTagContainerRef.current, filterTagSize?.height ?? 0);
   const searchElementRef = useRef<Element | null>(null);
   const lastWindowWidthRef = useRef(window.innerWidth);
 
@@ -69,13 +77,13 @@ const useCustomSearch = <T,>(props: UseCustomSearchProps<T>) => {
   const TableHeight = useMemo(() => {
     const bodyHeight = windowHeight;
     if (bodyHeight === 0) return 'auto';
-    const resultHeight = bodyHeight - 5 - defaultWrapperHeight - stableSearchHeight;
+    const resultHeight = bodyHeight - 5 - defaultWrapperHeight - stableSearchHeight - filterTagHeight;
     if (setTableHeight) {
       return setTableHeight(resultHeight, stableSearchHeight, bodyHeight - defaultWrapperHeight);
     }
     return resultHeight;
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [windowHeight, stableSearchHeight, setTableHeight, defaultWrapperHeight, ...TableHeightDept]);
+  }, [windowHeight, stableSearchHeight, filterTagHeight, setTableHeight, defaultWrapperHeight, ...TableHeightDept]);
 
   /* eslint-disable react-hooks/exhaustive-deps */
   const initValues = useMemo(() => {
@@ -156,6 +164,11 @@ const useCustomSearch = <T,>(props: UseCustomSearchProps<T>) => {
         className: `${className} ${!enabledColumnsSearch && 'gap-[8px]'}`,
       },
       enabledColumnsSearch,
+      enabledFilterTags,
+      filterTagBarRender,
+      showFilterTagDivider,
+      filterTagContainerRef,
+      resetFilterTags: resetFormValues,
     },
   };
 };

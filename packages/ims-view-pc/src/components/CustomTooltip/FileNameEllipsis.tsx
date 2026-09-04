@@ -1,4 +1,4 @@
-import { Tooltip } from 'antd';
+import { Tooltip, Typography } from 'antd';
 import { useEffect, useRef, useState } from 'react';
 
 interface FileNameEllipsisProps {
@@ -14,9 +14,16 @@ interface FileNameEllipsisProps {
    * 自定义样式
    */
   style?: React.CSSProperties;
+  /** 溢出 tooltip 内展示 antd copy 按钮，默认关闭 */
+  showCopyButton?: boolean;
 }
 
-const FileNameEllipsis = ({ fileName, className = '', style = {} }: FileNameEllipsisProps) => {
+/**
+ * 文件名自动省略组件
+ * 根据外层容器宽度自动截断文件名，同时保留文件扩展名
+ * 例如: "中建科技集团有限公司企业品牌（CI）建设....pdf"
+ */
+const FileNameEllipsis = ({ fileName, className = '', style = {}, showCopyButton = false }: FileNameEllipsisProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [displayText, setDisplayText] = useState(fileName);
   const [isOverflow, setIsOverflow] = useState(false);
@@ -119,18 +126,27 @@ const FileNameEllipsis = ({ fileName, className = '', style = {} }: FileNameElli
     };
   }, [fileName]);
 
+  const tooltipTitle =
+    isOverflow && showCopyButton ? (
+      <span
+        style={{ display: 'inline-flex', maxWidth: 520, alignItems: 'center', gap: 8 }}
+        onMouseDown={(event) => event.stopPropagation()}
+        onClick={(event) => event.stopPropagation()}
+      >
+        <Typography.Text style={{ color: '#fff' }} copyable={{ text: fileName }}>
+          {fileName}
+        </Typography.Text>
+      </span>
+    ) : isOverflow ? (
+      fileName
+    ) : undefined;
+
   return (
-    <Tooltip title={isOverflow ? fileName : undefined}>
+    <Tooltip title={tooltipTitle}>
       <div
         ref={containerRef}
-        className={` ${className}`}
-        style={{
-          width: '100%',
-          display: 'block',
-          overflow: 'hidden',
-          whiteSpace: 'nowrap',
-          ...style,
-        }}
+        className={className}
+        style={{ display: 'block', overflow: 'hidden', whiteSpace: 'nowrap', width: '100%', ...style }}
       >
         {displayText}
       </div>

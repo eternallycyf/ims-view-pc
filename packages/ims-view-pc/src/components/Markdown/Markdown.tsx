@@ -6,7 +6,8 @@ import { Image as AntdImage, Skeleton, Tooltip } from 'antd'
 import React, { memo, useEffect, useMemo, useState } from 'react'
 import './index.less'
 import '@ant-design/x-markdown/themes/light.css'
-import { variables } from '../../styles/variables'
+import { variables } from 'ims-view-pc'
+import { normalizeMarkdownLinkDestinations } from './normalizeMarkdownLinkDestinations'
 
 /**
  * 超过该长度时默认 defer 到空闲帧一次性解析，避免主线程长时间阻塞。
@@ -360,9 +361,11 @@ function useMarkdownRender(full: string, renderMode: MarkdownRenderMode = 'auto'
 
 export const Markdown = memo(function Markdown(props: MarkdownProps) {
   const { content, components, renderMode = 'auto' } = props
-  const normalizedContent = useMemo(() => String(content ?? '').replace(/\r\n/g, '\n'), [content])
+  const normalizedContent = useMemo(
+    () => normalizeMarkdownLinkDestinations(String(content ?? '').replace(/\r\n/g, '\n')),
+    [content],
+  )
   const { display, streaming, pending } = useMarkdownRender(normalizedContent, renderMode)
-  const token = variables
 
   const mergedComponents = useMemo(
     () => ({
@@ -375,20 +378,20 @@ export const Markdown = memo(function Markdown(props: MarkdownProps) {
   const customVars = useMemo(
     () =>
       ({
-        '--primary-color': token?.colorPrimary,
-        '--primary-color-hover': token?.colorPrimaryHover,
-        '--border-color': token?.colorBorderSecondary,
+        '--primary-color': variables?.colorPrimary,
+        '--primary-color-hover': variables?.colorPrimaryHover,
+        '--border-color': variables?.colorBorderSecondary,
       }) as React.CSSProperties,
-    [token?.colorBorderSecondary, token?.colorPrimary, token?.colorPrimaryHover],
+    [],
   )
 
   return (
-    <div className="reference-markdown markdown-body h-full w-full">
+    <div className="reference-markdown markdown-body" style={{ height: '100%', width: '100%' }}>
       {pending ? <Skeleton active paragraph={{ rows: 10 }} className="reference-markdown-pending" /> : null}
       {!pending ? (
         <XMarkdown
-          style={customVars}
-          className="x-markdown-light x-markdown-custom h-full w-full"
+          style={{ ...customVars, height: '100%', width: '100%' }}
+          className="x-markdown-light x-markdown-custom"
           content={display}
           components={mergedComponents}
           streaming={streaming}

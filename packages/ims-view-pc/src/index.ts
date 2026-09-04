@@ -2,6 +2,8 @@ export { default as AccessBtn } from './components/AccessBtn';
 export * from './components/AccessBtn/interface';
 export { default as AudioPlayer } from './components/AudioPlayer';
 export * from './components/AudioPlayer/interface';
+export { default as ButtonGroup } from './components/ButtonGroup';
+export type { ButtonGroupProps } from './components/ButtonGroup';
 export { default as CheckModal } from './components/CheckModal';
 export * from './components/CheckModal/interface';
 export { default as Clipboard } from './components/Clipboard';

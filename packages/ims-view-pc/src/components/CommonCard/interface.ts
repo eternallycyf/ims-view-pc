@@ -1,6 +1,6 @@
 import { useFetchProps, useFetchState } from '@ims-view/hooks';
 import { TabsProps } from 'antd';
-import { AnyData, ISectionTitle } from 'ims-view-pc';
+import { AnyData, SectionTitleProps } from 'ims-view-pc';
 import { PropsWithChildren } from 'react';
 export * from './CardList/interface';
 
@@ -34,7 +34,7 @@ export interface IPageProps {
   style?: React.CSSProperties;
   children?: React.ReactNode;
   title?: React.ReactNode;
-  sectionTitleProps?: ISectionTitle;
+  sectionTitleProps?: SectionTitleProps;
 }
 
 /**

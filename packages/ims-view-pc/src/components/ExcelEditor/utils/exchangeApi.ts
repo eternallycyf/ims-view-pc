@@ -97,11 +97,37 @@ const sleep = (ms: number) =>
 
 const yieldToUI = () => sleep(0);
 
-const absUrl = (endpoint: string, pathOrUrl?: string) => {
+/**
+ * 用当前 exchangeEndpoint 同源拼请求地址。
+ * 反代 / Docker 映射端口时，服务端按 Host 拼的绝对 URL 常丢端口，不可信；
+ * 与 upload（`${endpoint}/excel/upload`）保持同一套规范。
+ */
+const resolveExchangeUrl = (endpoint: string, pathOrUrl?: string) => {
   if (!pathOrUrl) return '';
-  if (/^https?:\/\//i.test(pathOrUrl)) return pathOrUrl;
-  const path = pathOrUrl.startsWith('/') ? pathOrUrl : `/${pathOrUrl}`;
-  return `${trimSlash(endpoint)}${path}`;
+  let pathname = pathOrUrl;
+  if (/^https?:\/\//i.test(pathOrUrl)) {
+    try {
+      pathname = new URL(pathOrUrl).pathname;
+    } catch {
+      return pathOrUrl;
+    }
+  }
+  if (!pathname.startsWith('/')) {
+    pathname = `/${pathname}`;
+  }
+  const base = trimSlash(endpoint);
+  let origin = '';
+  try {
+    origin = new URL(base, typeof window !== 'undefined' ? window.location.href : 'http://localhost').origin;
+  } catch {
+    origin = typeof window !== 'undefined' ? window.location.origin : '';
+  }
+  // /excel/... 相对 API 根（endpoint 已含 /api）
+  if (pathname.startsWith('/excel/')) {
+    return `${base}${pathname}`;
+  }
+  // 站点根路径（/api/... 或 {BASE_URL}/api/...）挂 origin，保留 Docker 对外端口
+  return `${origin}${pathname}`;
 };
 
 /** 兼容 ResponseEntity：{ code, data, msg }；也兼容旧版裸 JSON */
@@ -245,9 +271,8 @@ const uploadThenLoadServerResult = async (
   onProgress?.({ stage: 'parse', percent: 0, message: '服务端解析中...' });
   await yieldToUI();
 
-  const taskUrl =
-    uploaded.taskUrl ||
-    `${trimSlash(endpoint)}${uploaded.taskPath || `/excel/task/${uploaded.id}`}`;
+  // 与 upload 同源：优先 taskPath + endpoint，不信任服务端绝对 taskUrl（反代易丢端口）
+  const taskUrl = resolveExchangeUrl(endpoint, uploaded.taskPath || `/excel/task/${uploaded.id}`);
 
   const deadline = Date.now() + SERVER_PARSE_POLL_TIMEOUT_MS;
   let task: TaskResponse | null = null;
@@ -289,7 +314,7 @@ const uploadThenLoadServerResult = async (
 
   // chunked 模式
   if (task.mode === 'chunked' || task.metaUrl || task.metaPath) {
-    const metaUrl = absUrl(endpoint, task.metaUrl || task.metaPath);
+    const metaUrl = resolveExchangeUrl(endpoint, task.metaPath || task.metaUrl);
     if (!metaUrl) {
       throw new Error('服务端分块解析完成但未返回 meta 地址');
     }
@@ -326,7 +351,7 @@ const uploadThenLoadServerResult = async (
   }
 
   // snapshot 模式
-  const snapshotUrl = absUrl(endpoint, task.snapshotUrl || task.snapshotPath);
+  const snapshotUrl = resolveExchangeUrl(endpoint, task.snapshotPath || task.snapshotUrl);
   if (!snapshotUrl) {
     throw new Error('服务端解析完成但未返回 snapshot 地址');
   }

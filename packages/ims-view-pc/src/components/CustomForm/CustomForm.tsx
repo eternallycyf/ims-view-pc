@@ -1,8 +1,9 @@
 import { ExclamationCircleFilled } from '@ant-design/icons';
 import type { DrawerProps, ModalProps } from 'antd';
 import { Alert, Button, Col, Drawer, Form, Modal, Row, Space, Spin } from 'antd';
-import { renderFormItem, variables } from 'ims-view-pc';
-import React, { Suspense, useImperativeHandle, useMemo, useState, type ReactNode } from 'react';
+import classnames from 'classnames';
+import { renderFormItem, ScrollHorizontalCard, variables } from 'ims-view-pc';
+import React, { Fragment, Suspense, useImperativeHandle, useMemo, useState, type ReactNode } from 'react';
 import { ModalTypeEnum } from './';
 import './index.less';
 import type { CustomFormHandle, CustomFormList, CustomFormProps } from './interface';
@@ -14,6 +15,7 @@ export const renderFormList = <Values, Rest, Type>(
   return (
     <>
       {(formList || []).map((item, index) => {
+        const itemKey = item?.name != null && String(item.name) !== '' ? String(item.name) : `form-item-${index}`;
         const getContent = (item: any) => {
           if (!item?.children) {
             return (
@@ -30,7 +32,6 @@ export const renderFormList = <Values, Rest, Type>(
           }
           return (
             <Form.Item
-              key={index}
               labelAlign="left"
               noStyle
               shouldUpdate={item?.itemProps?.shouldUpdate || (() => true)}
@@ -45,11 +46,18 @@ export const renderFormList = <Values, Rest, Type>(
                       {...item?.itemProps}
                     >
                       <Row style={{ width: '100%' }}>
-                        {children?.map((ele: any, ind) => (
-                          <Col key={ind} style={ele?.itemProps?.style}>
-                            {getContent(ele)}
-                          </Col>
-                        ))}
+                        {children?.map((ele: any, ind) => {
+                          const childKey =
+                            ele?.name != null && String(ele.name) !== '' ? String(ele.name) : `form-child-${ind}`;
+                          if (!hasCol) {
+                            return <Fragment key={childKey}>{getContent(ele)}</Fragment>;
+                          }
+                          return (
+                            <Col key={childKey} style={ele?.itemProps?.style}>
+                              {getContent(ele)}
+                            </Col>
+                          );
+                        })}
                       </Row>
                     </Form.Item>
                   );
@@ -72,11 +80,13 @@ export const renderFormList = <Values, Rest, Type>(
             </Form.Item>
           );
         };
-        if (item?.type === 'update') return getContent(item);
-        if (!hasCol) return getContent(item);
+        const content = getContent(item);
+        if (item?.type === 'update' || !hasCol) {
+          return <Fragment key={itemKey}>{content}</Fragment>;
+        }
         return (
-          <Col span={item?.col ?? 0} key={index} className={`ant-form-item-${item?.type ?? ''}`}>
-            {getContent(item)}
+          <Col span={item?.col ?? 0} key={itemKey} className={`ant-form-item-${item?.type ?? ''}`}>
+            {content}
           </Col>
         );
       })}
@@ -108,10 +118,17 @@ function CustomForm<
     footer,
     rowProps,
     bodyScrollHeight = 500,
+    scrollX = false,
+    scrollXMaxWidth = 600,
     tipMessage,
     showTipMessageIcon = true,
+    destroyOnClose,
+    destroyOnHidden,
     ...rest
-  } = props;
+  } = props as CustomFormProps<Values, Rest, Type> & {
+    destroyOnClose?: boolean;
+    destroyOnHidden?: boolean;
+  };
   const [_loading, setLoading] = useState<boolean>(false);
   const isInLine = formProps?.layout === 'inline';
   const loading = _loading || globalLoading;
@@ -136,14 +153,15 @@ function CustomForm<
   };
 
   const modalRender: ModalProps['modalRender'] = (node) => {
-    const formInstanceProps = { form };
+    const formInstanceProps = { form: form || formProps?.form };
     return (
       <Form<Values>
         initialValues={initialValues!}
         onFinish={handleOnFinish}
         {...formProps}
         {...formInstanceProps}
-        className={`h-full w-full ${formProps?.className}`}
+        className={formProps?.className}
+        style={{ height: '100%', width: '100%', ...formProps?.style }}
       >
         <Suspense fallback={<Spin />}>{node}</Suspense>
       </Form>
@@ -151,6 +169,28 @@ function CustomForm<
   };
 
   const content = useMemo(() => {
+    if (isInLine) {
+      if (scrollX) {
+        return (
+          <div className="custom-form-scroll-x-wrapper" style={{ maxWidth: scrollXMaxWidth, overflowX: 'auto' }}>
+            <ScrollHorizontalCard<any>
+              itemWrapperStyle={{ minWidth: 'auto' }}
+              items={formList.map((ele) => ({ ...ele, key: ele?.name }))}
+              renderItem={(item) =>
+                renderFormList(
+                  [item].filter((ele) => ele?.visible ?? true),
+                  !isInLine,
+                )
+              }
+            />
+          </div>
+        );
+      }
+      return renderFormList(
+        formList.filter((ele) => ele?.visible ?? true),
+        !isInLine,
+      );
+    }
     return (
       <Row gutter={16} {...rowProps}>
         {renderFormList(
@@ -159,7 +199,7 @@ function CustomForm<
         )}
       </Row>
     );
-  }, [formList, isInLine, rowProps]);
+  }, [formList, isInLine, rowProps, scrollX, scrollXMaxWidth]);
 
   let WrapperProps: WrapperPropsType = {
     modalRender,
@@ -180,7 +220,7 @@ function CustomForm<
       ...rest?.cancelButtonProps,
       onClick: rest?.cancelButtonProps?.onClick || (() => onCancel && onCancel(getFormValues())),
     },
-    rootClassName: `CustomForm CustomModalDefaultScroll  ${rest?.className}`,
+    rootClassName: classnames('CustomForm', 'CustomModalDefaultScroll', rest?.className),
   };
 
   const renderSummiter = (
@@ -191,13 +231,15 @@ function CustomForm<
     },
   ): ReactNode => {
     if (props?.footer === null) return null;
-    const cancelBtn = (
-      <Button {...params?.cancelButtonProps} type="primary" ghost>
-        {params?.cancelText || '取消'}
-      </Button>
-    );
+    const cancelBtn = <Button {...params?.cancelButtonProps}>{params?.cancelText || '取消'}</Button>;
     const confirmBtn = (
-      <Button type="primary" htmlType="submit" {...params.okButtonProps}>
+      <Button
+        type="primary"
+        htmlType="submit"
+        {...params.okButtonProps}
+        className={`custom-form-confirm-btn ${params?.okButtonProps?.className}`}
+        style={{ borderWidth: 1, ...params?.okButtonProps?.style }}
+      >
         {params?.okText || '确定'}
       </Button>
     );
@@ -226,6 +268,7 @@ function CustomForm<
         maskClosable: false,
         centered: true,
         ...WrapperProps,
+        destroyOnHidden: destroyOnHidden ?? destroyOnClose,
         drawerRender: modalRender,
       } as DrawerProps;
       break;
@@ -238,6 +281,7 @@ function CustomForm<
         centered: true,
         maskClosable: false,
         ...WrapperProps,
+        destroyOnHidden: destroyOnHidden ?? destroyOnClose,
         footer: typeof footer !== 'function' && footer ? footer : renderSummiter(WrapperProps),
         modalRender,
       } as ModalProps;
@@ -249,12 +293,9 @@ function CustomForm<
   return (
     <>
       {modalType === 'normal' ? (
-        <div
-          className={['h-full w-full', WrapperProps?.className].join(' ')}
-          style={WrapperProps.style}
-        >
+        <div className={classnames(WrapperProps?.className, 'CustomModal')} style={{ height: '100%', width: '100%', ...WrapperProps.style }}>
           {WrapperProps?.open && (
-            <Spin className="h-full w-full" spinning={loading}>
+            <Spin className="custom-form-normal-spin" spinning={loading} style={{ height: '100%', width: '100%' }}>
               {modalRender(
                 <>
                   {content}
@@ -268,27 +309,28 @@ function CustomForm<
       ) : (
         <>
           <Component {...WrapperProps}>
-            <div className="customFormContent">
+            <div className="customContainer">
               {tipMessage && (
-                <div className="customFormContent-tip">
+                <div className="customContainer-tip">
                   <Alert
                     type="warning"
                     message={
-                      <div className="customFormContent-tipMessage">
+                      <div className="customContainer-tip-alert-message">
                         {showTipMessageIcon && (
                           <div className="customContainer-tip-alert-message-icon">
                             <ExclamationCircleFilled style={{ color: variables?.colorWarning }} />
                           </div>
                         )}
-                        <div className="customFormContent-tipText">{tipMessage}</div>
+                        <div className="customContainer-tip-alert-message-content">{tipMessage}</div>
                       </div>
                     }
-                    className="customFormContent-tipAlert"
+                    className="customContainer-tip-alert"
                   />
                 </div>
               )}
-              <div className="customFormContent-body">
-                <Spin className="customFormContent-spin" spinning={loading}>
+
+              <div className="customContainer-main">
+                <Spin className="customContainer-main-spin" spinning={loading}>
                   {content}
                 </Spin>
               </div>

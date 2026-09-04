@@ -23,33 +23,3 @@ demo:
 ## 示例
 
 <code src='./demo/index.tsx'>立即触发的筛选</code>
-
-```tsx | pure
-<ProTable<ColumnsType, SearchType>
-  style={{ '--table-min-h': TableHeight + 'px' } as any}
-  className="[&_.ant-table-body]:min-h-[var(--table-min-h)]"
-  search={false}
-  actionRef={actionRef}
-  toolbar={{
-    settings: [],
-    search: false,
-  }}
-  rowHoverable={false}
-  params={{
-    ...formValues,
-  }}
-  size="small"
-  pagination={{ defaultPageSize: 10, showSizeChanger: true }}
-  scroll={{ y: TableHeight }}
-  locale={{
-    emptyText: (
-      <CustomTooltip.TableEmpty
-        description={isNoPermission ? '暂无权限' : '暂无数据'}
-        height={Number(TableHeight)}
-      />
-    ),
-  }}
-/>
-```
-
-## API

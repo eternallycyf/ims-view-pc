@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { LeftOutlined, RightOutlined } from '@ant-design/icons'
 import { Button } from 'antd'
-import clsx from 'classnames'
+import classnames from 'classnames'
 import { CSSMotionList } from 'rc-motion'
 import React from 'react'
 import { useDebounceEffect } from 'ahooks'
@@ -18,12 +18,13 @@ const ScrollHorizontalCard = <T extends { key: string }>({
   enabledQuickScrollButton = true,
   enabledScrollBar = true,
   itemWrapperClassName,
+  itemWrapperStyle,
 }: ScrollHorizontalCardProps<T>) => {
   const containerRef = React.useRef<HTMLDivElement>(null)
   const [pingStart, setPingStart] = React.useState(false)
   const [pingEnd, setPingEnd] = React.useState(false)
 
-  const mergedCls = clsx(
+  const mergedCls = classnames(
     "ScrollHorizontalCardList",
     rootClassName,
     className,
@@ -75,14 +76,14 @@ const ScrollHorizontalCard = <T extends { key: string }>({
           motionName="ScrollHorizontalMotion"
           component={false}
           motionAppear={false}
-          motionLeave={false}
-          motionEnter={false}
+          motionLeave
+          motionEnter
         >
           {({ key, index, item, className: motionCls, style: motionStyle }: any) => {
             return (
               <div
-                className={clsx("ScrollHorizontalItem", motionCls, itemWrapperClassName)}
-                style={motionStyle}
+                className={classnames("ScrollHorizontalItem", motionCls, itemWrapperClassName)}
+                style={{ ...motionStyle, ...itemWrapperStyle }}
                 key={key}
               >
                 {renderItem && renderItem(item, index)}
@@ -112,8 +113,8 @@ const ScrollHorizontalCard = <T extends { key: string }>({
           </>
         )}
       </div>
-      {pingStart && <div className={clsx("ScrollHorizontalMask", "ScrollHorizontalMaskLeft")} />}
-      {pingEnd && <div className={clsx("ScrollHorizontalMask", "ScrollHorizontalMaskRight")} />}
+      {pingStart && <div className={classnames("ScrollHorizontalMask", "ScrollHorizontalMaskLeft")} />}
+      {pingEnd && <div className={classnames("ScrollHorizontalMask", "ScrollHorizontalMaskRight")} />}
     </div>
   )
 }

@@ -101,6 +101,7 @@ const CommonTable: React.ForwardRefRenderFunction<CommonTableRef, CommonTablePro
     removeSummary,
     searchParams: defaultSearchParams,
     setSearchParams: defaultSetSearchParams,
+    onChange: externalOnChange,
     ...restProps
   } = props;
   const [columns, setColumns] = useState<CommonTableProps['columns']>([]);
@@ -255,6 +256,7 @@ const CommonTable: React.ForwardRefRenderFunction<CommonTableRef, CommonTablePro
       { current: pagination.current, pageSize: pagination.pageSize },
       { order, sorter: sort },
     );
+    externalOnChange?.(pagination, filters, sorter, extra);
   };
 
   const renderSummary = (currentData: any[], columns: any[]) => {

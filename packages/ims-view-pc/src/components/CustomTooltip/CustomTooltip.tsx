@@ -1,20 +1,24 @@
-import { DownOutlined, LeftOutlined, UpOutlined } from '@ant-design/icons';
-import { useForceUpdate } from '@ims-view/hooks';
+import { DownOutlined, UpOutlined } from '@ant-design/icons';
 import { Typography } from 'antd';
 import type { ParagraphProps } from 'antd/es/typography/Paragraph';
+import lodash from 'lodash';
+import { useCallback, useState, type CSSProperties } from 'react';
 import { variables } from 'ims-view-pc';
-import { FC, useCallback, useMemo, useState, type CSSProperties } from 'react';
 import Empty from './Empty';
 import './index.less';
 import type { CustomTooltipProps } from './interface';
-import { isString as _isString, isEmpty } from './utils';
+import useForceUpdate from './useForceUpdate';
+import { isEmpty } from './utils';
 const { Paragraph } = Typography;
 
-const CustomTooltip: FC<CustomTooltipProps> = (props) => {
+/**
+ * 用于富文本的展开收起
+ * @deprecated 钉钉环境异常
+ */
+const DefaultCustomTooltip = (props: CustomTooltipProps) => {
   const forceUpdate = useForceUpdate();
   const [isExpand, setIsExpand] = useState<boolean>(false);
   const [hasExpend, setHasExpend] = useState<boolean>(false);
-
   const [overflowStatus, setOverflowStatus] = useState<'hidden' | 'unset'>('hidden');
 
   const {
@@ -25,30 +29,29 @@ const CustomTooltip: FC<CustomTooltipProps> = (props) => {
     direction = 'default',
     type = 'default',
     ellipsisSymbol = true,
-    style,
     paragraphStyle,
     buttonStyle,
     className,
     buttonClassName,
     paragraphClassName,
-    tooltipClassName,
     expandMoreLength,
     ellipsisProps = {},
+    onClick,
+    expandOnChange,
   } = props;
 
-  const isString = useMemo(() => {
-    return _isString(props?.content);
-  }, [props?.content]);
-
-  const contentRef = useCallback((node: HTMLDivElement) => {
-    if (node != null) {
-      if (props?.expandOnChange) {
-        props?.expandOnChange(setHasExpend);
-        return;
+  const contentRef = useCallback(
+    (node: HTMLDivElement) => {
+      if (node != null) {
+        if (expandOnChange) {
+          expandOnChange(setHasExpend);
+          return;
+        }
       }
-    }
-    return node;
-  }, []);
+      return node;
+    },
+    [expandOnChange],
+  );
 
   const getToggleButton = (isExpandStatus: boolean) => {
     return (
@@ -65,11 +68,7 @@ const CustomTooltip: FC<CustomTooltipProps> = (props) => {
           <>
             {isExpandStatus ? '展开' : '收起'}
             <span className="apply-shake">
-              {isExpandStatus ? (
-                <UpOutlined className="apply-shake" />
-              ) : (
-                <DownOutlined className="apply-shake" />
-              )}
+              {isExpandStatus ? <UpOutlined className="apply-shake" /> : <DownOutlined className="apply-shake" />}
             </span>
           </>
         ) : (
@@ -77,14 +76,10 @@ const CustomTooltip: FC<CustomTooltipProps> = (props) => {
             {expandMoreLength && isExpandStatus
               ? `更多 ${expandMoreLength} `
               : expandMoreLength && !isExpandStatus
-              ? '收起'
-              : ''}
+                ? '收起'
+                : ''}
             <span className="apply-shake">
-              {isExpandStatus ? (
-                <UpOutlined className="apply-shake" />
-              ) : (
-                <DownOutlined className="apply-shake" />
-              )}
+              {isExpandStatus ? <UpOutlined className="apply-shake" /> : <DownOutlined className="apply-shake" />}
             </span>
           </span>
         )}
@@ -92,18 +87,17 @@ const CustomTooltip: FC<CustomTooltipProps> = (props) => {
     );
   };
 
-  const WrapperProps: CSSProperties =
-    expandMoreLength == undefined
-      ? ({
-          '--max-height': overflowStatus === 'hidden' ? maxHeight : '100%',
-          '--overflow': overflowStatus,
-          paddingRight: direction === 'right' ? 46 : 0,
-          width: `calc(100% - ${direction === 'right' ? 46 : 0}px)`,
-        } as any as CSSProperties)
-      : ({
-          paddingRight: direction === 'right' ? 46 : 0,
-          width: `calc(100% - ${direction === 'right' ? 46 : 0}px)`,
-        } as any as CSSProperties);
+  const WrapperProps: CSSProperties = lodash.isNil(expandMoreLength)
+    ? ({
+        '--max-height': overflowStatus === 'hidden' ? maxHeight : '100%',
+        '--overflow': overflowStatus,
+        paddingRight: direction === 'right' ? 46 : 0,
+        width: '100%',
+      } as any as CSSProperties)
+    : ({
+        paddingRight: direction === 'right' ? 46 : 0,
+        width: '100%',
+      } as any as CSSProperties);
 
   const ParagraphProps: Partial<ParagraphProps> = isExpand
     ? {
@@ -123,6 +117,7 @@ const CustomTooltip: FC<CustomTooltipProps> = (props) => {
             expand ? setHasExpend(isEllipsis) : setHasExpend(false);
             forceUpdate();
           },
+          ...ellipsisProps,
         },
       };
 
@@ -130,15 +125,17 @@ const CustomTooltip: FC<CustomTooltipProps> = (props) => {
 
   return (
     <span
-      className={['CustomTooltip', ellipsisSymbol === false && 'ellipsis-symbol', className].join(
-        ' ',
-      )}
-      style={{
-        '--colorPrimary': variables?.colorPrimary,
-        ...WrapperProps,
-      }}
+      className={['CustomTooltip', ellipsisSymbol === false && 'ellipsis-symbol', className].join(' ')}
+      style={
+        {
+          '--colorPrimary': variables?.colorLink,
+          '--colorPrimary-hover': variables?.colorLinkHover,
+          ...WrapperProps,
+        } as any
+      }
+      onClick={(e) => onClick && onClick(e)}
     >
-      <Paragraph ref={contentRef} {...ParagraphProps}>
+      <Paragraph ref={contentRef} className={paragraphClassName} {...ParagraphProps}>
         {content ?? '--'}
       </Paragraph>
       {isExpand && getToggleButton(false)}
@@ -147,4 +144,4 @@ const CustomTooltip: FC<CustomTooltipProps> = (props) => {
   );
 };
 
-export default CustomTooltip;
+export default DefaultCustomTooltip;

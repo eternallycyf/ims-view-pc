@@ -2,37 +2,34 @@ import { QuestionCircleOutlined } from '@ant-design/icons';
 import { Tag, Tooltip } from 'antd';
 import React, { useMemo } from 'react';
 import CustomTooltip from '../CustomTooltip';
-import './index.less';
+import { getRandomTagColorByText } from './colorUtils';
 import type { CustomTagProps } from './interface';
 
-const presets = [
-  'magenta',
-  'volcano',
-  'orange',
-  'gold',
-  'lime',
-  'green',
-  'cyan',
-  'blue',
-  'geekblue',
-  'purple',
-  'red',
-];
+export {
+  CUSTOM_TAG_COLOR_PRESETS,
+  getRandomTagColorByText,
+  getTagColorStyle,
+  getTagColorStyleByText,
+  type CustomTagColorPreset,
+  type CustomTagColorStyle,
+} from './colorUtils';
 
-const getRandomColorByLength = (textLength: number, presets: string[]) => {
-  const index = textLength % presets.length;
-  return presets[index];
-};
-
+/**
+ * 展示统一样式的标签。
+ *
+ * @param props 标签内容与样式配置
+ * @returns 标签节点
+ */
 const CustomTag: React.FC<CustomTagProps> = (props) => {
   const {
     label,
     labelClassName,
-    labelStyle,
     color: propColor,
     tooltip,
     className,
     children,
+    showDot = true,
+    dotColor,
     ...restProps
   } = props;
 
@@ -41,14 +38,14 @@ const CustomTag: React.FC<CustomTagProps> = (props) => {
       return propColor;
     }
     if (label && typeof label === 'string') {
-      return getRandomColorByLength(label.length, presets);
+      return getRandomTagColorByText(label);
     }
     return undefined;
   }, [propColor, label]);
 
-  const mergedClassName = useMemo(() => {
-    return className ? `custom-tag ${className}` : 'custom-tag';
-  }, [className]);
+  const mergedStyle = useMemo((): React.CSSProperties => {
+    return { fontWeight: 'bold', ...restProps.style };
+  }, [restProps.style]);
 
   if (!label && !children) {
     return null;
@@ -56,16 +53,39 @@ const CustomTag: React.FC<CustomTagProps> = (props) => {
 
   const tagContent = (
     <>
-      <span className="custom-tag-content">
+      {showDot && (
+        <span
+          style={{
+            marginRight: 7,
+            height: 6,
+            width: 6,
+            borderRadius: '50%',
+            backgroundColor: dotColor || 'currentColor',
+            display: 'inline-block',
+          }}
+        />
+      )}
+      <span
+        style={{
+          display: 'inline-block',
+          maxWidth: '100%',
+          overflow: 'hidden',
+          verticalAlign: 'middle',
+          textOverflow: 'ellipsis',
+          whiteSpace: 'nowrap',
+        }}
+      >
         <CustomTooltip.Paragraph
           className={labelClassName}
           content={children || label}
-          style={{ color: 'inherit', fontSize: '12px', ...labelStyle }}
+          style={{ color: 'inherit', fontSize: 12 }}
         />
       </span>
       {tooltip && (
         <Tooltip title={tooltip}>
-          <QuestionCircleOutlined className="custom-tag-tooltip-icon" />
+          <QuestionCircleOutlined
+            style={{ marginLeft: 4, flexShrink: 0, cursor: 'help', fontSize: 12 }}
+          />
         </Tooltip>
       )}
     </>
@@ -76,8 +96,8 @@ const CustomTag: React.FC<CustomTagProps> = (props) => {
       {...restProps}
       bordered={false}
       color={color}
-      className={mergedClassName}
-      style={restProps.style}
+      className={className}
+      style={{ ...mergedStyle, display: 'inline-flex', width: 'fit-content', alignItems: 'center' }}
     >
       {tagContent}
     </Tag>

@@ -104,7 +104,7 @@ const FileName = (props: FileNameProps) => {
         </>
       )}
 
-      <div className="min-w-0 flex-1">
+      <div style={{ minWidth: 0, flex: 1 }}>
         <CustomTooltip.FileNameEllipsis
           fileName={content}
           {...ParagraphProps}

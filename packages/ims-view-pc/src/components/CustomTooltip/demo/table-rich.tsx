@@ -17,10 +17,11 @@ const Demo = () => {
       <Table
         dataSource={[{}, {}, {}]}
         pagination={false}
+        scroll={{ x: 'max-content' }}
         columns={[
           {
             title: '单行富文本',
-            width: 100,
+            width: 200,
             render: () => (
               <CustomTooltip
                 // ellipsisProps={{ tooltip: false }}
@@ -35,7 +36,7 @@ const Demo = () => {
           },
           {
             title: '可展开-具体数量',
-            width: 100,
+            width: 200,
             render: () => (
               <CustomTooltip
                 // ellipsisProps={{ tooltip: false }}
@@ -50,7 +51,7 @@ const Demo = () => {
           },
           {
             title: '可展开-右侧',
-            width: 100,
+            width: 200,
             render: () => (
               <CustomTooltip
                 // ellipsisProps={{ tooltip: false }}

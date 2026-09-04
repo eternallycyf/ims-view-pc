@@ -1,3 +1,5 @@
+import type { ButtonProps } from 'antd';
+import type { ReactNode } from 'react';
 import { AnyData, IColumnsType, RequestData } from 'ims-view-pc';
 
 type Request<DataType = AnyData, Params = RequestParams> = (
@@ -16,6 +18,10 @@ export interface IBaseExportButtonProps<DataType = AnyData, Params = RequestPara
   columns?: IColumnsType<DataType>;
   fileName?: string;
 }
+
+export type ExportButtonProps = ButtonProps & {
+  children?: ReactNode;
+};
 
 // Excel Style Types
 export type ExcelAlignment = {
@@ -252,4 +258,5 @@ export interface IExportButtonProps<DataType = AnyData, Params = RequestParams>
     sheetName?: string;
     [props: string]: any;
   }[];
+  buttonProps?: ExportButtonProps;
 }

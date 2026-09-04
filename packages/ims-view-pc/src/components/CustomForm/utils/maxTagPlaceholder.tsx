@@ -14,16 +14,16 @@ export function renderMaxTagPlaceholder(omittedValues: OmittedTagValue[] = []) {
       getPopupContainer={() => document.body}
       overlayInnerStyle={{ maxWidth: 300 }}
       content={
-        <div className="flex max-w-[280px] flex-wrap gap-1">
+        <div style={{ display: 'flex', maxWidth: 280, flexWrap: 'wrap', gap: 4 }}>
           {tags.map((item) => (
-            <Tag key={String(item?.value ?? item?.label)} className="!m-0 whitespace-normal">
+            <Tag key={String(item?.value ?? item?.label)} style={{ margin: 0, whiteSpace: 'normal' }}>
               {item?.label}
             </Tag>
           ))}
         </div>
       }
     >
-      <span className="cursor-default">+{tags.length}...</span>
+      <span style={{ cursor: 'default' }}>+{tags.length}...</span>
     </Popover>
   )
 }
