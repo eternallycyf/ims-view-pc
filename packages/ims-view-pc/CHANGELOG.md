@@ -1,5 +1,24 @@
 # Changelog
 
+## [Version&nbsp;1.97.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.96.7...ims-view-pc@1.97.0)
+
+<sup>Released on **2026-09-04**</sup>
+
+#### ✨ 新特性
+
+- **ims-view-pc**: Update components.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **ims-view-pc**: Update components ([92bd56b](https://github.com/eternallycyf/ims-view-pc/commit/92bd56b))
+
+</details>
+
 ### [Version&nbsp;1.96.7](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.96.6...ims-view-pc@1.96.7)
 
 <sup>Released on **2026-09-01**</sup>
