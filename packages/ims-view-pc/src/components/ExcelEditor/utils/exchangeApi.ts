@@ -145,7 +145,9 @@ const unwrapResponseEntity = <T>(json: unknown): T => {
   return body.data as T;
 };
 
-/** 本地解析：ExcelJS 公共内核；大文件默认 Web Worker 分块 */
+/** 本地解析：ExcelJS 公共内核；大文件默认 Web Worker 分块
+ * 源码用 .worker.ts（dumi 打 src）；发布产物由 scripts/fix-worker-urls.mjs 改成 .worker.js
+ */
 const createLocalExcelParseWorker = () =>
   new Worker(new URL('./excelParse.worker.ts', import.meta.url), { type: 'module' });
 

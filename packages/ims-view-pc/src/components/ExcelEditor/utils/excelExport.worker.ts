@@ -1,6 +1,6 @@
 /**
  * 浏览器 Excel 导出 Worker（供 ExcelEditor 本地导出）。
- * umi/dumi 通过 `new Worker(new URL('./excelExport.worker.ts', import.meta.url))` 打包。
+ * 源码：`new URL('./excelExport.worker.ts', import.meta.url)`；发布产物由 fix-worker-urls 改为 .js。
  */
 import { installExcelExportWorker } from '@ims-view/utils';
 

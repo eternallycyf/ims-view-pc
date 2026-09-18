@@ -11,7 +11,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "father build",
+    "build": "father build && node ./scripts/fix-worker-urls.js",
     "clean": "rm -rf es lib dist build coverage .eslintcache",
     "cov": "jest --coverage",
     "doctor": "father doctor",
