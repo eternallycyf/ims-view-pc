@@ -1,5 +1,29 @@
 # Changelog
 
+### [Version&nbsp;1.97.1](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.97.0...ims-view-pc@1.97.1)
+
+<sup>Released on **2026-09-18**</sup>
+
+#### 🐛 修复
+
+- 修复问题.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- 修复问题 ([1d21b70](https://github.com/eternallycyf/ims-view-pc/commit/1d21b70))
+
+</details>
+
+### Dependencies
+
+- **@ims-view/hooks:** upgraded to 1.23.1
+- **@ims-view/utils:** upgraded to 1.22.5
+
 ## [Version&nbsp;1.97.0](https://github.com/eternallycyf/ims-view-pc/compare/ims-view-pc@1.96.7...ims-view-pc@1.97.0)
 
 <sup>Released on **2026-09-04**</sup>
